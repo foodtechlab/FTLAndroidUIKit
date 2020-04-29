@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">FTLAndroidUIKitSample</string>
+
+    <string name="common_click">Click</string>
+</resources>

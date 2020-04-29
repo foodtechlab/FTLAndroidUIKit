@@ -1,0 +1,3 @@
+rootProject.name='FTLAndroidUIKitSample'
+include ':app'
+include ':ftlandroiduikit'
