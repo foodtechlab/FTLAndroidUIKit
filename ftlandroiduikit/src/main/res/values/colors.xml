@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="white">#ffffff</color>
+    <color name="OnPrimary">#FFFFFF</color>
 
-    <color name="red_ec1">#ec1010</color>
+    <color name="Surface">#FFFFFF</color>
+    <color name="OnSurfacePrimaryEnabled">#F6F6F6</color>
+    <color name="OnSurfacePrimaryPressed">#ECECEC</color>
+
+    <color name="OnBackground">#FFFFFF</color>
+    <color name="OnBackgroundPrimary">#161616</color>
+    <color name="OnBackgroundSecondary">#A4A4A4</color>
+
+    <color name="PrimaryDangerEnabled">#F9285E</color>
+    <color name="PrimaryDangerPressed">#E5144A</color>
+
+    <color name="PrimaryInfoEnabled">#2849F9</color>
+    <color name="PrimaryInfoPressed">#0A2BDB</color>
 
 </resources>

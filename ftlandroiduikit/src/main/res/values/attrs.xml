@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="FTLButton">
-        <!--        <attr name="backgroundColor" format="color" />-->
-    </declare-styleable>
+    <declare-styleable name="FTLButtonPrimary"> </declare-styleable>
+
+    <declare-styleable name="FTLButtonSecondary"> </declare-styleable>
 
 </resources>
