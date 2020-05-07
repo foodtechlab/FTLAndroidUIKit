@@ -2,6 +2,7 @@ package com.foodtechlab.ftlandroiduikit.button
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.Gravity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -40,6 +41,8 @@ class FTLButtonSecondary @JvmOverloads constructor(
         )
 
         typeface = ResourcesCompat.getFont(context, R.font.roboto_medium)
+
+        gravity = Gravity.CENTER
 
         typedArray.recycle()
     }
