@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
         btn_primary_click.setOnClickListener(this)
         btn_secondary_click.setOnClickListener(this)
+        btn_additional_click.setOnClickListener(this)
     }
 
     override fun onClick(v: View) {
