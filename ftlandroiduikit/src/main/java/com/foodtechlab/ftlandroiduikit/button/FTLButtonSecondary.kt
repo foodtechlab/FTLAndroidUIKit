@@ -40,7 +40,9 @@ class FTLButtonSecondary @JvmOverloads constructor(
             )
         )
 
-        typeface = ResourcesCompat.getFont(context, R.font.roboto_medium)
+        if (!isInEditMode) {
+            typeface = ResourcesCompat.getFont(context, R.font.roboto_medium)
+        }
 
         gravity = Gravity.CENTER
 

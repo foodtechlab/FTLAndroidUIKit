@@ -3,6 +3,7 @@
 
     <item android:state_pressed="true">
         <shape android:shape="rectangle">
+            <size android:height="48dp" />
             <padding android:bottom="8dp" android:left="16dp" android:right="16dp" android:top="8dp" />
             <solid android:color="@color/PrimaryDangerPressed" />
             <corners android:radius="4dp" />
@@ -11,6 +12,7 @@
 
     <item android:state_selected="true">
         <shape android:shape="rectangle">
+            <size android:height="48dp" />
             <padding android:bottom="8dp" android:left="16dp" android:right="16dp" android:top="8dp" />
             <solid android:color="@color/OnBackgroundSecondary" />
             <corners android:radius="4dp" />
@@ -19,6 +21,7 @@
 
     <item>
         <shape android:shape="rectangle">
+            <size android:height="48dp" />
             <padding android:bottom="8dp" android:left="16dp" android:right="16dp" android:top="8dp" />
             <solid android:color="@color/PrimaryDangerEnabled" />
             <corners android:radius="4dp" />
