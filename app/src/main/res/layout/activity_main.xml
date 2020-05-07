@@ -8,8 +8,9 @@
 
     <com.foodtechlab.ftlandroiduikit.button.FTLButtonSecondary
         android:id="@+id/btn_secondary_click"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:text="@string/common_click"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -18,8 +19,9 @@
 
     <com.foodtechlab.ftlandroiduikit.button.FTLButtonPrimary
         android:id="@+id/btn_primary_click"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:text="@string/common_click"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.501"
