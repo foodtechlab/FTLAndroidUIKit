@@ -2,9 +2,11 @@ package com.foodtechlab.ftlandroiduikitsample
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.foodtechlab.ftlandroiduikit.snackbar.top.TopSnackbar
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
+
 
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -18,7 +20,12 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
     }
 
     override fun onClick(v: View) {
-        Toast.makeText(this, "Click!", Toast.LENGTH_SHORT).show()
+        TopSnackbar.make(
+            ll_root,
+            "Пожалуйста, измените номер телефона и повторите попытку",
+            Snackbar.LENGTH_LONG
+        )?.show()
+
         v.isSelected = !v.isSelected
     }
 }

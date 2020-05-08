@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rl_snackbar_root"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:background="#323232">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_snackbar_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_regular"
+        android:lineSpacingExtra="4sp"
+        android:lines="2"
+        android:paddingStart="14dp"
+        android:paddingEnd="14dp"
+        android:textColor="@color/OnPrimary"
+        android:textSize="14sp"
+        tools:text="В работе приложения произошла ошибка. Мы работаем над ее устранением. Пожалуйста, повторите попытку позже" />
+
+</RelativeLayout>
