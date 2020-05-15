@@ -1,31 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/ll_root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <com.foodtechlab.ftlandroiduikit.button.FTLButtonSecondary
-        android:id="@+id/btn_secondary_click"
+    <LinearLayout
+        android:id="@+id/ll_root"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/common_click" />
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
-    <com.foodtechlab.ftlandroiduikit.button.FTLButtonPrimary
-        android:id="@+id/btn_primary_click"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/common_click" />
+        <com.foodtechlab.ftlandroiduikit.button.FTLButtonPrimary
+            android:id="@+id/btn_primary_click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/common_click" />
 
-    <com.foodtechlab.ftlandroiduikit.button.FTLButtonAdditional
-        android:id="@+id/btn_additional_click"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:text="@string/common_click" />
+        <com.foodtechlab.ftlandroiduikit.button.FTLButtonSecondary
+            android:id="@+id/btn_secondary_click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/common_click" />
 
-</LinearLayout>
+        <com.foodtechlab.ftlandroiduikit.button.FTLButtonAdditional
+            android:id="@+id/btn_additional_click"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="@string/common_click" />
+
+        <com.foodtechlab.ftlandroiduikit.textfields.FTLEditTextDefault
+            android:id="@+id/ftl_et_default_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:hint="@string/activity_main_input_phone" />
+
+        <com.foodtechlab.ftlandroiduikit.textfields.FTLEditTextDefault
+            android:id="@+id/ftl_et_default_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:isActiveStateEnabled="false" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

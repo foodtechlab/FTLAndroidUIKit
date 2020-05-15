@@ -10,6 +10,7 @@
     <color name="OnBackground">#FFFFFF</color>
     <color name="OnBackgroundPrimary">#161616</color>
     <color name="OnBackgroundSecondary">#A4A4A4</color>
+    <color name="OnBackgroundSecondaryOpacity10">#19A4A4A4</color>
 
     <color name="PrimaryDangerEnabled">#F9285E</color>
     <color name="PrimaryDangerPressed">#E5144A</color>

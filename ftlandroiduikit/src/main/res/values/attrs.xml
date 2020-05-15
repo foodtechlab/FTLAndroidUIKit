@@ -7,4 +7,9 @@
 
     <declare-styleable name="FTLButtonAdditional"> </declare-styleable>
 
+    <declare-styleable name="FTLEditTextDefault">
+        <attr name="hint" format="string" />
+        <attr name="isActiveStateEnabled" format="boolean" />
+    </declare-styleable>
+
 </resources>
