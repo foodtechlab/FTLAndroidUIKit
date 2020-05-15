@@ -27,11 +27,11 @@ class FTLEditTextDefault @JvmOverloads constructor(
     defStyle: Int = 0
 ) : LinearLayout(context, attrs, defStyle) {
 
-    private val hintLateralTranslation by lazy {
+    private val hintXTranslation by lazy {
         -((tvHint.width - (HINT_SHRINK_SCALE * tvHint.width)) * HALF)
     }
 
-    private val hintLongitudinalTranslation by lazy { -((height - etInput.height) * HALF) }
+    private val hintYTranslation by lazy { -((height - etInput.height) * HALF) }
 
     private val isHintOnTop: Boolean
         get() = etInput.hasFocus() || !etInput.text.isNullOrEmpty()
@@ -132,10 +132,11 @@ class FTLEditTextDefault @JvmOverloads constructor(
         }
     }
 
+    @Suppress("MemberVisibilityCanBePrivate")
     private fun scaleHint() {
         val scale = if (!isHintOnTop && !isErrorEnabled) 1f else HINT_SHRINK_SCALE
-        val translationX = if (!isHintOnTop && !isErrorEnabled) 0f else hintLateralTranslation
-        val translationY = if (!isHintOnTop && !isErrorEnabled) 0f else hintLongitudinalTranslation
+        val translationX = if (!isHintOnTop && !isErrorEnabled) 0f else hintXTranslation
+        val translationY = if (!isHintOnTop && !isErrorEnabled) 0f else hintYTranslation
 
         tvHint.animate().apply {
             scaleX(scale)
