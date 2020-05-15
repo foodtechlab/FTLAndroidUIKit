@@ -7,7 +7,6 @@ import com.foodtechlab.ftlandroiduikit.snackbar.top.TopSnackbar
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 
-
 class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,6 +25,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             Snackbar.LENGTH_LONG
         )?.show()
 
-        v.isSelected = !v.isSelected
+        when (v.id) {
+            R.id.btn_additional_click -> ftl_et_default_1.isActiveStateEnabled = false
+            R.id.btn_secondary_click -> ftl_et_default_2.setErrorEnabled(true)
+            R.id.btn_primary_click -> ftl_et_default_1.setErrorEnabled(true)
+            else -> v.isSelected = !v.isSelected
+        }
     }
 }

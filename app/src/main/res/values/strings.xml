@@ -2,4 +2,7 @@
     <string name="app_name">FTLAndroidUIKitSample</string>
 
     <string name="common_click">Click</string>
+
+    <string name="activity_main_input_email">Введите E-mail</string>
+    <string name="activity_main_input_phone">Введите номер</string>
 </resources>

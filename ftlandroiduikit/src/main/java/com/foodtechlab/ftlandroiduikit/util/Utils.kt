@@ -1,6 +1,11 @@
 package com.foodtechlab.ftlandroiduikit.util
 
 import android.content.Context
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
+import android.graphics.PorterDuff
+import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +30,15 @@ fun Context.spToPx(sp: Float): Float {
         sp,
         resources.displayMetrics
     )
+}
+
+@Suppress("DEPRECATION")
+fun Drawable.changeColor(color: Int) {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+        colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
+    } else {
+        setColorFilter(color, PorterDuff.Mode.SRC_IN)
+    }
 }
 
 internal fun View?.findSuitableParent(): ViewGroup? {
