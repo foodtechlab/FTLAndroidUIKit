@@ -10,9 +10,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="2dp"
-        android:minHeight="?attr/actionBarSize"
-        android:paddingStart="16dp"
-        android:paddingEnd="16dp">
+        android:minHeight="?attr/actionBarSize">
 
         <EditText
             android:id="@+id/et_input"
@@ -22,6 +20,8 @@
             android:fontFamily="@font/roboto_regular"
             android:letterSpacing=".03"
             android:lineSpacingExtra="5sp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
             android:textColor="@color/OnBackgroundPrimary"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="FTLButtonPrimary"> </declare-styleable>
+    <declare-styleable name="FTLButtonPrimary"></declare-styleable>
 
-    <declare-styleable name="FTLButtonSecondary"> </declare-styleable>
+    <declare-styleable name="FTLButtonSecondary"></declare-styleable>
 
-    <declare-styleable name="FTLButtonAdditional"> </declare-styleable>
+    <declare-styleable name="FTLButtonAdditional"></declare-styleable>
+
+    <declare-styleable name="CodeEditText">
+        <attr name="symbolsCount" format="integer" />
+    </declare-styleable>
 
     <declare-styleable name="FTLEditTextDefault">
         <attr name="hint" format="string" />
@@ -285,6 +289,8 @@
         </attr>
 
         <attr name="digits" format="string" />
+
+        <attr name="maxLength" format="string" />
 
         <attr name="isActiveStateEnabled" format="boolean" />
     </declare-styleable>
