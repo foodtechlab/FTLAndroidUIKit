@@ -1,7 +1,8 @@
-package com.foodtechlab.ftlandroiduikit.textfields
+package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
@@ -50,7 +51,6 @@ class FTLEditTextDefault @JvmOverloads constructor(
             }
         )
 
-
     var inputType: Int
         get() = etInput.inputType
         set(value) {
@@ -61,6 +61,16 @@ class FTLEditTextDefault @JvmOverloads constructor(
         get() = etInput.imeOptions
         set(value) {
             etInput.imeOptions = value
+        }
+
+    var maxLength: Int
+        get() = (etInput.filters[0] as? InputFilter.LengthFilter)?.max ?: -1
+        set(value) {
+            etInput.filters = if (value >= 0) {
+                arrayOf(InputFilter.LengthFilter(value))
+            } else {
+                arrayOfNulls(0)
+            }
         }
 
     private var isErrorEnabled = false
@@ -83,14 +93,27 @@ class FTLEditTextDefault @JvmOverloads constructor(
             field = value
         }
 
-    var onEditorActionListener: TextView.OnEditorActionListener? = null
+    var keyListener: OnKeyListener? = null
+        set(value) {
+            etInput.setOnKeyListener(value)
+            field = value
+        }
+
+    var focusChangeListener: OnFocusChangeListener? = null
+        set(value) {
+            etInput.onFocusChangeListener = value
+            field = value
+        }
+
+    var editorActionListener: TextView.OnEditorActionListener? = null
         set(value) {
             etInput.setOnEditorActionListener(value)
+            field = value
         }
 
     private val vUnderline: View
     private val tvHint: TextView
-    private val etInput: EditText
+    val etInput: EditText
 
     init {
         inflate(context, R.layout.layout_ftl_edit_text_default, this)
@@ -120,6 +143,8 @@ class FTLEditTextDefault @JvmOverloads constructor(
             imeOptions = getInt(R.styleable.FTLEditTextDefault_imeOptions, EditorInfo.IME_NULL)
 
             digits = getText(R.styleable.FTLEditTextDefault_digits)
+
+            maxLength = getInt(R.styleable.FTLEditTextDefault_maxLength, -1)
 
             isActiveStateEnabled = getBoolean(
                 R.styleable.FTLEditTextDefault_isActiveStateEnabled,
