@@ -1,7 +1,10 @@
 package com.foodtechlab.ftlandroiduikitsample
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.foodtechlab.ftlandroiduikit.snackbar.top.TopSnackbar
 import com.google.android.material.snackbar.Snackbar
@@ -16,6 +19,21 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         btn_primary_click.setOnClickListener(this)
         btn_secondary_click.setOnClickListener(this)
         btn_additional_click.setOnClickListener(this)
+
+        ftl_et_default_1.addTextChangedListener(object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
+                // TODO("Not yet implemented")
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                // TODO("Not yet implemented")
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                Toast.makeText(this@MainActivity, s.toString(), Toast.LENGTH_SHORT).show()
+                ftl_et_default_1.removeTextChangedListener(this)
+            }
+        })
     }
 
     override fun onClick(v: View) {
