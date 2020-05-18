@@ -2,8 +2,11 @@ package com.foodtechlab.ftlandroiduikit.textfields
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.text.TextWatcher
+import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -47,10 +50,17 @@ class FTLEditTextDefault @JvmOverloads constructor(
             }
         )
 
-    var hint: CharSequence
-        get() = tvHint.text
+
+    var inputType: Int
+        get() = etInput.inputType
         set(value) {
-            tvHint.text = value
+            etInput.inputType = value
+        }
+
+    var imeOptions: Int
+        get() = etInput.imeOptions
+        set(value) {
+            etInput.imeOptions = value
         }
 
     private var isErrorEnabled = false
@@ -59,6 +69,23 @@ class FTLEditTextDefault @JvmOverloads constructor(
         set(value) {
             field = value
             updateControls()
+        }
+
+    var hint: CharSequence
+        get() = tvHint.text
+        set(value) {
+            tvHint.text = value
+        }
+
+    private var digits: CharSequence? = null
+        set(value) {
+            value?.let { etInput.keyListener = DigitsKeyListener.getInstance(it.toString()) }
+            field = value
+        }
+
+    var onEditorActionListener: TextView.OnEditorActionListener? = null
+        set(value) {
+            etInput.setOnEditorActionListener(value)
         }
 
     private val vUnderline: View
@@ -87,6 +114,13 @@ class FTLEditTextDefault @JvmOverloads constructor(
 
         context.withStyledAttributes(attrs, R.styleable.FTLEditTextDefault) {
             hint = getText(R.styleable.FTLEditTextDefault_hint) ?: ""
+
+            inputType = getInt(R.styleable.FTLEditTextDefault_inputType, EditorInfo.TYPE_NULL)
+
+            imeOptions = getInt(R.styleable.FTLEditTextDefault_imeOptions, EditorInfo.IME_NULL)
+
+            digits = getText(R.styleable.FTLEditTextDefault_digits)
+
             isActiveStateEnabled = getBoolean(
                 R.styleable.FTLEditTextDefault_isActiveStateEnabled,
                 true
@@ -162,6 +196,14 @@ class FTLEditTextDefault @JvmOverloads constructor(
     fun setErrorEnabled(isEnabled: Boolean) {
         isErrorEnabled = isEnabled
         updateControls()
+    }
+
+    fun addTextChangedListener(watcher: TextWatcher) {
+        etInput.addTextChangedListener(watcher)
+    }
+
+    fun removeTextChangedListener(watcher: TextWatcher) {
+        etInput.removeTextChangedListener(watcher)
     }
 
     companion object {

@@ -39,7 +39,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:hint="@string/activity_main_input_phone" />
+            app:digits="123"
+            app:hint="@string/activity_main_input_phone"
+            app:imeOptions="actionSearch"
+            app:inputType="numberPassword" />
 
         <com.foodtechlab.ftlandroiduikit.textfields.FTLEditTextDefault
             android:id="@+id/ftl_et_default_2"
