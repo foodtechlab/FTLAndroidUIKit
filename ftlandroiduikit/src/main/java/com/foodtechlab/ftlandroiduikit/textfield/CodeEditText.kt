@@ -25,6 +25,15 @@ class CodeEditText @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : RelativeLayout(context, attrs, defStyleAttr), View.OnKeyListener {
 
+    val code: String
+        get() = StringBuilder(symbolsCount).apply {
+            codeSymbols.forEach {
+                if (it != -1) {
+                    append(it.toString())
+                }
+            }
+        }.toString()
+
     var symbolsCount: Int = DEFAULT_SYMBOLS_COUNT
         set(value) {
             field = value
@@ -39,7 +48,7 @@ class CodeEditText @JvmOverloads constructor(
             }
         }
 
-    private val code = arrayListOf<Int>()
+    private val codeSymbols = arrayListOf<Int>()
 
     private val llFields: LinearLayout
 
@@ -53,14 +62,14 @@ class CodeEditText @JvmOverloads constructor(
         context.withStyledAttributes(attrs, R.styleable.CodeEditText) {
             symbolsCount = getInt(R.styleable.CodeEditText_symbolsCount, DEFAULT_SYMBOLS_COUNT)
             for (i in 0 until symbolsCount) {
-                code.add(-1)
+                codeSymbols.add(-1)
             }
         }
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        val field = code.firstOrNull { it == -1 }
-            ?.let { inputFields[code.indexOf(it)] }
+        val field = codeSymbols.firstOrNull { it == -1 }
+            ?.let { inputFields[codeSymbols.indexOf(it)] }
             ?: inputFields.last()
 
         field.apply {
@@ -77,10 +86,10 @@ class CodeEditText @JvmOverloads constructor(
             if (field.text.isNullOrEmpty()) {
                 val curId = v.id
                 val prevId = v.id - 1
-                code[curId] = -1
+                codeSymbols[curId] = -1
                 inputFields[curId].updateFieldState(curId > 0)
                 inputFields.getOrNull(prevId)?.apply {
-                    code[prevId] = -1
+                    codeSymbols[prevId] = -1
                     etInput.text = null
                     updateFieldState(false)
                     requestFocus()
@@ -138,7 +147,7 @@ class CodeEditText @JvmOverloads constructor(
 
             when (text.length) {
                 1 -> {
-                    code[curId] = Integer.parseInt(text)
+                    codeSymbols[curId] = Integer.parseInt(text)
                     inputFields[curId].updateFieldState(true)
                     inputFields.getOrNull(nextId)?.apply {
                         updateFieldState(false)
@@ -146,7 +155,7 @@ class CodeEditText @JvmOverloads constructor(
                     }
                 }
                 0 -> {
-                    code[curId] = -1
+                    codeSymbols[curId] = -1
                     inputFields[curId].apply {
                         updateFieldState(false)
                         requestFocus()
