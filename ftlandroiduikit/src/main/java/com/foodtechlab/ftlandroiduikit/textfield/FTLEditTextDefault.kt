@@ -6,6 +6,7 @@ import android.text.InputFilter
 import android.text.TextWatcher
 import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
@@ -15,11 +16,11 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.isInvisible
-import androidx.core.view.marginStart
 import androidx.core.view.marginTop
 import androidx.core.view.updateMargins
 import androidx.core.widget.addTextChangedListener
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import com.google.android.material.animation.ArgbEvaluatorCompat
 
 /**
@@ -30,6 +31,19 @@ class FTLEditTextDefault @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : LinearLayout(context, attrs, defStyle) {
+
+    var textGravity: Int = Gravity.START
+        set(value) {
+            field = value
+            etInput.gravity = value
+        }
+
+    var marginHorizontal: Float = context.dpToPx(DEFAULT_MARGIN_HORIZONTAL_DP)
+        set(value) {
+            field = value
+            etInput.updateMargins()
+            tvHint.updateMargins()
+        }
 
     private val hintXTranslation by lazy {
         -((tvHint.width - (HINT_SHRINK_SCALE * tvHint.width)) * HALF)
@@ -157,19 +171,20 @@ class FTLEditTextDefault @JvmOverloads constructor(
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
 
         if (tvHint.marginTop == 0) {
-            val margin = (measuredHeight - tvHint.measuredHeight) / 2
-            tvHint.setVerticalMargins(margin)
-            etInput.setVerticalMargins(margin)
+            val marginVertical = (measuredHeight - tvHint.measuredHeight) / 2
+            tvHint.updateMargins(marginVertical)
+            etInput.updateMargins(marginVertical)
         }
     }
 
-    private fun View.setVerticalMargins(margin: Int) {
+    private fun View.updateMargins(marginVertical: Int = marginTop) {
         val lParams = layoutParams as ConstraintLayout.LayoutParams
+        val horizontal = if (id == tvHint.id) 0 else marginHorizontal.toInt()
         lParams.updateMargins(
-            marginStart,
-            margin,
-            marginStart,
-            margin
+            horizontal,
+            marginVertical,
+            horizontal,
+            marginVertical
         )
         layoutParams = lParams
     }
@@ -233,6 +248,9 @@ class FTLEditTextDefault @JvmOverloads constructor(
 
     companion object {
         private const val HINT_ANIMATION_DURATION = 200L
+
+        private const val DEFAULT_MARGIN_HORIZONTAL_DP = 16f
+
         private const val HINT_SHRINK_SCALE = .8f
         private const val HALF = .5f
     }

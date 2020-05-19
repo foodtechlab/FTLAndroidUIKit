@@ -24,10 +24,5 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             "Пожалуйста, измените номер телефона и повторите попытку",
             Snackbar.LENGTH_LONG
         )?.show()
-
-        when (v.id) {
-            R.id.btn_primary_click -> cet_code.isErrorEnabled = true
-            R.id.btn_secondary_click -> cet_code.isErrorEnabled = false
-        }
     }
 }

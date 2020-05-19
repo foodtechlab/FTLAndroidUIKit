@@ -3,6 +3,7 @@ package com.foodtechlab.ftlandroiduikit.textfield
 import android.content.Context
 import android.text.Editable
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
@@ -107,10 +108,12 @@ class CodeEditText @JvmOverloads constructor(
         for (i in 0 until symbolsCount) {
             val field = FTLEditTextDefault(context).apply {
                 etInput.id = i
+                textGravity = Gravity.CENTER
                 minimumWidth = context.dpToPx(MIN_FIELD_WIDTH_DP).toInt()
                 inputType = EditorInfo.TYPE_CLASS_NUMBER
                 isActiveStateEnabled = false
                 maxLength = 1
+                marginHorizontal = context.dpToPx(MARGIN_HORIZONTAL_DP)
                 keyListener = this@CodeEditText
                 updateFieldState(true)
                 addTextChangedListener(GenericTextWatcher(etInput))
@@ -169,5 +172,6 @@ class CodeEditText @JvmOverloads constructor(
         private const val DEFAULT_SYMBOLS_COUNT = 4
         private const val MIN_FIELD_WIDTH_DP = 40F
         private const val MIN_SPACE_WIDTH_DP = 16F
+        private const val MARGIN_HORIZONTAL_DP = 8f
     }
 }
