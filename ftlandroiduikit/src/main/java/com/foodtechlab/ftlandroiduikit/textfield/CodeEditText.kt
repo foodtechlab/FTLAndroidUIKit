@@ -49,6 +49,8 @@ class CodeEditText @JvmOverloads constructor(
             }
         }
 
+    var onCodeChangeListener: OnCodeChangeListener? = null
+
     private val codeSymbols = arrayListOf<Int>()
 
     private val llFields: LinearLayout
@@ -165,7 +167,13 @@ class CodeEditText @JvmOverloads constructor(
                     }
                 }
             }
+
+            onCodeChangeListener?.onCodeChanged(code)
         }
+    }
+
+    interface OnCodeChangeListener {
+        fun onCodeChanged(code: String)
     }
 
     companion object {

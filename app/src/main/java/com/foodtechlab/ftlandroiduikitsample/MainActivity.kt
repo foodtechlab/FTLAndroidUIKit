@@ -4,14 +4,20 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.foodtechlab.ftlandroiduikit.sheets.SadBottomSheetDialog
+import com.foodtechlab.ftlandroiduikit.sheets.DialogButton
+import com.foodtechlab.ftlandroiduikit.sheets.DialogState
+import com.foodtechlab.ftlandroiduikit.sheets.FTLBottomSheet
+import com.foodtechlab.ftlandroiduikit.sheets.Type
+import com.foodtechlab.ftlandroiduikit.textfield.CodeEditText
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, CodeEditText.OnCodeChangeListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        cet_code.onCodeChangeListener = this
 
         btn_primary_click.setOnClickListener(this)
         btn_secondary_click.setOnClickListener(this)
@@ -20,23 +26,36 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onClick(v: View) {
         when (v.id) {
-            R.id.btn_dialog_sad_neutral -> {
-                Toast.makeText(this, "Neutral", Toast.LENGTH_SHORT).show()
+            0 -> {
+                Toast.makeText(this, "Accept", Toast.LENGTH_SHORT).show()
             }
-            R.id.btn_dialog_sad_positive -> {
-                Toast.makeText(this, "Positive", Toast.LENGTH_SHORT).show()
-            }
-            R.id.btn_dialog_sad_negative -> {
-                Toast.makeText(this, "Negative", Toast.LENGTH_SHORT).show()
+            -1 -> {
+                Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show()
             }
             else -> {
-                SadBottomSheetDialog.newInstance(
-                    R.string.dialog_sad_title,
-                    R.string.dialog_sad_message,
-                    positiveBtnVisibility = View.VISIBLE,
-                    negativeBtnVisibility = View.VISIBLE
-                ).show(supportFragmentManager, SadBottomSheetDialog.TAG)
+                FTLBottomSheet.newInstance(
+                    DialogState(
+                        getString(R.string.dialog_sad_title),
+                        getString(R.string.dialog_sad_message),
+                        Type.ISSUE,
+                        listOf(
+                            DialogButton(
+                                0,
+                                "Accept"
+                            ),
+                            DialogButton(
+                                -1,
+                                "Cancel",
+                                true
+                            )
+                        )
+                    )
+                ).show(supportFragmentManager, FTLBottomSheet.TAG)
             }
         }
+    }
+
+    override fun onCodeChanged(code: String) {
+        Toast.makeText(this, code, Toast.LENGTH_SHORT).show()
     }
 }

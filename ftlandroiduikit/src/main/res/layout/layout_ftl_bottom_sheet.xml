@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:background="@android:color/black">
+
+    <View
+        android:layout_width="36dp"
+        android:layout_height="5.71dp"
+        android:layout_marginTop="9.81dp"
+        android:layout_marginBottom="9.81dp"
+        android:background="@drawable/shape_rect_solid_white_round_2dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_rect_solid_white_round_top_16dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/iv_ftl_bottom_sheet_image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            tools:src="@drawable/ic_sad_smile" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fadingEdgeLength="50dp"
+            android:requiresFadingEdge="vertical">
+
+            <LinearLayout
+                android:id="@+id/ll_ftl_bottom_sheet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tv_ftl_bottom_sheet_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="center"
+                    android:letterSpacing=".01"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="@color/PrimaryWrangerEnabled"
+                    android:textSize="24sp"
+                    tools:text="Достигнут лимит по смс" />
+
+                <TextView
+                    android:id="@+id/tv_ftl_bottom_sheet_message"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:gravity="center"
+                    android:letterSpacing=".03"
+                    android:lineSpacingExtra="5sp"
+                    android:textColor="@color/OnBackgroundPrimary"
+                    android:textSize="16sp"
+                    tools:text="К сожалению, сегодня вы запросили максимальное количество кодов доступа, ждем вас завтра. и тут еще очень много много много текста, должно быть, ниже сдублирую часть текста. К сожалению, сегодня вы запросили максимальное количество кодов доступа, ждем вас завтра" />
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</LinearLayout>
