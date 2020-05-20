@@ -12,11 +12,11 @@
     <color name="OnBackgroundSecondary">#A4A4A4</color>
     <color name="OnBackgroundSecondaryOpacity10">#19A4A4A4</color>
 
-    <color name="PrimaryDangerEnabled">#F9285E</color>
-    <color name="PrimaryDangerPressed">#E5144A</color>
+    <color name="PrimaryDangerEnabled">#DE2222</color>
+    <color name="PrimaryDangerPressed">#C00404</color>
 
-    <color name="PrimaryInfoEnabled">#2849F9</color>
-    <color name="PrimaryInfoPressed">#0A2BDB</color>
+    <color name="PrimaryInfoEnabled">#039BE5</color>
+    <color name="PrimaryInfoPressed">#0A87D1</color>
 
     <color name="PrimaryWrangerEnabled">#F8AA15</color>
 
