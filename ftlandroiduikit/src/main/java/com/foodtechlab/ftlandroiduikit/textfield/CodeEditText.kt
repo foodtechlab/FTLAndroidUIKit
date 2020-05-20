@@ -3,6 +3,7 @@ package com.foodtechlab.ftlandroiduikit.textfield
 import android.content.Context
 import android.text.Editable
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
@@ -25,6 +26,15 @@ class CodeEditText @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : RelativeLayout(context, attrs, defStyleAttr), View.OnKeyListener {
 
+    val code: String
+        get() = StringBuilder(symbolsCount).apply {
+            codeSymbols.forEach {
+                if (it != -1) {
+                    append(it.toString())
+                }
+            }
+        }.toString()
+
     var symbolsCount: Int = DEFAULT_SYMBOLS_COUNT
         set(value) {
             field = value
@@ -39,7 +49,7 @@ class CodeEditText @JvmOverloads constructor(
             }
         }
 
-    private val code = arrayListOf<Int>()
+    private val codeSymbols = arrayListOf<Int>()
 
     private val llFields: LinearLayout
 
@@ -53,14 +63,14 @@ class CodeEditText @JvmOverloads constructor(
         context.withStyledAttributes(attrs, R.styleable.CodeEditText) {
             symbolsCount = getInt(R.styleable.CodeEditText_symbolsCount, DEFAULT_SYMBOLS_COUNT)
             for (i in 0 until symbolsCount) {
-                code.add(-1)
+                codeSymbols.add(-1)
             }
         }
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        val field = code.firstOrNull { it == -1 }
-            ?.let { inputFields[code.indexOf(it)] }
+        val field = codeSymbols.firstOrNull { it == -1 }
+            ?.let { inputFields[codeSymbols.indexOf(it)] }
             ?: inputFields.last()
 
         field.apply {
@@ -77,10 +87,10 @@ class CodeEditText @JvmOverloads constructor(
             if (field.text.isNullOrEmpty()) {
                 val curId = v.id
                 val prevId = v.id - 1
-                code[curId] = -1
+                codeSymbols[curId] = -1
                 inputFields[curId].updateFieldState(curId > 0)
                 inputFields.getOrNull(prevId)?.apply {
-                    code[prevId] = -1
+                    codeSymbols[prevId] = -1
                     etInput.text = null
                     updateFieldState(false)
                     requestFocus()
@@ -98,10 +108,12 @@ class CodeEditText @JvmOverloads constructor(
         for (i in 0 until symbolsCount) {
             val field = FTLEditTextDefault(context).apply {
                 etInput.id = i
+                textGravity = Gravity.CENTER
                 minimumWidth = context.dpToPx(MIN_FIELD_WIDTH_DP).toInt()
                 inputType = EditorInfo.TYPE_CLASS_NUMBER
                 isActiveStateEnabled = false
                 maxLength = 1
+                marginHorizontal = context.dpToPx(MARGIN_HORIZONTAL_DP)
                 keyListener = this@CodeEditText
                 updateFieldState(true)
                 addTextChangedListener(GenericTextWatcher(etInput))
@@ -138,7 +150,7 @@ class CodeEditText @JvmOverloads constructor(
 
             when (text.length) {
                 1 -> {
-                    code[curId] = Integer.parseInt(text)
+                    codeSymbols[curId] = Integer.parseInt(text)
                     inputFields[curId].updateFieldState(true)
                     inputFields.getOrNull(nextId)?.apply {
                         updateFieldState(false)
@@ -146,7 +158,7 @@ class CodeEditText @JvmOverloads constructor(
                     }
                 }
                 0 -> {
-                    code[curId] = -1
+                    codeSymbols[curId] = -1
                     inputFields[curId].apply {
                         updateFieldState(false)
                         requestFocus()
@@ -160,5 +172,6 @@ class CodeEditText @JvmOverloads constructor(
         private const val DEFAULT_SYMBOLS_COUNT = 4
         private const val MIN_FIELD_WIDTH_DP = 40F
         private const val MIN_SPACE_WIDTH_DP = 16F
+        private const val MARGIN_HORIZONTAL_DP = 8f
     }
 }

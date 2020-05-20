@@ -20,8 +20,6 @@
             android:fontFamily="@font/roboto_regular"
             android:letterSpacing=".03"
             android:lineSpacingExtra="5sp"
-            android:paddingStart="16dp"
-            android:paddingEnd="16dp"
             android:textColor="@color/OnBackgroundPrimary"
             android:textSize="16sp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -18,4 +18,8 @@
     <color name="PrimaryInfoEnabled">#2849F9</color>
     <color name="PrimaryInfoPressed">#0A2BDB</color>
 
+    <color name="PrimaryWrangerEnabled">#F8AA15</color>
+
+    <color name="AdditionalYellow">#F57C00</color>
+
 </resources>

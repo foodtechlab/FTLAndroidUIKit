@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="dialog_sad_it_is_clear">Понятно</string>
+    <string name="dialog_sad_accept">Принять</string>
+    <string name="dialog_sad_decline">Отказать</string>
+</resources>
