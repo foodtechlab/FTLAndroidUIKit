@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:background="@android:color/black">
+
+    <View
+        android:layout_width="36dp"
+        android:layout_height="5.71dp"
+        android:layout_marginBottom="9.81dp"
+        android:background="@drawable/shape_rect_solid_white_round_2dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_rect_solid_white_round_top_16dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2.86dp"
+            android:src="@drawable/ic_sad_smile" />
+
+        <TextView
+            android:id="@+id/tv_dialog_sad_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:letterSpacing=".01"
+            android:lineSpacingExtra="8sp"
+            android:textColor="@color/PrimaryWrangerEnabled"
+            android:textSize="24sp"
+            tools:text="Достигнут лимит по смс" />
+
+        <TextView
+            android:id="@+id/tv_dialog_sad_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/roboto_regular"
+            android:gravity="center"
+            android:letterSpacing=".03"
+            android:lineSpacingExtra="5sp"
+            android:textColor="@color/OnBackgroundPrimary"
+            android:textSize="16sp"
+            tools:text="К сожалению, сегодня вы запросили максимальное количество кодов доступа, ждем вас завтра. и тут еще очень много много много текста, должно быть, ниже сдублирую часть текста. К сожалению, сегодня вы запросили максимальное количество кодов доступа, ждем вас завтра" />
+
+        <Button
+            android:id="@+id/btn_dialog_sad_neutral"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/selector_dialog_sad_btn_neutral_first"
+            android:fontFamily="@font/roboto_medium"
+            android:stateListAnimator="@null"
+            android:text="@string/dialog_sad_it_is_clear"
+            android:textAllCaps="true"
+            android:textColor="@color/selector_dialog_sad_btn_neutral_first"
+            android:textSize="14sp" />
+
+        <Button
+            android:id="@+id/btn_dialog_sad_positive"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/selector_dialog_sad_btn_positive"
+            android:fontFamily="@font/roboto_medium"
+            android:stateListAnimator="@null"
+            android:text="@string/dialog_sad_accept"
+            android:textAllCaps="true"
+            android:textColor="@color/selector_dialog_sad_btn_positive"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+        <Button
+            android:id="@+id/btn_dialog_sad_negative"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/selector_dialog_sad_btn_negative"
+            android:fontFamily="@font/roboto_medium"
+            android:stateListAnimator="@null"
+            android:text="@string/dialog_sad_decline"
+            android:textAllCaps="true"
+            android:textColor="@color/selector_dialog_sad_btn_negative"
+            android:textSize="14sp"
+            android:visibility="gone"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+</LinearLayout>
