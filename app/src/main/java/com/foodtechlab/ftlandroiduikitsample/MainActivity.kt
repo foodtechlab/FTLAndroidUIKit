@@ -4,10 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.foodtechlab.ftlandroiduikit.sheets.DialogButton
-import com.foodtechlab.ftlandroiduikit.sheets.DialogState
-import com.foodtechlab.ftlandroiduikit.sheets.FTLBottomSheet
-import com.foodtechlab.ftlandroiduikit.sheets.Type
 import com.foodtechlab.ftlandroiduikit.textfield.CodeEditText
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -33,24 +29,26 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, CodeEditText.OnC
                 Toast.makeText(this, "Cancel", Toast.LENGTH_SHORT).show()
             }
             else -> {
-                FTLBottomSheet.newInstance(
-                    DialogState(
-                        getString(R.string.dialog_sad_title),
-                        getString(R.string.dialog_sad_message),
-                        Type.ISSUE,
-                        listOf(
-                            DialogButton(
-                                0,
-                                "Accept"
-                            ),
-                            DialogButton(
-                                -1,
-                                "Cancel",
-                                true
-                            )
-                        )
-                    )
-                ).show(supportFragmentManager, FTLBottomSheet.TAG)
+                ftl.isErrorEnabled = true
+
+//                FTLBottomSheet.newInstance(
+//                    DialogState(
+//                        getString(R.string.dialog_sad_title),
+//                        getString(R.string.dialog_sad_message),
+//                        Type.ISSUE,
+//                        listOf(
+//                            DialogButton(
+//                                0,
+//                                "Accept"
+//                            ),
+//                            DialogButton(
+//                                -1,
+//                                "Cancel",
+//                                true
+//                            )
+//                        )
+//                    )
+//                ).show(supportFragmentManager, FTLBottomSheet.TAG)
             }
         }
     }
