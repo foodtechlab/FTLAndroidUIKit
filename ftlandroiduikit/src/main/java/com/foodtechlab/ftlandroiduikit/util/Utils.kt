@@ -1,6 +1,5 @@
 package com.foodtechlab.ftlandroiduikit.util
 
-import android.app.Activity
 import android.content.Context
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
@@ -10,7 +9,6 @@ import android.os.Build
 import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.FrameLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 
@@ -41,16 +39,6 @@ fun Drawable.changeColor(color: Int) {
     } else {
         setColorFilter(color, PorterDuff.Mode.SRC_IN)
     }
-}
-
-fun View.hideKeyboardFrom() {
-    val imm = context.getSystemService(Activity.INPUT_METHOD_SERVICE) as? InputMethodManager
-    imm?.hideSoftInputFromWindow(applicationWindowToken, 0)
-}
-
-fun View.openSoftKeyboard() {
-    val imm = context.getSystemService(Context.INPUT_METHOD_SERVICE) as? InputMethodManager
-    imm?.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT)
 }
 
 internal fun View?.findSuitableParent(): ViewGroup? {

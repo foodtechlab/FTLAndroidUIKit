@@ -25,7 +25,7 @@ import androidx.core.view.updateMargins
 import androidx.core.widget.addTextChangedListener
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
-import com.foodtechlab.ftlandroiduikit.util.openSoftKeyboard
+import com.foodtechlab.ftlandroiduikit.util.openKeyboard
 import com.foodtechlab.ftlandroiduikit.util.spToPx
 
 /**
@@ -148,7 +148,7 @@ class FTLEditTextDefault @JvmOverloads constructor(
         etInput = findViewById(R.id.et_input)
         etInput.apply {
             setOnFocusChangeListener { _, _ ->
-                openSoftKeyboard()
+                openKeyboard()
                 updateControls()
             }
             addTextChangedListener {
@@ -187,7 +187,17 @@ class FTLEditTextDefault @JvmOverloads constructor(
 
         canvas.drawHint()
 
-        etInput.y = (height / 2).toFloat()
+        etInput.y = if (hint.isEmpty()) {
+            (height / 2 - etInput.height / 2).toFloat()
+        } else {
+            (height / 2).toFloat()
+        }
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        etInput.minimumWidth = width
+        vUnderline.minimumWidth = width
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
@@ -260,6 +270,18 @@ class FTLEditTextDefault @JvmOverloads constructor(
 
     fun removeTextChangedListener(watcher: TextWatcher) {
         etInput.removeTextChangedListener(watcher)
+    }
+
+    fun updateFieldState(blocked: Boolean) {
+        etInput.isFocusable = !blocked
+        etInput.isFocusableInTouchMode = !blocked
+        etInput.isCursorVisible = !blocked
+
+        if (blocked) {
+            etInput.clearFocus()
+        } else {
+            etInput.requestFocus()
+        }
     }
 
     companion object {

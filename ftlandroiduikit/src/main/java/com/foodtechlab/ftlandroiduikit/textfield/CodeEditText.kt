@@ -16,6 +16,7 @@ import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.TextWatcher
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
+import com.foodtechlab.ftlandroiduikit.util.hideKeyboard
 
 /**
  * Created by Umalt on 18.05.2020
@@ -80,7 +81,7 @@ class CodeEditText @JvmOverloads constructor(
 
             field.apply {
                 updateFieldState(false)
-                etInput.requestFocus()
+//                requestFocus()
             }
             return true
         }
@@ -88,21 +89,23 @@ class CodeEditText @JvmOverloads constructor(
     }
 
     override fun onKey(v: View, keyCode: Int, event: KeyEvent): Boolean {
-        if (keyCode == KeyEvent.KEYCODE_DEL && event.action == KeyEvent.ACTION_UP) {
+        if (keyCode == KeyEvent.KEYCODE_DEL && event.action == KeyEvent.ACTION_DOWN) {
             val field = v as EditText
             if (field.text.isNullOrEmpty()) {
                 val curId = v.id
                 val prevId = v.id - 1
                 codeSymbols[curId] = -1
-                inputFields[curId].updateFieldState(curId > 0)
+                inputFields[curId].updateFieldState(true)
                 inputFields.getOrNull(prevId)?.apply {
                     codeSymbols[prevId] = -1
                     etInput.text = null
                     updateFieldState(false)
-                    requestFocus()
+//                    requestFocus()
                 }
+                return true
+            } else {
+                return false
             }
-            return true
         }
         return false
     }
@@ -119,10 +122,9 @@ class CodeEditText @JvmOverloads constructor(
                 inputType = EditorInfo.TYPE_CLASS_NUMBER
                 isActiveStateEnabled = false
                 maxLength = 1
-//                imeOptions = EditorInfo.IME_ACTION_NEXT
                 marginHorizontal = context.dpToPx(MARGIN_HORIZONTAL_DP)
                 keyListener = this@CodeEditText
-                updateFieldState(true)
+                updateFieldState(i > 0)
                 addTextChangedListener(GenericTextWatcher(etInput))
             }
             inputFields.add(field)
@@ -137,17 +139,8 @@ class CodeEditText @JvmOverloads constructor(
         }
     }
 
-    private fun FTLEditTextDefault.updateFieldState(blocked: Boolean) {
-        etInput.isFocusable = !blocked
-        etInput.isFocusableInTouchMode = !blocked
-        etInput.isCursorVisible = !blocked
-    }
-
     private inner class GenericTextWatcher(private val view: View) : TextWatcher() {
-
         override fun afterTextChanged(s: Editable?) {
-            super.afterTextChanged(s)
-
             isErrorEnabled = false
 
             val text = s.toString()
@@ -161,14 +154,18 @@ class CodeEditText @JvmOverloads constructor(
                     inputFields[curId].updateFieldState(true)
                     inputFields.getOrNull(nextId)?.apply {
                         updateFieldState(false)
-                        requestFocus()
+//                        requestFocus()
+                    }
+
+                    if (curId == symbolsCount - 1) {
+                        hideKeyboard()
                     }
                 }
                 0 -> {
                     codeSymbols[curId] = -1
                     inputFields[curId].apply {
                         updateFieldState(false)
-                        requestFocus()
+//                        requestFocus()
                     }
                 }
             }
@@ -185,6 +182,6 @@ class CodeEditText @JvmOverloads constructor(
         private const val DEFAULT_SYMBOLS_COUNT = 4
         private const val MIN_FIELD_WIDTH_DP = 40F
         private const val MIN_SPACE_WIDTH_DP = 16F
-        private const val MARGIN_HORIZONTAL_DP = 8f
+        private const val MARGIN_HORIZONTAL_DP = 0f
     }
 }
