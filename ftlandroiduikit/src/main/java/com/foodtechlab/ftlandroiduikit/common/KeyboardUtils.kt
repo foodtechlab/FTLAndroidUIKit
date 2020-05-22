@@ -1,11 +1,10 @@
-package com.foodtechlab.ftlandroiduikit.util
+package com.foodtechlab.ftlandroiduikit.common
 
 import android.app.Activity
 import android.content.Context
 import android.graphics.Rect
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-
 
 /**
  * Created by Umalt on 22.05.2020
