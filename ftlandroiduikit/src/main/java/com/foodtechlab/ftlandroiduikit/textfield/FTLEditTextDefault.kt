@@ -20,7 +20,7 @@ import androidx.core.view.marginTop
 import androidx.core.view.updateMargins
 import androidx.core.widget.addTextChangedListener
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.util.dpToPx
+import com.foodtechlab.ftlandroiduikit.common.dpToPx
 import com.google.android.material.animation.ArgbEvaluatorCompat
 
 /**

@@ -15,7 +15,7 @@ import android.widget.Space
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.TextWatcher
-import com.foodtechlab.ftlandroiduikit.util.dpToPx
+import com.foodtechlab.ftlandroiduikit.common.dpToPx
 
 /**
  * Created by Umalt on 18.05.2020

@@ -295,4 +295,6 @@
         <attr name="isActiveStateEnabled" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="FTLBottomNavigationView"></declare-styleable>
+
 </resources>

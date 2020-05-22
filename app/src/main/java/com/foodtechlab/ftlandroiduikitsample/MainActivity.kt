@@ -17,6 +17,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, CodeEditText.OnC
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        ftl_bnv_menu.setOnNavigationItemSelectedListener {
+            Toast.makeText(this, "${it.itemId}", Toast.LENGTH_SHORT).show()
+            return@setOnNavigationItemSelectedListener true
+        }
+
         cet_code.onCodeChangeListener = this
 
         btn_primary_click.setOnClickListener(this)
