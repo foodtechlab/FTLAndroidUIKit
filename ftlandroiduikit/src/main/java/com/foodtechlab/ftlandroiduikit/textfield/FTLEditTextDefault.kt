@@ -2,26 +2,31 @@ package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.graphics.Canvas
+import android.graphics.Paint
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
 import android.view.Gravity
+import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.EditText
-import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.isInvisible
+import androidx.core.view.marginBottom
 import androidx.core.view.marginTop
 import androidx.core.view.updateMargins
 import androidx.core.widget.addTextChangedListener
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
-import com.google.android.material.animation.ArgbEvaluatorCompat
+import com.foodtechlab.ftlandroiduikit.util.openSoftKeyboard
+import com.foodtechlab.ftlandroiduikit.util.spToPx
 
 /**
  * Created by Umalt on 12.05.2020
@@ -30,7 +35,7 @@ class FTLEditTextDefault @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : LinearLayout(context, attrs, defStyle) {
+) : RelativeLayout(context, attrs, defStyle) {
 
     var textGravity: Int = Gravity.START
         set(value) {
@@ -38,18 +43,13 @@ class FTLEditTextDefault @JvmOverloads constructor(
             etInput.gravity = value
         }
 
-    var marginHorizontal: Float = context.dpToPx(DEFAULT_MARGIN_HORIZONTAL_DP)
+    var marginHorizontal: Float = context.dpToPx(DEFAULT_MARGIN_HORIZONTAL)
         set(value) {
             field = value
             etInput.updateMargins()
-            tvHint.updateMargins()
         }
 
-    private val hintXTranslation by lazy {
-        -((tvHint.width - (HINT_SHRINK_SCALE * tvHint.width)) * HALF)
-    }
-
-    private val hintYTranslation by lazy { -((height - etInput.height) * HALF) }
+    private var scale = SCALE_MAX
 
     private val isHintOnTop: Boolean
         get() = etInput.hasFocus() || !etInput.text.isNullOrEmpty()
@@ -87,7 +87,11 @@ class FTLEditTextDefault @JvmOverloads constructor(
             }
         }
 
-    private var isErrorEnabled = false
+    var isErrorEnabled = false
+        set(value) {
+            field = value
+            updateControls()
+        }
 
     var isActiveStateEnabled: Boolean = true
         set(value) {
@@ -95,11 +99,25 @@ class FTLEditTextDefault @JvmOverloads constructor(
             updateControls()
         }
 
-    var hint: CharSequence
-        get() = tvHint.text
+    var hint: String = ""
         set(value) {
-            tvHint.text = value
+            field = value
+            invalidate()
         }
+
+    private val initialHintTextSize by lazy { context.spToPx(INITIAL_HINT_TEXT_SIZE) }
+
+    private val initialHeight by lazy { height }
+
+    private val hintPaint by lazy {
+        Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color = controlsColor
+            textSize = initialHintTextSize
+            if (!isInEditMode) {
+                typeface = ResourcesCompat.getFont(context, R.font.roboto_regular)
+            }
+        }
+    }
 
     private var digits: CharSequence? = null
         set(value) {
@@ -113,12 +131,6 @@ class FTLEditTextDefault @JvmOverloads constructor(
             field = value
         }
 
-    var focusChangeListener: OnFocusChangeListener? = null
-        set(value) {
-            etInput.onFocusChangeListener = value
-            field = value
-        }
-
     var editorActionListener: TextView.OnEditorActionListener? = null
         set(value) {
             etInput.setOnEditorActionListener(value)
@@ -126,33 +138,36 @@ class FTLEditTextDefault @JvmOverloads constructor(
         }
 
     private val vUnderline: View
-    private val tvHint: TextView
     val etInput: EditText
 
     init {
         inflate(context, R.layout.layout_ftl_edit_text_default, this)
 
         vUnderline = findViewById(R.id.v_underline)
-        tvHint = findViewById(R.id.tv_hint)
 
         etInput = findViewById(R.id.et_input)
         etInput.apply {
             setOnFocusChangeListener { _, _ ->
+                openSoftKeyboard()
                 updateControls()
             }
             addTextChangedListener {
-                setErrorEnabled(false)
+                isErrorEnabled = false
             }
+            updateMargins()
         }
 
-        orientation = VERTICAL
+        minimumHeight = context.dpToPx(MIN_HEIGHT).toInt()
 
         background = ContextCompat.getDrawable(context, R.drawable.shape_ftl_edit_text_default)
 
         context.withStyledAttributes(attrs, R.styleable.FTLEditTextDefault) {
-            hint = getText(R.styleable.FTLEditTextDefault_hint) ?: ""
+            hint = getString(R.styleable.FTLEditTextDefault_hint) ?: ""
 
-            inputType = getInt(R.styleable.FTLEditTextDefault_inputType, EditorInfo.TYPE_NULL)
+            inputType = getInt(
+                R.styleable.FTLEditTextDefault_inputType,
+                EditorInfo.TYPE_CLASS_TEXT or EditorInfo.TYPE_TEXT_FLAG_MULTI_LINE
+            )
 
             imeOptions = getInt(R.styleable.FTLEditTextDefault_imeOptions, EditorInfo.IME_NULL)
 
@@ -167,24 +182,41 @@ class FTLEditTextDefault @JvmOverloads constructor(
         }
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
 
-        if (tvHint.marginTop == 0) {
-            val marginVertical = (measuredHeight - tvHint.measuredHeight) / 2
-            tvHint.updateMargins(marginVertical)
-            etInput.updateMargins(marginVertical)
-        }
+        canvas.drawHint()
+
+        etInput.y = (height / 2).toFloat()
     }
 
-    private fun View.updateMargins(marginVertical: Int = marginTop) {
-        val lParams = layoutParams as ConstraintLayout.LayoutParams
-        val horizontal = if (id == tvHint.id) 0 else marginHorizontal.toInt()
+    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
+        if (ev.action == MotionEvent.ACTION_DOWN) {
+            return true
+        } else if (ev.action == MotionEvent.ACTION_UP) {
+            etInput.requestFocus()
+            return true
+        }
+        return super.dispatchTouchEvent(ev)
+    }
+
+    private fun Canvas.drawHint() {
+        val hintHeight = hintPaint.fontMetrics.descent - hintPaint.fontMetrics.ascent
+        val hintY = (initialHeight / 2 + hintHeight / 2 - hintPaint.fontMetrics.bottom) * scale
+        hintPaint.textSize = initialHintTextSize * scale
+
+        hintPaint.color = controlsColor
+
+        drawText(hint, marginHorizontal, hintY, hintPaint)
+    }
+
+    private fun View.updateMargins() {
+        val lParams = layoutParams as LayoutParams
         lParams.updateMargins(
-            horizontal,
-            marginVertical,
-            horizontal,
-            marginVertical
+            marginHorizontal.toInt(),
+            marginTop,
+            marginHorizontal.toInt(),
+            marginBottom
         )
         layoutParams = lParams
     }
@@ -194,11 +226,6 @@ class FTLEditTextDefault @JvmOverloads constructor(
         updateUnderline()
     }
 
-    private fun updateHint() {
-        scaleHint()
-        tintHint()
-    }
-
     private fun updateUnderline() {
         vUnderline.apply {
             isInvisible = !isHintOnTop && !isErrorEnabled
@@ -206,36 +233,25 @@ class FTLEditTextDefault @JvmOverloads constructor(
         }
     }
 
-    @Suppress("MemberVisibilityCanBePrivate")
-    private fun scaleHint() {
-        val scale = if (!isHintOnTop && !isErrorEnabled) 1f else HINT_SHRINK_SCALE
-        val translationX = if (!isHintOnTop && !isErrorEnabled) 0f else hintXTranslation
-        val translationY = if (!isHintOnTop && !isErrorEnabled) 0f else hintYTranslation
-
-        tvHint.animate().apply {
-            scaleX(scale)
-            scaleY(scale)
-            translationX(translationX)
-            translationY(translationY)
-            duration = HINT_ANIMATION_DURATION
-            start()
+    private fun updateHint() {
+        if (hintPaint.color != controlsColor) {
+            invalidate()
         }
-    }
 
-    private fun tintHint() {
-        ValueAnimator.ofObject(ArgbEvaluatorCompat(), tvHint.currentTextColor, controlsColor)
-            .apply {
-                duration = HINT_ANIMATION_DURATION
+        val startVal = if (!isHintOnTop && !isErrorEnabled) SCALE_MIN else SCALE_MAX
+        val endVal = if (!isHintOnTop && !isErrorEnabled) SCALE_MAX else SCALE_MIN
+
+        if (scale != endVal) {
+            ValueAnimator.ofFloat(startVal, endVal).apply {
+                duration = ANIMATION_DURATION
+
                 addUpdateListener { animation ->
-                    tvHint.setTextColor(animation.animatedValue as Int)
+                    scale = animation.animatedValue as Float
+                    invalidate()
                 }
                 start()
             }
-    }
-
-    fun setErrorEnabled(isEnabled: Boolean) {
-        isErrorEnabled = isEnabled
-        updateControls()
+        }
     }
 
     fun addTextChangedListener(watcher: TextWatcher) {
@@ -247,11 +263,12 @@ class FTLEditTextDefault @JvmOverloads constructor(
     }
 
     companion object {
-        private const val HINT_ANIMATION_DURATION = 200L
+        private const val ANIMATION_DURATION = 200L
 
-        private const val DEFAULT_MARGIN_HORIZONTAL_DP = 16f
-
-        private const val HINT_SHRINK_SCALE = .8f
-        private const val HALF = .5f
+        private const val SCALE_MAX = 1f
+        private const val SCALE_MIN = .7f
+        private const val DEFAULT_MARGIN_HORIZONTAL = 16f
+        private const val INITIAL_HINT_TEXT_SIZE = 16f
+        private const val MIN_HEIGHT = 56f
     }
 }

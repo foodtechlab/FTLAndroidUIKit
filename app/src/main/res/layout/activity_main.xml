@@ -35,17 +35,17 @@
             android:text="@string/common_click" />
 
         <com.foodtechlab.ftlandroiduikit.textfield.FTLEditTextDefault
+            android:id="@+id/ftl"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:hint="Simple hint"
-            app:inputType="number" />
+            app:hint="Simple hint" />
 
         <com.foodtechlab.ftlandroiduikit.textfield.FTLEditTextDefault
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:hint="Simple hint" />
+            app:hint="Just hint for hint" />
 
         <com.foodtechlab.ftlandroiduikit.textfield.CodeEditText
             android:id="@+id/cet_code"

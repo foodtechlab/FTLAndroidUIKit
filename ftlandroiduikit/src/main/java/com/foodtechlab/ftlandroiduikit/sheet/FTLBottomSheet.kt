@@ -1,4 +1,4 @@
-package com.foodtechlab.ftlandroiduikit.sheets
+package com.foodtechlab.ftlandroiduikit.sheet
 
 import android.app.Dialog
 import android.content.Context

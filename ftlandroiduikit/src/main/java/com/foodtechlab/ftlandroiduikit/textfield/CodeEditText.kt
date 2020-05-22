@@ -45,7 +45,7 @@ class CodeEditText @JvmOverloads constructor(
         set(value) {
             field = value
             for (i in 0 until symbolsCount) {
-                inputFields[i].setErrorEnabled(value)
+                inputFields[i].isErrorEnabled = value
             }
         }
 
@@ -71,15 +71,19 @@ class CodeEditText @JvmOverloads constructor(
     }
 
     override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        val field = codeSymbols.firstOrNull { it == -1 }
-            ?.let { inputFields[codeSymbols.indexOf(it)] }
-            ?: inputFields.last()
+        if (ev.action == MotionEvent.ACTION_DOWN) {
+            return true
+        } else if (ev.action == MotionEvent.ACTION_UP) {
+            val field = codeSymbols.firstOrNull { it == -1 }
+                ?.let { inputFields[codeSymbols.indexOf(it)] }
+                ?: inputFields.last()
 
-        field.apply {
-            updateFieldState(false)
-            requestFocus()
+            field.apply {
+                updateFieldState(false)
+                etInput.requestFocus()
+            }
+            return true
         }
-
         return super.dispatchTouchEvent(ev)
     }
 
@@ -115,6 +119,7 @@ class CodeEditText @JvmOverloads constructor(
                 inputType = EditorInfo.TYPE_CLASS_NUMBER
                 isActiveStateEnabled = false
                 maxLength = 1
+//                imeOptions = EditorInfo.IME_ACTION_NEXT
                 marginHorizontal = context.dpToPx(MARGIN_HORIZONTAL_DP)
                 keyListener = this@CodeEditText
                 updateFieldState(true)

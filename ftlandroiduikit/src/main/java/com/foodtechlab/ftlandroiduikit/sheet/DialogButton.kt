@@ -1,4 +1,4 @@
-package com.foodtechlab.ftlandroiduikit.sheets
+package com.foodtechlab.ftlandroiduikit.sheet
 
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
