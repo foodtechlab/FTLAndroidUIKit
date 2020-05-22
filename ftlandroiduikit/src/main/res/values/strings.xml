@@ -4,4 +4,9 @@
     <string name="dialog_sad_it_is_clear">Понятно</string>
     <string name="dialog_sad_accept">Принять</string>
     <string name="dialog_sad_decline">Отказать</string>
+
+    <string name="ftl_bnv_orders">Заказы</string>
+    <string name="ftl_bnv_maps">Карты</string>
+    <string name="ftl_bnv_history">История</string>
+    <string name="ftl_bnv_more">Еще</string>
 </resources>

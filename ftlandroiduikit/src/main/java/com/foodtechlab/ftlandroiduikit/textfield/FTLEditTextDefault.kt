@@ -24,9 +24,9 @@ import androidx.core.view.marginTop
 import androidx.core.view.updateMargins
 import androidx.core.widget.addTextChangedListener
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.util.dpToPx
-import com.foodtechlab.ftlandroiduikit.util.openKeyboard
-import com.foodtechlab.ftlandroiduikit.util.spToPx
+import com.foodtechlab.ftlandroiduikit.common.dpToPx
+import com.foodtechlab.ftlandroiduikit.common.spToPx
+import com.foodtechlab.ftlandroiduikit.common.openKeyboard
 
 /**
  * Created by Umalt on 12.05.2020
