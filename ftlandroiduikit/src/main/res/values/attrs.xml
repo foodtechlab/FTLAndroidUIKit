@@ -297,4 +297,9 @@
 
     <declare-styleable name="FTLBottomNavigationView"></declare-styleable>
 
+    <declare-styleable name="FTLTextAddresses">
+        <attr name="textAddressFrom" format="string" />
+        <attr name="textAddressTo" format="string" />
+    </declare-styleable>
+
 </resources>

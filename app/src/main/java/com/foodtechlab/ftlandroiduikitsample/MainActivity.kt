@@ -23,6 +23,8 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, CodeEditText.OnC
         btn_primary_click.setOnClickListener(this)
         btn_secondary_click.setOnClickListener(this)
         btn_additional_click.setOnClickListener(this)
+
+        tv_addresses.textAddressFrom = "Волгоград, ул. Садовое товарищество Авангард, д.62 кв./офис 102, под. 1 эт. 24"
     }
 
     override fun onClick(v: View) {

@@ -75,6 +75,13 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="16dp" />
 
+            <com.foodtechlab.ftlandroiduikit.textfield.FTLTextAddresses
+                android:id="@+id/tv_addresses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:textAddressTo="Волгоград, ул. им Рокоссовского д.62 кв./оф. 102 под.1 эт 24"/>
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

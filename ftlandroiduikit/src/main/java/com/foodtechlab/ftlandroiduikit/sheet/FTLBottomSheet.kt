@@ -15,7 +15,7 @@ import androidx.fragment.app.DialogFragment
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.button.FTLButtonCancel
 import com.foodtechlab.ftlandroiduikit.button.FTLButtonSecondary
-import com.foodtechlab.ftlandroiduikit.common.dpToPx
+import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
