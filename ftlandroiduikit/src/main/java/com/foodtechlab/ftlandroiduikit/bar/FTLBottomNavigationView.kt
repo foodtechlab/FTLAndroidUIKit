@@ -5,7 +5,7 @@ import android.util.AttributeSet
 import android.view.Menu
 import androidx.core.content.ContextCompat
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.common.dpToPx
+import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
 
