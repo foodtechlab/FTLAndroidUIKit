@@ -75,12 +75,26 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="16dp" />
 
-            <com.foodtechlab.ftlandroiduikit.textfield.FTLTextAddresses
+            <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldRoute
                 android:id="@+id/tv_addresses"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 app:textAddressTo="Волгоград, ул. им Рокоссовского д.62 кв./оф. 102 под.1 эт 24"/>
+
+            <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldMultiple
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:type="CARD_COURIER"
+                app:textTopStartSlot="Картой курьеру"
+                app:textBottomStartSlot="К оплате: 750 р" />
+
+            <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldMultiple
+                android:id="@+id/ftl_tv_multiple"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp" />
 
         </LinearLayout>
 

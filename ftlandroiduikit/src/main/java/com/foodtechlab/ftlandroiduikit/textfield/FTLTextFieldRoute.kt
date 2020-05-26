@@ -7,7 +7,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
 
-class FTLTextAddresses @JvmOverloads constructor(
+class FTLTextFieldRoute @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
@@ -29,13 +29,13 @@ class FTLTextAddresses @JvmOverloads constructor(
         }
 
     init {
-        inflate(context, R.layout.layout_ftl_text_addresses, this)
+        inflate(context, R.layout.layout_ftl_text_field_route, this)
         tvAddressFrom = findViewById(R.id.tv_address_from)
         tvAddressTo = findViewById(R.id.tv_address_to)
 
-        context.withStyledAttributes(attrs, R.styleable.FTLTextAddresses) {
-            textAddressFrom = getString(R.styleable.FTLTextAddresses_textAddressFrom) ?: ""
-            textAddressTo = getString(R.styleable.FTLTextAddresses_textAddressTo) ?: ""
+        context.withStyledAttributes(attrs, R.styleable.FTLTextFieldRoute) {
+            textAddressFrom = getString(R.styleable.FTLTextFieldRoute_textAddressFrom) ?: ""
+            textAddressTo = getString(R.styleable.FTLTextFieldRoute_textAddressTo) ?: ""
         }
     }
 }

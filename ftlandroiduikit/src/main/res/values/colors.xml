@@ -6,11 +6,13 @@
     <color name="Surface">#FFFFFF</color>
     <color name="OnSurfacePrimaryEnabled">#F6F6F6</color>
     <color name="OnSurfacePrimaryPressed">#ECECEC</color>
+    <color name="OnSurfacePrimaryAdditionalLight">#ECECEC</color>
 
     <color name="OnBackground">#FFFFFF</color>
     <color name="OnBackgroundPrimary">#161616</color>
     <color name="OnBackgroundSecondary">#A4A4A4</color>
     <color name="OnBackgroundSecondaryOpacity10">#19A4A4A4</color>
+
 
     <color name="PrimaryDangerEnabled">#DE2222</color>
     <color name="PrimaryDangerPressed">#C00404</color>
