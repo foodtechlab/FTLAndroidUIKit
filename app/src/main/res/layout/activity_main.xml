@@ -54,8 +54,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="16dp"
-                android:maxLength="12"
-                tools:text="12345" />
+                android:digits="1234567890"
+                android:inputType="phone"
+                android:maxLength="12" />
 
             <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldRoute
                 android:id="@+id/tv_addresses"
