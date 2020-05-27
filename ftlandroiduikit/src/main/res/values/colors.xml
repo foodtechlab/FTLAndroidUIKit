@@ -6,11 +6,13 @@
     <color name="Surface">#FFFFFF</color>
     <color name="OnSurfacePrimaryEnabled">#F6F6F6</color>
     <color name="OnSurfacePrimaryPressed">#ECECEC</color>
+    <color name="OnSurfacePrimaryAdditionalLight">#ECECEC</color>
 
     <color name="OnBackground">#FFFFFF</color>
     <color name="OnBackgroundPrimary">#161616</color>
     <color name="OnBackgroundSecondary">#A4A4A4</color>
     <color name="OnBackgroundSecondaryOpacity10">#1AA4A4A4</color>
+
 
     <color name="PrimaryDangerEnabled">#DE2222</color>
     <color name="PrimaryDangerPressed">#C00404</color>
@@ -21,5 +23,7 @@
     <color name="PrimaryWrangerEnabled">#F8AA15</color>
 
     <color name="AdditionalYellow">#F57C00</color>
+
+    <color name="AdditionalDarkBlue">#1C497C</color>
 
 </resources>

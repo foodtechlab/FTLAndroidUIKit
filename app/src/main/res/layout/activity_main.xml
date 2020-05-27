@@ -6,60 +6,81 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <!--    <androidx.core.widget.NestedScrollView-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="match_parent"-->
-    <!--        android:clipToPadding="false"-->
-    <!--        android:orientation="vertical"-->
-    <!--        android:paddingBottom="?attr/actionBarSize">-->
-
-    <LinearLayout
-        android:id="@+id/ll_root"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:clipToPadding="false"
+        android:orientation="vertical"
+        android:paddingBottom="?attr/actionBarSize">
 
-        <com.foodtechlab.ftlandroiduikit.button.FTLButtonPrimary
-            android:id="@+id/ftl_open_dialog"
+        <LinearLayout
+            android:id="@+id/ll_root"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="Open dialog" />
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
-        <com.foodtechlab.ftlandroiduikit.button.FTLButtonPrimary
-            android:id="@+id/ftl_make_code_is_wrong"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="Make code is Wrong" />
+            <com.foodtechlab.ftlandroiduikit.button.FTLButtonPrimary
+                android:id="@+id/ftl_open_dialog"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Open dialog" />
 
-        <com.foodtechlab.ftlandroiduikit.button.FTLButtonPrimary
-            android:id="@+id/ftl_make_field_is_wrong"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="Make field is Wrong" />
+            <com.foodtechlab.ftlandroiduikit.button.FTLButtonPrimary
+                android:id="@+id/ftl_make_code_is_wrong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Make code is Wrong" />
 
-        <com.foodtechlab.ftlandroiduikit.textfield.FTLEditTextDefault
-            android:id="@+id/ftl_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:hint="Hint hint"
-            app:text="kjjhhgj" />
+            <com.foodtechlab.ftlandroiduikit.button.FTLButtonPrimary
+                android:id="@+id/ftl_make_field_is_wrong"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:text="Make field is Wrong" />
 
-        <com.foodtechlab.ftlandroiduikit.textfield.FTLEditTextAuthCode
-            android:id="@+id/code"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_margin="16dp"
-            android:maxLength="12"
-            tools:text="12345" />
+            <com.foodtechlab.ftlandroiduikit.textfield.FTLEditTextDefault
+                android:id="@+id/ftl_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:hint="Hint hint"
+                app:text="kjjhhgj" />
 
-    </LinearLayout>
+            <com.foodtechlab.ftlandroiduikit.textfield.FTLEditTextAuthCode
+                android:id="@+id/code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="16dp"
+                android:maxLength="12"
+                tools:text="12345" />
 
-    <!--    </androidx.core.widget.NestedScrollView>-->
+            <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldRoute
+                android:id="@+id/tv_addresses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:textAddressTo="Волгоград, ул. им Рокоссовского д.62 кв./оф. 102 под.1 эт 24" />
+
+            <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldMultiple
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:textBottomStartSlot="К оплате: 750 р"
+                app:textTopStartSlot="Картой курьеру"
+                app:type="CARD_COURIER" />
+
+            <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldMultiple
+                android:id="@+id/ftl_tv_multiple"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
 
     <com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
         android:id="@+id/ftl_bnv_menu"

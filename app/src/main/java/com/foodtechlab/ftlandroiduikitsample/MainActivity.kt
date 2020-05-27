@@ -9,6 +9,7 @@ import com.foodtechlab.ftlandroiduikit.sheet.DialogButton
 import com.foodtechlab.ftlandroiduikit.sheet.DialogState
 import com.foodtechlab.ftlandroiduikit.sheet.FTLBottomSheet
 import com.foodtechlab.ftlandroiduikit.sheet.Type
+import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
 import com.foodtechlab.ftlandroiduikit.textfield.helper.TextWatcher
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -42,6 +43,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
         ftl_bnv_menu.setOnNavigationItemSelectedListener {
             Toast.makeText(this, "${it.itemId}", Toast.LENGTH_SHORT).show()
             return@setOnNavigationItemSelectedListener true
+        }
+
+        tv_addresses.textAddressFrom =
+            "Волгоград, ул. Садовое товарищество Авангард, д.62 кв./офис 102, под. 1 эт. 24"
+
+        ftl_tv_multiple.apply {
+            imageType = ImageType.CASH
+            textTopStartSlot = "Наличными"
+            textBottomStartSlot = "Без сдачи"
+            textTopEndSlot = "1000 р"
+            textBottomEndSlot = "Сумма: 1000 р"
         }
     }
 
