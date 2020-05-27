@@ -30,15 +30,6 @@ class FTLBottomNavigationView @JvmOverloads constructor(
             R.color.selector_ftl_bnv_item_text_color
         )
         labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
-
-        menu.add(Menu.NONE, ID_ORDERS, Menu.NONE, context.getString(R.string.ftl_bnv_orders))
-            .setIcon(R.drawable.selector_ftl_bnv_orders)
-        menu.add(Menu.NONE, ID_MAPS, Menu.NONE, context.getString(R.string.ftl_bnv_maps))
-            .setIcon(R.drawable.selector_ftl_bnv_maps)
-        menu.add(Menu.NONE, ID_HISTORY, Menu.NONE, context.getString(R.string.ftl_bnv_history))
-            .setIcon(R.drawable.selector_ftl_bnv_history)
-        menu.add(Menu.NONE, ID_MORE, Menu.NONE, context.getString(R.string.ftl_bnv_more))
-            .setIcon(R.drawable.selector_ftl_bnv_more)
     }
 
     fun addMenuItems(menuItems: List<MenuItem>) {
