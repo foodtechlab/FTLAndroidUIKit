@@ -78,7 +78,19 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp" />
+            <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldExtendable
+                android:id="@+id/ftl_tv_extendable"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp" />
 
+            <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldExtendable
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                app:ellipsizedText="... еще"
+                app:imageType="CUSTOMER"
+                app:fullText="Воу привет! А можно ли мне какой-нибудь, очень вкусный комплимент"/>
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
