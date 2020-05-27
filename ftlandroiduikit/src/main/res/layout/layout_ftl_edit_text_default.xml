@@ -3,15 +3,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:minHeight="?attr/actionBarSize"
     tools:layout_margin="16dp">
 
-    <com.foodtechlab.ftlandroiduikit.textfield.BackspaceEditText
+    <androidx.appcompat.widget.AppCompatEditText
         android:id="@+id/et_input"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
         android:background="@null"
         android:fontFamily="@font/roboto_regular"
+        android:gravity="center_vertical"
         android:includeFontPadding="false"
         android:letterSpacing=".05"
         android:lineSpacingExtra="5sp"
@@ -23,7 +25,6 @@
         android:layout_width="match_parent"
         android:layout_height="2dp"
         android:layout_below="@id/et_input"
-        android:layout_alignParentBottom="true"
         android:background="@color/OnBackgroundSecondary"
         android:visibility="invisible" />
 

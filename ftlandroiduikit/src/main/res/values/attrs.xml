@@ -7,7 +7,7 @@
 
     <declare-styleable name="FTLButtonAdditional"></declare-styleable>
 
-    <declare-styleable name="CodeEditText">
+    <declare-styleable name="FTLEditTextAuthCode">
         <attr name="symbolsCount" format="integer" />
     </declare-styleable>
 
@@ -292,7 +292,9 @@
 
         <attr name="maxLength" format="string" />
 
-        <attr name="isActiveStateEnabled" format="boolean" />
+        <attr name="maxLineCount" format="string" />
+
+        <attr name="text" format="string" />
     </declare-styleable>
 
     <declare-styleable name="FTLBottomNavigationView"></declare-styleable>
