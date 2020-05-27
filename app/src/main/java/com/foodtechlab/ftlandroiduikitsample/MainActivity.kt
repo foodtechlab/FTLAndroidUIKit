@@ -5,6 +5,7 @@ import android.text.Editable
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView.MenuItem.*
 import com.foodtechlab.ftlandroiduikit.sheet.DialogButton
 import com.foodtechlab.ftlandroiduikit.sheet.DialogState
 import com.foodtechlab.ftlandroiduikit.sheet.FTLBottomSheet
@@ -40,9 +41,19 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             Toast.makeText(this@MainActivity, "focus is changed", Toast.LENGTH_SHORT).show()
         }
 
-        ftl_bnv_menu.setOnNavigationItemSelectedListener {
-            Toast.makeText(this, "${it.itemId}", Toast.LENGTH_SHORT).show()
-            return@setOnNavigationItemSelectedListener true
+        ftl_bnv_menu.apply {
+            addMenuItems(
+                listOf(
+                    ORDERS,
+                    MAPS,
+                    HISTORY,
+                    MORE
+                )
+            )
+            setOnNavigationItemSelectedListener {
+                Toast.makeText(this@MainActivity, "${it.itemId}", Toast.LENGTH_SHORT).show()
+                return@setOnNavigationItemSelectedListener true
+            }
         }
 
         tv_addresses.textAddressFrom =
