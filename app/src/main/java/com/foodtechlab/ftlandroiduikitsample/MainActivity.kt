@@ -55,6 +55,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
             textTopEndSlot = "1000 р"
             textBottomEndSlot = "Сумма: 1000 р"
         }
+        ftl_tv_extendable.apply {
+            fullText = "Воу привет! а можно ли мне какой-нибудь, очень вкусный" +
+                    " комплимент от шефа! Спасибо, Воу Воу Воу Воу Воу Воу"
+            ellipsizedText = "... еще"
+        }
     }
 
     override fun onClick(v: View) {
