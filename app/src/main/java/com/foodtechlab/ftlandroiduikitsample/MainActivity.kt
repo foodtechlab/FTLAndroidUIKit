@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.foodtechlab.ftlandroiduikit.textfield.CodeEditText
+import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity(), View.OnClickListener, CodeEditText.OnCodeChangeListener {
@@ -25,6 +26,14 @@ class MainActivity : AppCompatActivity(), View.OnClickListener, CodeEditText.OnC
         btn_additional_click.setOnClickListener(this)
 
         tv_addresses.textAddressFrom = "Волгоград, ул. Садовое товарищество Авангард, д.62 кв./офис 102, под. 1 эт. 24"
+
+        ftl_tv_multiple.apply {
+            imageType = ImageType.CASH
+            textTopStartSlot = "Наличными"
+            textBottomStartSlot = "Без сдачи"
+            textTopEndSlot = "1000 р"
+            textBottomEndSlot = "Сумма: 1000 р"
+        }
     }
 
     override fun onClick(v: View) {
