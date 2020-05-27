@@ -11,8 +11,8 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.common.dpToPx
-import com.foodtechlab.ftlandroiduikit.common.findSuitableParent
+import com.foodtechlab.ftlandroiduikit.util.dpToPx
+import com.foodtechlab.ftlandroiduikit.util.findSuitableParent
 import com.google.android.material.snackbar.BaseTransientBottomBar
 
 /**

@@ -1,4 +1,4 @@
-package com.foodtechlab.ftlandroiduikit.common
+package com.foodtechlab.ftlandroiduikit.util
 
 import android.content.Context
 import android.graphics.BlendMode

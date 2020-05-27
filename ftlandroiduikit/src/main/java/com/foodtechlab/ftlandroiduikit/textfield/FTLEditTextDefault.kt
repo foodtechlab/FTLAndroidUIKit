@@ -4,17 +4,17 @@ import android.animation.ValueAnimator
 import android.content.Context
 import android.graphics.Canvas
 import android.graphics.Paint
+import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
 import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
 import android.view.Gravity
-import android.view.MotionEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.EditText
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
@@ -22,11 +22,10 @@ import androidx.core.view.isInvisible
 import androidx.core.view.marginBottom
 import androidx.core.view.marginTop
 import androidx.core.view.updateMargins
-import androidx.core.widget.addTextChangedListener
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.common.dpToPx
-import com.foodtechlab.ftlandroiduikit.common.spToPx
-import com.foodtechlab.ftlandroiduikit.common.openKeyboard
+import com.foodtechlab.ftlandroiduikit.util.dpToPx
+import com.foodtechlab.ftlandroiduikit.util.openKeyboard
+import com.foodtechlab.ftlandroiduikit.util.spToPx
 
 /**
  * Created by Umalt on 12.05.2020
@@ -43,12 +42,6 @@ class FTLEditTextDefault @JvmOverloads constructor(
             etInput.gravity = value
         }
 
-    var marginHorizontal: Float = context.dpToPx(DEFAULT_MARGIN_HORIZONTAL)
-        set(value) {
-            field = value
-            etInput.updateMargins()
-        }
-
     private var scale = SCALE_MAX
 
     private val isHintOnTop: Boolean
@@ -58,7 +51,6 @@ class FTLEditTextDefault @JvmOverloads constructor(
         get() = ContextCompat.getColor(
             context, when {
                 isErrorEnabled -> R.color.PrimaryDangerEnabled
-                !etInput.hasFocus() && !etInput.text.isNullOrEmpty() && !isActiveStateEnabled -> R.color.PrimaryInfoEnabled
                 !etInput.hasFocus() && !etInput.text.isNullOrEmpty() -> R.color.OnBackgroundSecondary
                 isHintOnTop -> R.color.PrimaryInfoEnabled
                 else -> R.color.OnBackgroundSecondary
@@ -77,7 +69,7 @@ class FTLEditTextDefault @JvmOverloads constructor(
             etInput.imeOptions = value
         }
 
-    var maxLength: Int
+    private var maxLength: Int
         get() = (etInput.filters[0] as? InputFilter.LengthFilter)?.max ?: -1
         set(value) {
             etInput.filters = if (value >= 0) {
@@ -87,13 +79,13 @@ class FTLEditTextDefault @JvmOverloads constructor(
             }
         }
 
-    var isErrorEnabled = false
+    private var maxLines: Int
+        get() = etInput.maxLines
         set(value) {
-            field = value
-            updateControls()
+            etInput.maxLines = value
         }
 
-    var isActiveStateEnabled: Boolean = true
+    var isErrorEnabled = false
         set(value) {
             field = value
             updateControls()
@@ -105,9 +97,18 @@ class FTLEditTextDefault @JvmOverloads constructor(
             invalidate()
         }
 
+    var text: String
+        get() = etInput.text?.toString() ?: ""
+        set(value) {
+            etInput.setText(value)
+        }
+
     private val initialHintTextSize by lazy { context.spToPx(INITIAL_HINT_TEXT_SIZE) }
 
-    private val initialHeight by lazy { height }
+    private val initialHeight by lazy {
+        val lineHeight = etInput.height / etInput.lineCount
+        height - lineHeight * (etInput.lineCount - 1)
+    }
 
     private val hintPaint by lazy {
         Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -125,20 +126,20 @@ class FTLEditTextDefault @JvmOverloads constructor(
             field = value
         }
 
-    var keyListener: OnKeyListener? = null
-        set(value) {
-            etInput.setOnKeyListener(value)
-            field = value
-        }
-
     var editorActionListener: TextView.OnEditorActionListener? = null
         set(value) {
             etInput.setOnEditorActionListener(value)
             field = value
         }
 
+    private var textWatcher: TextWatcher? = null
+
+    private var focusChangeListener: OnFocusChangeListener? = null
+
+    private var clickListener: OnClickListener? = null
+
     private val vUnderline: View
-    val etInput: EditText
+    val etInput: AppCompatEditText
 
     init {
         inflate(context, R.layout.layout_ftl_edit_text_default, this)
@@ -147,13 +148,17 @@ class FTLEditTextDefault @JvmOverloads constructor(
 
         etInput = findViewById(R.id.et_input)
         etInput.apply {
-            setOnFocusChangeListener { _, _ ->
+            setOnFocusChangeListener { v, hasFocus ->
                 openKeyboard()
                 updateControls()
+                focusChangeListener?.onFocusChange(v, hasFocus)
             }
-            addTextChangedListener {
-                isErrorEnabled = false
-            }
+            addTextChangedListener(object :
+                com.foodtechlab.ftlandroiduikit.textfield.helper.TextWatcher() {
+                override fun afterTextChanged(s: Editable?) {
+                    isErrorEnabled = false
+                }
+            })
             updateMargins()
         }
 
@@ -161,13 +166,17 @@ class FTLEditTextDefault @JvmOverloads constructor(
 
         background = ContextCompat.getDrawable(context, R.drawable.shape_ftl_edit_text_default)
 
+        super.setOnClickListener {
+            etInput.openKeyboard()
+            etInput.requestFocus()
+
+            clickListener?.onClick(it)
+        }
+
         context.withStyledAttributes(attrs, R.styleable.FTLEditTextDefault) {
             hint = getString(R.styleable.FTLEditTextDefault_hint) ?: ""
 
-            inputType = getInt(
-                R.styleable.FTLEditTextDefault_inputType,
-                EditorInfo.TYPE_CLASS_TEXT or EditorInfo.TYPE_TEXT_FLAG_MULTI_LINE
-            )
+            inputType = getInt(R.styleable.FTLEditTextDefault_inputType, EditorInfo.TYPE_CLASS_TEXT)
 
             imeOptions = getInt(R.styleable.FTLEditTextDefault_imeOptions, EditorInfo.IME_NULL)
 
@@ -175,10 +184,9 @@ class FTLEditTextDefault @JvmOverloads constructor(
 
             maxLength = getInt(R.styleable.FTLEditTextDefault_maxLength, -1)
 
-            isActiveStateEnabled = getBoolean(
-                R.styleable.FTLEditTextDefault_isActiveStateEnabled,
-                true
-            )
+            maxLines = getInt(R.styleable.FTLEditTextDefault_maxLineCount, Int.MAX_VALUE)
+
+            text = getString(R.styleable.FTLEditTextDefault_text) ?: ""
         }
     }
 
@@ -188,26 +196,20 @@ class FTLEditTextDefault @JvmOverloads constructor(
         canvas.drawHint()
 
         etInput.y = if (hint.isEmpty()) {
-            (height / 2 - etInput.height / 2).toFloat()
+            (initialHeight / 2 - etInput.height / 2).toFloat()
         } else {
-            (height / 2).toFloat()
+            (initialHeight / 2).toFloat()
         }
+
+        vUnderline.y = (height - vUnderline.height).toFloat()
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
-        etInput.minimumWidth = width
-        vUnderline.minimumWidth = width
+    override fun setOnClickListener(l: OnClickListener?) {
+        clickListener = l
     }
 
-    override fun dispatchTouchEvent(ev: MotionEvent): Boolean {
-        if (ev.action == MotionEvent.ACTION_DOWN) {
-            return true
-        } else if (ev.action == MotionEvent.ACTION_UP) {
-            etInput.requestFocus()
-            return true
-        }
-        return super.dispatchTouchEvent(ev)
+    override fun setOnFocusChangeListener(l: OnFocusChangeListener?) {
+        focusChangeListener = l
     }
 
     private fun Canvas.drawHint() {
@@ -217,15 +219,16 @@ class FTLEditTextDefault @JvmOverloads constructor(
 
         hintPaint.color = controlsColor
 
-        drawText(hint, marginHorizontal, hintY, hintPaint)
+        drawText(hint, context.dpToPx(MARGIN_HORIZONTAL), hintY, hintPaint)
     }
 
     private fun View.updateMargins() {
         val lParams = layoutParams as LayoutParams
+        val marginHorizontal = context.dpToPx(MARGIN_HORIZONTAL).toInt()
         lParams.updateMargins(
-            marginHorizontal.toInt(),
+            marginHorizontal,
             marginTop,
-            marginHorizontal.toInt(),
+            marginHorizontal,
             marginBottom
         )
         layoutParams = lParams
@@ -272,24 +275,12 @@ class FTLEditTextDefault @JvmOverloads constructor(
         etInput.removeTextChangedListener(watcher)
     }
 
-    fun updateFieldState(blocked: Boolean) {
-        etInput.isFocusable = !blocked
-        etInput.isFocusableInTouchMode = !blocked
-        etInput.isCursorVisible = !blocked
-
-        if (blocked) {
-            etInput.clearFocus()
-        } else {
-            etInput.requestFocus()
-        }
-    }
-
     companion object {
         private const val ANIMATION_DURATION = 200L
 
         private const val SCALE_MAX = 1f
         private const val SCALE_MIN = .7f
-        private const val DEFAULT_MARGIN_HORIZONTAL = 16f
+        private const val MARGIN_HORIZONTAL = 16f
         private const val INITIAL_HINT_TEXT_SIZE = 16f
         private const val MIN_HEIGHT = 56f
     }
