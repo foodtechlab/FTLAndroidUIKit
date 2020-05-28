@@ -304,27 +304,24 @@
         <attr name="textAddressTo" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="FTLTextFieldMultiple">
-        <attr name="type" format="enum">
-            <enum name="CASH" value="0" />
-            <enum name="CARD_COURIER" value="1" />
-            <enum name="CARD_ONLINE" value="2" />
-            <enum name="CUSTOMER" value="3" />
-            <enum name="DELIVERY_ADDRESS" value="4" />
-            <enum name="ORDER_SOURCE" value="5" />
-            <enum name="COMMENT" value="6" />
-        </attr>
+    <declare-styleable name="FTLTextFieldMultiple" parent="FTLTextFieldDefault">
+        <attr name="imageType" />
         <attr name="textTopStartSlot" format="string" />
         <attr name="textBottomStartSlot" format="string" />
         <attr name="textTopEndSlot" format="string" />
         <attr name="textBottomEndSlot" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="FTLTextFieldExtendable">
+    <declare-styleable name="FTLTextFieldExtendable" parent="FTLTextFieldDefault">
         <attr name="isExpand" format="boolean" />
         <attr name="collapseLines" format="integer" />
         <attr name="fullText" format="string" />
         <attr name="ellipsizedText" format="string" />
+        <attr name="imageType" />
+    </declare-styleable>
+
+    <declare-styleable name="FTLTextFieldDefault">
+        <attr name="textForSlot" format="string" />
         <attr name="imageType" format="enum">
             <enum name="CASH" value="0" />
             <enum name="CARD_COURIER" value="1" />

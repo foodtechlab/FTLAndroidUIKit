@@ -60,7 +60,7 @@ class FTLTextFieldMultiple @JvmOverloads constructor(
         ivImageSlot = findViewById(R.id.iv_image_slot)
 
         context.withStyledAttributes(attrs, R.styleable.FTLTextFieldMultiple) {
-            imageType = ImageType.values()[getInt(R.styleable.FTLTextFieldMultiple_type, 0)]
+            imageType = ImageType.values()[getInt(R.styleable.FTLTextFieldMultiple_imageType, 0)]
             textTopStartSlot = getString(R.styleable.FTLTextFieldMultiple_textTopStartSlot) ?: ""
             textBottomStartSlot =
                 getString(R.styleable.FTLTextFieldMultiple_textBottomStartSlot) ?: ""

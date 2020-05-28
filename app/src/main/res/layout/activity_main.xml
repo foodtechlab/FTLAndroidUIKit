@@ -72,7 +72,7 @@
                 android:layout_margin="16dp"
                 app:textBottomStartSlot="К оплате: 750 р"
                 app:textTopStartSlot="Картой курьеру"
-                app:type="CARD_COURIER" />
+                app:imageType="CARD_COURIER" />
 
             <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldMultiple
                 android:id="@+id/ftl_tv_multiple"
@@ -91,8 +91,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 app:ellipsizedText="... еще"
-                app:fullText="Воу привет! А можно ли мне какой-нибудь, очень вкусный комплимент"
-                app:imageType="CUSTOMER" />
+                app:imageType="ORDER_SOURCE"
+                app:fullText="Воу привет! А можно ли мне какой-нибудь, очень вкусный комплимент"/>
+
+            <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldDefault
+                android:id="@+id/ftl_tv_default"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
