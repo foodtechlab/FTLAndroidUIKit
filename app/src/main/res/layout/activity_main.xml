@@ -11,6 +11,7 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:orientation="vertical"
+        android:paddingTop="?attr/actionBarSize"
         android:paddingBottom="?attr/actionBarSize">
 
         <LinearLayout
@@ -78,6 +79,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp" />
+
             <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldExtendable
                 android:id="@+id/ftl_tv_extendable"
                 android:layout_width="match_parent"
@@ -106,5 +108,15 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom" />
+
+    <com.foodtechlab.ftlandroiduikit.bar.toolbar.FTLToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:endIcon="@drawable/ic_close_24"
+        app:logoIcon="@drawable/ic_inbox_checked_24"
+        app:startIcon="@drawable/ic_back"
+        app:subtitle="Position: 0"
+        app:title="My orders" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
