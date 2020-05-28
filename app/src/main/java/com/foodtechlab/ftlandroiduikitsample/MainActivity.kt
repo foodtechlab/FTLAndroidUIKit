@@ -71,6 +71,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     " комплимент от шефа! Спасибо, Воу Воу Воу Воу Воу Воу"
             ellipsizedText = "... еще"
         }
+        ftl_tv_default.apply {
+            textForSlot = "John Wiskas"
+        }
     }
 
     override fun onClick(v: View) {
