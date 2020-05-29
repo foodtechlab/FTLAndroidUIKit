@@ -6,6 +6,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView.MenuItem.*
+import com.foodtechlab.ftlandroiduikit.bar.toolbar.OnToolbarClickListener
 import com.foodtechlab.ftlandroiduikit.sheet.DialogButton
 import com.foodtechlab.ftlandroiduikit.sheet.DialogState
 import com.foodtechlab.ftlandroiduikit.sheet.FTLBottomSheet
@@ -14,7 +15,7 @@ import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
 import com.foodtechlab.ftlandroiduikit.textfield.helper.TextWatcher
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener, OnToolbarClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +27,11 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                 Toast.makeText(this@MainActivity, s, Toast.LENGTH_SHORT).show()
             }
         })
+
+        toolbar.apply {
+            showEndButton()
+            onToolbarClickListener = this@MainActivity
+        }
 
         ftl_open_dialog.setOnClickListener(this)
         ftl_make_code_is_wrong.setOnClickListener(this)
@@ -71,6 +77,9 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                     " комплимент от шефа! Спасибо, Воу Воу Воу Воу Воу Воу"
             ellipsizedText = "... еще"
         }
+        ftl_tv_default.apply {
+            textForSlot = "John Wiskas"
+        }
     }
 
     override fun onClick(v: View) {
@@ -106,6 +115,17 @@ class MainActivity : AppCompatActivity(), View.OnClickListener {
                         )
                     )
                 ).show(supportFragmentManager, FTLBottomSheet.TAG)
+            }
+        }
+    }
+
+    override fun onToolbarClick(v: View) {
+        when (v.id) {
+            R.id.ib_ftl_toolbar_start -> {
+                Toast.makeText(this, "Start button click", Toast.LENGTH_SHORT).show()
+            }
+            R.id.ib_ftl_toolbar_end -> {
+                Toast.makeText(this, "End button click", Toast.LENGTH_SHORT).show()
             }
         }
     }
