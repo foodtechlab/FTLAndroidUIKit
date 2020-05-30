@@ -20,6 +20,44 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <com.foodtechlab.ftlandroiduikit.card.FTLCard
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:orientation="vertical">
+
+                    <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldDefault
+                        android:id="@+id/ftl_tv_default"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" />
+
+                    <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldRoute
+                        android:id="@+id/tv_addresses"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:textAddressTo="Волгоград, ул. им Рокоссовского д.62 кв./оф. 102 под.1 эт 24" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="2dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_marginBottom="12dp"
+                        android:background="@color/OnSurfacePrimaryEnabled" />
+
+                    <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldMultiple
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:imageType="CARD_COURIER"
+                        app:textBottomStartSlot="К оплате: 750 р"
+                        app:textTopStartSlot="Картой курьеру" />
+                </LinearLayout>
+            </com.foodtechlab.ftlandroiduikit.card.FTLCard>
+
             <com.foodtechlab.ftlandroiduikit.button.FTLButtonPrimary
                 android:id="@+id/ftl_open_dialog"
                 android:layout_width="match_parent"
@@ -59,21 +97,6 @@
                 android:inputType="phone"
                 android:maxLength="12" />
 
-            <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldRoute
-                android:id="@+id/tv_addresses"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:textAddressTo="Волгоград, ул. им Рокоссовского д.62 кв./оф. 102 под.1 эт 24" />
-
-            <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldMultiple
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                app:textBottomStartSlot="К оплате: 750 р"
-                app:textTopStartSlot="Картой курьеру"
-                app:imageType="CARD_COURIER" />
-
             <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldMultiple
                 android:id="@+id/ftl_tv_multiple"
                 android:layout_width="match_parent"
@@ -91,14 +114,8 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 app:ellipsizedText="... еще"
-                app:imageType="ORDER_SOURCE"
-                app:fullText="Воу привет! А можно ли мне какой-нибудь, очень вкусный комплимент"/>
-
-            <com.foodtechlab.ftlandroiduikit.textfield.FTLTextFieldDefault
-                android:id="@+id/ftl_tv_default"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_margin="16dp" />
+                app:fullText="Воу привет! А можно ли мне какой-нибудь, очень вкусный комплимент"
+                app:imageType="ORDER_SOURCE" />
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
