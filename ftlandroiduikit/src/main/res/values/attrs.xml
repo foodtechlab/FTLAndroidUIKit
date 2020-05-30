@@ -336,12 +336,13 @@
     <declare-styleable name="FTLToolbar">
         <attr name="title" format="string" />
         <attr name="subtitle" format="string" />
-
+        <attr name="titleColor" format="color" />
+        <attr name="subtitleColor" format="color" />
+        <attr name="isShadowVisible" format="boolean" />
         <attr name="endIcon" format="reference" />
         <attr name="logoIcon" format="reference" />
         <attr name="startIcon" format="reference" />
         <attr name="logoPlaceholder" format="reference" />
-
     </declare-styleable>
 
 </resources>

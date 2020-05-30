@@ -131,6 +131,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:endIcon="@drawable/ic_close_24"
+        app:isShadowVisible="true"
         app:logoIcon="@drawable/ic_inbox_checked_24"
         app:startIcon="@drawable/ic_back"
         app:subtitle="Position: 0"
