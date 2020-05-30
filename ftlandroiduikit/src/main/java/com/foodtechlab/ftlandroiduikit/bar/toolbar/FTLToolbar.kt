@@ -22,6 +22,24 @@ class FTLToolbar @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
+    var isShadowVisible: Boolean
+        get() = vShadow.isVisible
+        set(value) {
+            vShadow.isVisible = value
+        }
+
+    var titleColor: Int
+        get() = tvTitle.currentTextColor
+        set(value) {
+            tvTitle.setTextColor(value)
+        }
+
+    var subtitleColor: Int
+        get() = tvSubtitle.currentTextColor
+        set(value) {
+            tvSubtitle.setTextColor(value)
+        }
+
     var title: String?
         get() = tvTitle.text.toString()
         set(value) {
@@ -80,6 +98,8 @@ class FTLToolbar @JvmOverloads constructor(
     init {
         View.inflate(context, R.layout.layout_ftl_toolbar, this)
 
+        orientation = VERTICAL
+
         progress = findViewById(R.id.pb_loading)
         ibStart = findViewById(R.id.ib_ftl_toolbar_start)
         ibEnd = findViewById(R.id.ib_ftl_toolbar_end)
@@ -122,13 +142,18 @@ class FTLToolbar @JvmOverloads constructor(
                     getDrawable(R.styleable.FTLToolbar_logoIcon) ?: logoPlaceholder
                 else -> logoPlaceholder
             }
+            isShadowVisible = getBoolean(R.styleable.FTLToolbar_isShadowVisible, false)
+            titleColor = getColor(
+                R.styleable.FTLToolbar_titleColor,
+                ContextCompat.getColor(context, R.color.OnBackgroundPrimary)
+            )
+            subtitleColor = getColor(
+                R.styleable.FTLToolbar_subtitleColor,
+                ContextCompat.getColor(context, R.color.AdditionalGreen)
+            )
             title = getString(R.styleable.FTLToolbar_title)
             subTitle = getString(R.styleable.FTLToolbar_subtitle)
         }
-    }
-
-    fun showShadow(isVisible: Boolean) {
-        vShadow.isVisible = isVisible
     }
 
     fun showProgress() {
