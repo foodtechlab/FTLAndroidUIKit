@@ -15,7 +15,7 @@
         <item name="cardUseCompatPadding">false</item>
         <item name="cardPreventCornerOverlap">true</item>
         <item name="android:layout_margin">8dp</item>
-        <item name="backgroundColor">@color/OnBackground</item>
+        <item name="backgroundColor">@color/BackgroundPrimary</item>
     </style>
 
 </resources>

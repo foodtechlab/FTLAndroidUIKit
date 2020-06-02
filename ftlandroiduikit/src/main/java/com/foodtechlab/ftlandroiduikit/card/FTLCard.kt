@@ -20,7 +20,7 @@ class FTLCard @JvmOverloads constructor(
         context.withStyledAttributes(attrs, R.styleable.CardView, R.style.FTLCardStyle) {
             radius = context.dpToPx(CARD_RADIUS_DEFAULT)
             cardElevation = context.dpToPx(CARD_ELEVATION_DEFAULT)
-            setCardBackgroundColor(ContextCompat.getColor(context, R.color.OnBackground))
+            setCardBackgroundColor(ContextCompat.getColor(context, R.color.BackgroundPrimary))
         }
     }
 
