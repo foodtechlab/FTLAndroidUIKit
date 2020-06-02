@@ -345,4 +345,11 @@
         <attr name="logoPlaceholder" format="reference" />
     </declare-styleable>
 
+    <declare-styleable name="FTLPlaceholderImageView">
+        <attr name="placeholder" format="reference" />
+        <attr name="border_width" format="dimension" />
+        <attr name="border_color" format="color" />
+        <attr name="border_overlay" format="boolean" />
+    </declare-styleable>
+
 </resources>
