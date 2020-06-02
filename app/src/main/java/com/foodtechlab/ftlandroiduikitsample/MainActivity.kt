@@ -2,7 +2,6 @@ package com.foodtechlab.ftlandroiduikitsample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -11,10 +10,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        btn_simple.setOnClickListener {
-            Picasso.get()
-                .load(R.drawable.image_test)
-                .into(ftlpiv_pic)
-        }
+//        dtsv_time.date = "22018-07-09T08:26:38.125"
+        dtsv_time.deliveryTimeMillis = 1590582735098
     }
 }

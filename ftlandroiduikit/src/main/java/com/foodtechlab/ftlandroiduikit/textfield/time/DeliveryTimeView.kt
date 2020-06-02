@@ -39,13 +39,22 @@ open class DeliveryTimeView @JvmOverloads constructor(
     @FontRes
     protected var font = R.font.roboto_bold
 
-    private var deliveryTime: String = "77:55"
+    var deliveryTime: String? = null
+        set(value) {
+            field = value
+            invalidate()
+        }
+
+    var date: String? = null
+        set(value) {
+            field = value
+            deliveryTime = formatTime(value)
+        }
 
     var deliveryTimeMillis: Long = 0L
         set(value) {
             field = value
             deliveryTime = formatTime(value)
-            invalidate()
         }
 
     protected var cornerRadius = 16f
@@ -65,14 +74,14 @@ open class DeliveryTimeView @JvmOverloads constructor(
     private val timeHeight: Int
         get() {
             val timeRect = Rect()
-            timePaint.getTextBounds(deliveryTime, 0, deliveryTime.length, timeRect)
+            timePaint.getTextBounds(deliveryTime, 0, deliveryTime?.length ?: 0, timeRect)
             return timeRect.height()
         }
 
     private val timeWidth: Int
         get() {
             val timeRect = Rect()
-            timePaint.getTextBounds(deliveryTime, 0, deliveryTime.length, timeRect)
+            timePaint.getTextBounds(deliveryTime, 0, deliveryTime?.length ?: 0, timeRect)
             return timeRect.width()
         }
 
@@ -211,8 +220,6 @@ open class DeliveryTimeView @JvmOverloads constructor(
                     ic.marginStart = min(ic.marginStart, icOrig.marginStart * scale)
                 }
             }
-
-            Log.v("test_test", "$scale")
         }
 
         return result
@@ -226,17 +233,19 @@ open class DeliveryTimeView @JvmOverloads constructor(
     }
 
     private fun Canvas.drawTime() {
-        val icon = if (deliveryMode == DeliveryMode.URGENT) iconUrgent else iconUsual
-        val iconRequiredWidth = icon?.let {
-            (it.width + it.marginEnd + it.marginStart) * displayDensity
-        } ?: 0f
+        deliveryTime?.let { time ->
+            val icon = if (deliveryMode == DeliveryMode.URGENT) iconUrgent else iconUsual
+            val iconRequiredWidth = icon?.let {
+                (it.width + it.marginEnd + it.marginStart) * displayDensity
+            } ?: 0f
 
-        val posX = (width * HALF - timeWidth * HALF).coerceAtLeast(
-            iconRequiredWidth + paddingStart * displayDensity
-        )
-        val posY = height * HALF + timeHeight * HALF
+            val posX = (width * HALF - timeWidth * HALF).coerceAtLeast(
+                iconRequiredWidth + paddingStart * displayDensity
+            )
+            val posY = height * HALF + timeHeight * HALF
 
-        drawText(deliveryTime, posX, posY, timePaint)
+            drawText(time, posX, posY, timePaint)
+        }
     }
 
     private fun Canvas.drawIcon() {
