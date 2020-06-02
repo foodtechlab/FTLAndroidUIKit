@@ -7,9 +7,4 @@ class DeliveryTimeSmallView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) :
-    DeliveryTimeView(context, attrs, defStyleAttr) {
-
-    init {
-    }
-}
+) : DeliveryTimeView(context, attrs, defStyleAttr)
