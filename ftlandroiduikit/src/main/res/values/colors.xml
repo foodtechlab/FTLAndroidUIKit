@@ -6,13 +6,14 @@
     <color name="Surface">#FFFFFF</color>
     <color name="OnSurfacePrimaryEnabled">#F6F6F6</color>
     <color name="OnSurfacePrimaryPressed">#ECECEC</color>
-    <color name="OnSurfacePrimaryAdditionalLight">#ECECEC</color>
+    <color name="OnSurfaceSecondary">#161616</color>
+    <color name="OnSurfacePrimaryAdditional">#ECECEC</color>
 
-    <color name="OnBackground">#FFFFFF</color>
+    <color name="BackgroundPrimary">#FFFFFF</color>
+    <color name="BackgroundSecondary">#F5F5F5</color>
     <color name="OnBackgroundPrimary">#161616</color>
     <color name="OnBackgroundSecondary">#A4A4A4</color>
     <color name="OnBackgroundSecondaryOpacity10">#1AA4A4A4</color>
-
 
     <color name="PrimaryDangerEnabled">#DE2222</color>
     <color name="PrimaryDangerPressed">#C00404</color>
@@ -20,15 +21,18 @@
     <color name="PrimaryInfoEnabled">#039BE5</color>
     <color name="PrimaryInfoPressed">#0A87D1</color>
 
-    <color name="PrimaryWrangerEnabled">#F8AA15</color>
-
-    <color name="AdditionalYellow">#F57C00</color>
-
-    <color name="AdditionalDarkBlue">#1C497C</color>
-
-    <color name="AdditionalGreen">#4CB944</color>
-    <color name="AdditionalLightGreen">#DBF1DA</color>
+    <color name="PrimaryWarningEnabled">#F8AA15</color>
 
     <color name="AdditionalPink">#EA2249</color>
+    <color name="AdditionalOrange">#F57C00</color>
+    <color name="AdditionalYellow">#FFB300</color>
+    <color name="AdditionalDarkBlue">#1C497C</color>
+    <color name="AdditionalCyan">#00ACC1</color>
+    <color name="AdditionalGreen">#4CB944</color>
+    <color name="AdditionalLightGreen">#DBF1DA</color>
+    <color name="AdditionalViolet">#BD15F8</color>
+
+    <color name="OnAdditionalLight">#FFFFFF</color>
+    <color name="OnAdditionalDark">#161616</color>
 
 </resources>

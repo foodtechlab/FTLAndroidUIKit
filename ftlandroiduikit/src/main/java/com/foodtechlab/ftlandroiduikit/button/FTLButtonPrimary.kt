@@ -33,7 +33,7 @@ class FTLButtonPrimary @JvmOverloads constructor(
 
         textSize = DEFAULT_TEXT_SIZE
 
-        setTextColor(ContextCompat.getColor(context, R.color.OnBackground))
+        setTextColor(ContextCompat.getColor(context, R.color.BackgroundPrimary))
 
         if (!isInEditMode) {
             typeface = ResourcesCompat.getFont(context, R.font.roboto_medium)
