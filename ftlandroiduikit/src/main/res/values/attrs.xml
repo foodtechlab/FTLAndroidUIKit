@@ -22,12 +22,6 @@
             <enum name="info_medium" value="8" />
             <enum name="info_large" value="9" />
         </attr>
-
-        <attr name="size" format="enum">
-            <enum name="small" value="0" />
-            <enum name="medium" value="1" />
-            <enum name="large" value="2" />
-        </attr>
     </declare-styleable>
 
     <declare-styleable name="FTLEditTextAuthCode">
