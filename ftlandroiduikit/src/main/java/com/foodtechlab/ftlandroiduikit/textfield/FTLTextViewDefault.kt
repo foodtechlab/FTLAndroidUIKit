@@ -10,7 +10,7 @@ import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
 
 
-class FTLTextFieldDefault @JvmOverloads constructor(
+class FTLTextViewDefault @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
@@ -32,14 +32,14 @@ class FTLTextFieldDefault @JvmOverloads constructor(
         }
 
     init {
-        inflate(context, R.layout.layout_ftl_text_field_default, this)
+        inflate(context, R.layout.layout_ftl_text_view_default, this)
         tvTextSlot = findViewById(R.id.tv_text_slot)
         ivImageSlot = findViewById(R.id.iv_image_slot)
 
-        context.withStyledAttributes(attrs, R.styleable.FTLTextFieldDefault) {
-            imageType = ImageType.values()[getInt(R.styleable.FTLTextFieldDefault_imageType, 3)]
+        context.withStyledAttributes(attrs, R.styleable.FTLTextViewDefault) {
+            imageType = ImageType.values()[getInt(R.styleable.FTLTextViewDefault_imageType, 3)]
             ivImageSlot.setImageResource(imageType.imgRes)
-            textForSlot = getString(R.styleable.FTLTextFieldDefault_textForSlot) ?: ""
+            textForSlot = getString(R.styleable.FTLTextViewDefault_textForSlot) ?: ""
             tvTextSlot.text = textForSlot
         }
     }
