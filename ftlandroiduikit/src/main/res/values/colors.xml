@@ -8,10 +8,12 @@
     <color name="OnSurfacePrimaryPressed">#ECECEC</color>
     <color name="OnSurfaceSecondary">#161616</color>
     <color name="OnSurfacePrimaryAdditional">#ECECEC</color>
+    <color name="OnSurfacePrimaryAdditionalDark">#A4A4A4</color>
 
     <color name="BackgroundPrimary">#FFFFFF</color>
     <color name="BackgroundSecondary">#F5F5F5</color>
     <color name="OnBackgroundPrimary">#161616</color>
+    <color name="OnBackgroundPrimaryOpacity8">#14161616</color>
     <color name="OnBackgroundSecondary">#A4A4A4</color>
     <color name="OnBackgroundSecondaryOpacity10">#1AA4A4A4</color>
 
