@@ -299,12 +299,12 @@
 
     <declare-styleable name="FTLBottomNavigationView"></declare-styleable>
 
-    <declare-styleable name="FTLTextFieldRoute">
+    <declare-styleable name="FTLTextViewRoute">
         <attr name="textAddressFrom" format="string" />
         <attr name="textAddressTo" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="FTLTextFieldMultiple" parent="FTLTextFieldDefault">
+    <declare-styleable name="FTLTextViewMultiple" parent="FTLTextFieldDefault">
         <attr name="imageType" />
         <attr name="textTopStartSlot" format="string" />
         <attr name="textBottomStartSlot" format="string" />
@@ -312,7 +312,7 @@
         <attr name="textBottomEndSlot" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="FTLTextFieldExtendable" parent="FTLTextFieldDefault">
+    <declare-styleable name="FTLTextViewExtendable" parent="FTLTextFieldDefault">
         <attr name="isExpand" format="boolean" />
         <attr name="collapseLines" format="integer" />
         <attr name="fullText" format="string" />
@@ -320,7 +320,7 @@
         <attr name="imageType" />
     </declare-styleable>
 
-    <declare-styleable name="FTLTextFieldDefault">
+    <declare-styleable name="FTLTextViewDefault">
         <attr name="textForSlot" format="string" />
         <attr name="imageType" format="enum">
             <enum name="CASH" value="0" />
@@ -330,6 +330,7 @@
             <enum name="DELIVERY_ADDRESS" value="4" />
             <enum name="ORDER_SOURCE" value="5" />
             <enum name="COMMENT" value="6" />
+            <enum name="FAST_FOOD" value="7" />
         </attr>
     </declare-styleable>
 
@@ -350,6 +351,19 @@
         <attr name="border_width" format="dimension" />
         <attr name="border_color" format="color" />
         <attr name="border_overlay" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="FTLTableHeader" parent="FTLTextFieldDefault">
+        <attr name="titleForHeader" format="string" />
+        <attr name="isUnwrapped" format="boolean" />
+        <attr name="imageType" />
+    </declare-styleable>
+
+    <declare-styleable name="FTLTableRow">
+        <attr name="textForStartColumn" format="string" />
+        <attr name="textForEndColumn" format="string" />
+        <attr name="textForCenterColumn" format="string" />
+        <attr name="isLastRow" format="boolean" />
     </declare-styleable>
 
 </resources>

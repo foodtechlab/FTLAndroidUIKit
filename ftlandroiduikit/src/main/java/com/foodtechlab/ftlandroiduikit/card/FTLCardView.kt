@@ -1,6 +1,7 @@
 package com.foodtechlab.ftlandroiduikit.card
 
 import android.content.Context
+import android.graphics.Canvas
 import android.util.AttributeSet
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
@@ -10,22 +11,23 @@ import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 
 
-class FTLCard @JvmOverloads constructor(
+class FTLCardView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : CardView(context, attrs, defStyle) {
 
     init {
-        context.withStyledAttributes(attrs, R.styleable.CardView, R.style.FTLCardStyle) {
+        context.withStyledAttributes(attrs, R.styleable.CardView, R.style.FTLCardViewStyle) {
             radius = context.dpToPx(CARD_RADIUS_DEFAULT)
             cardElevation = context.dpToPx(CARD_ELEVATION_DEFAULT)
             setCardBackgroundColor(ContextCompat.getColor(context, R.color.BackgroundPrimary))
         }
+        setWillNotDraw(false)
     }
 
-    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+    override fun onDraw(canvas: Canvas?) {
+        super.onDraw(canvas)
         val margins = layoutParams as MarginLayoutParams
         margins.setMargins(context.dpToPx(MARGIN_DEFAULT).toInt())
         layoutParams = margins
