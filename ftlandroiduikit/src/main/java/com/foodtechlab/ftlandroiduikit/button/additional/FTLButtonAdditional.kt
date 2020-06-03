@@ -20,17 +20,17 @@ class FTLButtonAdditional @JvmOverloads constructor(
 
     private val displayDensity = resources.displayMetrics.density
 
-    var size = AdditionalButtonSize.SMALL
-        private set(value) {
-            field = value
-            minimumWidth = (value.size * displayDensity).toInt()
-            minimumHeight = (value.size * displayDensity).toInt()
-        }
-
     var type = AdditionalButtonType.TEXT
         private set(value) {
             field = value
+
             background = value.bgRes?.let { ContextCompat.getDrawable(context, it) }
+
+            if (value != AdditionalButtonType.TEXT) {
+                text = null
+                minimumWidth = (value.size * displayDensity).toInt()
+                minimumHeight = (value.size * displayDensity).toInt()
+            }
         }
 
     init {
@@ -43,9 +43,6 @@ class FTLButtonAdditional @JvmOverloads constructor(
             )
         )
 
-        minimumWidth = (48 * displayDensity).toInt()
-        minimumHeight = (48 * displayDensity).toInt()
-
         if (!isInEditMode) {
             typeface = ResourcesCompat.getFont(context, R.font.roboto_regular)
         }
@@ -56,15 +53,7 @@ class FTLButtonAdditional @JvmOverloads constructor(
             val typeOrdinal =
                 getInt(R.styleable.FTLButtonAdditional_type, AdditionalButtonType.TEXT.ordinal)
             type = AdditionalButtonType.values()[typeOrdinal]
-
-            val sizeOrdinal =
-                getInt(R.styleable.FTLButtonAdditional_size, AdditionalButtonSize.SMALL.ordinal)
-            size = AdditionalButtonSize.values()[sizeOrdinal]
         }
-    }
-
-    override fun setText(text: CharSequence?, type: BufferType?) {
-        super.setText(if (this.type == AdditionalButtonType.TEXT) text else null, type)
     }
 
     companion object {

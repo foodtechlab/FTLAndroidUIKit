@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:size="small"
+            android:text="34234234"
             app:type="navigator_small" />
 
         <com.foodtechlab.ftlandroiduikit.button.additional.FTLButtonAdditional
@@ -25,16 +25,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:size="medium"
-            app:type="navigator_medium" />
+            app:type="location_medium" />
 
         <com.foodtechlab.ftlandroiduikit.button.additional.FTLButtonAdditional
             android:id="@+id/ftl_btn_additional_large"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:size="large"
-            app:type="navigator_large" />
+            app:type="info_large" />
 
         <Button
             android:id="@+id/btn_simple"
