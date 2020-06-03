@@ -1,4 +1,4 @@
-package com.foodtechlab.ftlandroiduikit.button
+package com.foodtechlab.ftlandroiduikit.button.additional
 
 import android.content.Context
 import android.util.AttributeSet
@@ -6,6 +6,7 @@ import android.view.Gravity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
 
 /**
@@ -17,15 +18,22 @@ class FTLButtonAdditional @JvmOverloads constructor(
     defStyle: Int = 0
 ) : AppCompatButton(context, attrs, defStyle) {
 
+    private val displayDensity = resources.displayMetrics.density
+
+    var type = AdditionalButtonType.TEXT
+        private set(value) {
+            field = value
+
+            background = value.bgRes?.let { ContextCompat.getDrawable(context, it) }
+
+            if (value != AdditionalButtonType.TEXT) {
+                text = null
+                minimumWidth = (value.size * displayDensity).toInt()
+                minimumHeight = (value.size * displayDensity).toInt()
+            }
+        }
+
     init {
-        val typedArray =
-            context.obtainStyledAttributes(
-                attrs,
-                R.styleable.FTLButtonAdditional, defStyle, 0
-            )
-
-        background = null
-
         textSize = DEFAULT_TEXT_SIZE
 
         setTextColor(
@@ -41,7 +49,11 @@ class FTLButtonAdditional @JvmOverloads constructor(
 
         gravity = Gravity.CENTER
 
-        typedArray.recycle()
+        context.withStyledAttributes(attrs, R.styleable.FTLButtonAdditional) {
+            val typeOrdinal =
+                getInt(R.styleable.FTLButtonAdditional_type, AdditionalButtonType.TEXT.ordinal)
+            type = AdditionalButtonType.values()[typeOrdinal]
+        }
     }
 
     companion object {

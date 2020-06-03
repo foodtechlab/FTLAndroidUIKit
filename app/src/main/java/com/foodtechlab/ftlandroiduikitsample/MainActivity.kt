@@ -10,7 +10,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-//        dtsv_time.date = "22018-07-09T08:26:38.125"
-        dtsv_time.deliveryTimeMillis = 1590582735098
+        btn_simple.setOnClickListener {
+            ftl_btn_additional_small.isSelected = !ftl_btn_additional_small.isSelected
+            ftl_btn_additional_medium.isSelected = !ftl_btn_additional_medium.isSelected
+            ftl_btn_additional_large.isSelected = !ftl_btn_additional_large.isSelected
+        }
     }
 }
