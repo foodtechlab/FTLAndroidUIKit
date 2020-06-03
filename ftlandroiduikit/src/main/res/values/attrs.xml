@@ -5,7 +5,30 @@
 
     <declare-styleable name="FTLButtonSecondary"></declare-styleable>
 
-    <declare-styleable name="FTLButtonAdditional"></declare-styleable>
+    <declare-styleable name="FTLButtonAdditional">
+
+        <attr name="type" format="enum">
+            <enum name="text" value="0" />
+
+            <enum name="navigator_small" value="1" />
+            <enum name="navigator_medium" value="2" />
+            <enum name="navigator_large" value="3" />
+
+            <enum name="location_small" value="4" />
+            <enum name="location_medium" value="5" />
+            <enum name="location_large" value="6" />
+
+            <enum name="info_small" value="7" />
+            <enum name="info_medium" value="8" />
+            <enum name="info_large" value="9" />
+        </attr>
+
+        <attr name="size" format="enum">
+            <enum name="small" value="0" />
+            <enum name="medium" value="1" />
+            <enum name="large" value="2" />
+        </attr>
+    </declare-styleable>
 
     <declare-styleable name="FTLEditTextAuthCode">
         <attr name="symbolsCount" format="integer" />
