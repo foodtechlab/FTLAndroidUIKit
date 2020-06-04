@@ -10,7 +10,15 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        var i = 0
+
         btn_simple.setOnClickListener {
+            if (i++ % 2 == 0) {
+                ftl_toolbar.showProgress()
+            } else {
+                ftl_toolbar.hideProgress()
+            }
+
             ftl_btn_additional_small.isSelected = !ftl_btn_additional_small.isSelected
             ftl_btn_additional_medium.isSelected = !ftl_btn_additional_medium.isSelected
             ftl_btn_additional_large.isSelected = !ftl_btn_additional_large.isSelected
