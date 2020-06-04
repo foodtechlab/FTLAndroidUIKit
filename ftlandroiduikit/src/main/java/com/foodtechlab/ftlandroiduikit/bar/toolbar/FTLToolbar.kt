@@ -11,6 +11,7 @@ import androidx.core.content.withStyledAttributes
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
 import com.foodtechlab.ftlandroiduikit.util.changeColor
 
 /**
@@ -29,29 +30,29 @@ class FTLToolbar @JvmOverloads constructor(
         }
 
     var titleColor: Int
-        get() = tvTitle.currentTextColor
+        get() = ftlTitle.titleColor
         set(value) {
-            tvTitle.setTextColor(value)
+            ftlTitle.titleColor = value
         }
 
     var subtitleColor: Int
-        get() = tvSubtitle.currentTextColor
+        get() = ftlTitle.subtitleColor
         set(value) {
-            tvSubtitle.setTextColor(value)
+            ftlTitle.subtitleColor = value
         }
 
     var title: String?
-        get() = tvTitle.text.toString()
+        get() = ftlTitle.title
         set(value) {
-            tvTitle.isVisible = !value.isNullOrEmpty()
-            tvTitle.text = value
+            ftlTitle.isTitleVisible = !value.isNullOrEmpty()
+            ftlTitle.title = value
         }
 
     var subTitle: String?
-        get() = tvSubtitle.text.toString()
+        get() = ftlTitle.subTitle.toString()
         set(value) {
-            tvSubtitle.isVisible = !value.isNullOrEmpty()
-            tvSubtitle.text = value
+            ftlTitle.isSubtitleVisible = !value.isNullOrEmpty()
+            ftlTitle.subTitle = value
         }
 
     var connectionState: ConnectionState = ConnectionState.CONNECTED
@@ -88,11 +89,14 @@ class FTLToolbar @JvmOverloads constructor(
     private val ibEnd: ImageButton
     private val ivLogo: ImageView
     private val vIndicator: View
-    private val tvTitle: TextView
-    private val tvSubtitle: TextView
+    private val ftlTitle: FTLTitle
+
+    //    private val tvTitle: TextView
+//    private val tvSubtitle: TextView
     private val vShadow: View
     private val flEndContainer: FrameLayout
-    private val llTitleContainer: LinearLayout
+
+    //    private val llTitleContainer: LinearLayout
     private val rlContainer: RelativeLayout
 
     init {
@@ -101,14 +105,15 @@ class FTLToolbar @JvmOverloads constructor(
         orientation = VERTICAL
 
         progress = findViewById(R.id.pb_loading)
+        ftlTitle = findViewById(R.id.ftl_title)
         ibStart = findViewById(R.id.ib_ftl_toolbar_start)
         ibEnd = findViewById(R.id.ib_ftl_toolbar_end)
         ivLogo = findViewById(R.id.iv_ftl_toolbar_logo)
         vIndicator = findViewById(R.id.v_ftl_toolbar_indicator)
-        tvTitle = findViewById(R.id.tv_ftl_toolbar_title)
-        tvSubtitle = findViewById(R.id.tv_ftl_toolbar_subtitle)
+//        tvTitle = findViewById(R.id.tv_ftl_toolbar_title)
+//        tvSubtitle = findViewById(R.id.tv_ftl_toolbar_subtitle)
         flEndContainer = findViewById(R.id.fl_ftl_toolbar_end_container)
-        llTitleContainer = findViewById(R.id.ll_ftl_toolbar_title_container)
+//        llTitleContainer = findViewById(R.id.ll_ftl_toolbar_title_container)
         vShadow = findViewById(R.id.v_ftl_toolbar_shadow)
         rlContainer = findViewById(R.id.rl_ftl_toolbar_container)
 
@@ -157,13 +162,13 @@ class FTLToolbar @JvmOverloads constructor(
     }
 
     fun showProgress() {
-        llTitleContainer.isGone = true
+        ftlTitle.isGone = true
         progress.isVisible = true
     }
 
     fun hideProgress() {
         progress.isGone = true
-        llTitleContainer.isVisible = true
+        ftlTitle.isVisible = true
     }
 
     fun showConnectionIndicator() {
