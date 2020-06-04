@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -60,48 +61,12 @@
                 android:visibility="gone" />
         </FrameLayout>
 
-        <LinearLayout
-            android:id="@+id/ll_ftl_toolbar_title_container"
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+            android:id="@+id/ftl_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignWithParentIfMissing="true"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
-            android:layout_marginEnd="20dp"
-            android:layout_toStartOf="@id/fl_ftl_toolbar_end_container"
-            android:layout_toEndOf="@id/ib_ftl_toolbar_start"
-            android:orientation="vertical"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp">
-
-            <TextView
-                android:id="@+id/tv_ftl_toolbar_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:fontFamily="@font/roboto_medium"
-                android:includeFontPadding="false"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@color/OnBackgroundPrimary"
-                android:textSize="20sp"
-                android:visibility="gone"
-                tools:text="Title" />
-
-            <TextView
-                android:id="@+id/tv_ftl_toolbar_subtitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:ellipsize="end"
-                android:fontFamily="@font/roboto_regular"
-                android:includeFontPadding="false"
-                android:maxLines="1"
-                android:singleLine="true"
-                android:textColor="@color/AdditionalGreen"
-                android:textSize="12sp"
-                android:visibility="gone"
-                tools:text="Subtitle" />
-        </LinearLayout>
+            app:subtitle_text="Subtitle"
+            app:title_text="Title" />
 
         <ProgressBar
             android:id="@+id/pb_loading"

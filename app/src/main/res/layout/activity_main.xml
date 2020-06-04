@@ -12,6 +12,13 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
+        <com.foodtechlab.ftlandroiduikit.bar.toolbar.FTLToolbar
+            android:id="@+id/ftl_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:subtitle="Subtitle"
+            app:title="Title" />
+
         <com.foodtechlab.ftlandroiduikit.button.additional.FTLButtonAdditional
             android:id="@+id/ftl_btn_additional_small"
             android:layout_width="wrap_content"
