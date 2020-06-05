@@ -9,7 +9,7 @@ import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
 
-class FTLTextViewMultiple @JvmOverloads constructor(
+class FTLMultipleTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
@@ -52,20 +52,20 @@ class FTLTextViewMultiple @JvmOverloads constructor(
         }
 
     init {
-        inflate(context, R.layout.layout_ftl_text_view_multiple, this)
+        inflate(context, R.layout.layout_ftl_multiple_text_view, this)
         tvTopStartSlot = findViewById(R.id.tv_top_start_slot)
         tvBottomStartSlot = findViewById(R.id.tv_bottom_start_slot)
         tvTopEndSlot = findViewById(R.id.tv_top_end_slot)
         tvBottomEndSlot = findViewById(R.id.tv_bottom_end_slot)
         ivImageSlot = findViewById(R.id.iv_image_slot)
 
-        context.withStyledAttributes(attrs, R.styleable.FTLTextViewMultiple) {
-            imageType = ImageType.values()[getInt(R.styleable.FTLTextViewMultiple_imageType, 0)]
-            textTopStartSlot = getString(R.styleable.FTLTextViewMultiple_textTopStartSlot) ?: ""
+        context.withStyledAttributes(attrs, R.styleable.FTLMultipleTextView) {
+            imageType = ImageType.values()[getInt(R.styleable.FTLMultipleTextView_imageType, 0)]
+            textTopStartSlot = getString(R.styleable.FTLMultipleTextView_textTopStartSlot) ?: ""
             textBottomStartSlot =
-                getString(R.styleable.FTLTextViewMultiple_textBottomStartSlot) ?: ""
-            textTopEndSlot = getString(R.styleable.FTLTextViewMultiple_textTopEndSlot) ?: ""
-            textBottomEndSlot = getString(R.styleable.FTLTextViewMultiple_textBottomEndSlot) ?: ""
+                getString(R.styleable.FTLMultipleTextView_textBottomStartSlot) ?: ""
+            textTopEndSlot = getString(R.styleable.FTLMultipleTextView_textTopEndSlot) ?: ""
+            textBottomEndSlot = getString(R.styleable.FTLMultipleTextView_textBottomEndSlot) ?: ""
             ivImageSlot.setImageResource(imageType.imgRes)
         }
     }
