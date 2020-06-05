@@ -15,7 +15,7 @@ import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
 
 
-class FTLTextViewExtendable @JvmOverloads constructor(
+class FTLExtendableTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
@@ -40,18 +40,18 @@ class FTLTextViewExtendable @JvmOverloads constructor(
         }
 
     init {
-        inflate(context, R.layout.layout_ftl_text_view_extendable, this)
+        inflate(context, R.layout.layout_ftl_extendable_text_view, this)
         tvTextSlot = findViewById(R.id.tv_text_slot)
         ivImageSlot = findViewById(R.id.iv_image_slot)
 
-        context.withStyledAttributes(attrs, R.styleable.FTLTextViewExtendable) {
+        context.withStyledAttributes(attrs, R.styleable.FTLExtendableTextView) {
             isClickable = true
-            imageType = ImageType.values()[getInt(R.styleable.FTLTextViewExtendable_imageType, 6)]
+            imageType = ImageType.values()[getInt(R.styleable.FTLExtendableTextView_imageType, 6)]
             ivImageSlot.setImageResource(imageType.imgRes)
-            fullText = getString(R.styleable.FTLTextViewExtendable_fullText) ?: ""
-            collapseLines = getInt(R.styleable.FTLTextViewExtendable_collapseLines, 3)
-            ellipsizedText = getString(R.styleable.FTLTextViewExtendable_ellipsizedText) ?: ""
-            isExpandText = getBoolean(R.styleable.FTLTextViewExtendable_isExpand, false)
+            fullText = getString(R.styleable.FTLExtendableTextView_fullText) ?: ""
+            collapseLines = getInt(R.styleable.FTLExtendableTextView_collapseLines, 3)
+            ellipsizedText = getString(R.styleable.FTLExtendableTextView_ellipsizedText) ?: ""
+            isExpandText = getBoolean(R.styleable.FTLExtendableTextView_isExpand, false)
             tvTextSlot.text = fullText
         }
         setWillNotDraw(false)

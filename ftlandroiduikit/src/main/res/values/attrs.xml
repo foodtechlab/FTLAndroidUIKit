@@ -316,12 +316,12 @@
 
     <declare-styleable name="FTLBottomNavigationView"></declare-styleable>
 
-    <declare-styleable name="FTLTextViewRoute">
+    <declare-styleable name="FTLRouteTextView">
         <attr name="textAddressFrom" format="string" />
         <attr name="textAddressTo" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="FTLTextViewMultiple" parent="FTLTextFieldDefault">
+    <declare-styleable name="FTLMultipleTextView" parent="FTLTextFieldDefault">
         <attr name="imageType" />
         <attr name="textTopStartSlot" format="string" />
         <attr name="textBottomStartSlot" format="string" />
@@ -329,7 +329,7 @@
         <attr name="textBottomEndSlot" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="FTLTextViewExtendable" parent="FTLTextFieldDefault">
+    <declare-styleable name="FTLExtendableTextView" parent="FTLTextFieldDefault">
         <attr name="isExpand" format="boolean" />
         <attr name="collapseLines" format="integer" />
         <attr name="fullText" format="string" />
@@ -337,7 +337,7 @@
         <attr name="imageType" />
     </declare-styleable>
 
-    <declare-styleable name="FTLTextViewDefault">
+    <declare-styleable name="FTLDefaultTextView">
         <attr name="textForSlot" format="string" />
         <attr name="imageType" format="enum">
             <enum name="CASH" value="0" />
