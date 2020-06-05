@@ -390,4 +390,18 @@
         <attr name="isLastRow" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="FTLDeliveryTimeView">
+        <attr name="status" format="enum">
+            <enum name="usual" value="0" />
+            <enum name="urgent" value="1" />
+            <enum name="delivered" value="2" />
+            <enum name="delivered_late" value="3" />
+            <enum name="canceled" value="4" />
+        </attr>
+        <attr name="size" format="enum">
+            <enum name="small" value="0" />
+            <enum name="large" value="1" />
+        </attr>
+    </declare-styleable>
+
 </resources>
