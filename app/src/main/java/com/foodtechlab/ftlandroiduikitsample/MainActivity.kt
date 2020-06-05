@@ -11,6 +11,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        ftl_delivery_time.deliveryTimeMillis = 1590582735098
+
         var i = 0
 
         btn_simple.setOnClickListener {
