@@ -16,6 +16,8 @@ class FTLTitle @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : LinearLayout(context, attrs, defStyleAttr) {
 
+    private val displayDensity = resources.displayMetrics.density
+
     var isTitleVisible: Boolean
         get() = tvTitle.isVisible
         set(value) {
@@ -25,7 +27,7 @@ class FTLTitle @JvmOverloads constructor(
     var isSubtitleVisible: Boolean
         get() = tvTitle.isVisible
         set(value) {
-            tvTitle.isVisible = value
+            tvSubtitle.isVisible = value
         }
 
     var titleColor: Int
@@ -59,6 +61,15 @@ class FTLTitle @JvmOverloads constructor(
 
     init {
         View.inflate(context, R.layout.layout_ftl_title, this)
+
+        orientation = VERTICAL
+
+        setPadding(
+            (20f * displayDensity).toInt(),
+            (8f * displayDensity).toInt(),
+            (20f * displayDensity).toInt(),
+            (8f * displayDensity).toInt()
+        )
 
         tvTitle = findViewById(R.id.tv_ftl_title)
         tvSubtitle = findViewById(R.id.tv_ftl_subtitle)

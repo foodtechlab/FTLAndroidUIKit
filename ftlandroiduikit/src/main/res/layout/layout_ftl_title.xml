@@ -1,18 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/ll_ftl_toolbar_title_container"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_alignWithParentIfMissing="true"
-    android:layout_centerVertical="true"
-    android:layout_toStartOf="@id/fl_ftl_toolbar_end_container"
-    android:layout_toEndOf="@id/ib_ftl_toolbar_start"
-    android:orientation="vertical"
-    android:paddingStart="20dp"
-    android:paddingTop="8dp"
-    android:paddingEnd="20dp"
-    android:paddingBottom="8dp">
+    android:gravity="center_vertical"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/tv_ftl_title"
@@ -24,9 +17,10 @@
         android:maxLines="1"
         android:singleLine="true"
         android:textColor="@color/OnBackgroundPrimary"
-        android:textSize="20sp"
+        android:textSize="16sp"
         android:visibility="gone"
-        tools:text="Title" />
+        tools:text="Title"
+        tools:visibility="visible" />
 
     <TextView
         android:id="@+id/tv_ftl_subtitle"
@@ -41,4 +35,4 @@
         android:textSize="12sp"
         android:visibility="gone"
         tools:text="Subtitle" />
-</LinearLayout>
+</merge>

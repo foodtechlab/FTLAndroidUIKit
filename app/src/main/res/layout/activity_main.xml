@@ -13,33 +13,21 @@
         android:orientation="vertical">
 
         <com.foodtechlab.ftlandroiduikit.bar.toolbar.FTLToolbar
-            android:id="@+id/ftl_toolbar"
+            android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:isShadowVisible="true"
+            app:logoIcon="@drawable/ic_info_24"
             app:subtitle="Subtitle"
-            app:title="Title" />
+            app:title="TitleTitleTitleTitleTitleTitleTitleTitleTTitleTitleTitleTitleTitleTitleTitleTitleT" />
 
-        <com.foodtechlab.ftlandroiduikit.button.additional.FTLButtonAdditional
-            android:id="@+id/ftl_btn_additional_small"
+        <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
+            android:id="@+id/ftl_delivery_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="34234234"
-            app:type="navigator_small" />
-
-        <com.foodtechlab.ftlandroiduikit.button.additional.FTLButtonAdditional
-            android:id="@+id/ftl_btn_additional_medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:type="location_medium" />
-
-        <com.foodtechlab.ftlandroiduikit.button.additional.FTLButtonAdditional
-            android:id="@+id/ftl_btn_additional_large"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:type="info_large" />
+            app:size="large"
+            app:status="urgent" />
 
         <Button
             android:id="@+id/btn_simple"
@@ -49,6 +37,5 @@
             android:text="Simple btn" />
 
     </LinearLayout>
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

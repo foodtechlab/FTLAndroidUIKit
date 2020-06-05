@@ -2,6 +2,7 @@ package com.foodtechlab.ftlandroiduikitsample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.foodtechlab.ftlandroiduikit.textfield.time.helper.DeliveryStatus
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -10,18 +11,18 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        toolbar.showLogo()
+
+        ftl_delivery_time.deliveryTimeMillis = 1590582735098
+
         var i = 0
 
         btn_simple.setOnClickListener {
-            if (i++ % 2 == 0) {
-                ftl_toolbar.showProgress()
+            ftl_delivery_time.deliveryStatus = if (i++ % 2 == 0) {
+                DeliveryStatus.CANCELED
             } else {
-                ftl_toolbar.hideProgress()
+                DeliveryStatus.DELIVERED_LATE
             }
-
-            ftl_btn_additional_small.isSelected = !ftl_btn_additional_small.isSelected
-            ftl_btn_additional_medium.isSelected = !ftl_btn_additional_medium.isSelected
-            ftl_btn_additional_large.isSelected = !ftl_btn_additional_large.isSelected
         }
     }
 }
