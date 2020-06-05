@@ -91,12 +91,9 @@ class FTLToolbar @JvmOverloads constructor(
     private val vIndicator: View
     private val ftlTitle: FTLTitle
 
-    //    private val tvTitle: TextView
-//    private val tvSubtitle: TextView
     private val vShadow: View
     private val flEndContainer: FrameLayout
 
-    //    private val llTitleContainer: LinearLayout
     private val rlContainer: RelativeLayout
 
     init {
@@ -110,10 +107,7 @@ class FTLToolbar @JvmOverloads constructor(
         ibEnd = findViewById(R.id.ib_ftl_toolbar_end)
         ivLogo = findViewById(R.id.iv_ftl_toolbar_logo)
         vIndicator = findViewById(R.id.v_ftl_toolbar_indicator)
-//        tvTitle = findViewById(R.id.tv_ftl_toolbar_title)
-//        tvSubtitle = findViewById(R.id.tv_ftl_toolbar_subtitle)
         flEndContainer = findViewById(R.id.fl_ftl_toolbar_end_container)
-//        llTitleContainer = findViewById(R.id.ll_ftl_toolbar_title_container)
         vShadow = findViewById(R.id.v_ftl_toolbar_shadow)
         rlContainer = findViewById(R.id.rl_ftl_toolbar_container)
 
@@ -125,7 +119,7 @@ class FTLToolbar @JvmOverloads constructor(
             onToolbarClickListener?.onToolbarClick(it)
         }
 
-        if (rlContainer.background == null) {
+        if (background == null) {
             rlContainer.setBackgroundColor(Color.WHITE)
         }
 
