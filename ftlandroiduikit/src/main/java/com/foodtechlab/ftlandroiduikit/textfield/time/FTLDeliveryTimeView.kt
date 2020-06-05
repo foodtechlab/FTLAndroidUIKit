@@ -50,6 +50,14 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
             paddingHorizontalOrig = value
         }
 
+    private var marginEndOrig = 0f
+
+    private var marginEnd = 0f
+        set(value) {
+            field = value
+            marginEndOrig = value
+        }
+
     private var paddingVerticalOrig = 8f * displayDensity
 
     private var paddingVertical = 8f * displayDensity
@@ -131,9 +139,9 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
         val iconMarginEnd = icon?.marginEnd ?: 0f
 
         val desiredWidth =
-            suggestedMinimumWidth + 2 * paddingHorizontal + timeWidth + iconRequiredWidth + iconMarginEnd
-        val desiredHeight =
-            suggestedMinimumHeight + 2 * paddingVertical + timeHeight
+            suggestedMinimumWidth + 2 * paddingHorizontal + timeWidth + iconRequiredWidth + iconMarginEnd + marginEnd
+
+        val desiredHeight = suggestedMinimumHeight + 2 * paddingVertical + timeHeight
 
         setMeasuredDimension(
             measureDimension(desiredWidth.toInt(), widthMeasureSpec),
@@ -166,6 +174,7 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
 
             paddingHorizontal = min(paddingHorizontal, paddingHorizontalOrig * scale)
             paddingVertical = min(paddingVertical, paddingVerticalOrig * scale)
+            marginEnd = min(marginEnd, marginEndOrig * scale)
 
             icon?.let { ic ->
                 iconOrig?.let { icOrig ->
@@ -192,6 +201,7 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
             bgCorners[index] = radius
         }
 
+        marginEnd = size.marginEnd * displayDensity
         paddingHorizontal = size.paddingHorizontal * displayDensity
         paddingVertical = size.paddingVertical * displayDensity
         textSize = size.textSize * displayDensity
