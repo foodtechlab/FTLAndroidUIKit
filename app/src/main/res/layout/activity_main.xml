@@ -19,7 +19,7 @@
             app:isShadowVisible="true"
             app:logoIcon="@drawable/ic_info_24"
             app:subtitle="Subtitle"
-            app:title="TitleTitleTitleTitleTitleTitleTitleTitleTTitleTitleTitleTitleTitleTitleTitleTitleT" />
+            app:title="Title" />
 
         <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
             android:id="@+id/ftl_delivery_time"
