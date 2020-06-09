@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <string name="format_mm_ss">%02d:%02d</string>
+    <string name="format_negative_mm_ss">-%02d:%02d</string>
+
     <string name="dialog_sad_it_is_clear">Понятно</string>
     <string name="dialog_sad_accept">Принять</string>
     <string name="dialog_sad_decline">Отказать</string>

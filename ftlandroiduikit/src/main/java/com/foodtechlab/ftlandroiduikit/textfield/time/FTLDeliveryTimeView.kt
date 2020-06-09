@@ -2,6 +2,8 @@ package com.foodtechlab.ftlandroiduikit.textfield.time
 
 import android.content.Context
 import android.graphics.*
+import android.os.Parcel
+import android.os.Parcelable
 import android.text.TextPaint
 import android.util.AttributeSet
 import android.util.Log
@@ -14,6 +16,8 @@ import com.foodtechlab.ftlandroiduikit.textfield.time.helper.DeliveryStatus
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.Icon
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.Size
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.formatTime
+import java.util.concurrent.TimeUnit
+import kotlin.math.abs
 import kotlin.math.min
 
 class FTLDeliveryTimeView @JvmOverloads constructor(
@@ -24,7 +28,7 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
 
     private val displayDensity = resources.displayMetrics.density
 
-    var deliveryTime: String? = null
+    var deliveryTime: String? = if (isInEditMode) "00:00" else null
         set(value) {
             field = value
             invalidate()
@@ -40,6 +44,27 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
         set(value) {
             field = value
             deliveryTime = formatTime(value)
+        }
+
+    var initialRemainedTimeMillis = 0L
+
+    var remainedTimeMillis: Long = 0L
+        set(value) {
+            if (deliveryStatus == DeliveryStatus.IN_PROGRESS || deliveryStatus == DeliveryStatus.IN_PROGRESS_LATE) {
+                field = value
+
+                if (initialRemainedTimeMillis == 0L) initialRemainedTimeMillis = value
+
+                val minutes = TimeUnit.MILLISECONDS.toMinutes(value) % 60
+                val seconds = TimeUnit.MILLISECONDS.toSeconds(value - minutes * 60 * 1000) % 3600
+
+                val format =
+                    if (seconds < 0) R.string.format_negative_mm_ss else R.string.format_mm_ss
+
+                deliveryTime = String.format(context.getString(format), abs(minutes), abs(seconds))
+
+                if (seconds < 0) deliveryStatus = DeliveryStatus.IN_PROGRESS_LATE
+            }
         }
 
     private var paddingHorizontalOrig = 8f * displayDensity
@@ -93,7 +118,12 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
             requestLayout()
         }
 
-    private var size: Size = Size.SMALL
+    var size: Size = Size.SMALL
+        set(value) {
+            field = value
+            updateViewState()
+            requestLayout()
+        }
 
     private val bgPath = Path()
 
@@ -114,6 +144,8 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
     private val bgCorners = FloatArray(8)
 
     init {
+        isSaveEnabled = true
+
         context.withStyledAttributes(attrs, R.styleable.FTLDeliveryTimeView) {
             val sizeOrdinal = getInt(R.styleable.FTLDeliveryTimeView_size, Size.SMALL.ordinal)
             size = Size.values()[sizeOrdinal]
@@ -126,6 +158,22 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
         }
     }
 
+    override fun onSaveInstanceState(): Parcelable? =
+        SavedState(super.onSaveInstanceState()).apply {
+            initialRemainedTimeMillis = this@FTLDeliveryTimeView.initialRemainedTimeMillis
+            remainedTimeMillis = this@FTLDeliveryTimeView.remainedTimeMillis
+        }
+
+    override fun onRestoreInstanceState(state: Parcelable?) {
+        if (state is SavedState) {
+            super.onRestoreInstanceState(state.superState)
+            initialRemainedTimeMillis = state.initialRemainedTimeMillis
+            remainedTimeMillis = state.remainedTimeMillis
+        } else {
+            super.onRestoreInstanceState(state)
+        }
+    }
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
@@ -135,11 +183,10 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
     }
 
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
-        val iconRequiredWidth = icon?.size ?: 0f
-        val iconMarginEnd = icon?.marginEnd ?: 0f
+        val iconRequiredWidth = icon?.let { it.size + it.marginEnd } ?: 0f
 
         val desiredWidth =
-            suggestedMinimumWidth + 2 * paddingHorizontal + timeWidth + iconRequiredWidth + iconMarginEnd + marginEnd
+            suggestedMinimumWidth + 2 * paddingHorizontal + timeWidth + iconRequiredWidth + marginEnd
 
         val desiredHeight = suggestedMinimumHeight + 2 * paddingVertical + timeHeight
 
@@ -241,6 +288,39 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
                 val bottom = height * HALF + ic.size * HALF
                 setBounds(left.toInt(), top.toInt(), right.toInt(), bottom.toInt())
                 draw(this@drawIcon)
+            }
+        }
+    }
+
+    internal class SavedState : BaseSavedState {
+        var initialRemainedTimeMillis = 0L
+
+        var remainedTimeMillis: Long = 0L
+
+        constructor(source: Parcel) : super(source) {
+            initialRemainedTimeMillis = source.readLong()
+            remainedTimeMillis = source.readLong()
+        }
+
+        constructor(superState: Parcelable?) : super(superState)
+
+        override fun writeToParcel(out: Parcel, flags: Int) {
+            super.writeToParcel(out, flags)
+            out.writeLong(initialRemainedTimeMillis)
+            out.writeLong(remainedTimeMillis)
+        }
+
+        override fun describeContents(): Int {
+            return 0
+        }
+
+        companion object CREATOR : Parcelable.Creator<SavedState> {
+            override fun createFromParcel(parcel: Parcel): SavedState {
+                return SavedState(parcel)
+            }
+
+            override fun newArray(size: Int): Array<SavedState?> {
+                return arrayOfNulls(size)
             }
         }
     }

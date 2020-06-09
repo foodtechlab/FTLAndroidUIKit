@@ -29,6 +29,13 @@
             app:size="large"
             app:status="urgent" />
 
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLDeliveryTimerView
+            android:id="@+id/ftl_delivery_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:deliveryTimerView_size="large" />
+
         <Button
             android:id="@+id/btn_simple"
             android:layout_width="match_parent"

@@ -26,7 +26,8 @@ enum class Size(
     LARGE(
         16f,
         20f,
-        32f, 32f,
+        32f,
+        32f,
         24f,
         12f,
         16f,
