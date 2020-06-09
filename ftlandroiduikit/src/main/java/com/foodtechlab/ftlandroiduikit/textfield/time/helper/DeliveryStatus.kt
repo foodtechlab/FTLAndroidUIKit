@@ -25,5 +25,15 @@ enum class DeliveryStatus(
         R.color.OnSurfacePrimaryAdditionalDark,
         R.color.OnSurfacePrimaryEnabled,
         R.drawable.ic_clock_gray_24
+    ),
+    IN_PROGRESS(
+        R.color.OnBackgroundPrimary,
+        android.R.color.transparent,
+        R.drawable.ic_timer_24
+    ),
+    IN_PROGRESS_LATE(
+        R.color.AdditionalPink,
+        android.R.color.transparent,
+        R.drawable.ic_timer_pink_24
     )
 }
