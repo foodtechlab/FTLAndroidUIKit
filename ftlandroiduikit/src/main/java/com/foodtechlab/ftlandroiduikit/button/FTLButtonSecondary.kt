@@ -18,12 +18,6 @@ class FTLButtonSecondary @JvmOverloads constructor(
 ) : AppCompatButton(context, attrs, defStyle) {
 
     init {
-        val typedArray =
-            context.obtainStyledAttributes(
-                attrs,
-                R.styleable.FTLButtonSecondary, defStyle, 0
-            )
-
         background = ContextCompat.getDrawable(
             context,
             R.drawable.selector_ftl_button_secondary
@@ -45,8 +39,6 @@ class FTLButtonSecondary @JvmOverloads constructor(
         }
 
         gravity = Gravity.CENTER
-
-        typedArray.recycle()
     }
 
     companion object {

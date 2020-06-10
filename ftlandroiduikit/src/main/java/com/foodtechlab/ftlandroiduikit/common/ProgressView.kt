@@ -1,4 +1,4 @@
-package com.foodtechlab.ftlandroiduikit.textfield.time
+package com.foodtechlab.ftlandroiduikit.common
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -18,6 +18,7 @@ import androidx.annotation.Px
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.updateLayoutParams
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.textfield.timer.OnProgressChangeListener
 import com.foodtechlab.ftlandroiduikit.util.doStartAndFinish
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 
@@ -31,7 +32,8 @@ class ProgressView @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     // Presents background color of the ProgressView
-    private val progressBodyView = ProgressBodyView(context)
+    private val progressBodyView =
+        ProgressBodyView(context)
 
     // Duration of the progress animation
     var duration = 1000L
@@ -140,7 +142,9 @@ class ProgressView @JvmOverloads constructor(
     }
 
     override fun onSaveInstanceState(): Parcelable? =
-        SavedState(super.onSaveInstanceState()).apply {
+        SavedState(
+            super.onSaveInstanceState()
+        ).apply {
             isFilled = this@ProgressView.isFilled
             progressFromPrevious = this@ProgressView.progressFromPrevious
             progress = this@ProgressView.progress
@@ -264,7 +268,8 @@ class ProgressView @JvmOverloads constructor(
      * Sets a progress change listener
      * */
     fun setOnProgressChangeListener(block: (Float) -> Unit) {
-        this.onProgressChangeListener = object : OnProgressChangeListener {
+        this.onProgressChangeListener = object :
+            OnProgressChangeListener {
             override fun onChange(progress: Float) {
                 block(progress)
             }
@@ -301,7 +306,9 @@ class ProgressView @JvmOverloads constructor(
 
         companion object CREATOR : Parcelable.Creator<SavedState> {
             override fun createFromParcel(parcel: Parcel): SavedState {
-                return SavedState(parcel)
+                return SavedState(
+                    parcel
+                )
             }
 
             override fun newArray(size: Int): Array<SavedState?> {

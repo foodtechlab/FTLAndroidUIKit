@@ -1,4 +1,4 @@
-package com.foodtechlab.ftlandroiduikit.textfield.time
+package com.foodtechlab.ftlandroiduikit.common
 
 import android.content.Context
 import android.graphics.Color

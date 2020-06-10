@@ -11,22 +11,16 @@ import com.foodtechlab.ftlandroiduikit.R
 /**
  * Created by Umalt on 27.04.2020
  */
-class FTLButtonPrimary @JvmOverloads constructor(
+class FTLPrimaryButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : AppCompatButton(context, attrs, defStyle) {
 
     init {
-        val typedArray =
-            context.obtainStyledAttributes(
-                attrs,
-                R.styleable.FTLButtonPrimary, defStyle, 0
-            )
-
         background = ContextCompat.getDrawable(
             context,
-            R.drawable.selector_ftl_button_primary
+            R.drawable.selector_ftl_primary_button
         )
 
         isAllCaps = true
@@ -40,8 +34,6 @@ class FTLButtonPrimary @JvmOverloads constructor(
         }
 
         gravity = Gravity.CENTER
-
-        typedArray.recycle()
     }
 
     companion object {

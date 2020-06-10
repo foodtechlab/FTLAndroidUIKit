@@ -1,4 +1,4 @@
-package com.foodtechlab.ftlandroiduikit.textfield
+package com.foodtechlab.ftlandroiduikit.textfield.timer
 
 import android.content.Context
 import android.os.Handler
@@ -11,7 +11,7 @@ import androidx.core.content.withStyledAttributes
 import androidx.core.view.updateLayoutParams
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
-import com.foodtechlab.ftlandroiduikit.textfield.time.ProgressView
+import com.foodtechlab.ftlandroiduikit.common.ProgressView
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.Size
 import kotlin.concurrent.timer
 

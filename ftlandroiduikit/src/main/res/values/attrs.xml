@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="FTLButtonPrimary"></declare-styleable>
-
-    <declare-styleable name="FTLButtonSecondary"></declare-styleable>
-
-    <declare-styleable name="FTLButtonAdditional">
+    <declare-styleable name="FTLAdditionalButton">
 
         <attr name="type" format="enum">
             <enum name="text" value="0" />

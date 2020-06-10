@@ -6,7 +6,7 @@
             <size android:height="48dp" />
             <padding android:bottom="8dp" android:left="16dp" android:right="16dp" android:top="8dp" />
             <solid android:color="@color/PrimaryDangerPressed" />
-            <corners android:radius="4dp" />
+            <corners android:radius="8dp" />
         </shape>
     </item>
 
@@ -15,7 +15,7 @@
             <size android:height="48dp" />
             <padding android:bottom="8dp" android:left="16dp" android:right="16dp" android:top="8dp" />
             <solid android:color="@color/OnBackgroundSecondary" />
-            <corners android:radius="4dp" />
+            <corners android:radius="8dp" />
         </shape>
     </item>
 
@@ -24,7 +24,7 @@
             <size android:height="48dp" />
             <padding android:bottom="8dp" android:left="16dp" android:right="16dp" android:top="8dp" />
             <solid android:color="@color/PrimaryDangerEnabled" />
-            <corners android:radius="4dp" />
+            <corners android:radius="8dp" />
         </shape>
     </item>
 
