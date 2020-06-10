@@ -14,7 +14,7 @@ import androidx.core.view.*
 import androidx.fragment.app.DialogFragment
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.button.FTLButtonCancel
-import com.foodtechlab.ftlandroiduikit.button.FTLButtonSecondary
+import com.foodtechlab.ftlandroiduikit.button.FTLSecondaryButton
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -115,7 +115,7 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
                     llContent.addView(view)
                     view.setMarginTop()
                 } else {
-                    val view = FTLButtonSecondary(ctx).apply {
+                    val view = FTLSecondaryButton(ctx).apply {
                         id = it.id
                         text = it.title
                         setOnClickListener(this@FTLBottomSheet)
