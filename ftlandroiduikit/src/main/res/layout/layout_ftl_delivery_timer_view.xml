@@ -4,7 +4,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content">
 
-    <com.foodtechlab.ftlandroiduikit.textfield.time.ProgressView
+    <com.foodtechlab.ftlandroiduikit.common.ProgressView
         android:id="@+id/progress_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

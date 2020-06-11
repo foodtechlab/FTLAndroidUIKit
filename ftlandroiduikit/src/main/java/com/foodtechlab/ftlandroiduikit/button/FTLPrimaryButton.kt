@@ -11,24 +11,23 @@ import com.foodtechlab.ftlandroiduikit.R
 /**
  * Created by Umalt on 27.04.2020
  */
-class FTLButtonCancel @JvmOverloads constructor(
+class FTLPrimaryButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : AppCompatButton(context, attrs, defStyle) {
 
     init {
-        background = null
+        background = ContextCompat.getDrawable(
+            context,
+            R.drawable.selector_ftl_primary_button
+        )
 
         isAllCaps = true
+
         textSize = DEFAULT_TEXT_SIZE
 
-        setTextColor(
-            ContextCompat.getColorStateList(
-                context,
-                R.color.selector_ftl_button_cancel
-            )
-        )
+        setTextColor(ContextCompat.getColor(context, R.color.BackgroundPrimary))
 
         if (!isInEditMode) {
             typeface = ResourcesCompat.getFont(context, R.font.roboto_medium)

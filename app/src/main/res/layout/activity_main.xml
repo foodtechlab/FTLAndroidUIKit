@@ -21,20 +21,25 @@
             app:subtitle="Subtitle"
             app:title="Title" />
 
-        <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
-            android:id="@+id/ftl_delivery_time"
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLAuthCodeEditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:size="large"
-            app:status="urgent" />
+            android:layout_margin="16dp" />
 
-        <com.foodtechlab.ftlandroiduikit.textfield.FTLDeliveryTimerView
-            android:id="@+id/ftl_delivery_timer"
+        <com.foodtechlab.ftlandroiduikit.textfield.timer.FTLDeliveryTimerView
+            android:id="@+id/timer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             app:deliveryTimerView_size="large" />
+
+
+        <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:size="large" />
 
         <Button
             android:id="@+id/btn_simple"

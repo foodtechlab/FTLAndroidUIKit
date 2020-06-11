@@ -11,19 +11,13 @@ import com.foodtechlab.ftlandroiduikit.R
 /**
  * Created by Umalt on 27.04.2020
  */
-class FTLButtonSecondary @JvmOverloads constructor(
+class FTLSecondaryButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : AppCompatButton(context, attrs, defStyle) {
 
     init {
-        val typedArray =
-            context.obtainStyledAttributes(
-                attrs,
-                R.styleable.FTLButtonSecondary, defStyle, 0
-            )
-
         background = ContextCompat.getDrawable(
             context,
             R.drawable.selector_ftl_button_secondary
@@ -45,8 +39,6 @@ class FTLButtonSecondary @JvmOverloads constructor(
         }
 
         gravity = Gravity.CENTER
-
-        typedArray.recycle()
     }
 
     companion object {

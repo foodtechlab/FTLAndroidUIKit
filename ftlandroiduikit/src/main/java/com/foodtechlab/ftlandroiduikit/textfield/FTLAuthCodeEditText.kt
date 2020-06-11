@@ -22,15 +22,15 @@ import kotlin.math.min
 /**
  * Created by Umalt on 25.05.2020
  */
-class FTLEditTextAuthCode @JvmOverloads constructor(
+class FTLAuthCodeEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
 ) : AppCompatEditText(context, attrs, defStyleAttr) {
 
-    private val density = resources.displayMetrics.density
+    private val displayDensity = resources.displayMetrics.density
 
-    private val gap = DEFAULT_GAP * density
+    private val gap = DEFAULT_GAP * displayDensity
 
     private var charWidth = 0f
 
@@ -51,8 +51,8 @@ class FTLEditTextAuthCode @JvmOverloads constructor(
         }
 
     private val bgCorners = floatArrayOf(
-        5f * density, 5f * density, // top left corner radius in dp
-        5f * density, 5f * density, // top right corner radius in dp
+        5f * displayDensity, 5f * displayDensity, // top left corner radius in dp
+        5f * displayDensity, 5f * displayDensity, // top right corner radius in dp
         0f, 0f,                     // bottom right corner radius in dp
         0f, 0f                      // bottom left corner radius in dp
     )
@@ -89,7 +89,7 @@ class FTLEditTextAuthCode @JvmOverloads constructor(
         setBackgroundResource(0)
 
         maxLines = 1
-        minimumHeight = (MIN_HEIGHT * density).toInt()
+        minimumHeight = (MIN_HEIGHT * displayDensity).toInt()
         isCursorVisible = false
         includeFontPadding = false
 
@@ -104,7 +104,7 @@ class FTLEditTextAuthCode @JvmOverloads constructor(
         charWidths = FloatArray(maxLength)
 
         val horizontalPadding = paddingStart + paddingEnd
-        val charsWidth = maxLength * MIN_CHAR_WIDTH * density
+        val charsWidth = maxLength * MIN_CHAR_WIDTH * displayDensity
         val gapsWidth = (maxLength - 1) * gap
         minWidth = (charsWidth + gapsWidth + horizontalPadding).toInt()
 
@@ -201,7 +201,7 @@ class FTLEditTextAuthCode @JvmOverloads constructor(
         when {
             isErrorEnabled -> linePaint.apply {
                 color = ContextCompat.getColor(context, R.color.PrimaryDangerEnabled)
-                strokeWidth = 2f * this@FTLEditTextAuthCode.density
+                strokeWidth = 2f * displayDensity
             }
             char.isNullOrEmpty() -> linePaint.apply {
                 color = ContextCompat.getColor(context, R.color.OnBackgroundSecondaryOpacity10)
@@ -209,7 +209,7 @@ class FTLEditTextAuthCode @JvmOverloads constructor(
             }
             else -> linePaint.apply {
                 color = ContextCompat.getColor(context, R.color.PrimaryInfoEnabled)
-                strokeWidth = 2f * this@FTLEditTextAuthCode.density
+                strokeWidth = 2f * displayDensity
             }
         }
 

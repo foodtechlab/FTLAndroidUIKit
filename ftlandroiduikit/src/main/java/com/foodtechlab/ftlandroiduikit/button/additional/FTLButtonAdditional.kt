@@ -49,9 +49,9 @@ class FTLButtonAdditional @JvmOverloads constructor(
 
         gravity = Gravity.CENTER
 
-        context.withStyledAttributes(attrs, R.styleable.FTLButtonAdditional) {
+        context.withStyledAttributes(attrs, R.styleable.FTLAdditionalButton) {
             val typeOrdinal =
-                getInt(R.styleable.FTLButtonAdditional_type, AdditionalButtonType.TEXT.ordinal)
+                getInt(R.styleable.FTLAdditionalButton_type, AdditionalButtonType.TEXT.ordinal)
             type = AdditionalButtonType.values()[typeOrdinal]
         }
     }
