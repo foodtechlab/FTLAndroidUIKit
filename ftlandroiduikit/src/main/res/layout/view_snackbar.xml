@@ -13,7 +13,6 @@
         android:ellipsize="end"
         android:fontFamily="@font/roboto_regular"
         android:lineSpacingExtra="4sp"
-        android:lines="2"
         android:paddingStart="14dp"
         android:paddingEnd="14dp"
         android:textColor="@color/OnPrimary"
