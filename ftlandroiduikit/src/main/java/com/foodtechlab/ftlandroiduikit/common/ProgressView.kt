@@ -32,17 +32,13 @@ class ProgressView @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     // Presents background color of the ProgressView
-    private val progressBodyView =
-        ProgressBodyView(context)
+    private val progressBodyView = ProgressBodyView(context)
 
     // Duration of the progress animation
     var duration = 1000L
 
     // Returns the ProgressView's animation is ongoing or not
     var isAnimating = false
-
-    var isFilled = false
-        private set
 
     // Starts progress animation automatically when [ProgressView] is initialized
     var autoAnimate = true
@@ -70,7 +66,6 @@ class ProgressView @JvmOverloads constructor(
     // Presents the progress value of the ProgressView
     var progress = 0f
         set(value) {
-            isFilled = true
             if (progressFromPrevious) {
                 previousProgress = field
             }
@@ -145,7 +140,6 @@ class ProgressView @JvmOverloads constructor(
         SavedState(
             super.onSaveInstanceState()
         ).apply {
-            isFilled = this@ProgressView.isFilled
             progressFromPrevious = this@ProgressView.progressFromPrevious
             progress = this@ProgressView.progress
             previousProgress = this@ProgressView.previousProgress
@@ -154,7 +148,6 @@ class ProgressView @JvmOverloads constructor(
     override fun onRestoreInstanceState(state: Parcelable?) {
         if (state is SavedState) {
             super.onRestoreInstanceState(state.superState)
-            isFilled = state.isFilled
             progressFromPrevious = state.progressFromPrevious
             progress = state.progress
             previousProgress = state.previousProgress
@@ -230,7 +223,7 @@ class ProgressView @JvmOverloads constructor(
     /**
      * Animates [ProgressView]'s progress bar.
      * */
-    fun progressAnimate() {
+    private fun progressAnimate() {
         ValueAnimator.ofFloat(0f, 1f)
             .apply {
                 interpolator = AccelerateInterpolator()
@@ -277,7 +270,6 @@ class ProgressView @JvmOverloads constructor(
     }
 
     internal class SavedState : BaseSavedState {
-        var isFilled = false
         var progressFromPrevious = false
 
         var progress = 0f
@@ -286,7 +278,6 @@ class ProgressView @JvmOverloads constructor(
         constructor(superState: Parcelable?) : super(superState)
 
         constructor(parcel: Parcel) : super(parcel) {
-            isFilled = parcel.readByte() != 0.toByte()
             progressFromPrevious = parcel.readByte() != 0.toByte()
             progress = parcel.readFloat()
             previousProgress = parcel.readFloat()
@@ -294,7 +285,6 @@ class ProgressView @JvmOverloads constructor(
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
             super.writeToParcel(parcel, flags)
-            parcel.writeByte(if (isFilled) 1 else 0)
             parcel.writeByte(if (progressFromPrevious) 1 else 0)
             parcel.writeFloat(progress)
             parcel.writeFloat(previousProgress)

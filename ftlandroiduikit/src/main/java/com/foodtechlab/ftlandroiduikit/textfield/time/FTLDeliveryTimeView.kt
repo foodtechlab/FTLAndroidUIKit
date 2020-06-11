@@ -46,16 +46,15 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
             deliveryTime = formatTime(value)
         }
 
-    var initialRemainedTimeMillis = 0L
+    var estimateDuration = 0L
 
-    var remainedTimeMillis: Long = 0L
+    var remainedDuration: Long = 0L
         set(value) {
             if (deliveryStatus == DeliveryStatus.IN_PROGRESS || deliveryStatus == DeliveryStatus.IN_PROGRESS_LATE) {
                 field = value
 
-                if (initialRemainedTimeMillis == 0L) initialRemainedTimeMillis = value
-
-                val minutes = TimeUnit.MILLISECONDS.toMinutes(value) % 60
+                val hours = TimeUnit.MILLISECONDS.toHours(value)
+                val minutes = TimeUnit.MILLISECONDS.toMinutes(value) % 60 + hours * 60
                 val seconds = TimeUnit.MILLISECONDS.toSeconds(value - minutes * 60 * 1000) % 3600
 
                 val format =
@@ -160,15 +159,15 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
 
     override fun onSaveInstanceState(): Parcelable? =
         SavedState(super.onSaveInstanceState()).apply {
-            initialRemainedTimeMillis = this@FTLDeliveryTimeView.initialRemainedTimeMillis
-            remainedTimeMillis = this@FTLDeliveryTimeView.remainedTimeMillis
+            estimateDuration = this@FTLDeliveryTimeView.estimateDuration
+            remainedDuration = this@FTLDeliveryTimeView.remainedDuration
         }
 
     override fun onRestoreInstanceState(state: Parcelable?) {
         if (state is SavedState) {
             super.onRestoreInstanceState(state.superState)
-            initialRemainedTimeMillis = state.initialRemainedTimeMillis
-            remainedTimeMillis = state.remainedTimeMillis
+            estimateDuration = state.estimateDuration
+            remainedDuration = state.remainedDuration
         } else {
             super.onRestoreInstanceState(state)
         }
@@ -293,21 +292,21 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
     }
 
     internal class SavedState : BaseSavedState {
-        var initialRemainedTimeMillis = 0L
+        var estimateDuration = 0L
 
-        var remainedTimeMillis: Long = 0L
+        var remainedDuration: Long = 0L
 
         constructor(source: Parcel) : super(source) {
-            initialRemainedTimeMillis = source.readLong()
-            remainedTimeMillis = source.readLong()
+            estimateDuration = source.readLong()
+            remainedDuration = source.readLong()
         }
 
         constructor(superState: Parcelable?) : super(superState)
 
         override fun writeToParcel(out: Parcel, flags: Int) {
             super.writeToParcel(out, flags)
-            out.writeLong(initialRemainedTimeMillis)
-            out.writeLong(remainedTimeMillis)
+            out.writeLong(estimateDuration)
+            out.writeLong(remainedDuration)
         }
 
         override fun describeContents(): Int {
