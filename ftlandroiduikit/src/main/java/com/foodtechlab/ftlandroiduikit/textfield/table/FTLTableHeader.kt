@@ -21,6 +21,7 @@ class FTLTableHeader @JvmOverloads constructor(
     private var ivImageSlot: ImageView
     private var ivSwitch: ImageView
     private var vDivider: View
+    private var llContainer: LinearLayout
 
     var titleForHeader: String = ""
         set(value) {
@@ -49,7 +50,8 @@ class FTLTableHeader @JvmOverloads constructor(
         ivImageSlot = findViewById(R.id.iv_image_slot)
         ivSwitch = findViewById(R.id.iv_switch)
         vDivider = findViewById(R.id.v_bottom_divider)
-        ivSwitch.setOnClickListener {
+        llContainer = findViewById(R.id.ll_container)
+        llContainer.setOnClickListener {
             changeStateHeader()
             tableHeaderClickListener?.onSwitchClick(isUnwrapped)
         }
