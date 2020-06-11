@@ -32,7 +32,11 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
 
     private val gap = DEFAULT_GAP * displayDensity
 
+    private var blink = false
+
     private var charWidth = 0f
+
+    private var cursorStartX = paddingLeft.toFloat()
 
     var isErrorEnabled = false
         set(value) {
@@ -70,6 +74,8 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
     }
 
     private val linePaint = Paint(Paint.ANTI_ALIAS_FLAG)
+
+    private val cursorPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
     private val textPaint by lazy {
         Paint(Paint.ANTI_ALIAS_FLAG).apply {
@@ -148,6 +154,21 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
                 textWatcher?.onTextChanged(s, start, before, count)
             }
         })
+
+        postDelayed(object : Runnable {
+            override fun run() {
+                blink = !blink
+                cursorPaint.apply {
+                    color = ContextCompat.getColor(
+                        context,
+                        if (blink) R.color.PrimaryInfoEnabled else R.color.OnBackgroundSecondaryOpacity10
+                    )
+                    strokeWidth = if (blink) 2f * displayDensity else 0f
+                }
+                invalidate()
+                postDelayed(this, 300)
+            }
+        }, 300)
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -159,10 +180,22 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
 
         textPaint.getTextWidths(text, 0, text?.length ?: 0, charWidths)
 
+        val cursorPosition = text?.length ?: 0
+
         for (i in 0 until maxLength) {
             canvas.drawBackground(startX)
-            canvas.drawUnderline(startX, text?.getOrNull(i)?.toString())
             canvas.drawText(startX, i)
+
+            if (i == cursorPosition) cursorStartX = startX
+
+            val isEmptyLastChar = text?.getOrNull(maxLength - 1)?.toString().isNullOrEmpty()
+
+            if (startX == cursorStartX && hasFocus() && isEmptyLastChar) {
+                canvas.drawCursor()
+            } else {
+                canvas.drawUnderline(startX, text?.getOrNull(i)?.toString())
+            }
+
             startX += charWidth + gap
         }
     }
@@ -219,6 +252,16 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
             startX + charWidth,
             height.toFloat(),
             linePaint
+        )
+    }
+
+    private fun Canvas.drawCursor() {
+        drawLine(
+            cursorStartX,
+            height.toFloat(),
+            cursorStartX + charWidth,
+            height.toFloat(),
+            cursorPaint
         )
     }
 
