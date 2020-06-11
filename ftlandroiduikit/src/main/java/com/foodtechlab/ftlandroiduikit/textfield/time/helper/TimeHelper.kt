@@ -24,6 +24,6 @@ fun formatTime(dateStr: String?): String? = dateStr?.let {
 @SuppressLint("SimpleDateFormat")
 fun getMillis(dateStr: String?): Long = dateStr?.let {
     SimpleDateFormat(dateFormat).apply {
-        timeZone = TimeZone.getTimeZone("UTC")
+//        timeZone = TimeZone.getTimeZone("UTC")
     }.parse(dateStr)?.time ?: 0L
 } ?: 0L

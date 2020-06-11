@@ -12,9 +12,10 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.showLogo()
 
-        ftl_delivery_time.deliveryTimeMillis = 1590582735098
+        time.date = "2020-06-11T16:37:00.001"
 
-        ftl_delivery_timer.setRemainedTime(10_000L)
+        timer.estimateDuration = 60 * 60 * 1000
+        timer.estimateSuccessAt = "2020-06-11T16:37:00.001"
 
         btn_simple.setOnClickListener {}
     }

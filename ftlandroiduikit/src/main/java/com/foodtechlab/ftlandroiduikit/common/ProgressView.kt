@@ -1,4 +1,4 @@
-package com.foodtechlab.ftlandroiduikit.textfield.time
+package com.foodtechlab.ftlandroiduikit.common
 
 import android.animation.ValueAnimator
 import android.content.Context
@@ -18,6 +18,7 @@ import androidx.annotation.Px
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.updateLayoutParams
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.textfield.timer.OnProgressChangeListener
 import com.foodtechlab.ftlandroiduikit.util.doStartAndFinish
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 
@@ -38,9 +39,6 @@ class ProgressView @JvmOverloads constructor(
 
     // Returns the ProgressView's animation is ongoing or not
     var isAnimating = false
-
-    var isFilled = false
-        private set
 
     // Starts progress animation automatically when [ProgressView] is initialized
     var autoAnimate = true
@@ -68,7 +66,6 @@ class ProgressView @JvmOverloads constructor(
     // Presents the progress value of the ProgressView
     var progress = 0f
         set(value) {
-            isFilled = true
             if (progressFromPrevious) {
                 previousProgress = field
             }
@@ -140,8 +137,9 @@ class ProgressView @JvmOverloads constructor(
     }
 
     override fun onSaveInstanceState(): Parcelable? =
-        SavedState(super.onSaveInstanceState()).apply {
-            isFilled = this@ProgressView.isFilled
+        SavedState(
+            super.onSaveInstanceState()
+        ).apply {
             progressFromPrevious = this@ProgressView.progressFromPrevious
             progress = this@ProgressView.progress
             previousProgress = this@ProgressView.previousProgress
@@ -150,7 +148,6 @@ class ProgressView @JvmOverloads constructor(
     override fun onRestoreInstanceState(state: Parcelable?) {
         if (state is SavedState) {
             super.onRestoreInstanceState(state.superState)
-            isFilled = state.isFilled
             progressFromPrevious = state.progressFromPrevious
             progress = state.progress
             previousProgress = state.previousProgress
@@ -226,7 +223,7 @@ class ProgressView @JvmOverloads constructor(
     /**
      * Animates [ProgressView]'s progress bar.
      * */
-    fun progressAnimate() {
+    private fun progressAnimate() {
         ValueAnimator.ofFloat(0f, 1f)
             .apply {
                 interpolator = AccelerateInterpolator()
@@ -264,7 +261,8 @@ class ProgressView @JvmOverloads constructor(
      * Sets a progress change listener
      * */
     fun setOnProgressChangeListener(block: (Float) -> Unit) {
-        this.onProgressChangeListener = object : OnProgressChangeListener {
+        this.onProgressChangeListener = object :
+            OnProgressChangeListener {
             override fun onChange(progress: Float) {
                 block(progress)
             }
@@ -272,7 +270,6 @@ class ProgressView @JvmOverloads constructor(
     }
 
     internal class SavedState : BaseSavedState {
-        var isFilled = false
         var progressFromPrevious = false
 
         var progress = 0f
@@ -281,7 +278,6 @@ class ProgressView @JvmOverloads constructor(
         constructor(superState: Parcelable?) : super(superState)
 
         constructor(parcel: Parcel) : super(parcel) {
-            isFilled = parcel.readByte() != 0.toByte()
             progressFromPrevious = parcel.readByte() != 0.toByte()
             progress = parcel.readFloat()
             previousProgress = parcel.readFloat()
@@ -289,7 +285,6 @@ class ProgressView @JvmOverloads constructor(
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
             super.writeToParcel(parcel, flags)
-            parcel.writeByte(if (isFilled) 1 else 0)
             parcel.writeByte(if (progressFromPrevious) 1 else 0)
             parcel.writeFloat(progress)
             parcel.writeFloat(previousProgress)
@@ -301,7 +296,9 @@ class ProgressView @JvmOverloads constructor(
 
         companion object CREATOR : Parcelable.Creator<SavedState> {
             override fun createFromParcel(parcel: Parcel): SavedState {
-                return SavedState(parcel)
+                return SavedState(
+                    parcel
+                )
             }
 
             override fun newArray(size: Int): Array<SavedState?> {
