@@ -18,10 +18,10 @@ import com.google.android.material.snackbar.BaseTransientBottomBar
 /**
  * Created by Umalt on 08.05.2020
  */
-class TopSnackbar(
+class FTLSnackbar(
     @NonNull parent: ViewGroup,
     @NonNull customView: SnackbarView
-) : BaseTransientBottomBar<TopSnackbar>(parent, customView, customView) {
+) : BaseTransientBottomBar<FTLSnackbar>(parent, customView, customView) {
 
     init {
         animationMode = ANIMATION_MODE_FADE
@@ -43,7 +43,7 @@ class TopSnackbar(
             @NonNull view: View,
             @NonNull text: String,
             @Duration duration: Int
-        ): TopSnackbar? {
+        ): FTLSnackbar? {
             val parent = view.findSuitableParent() ?: throw IllegalArgumentException(
                 "No suitable parent found from the given view. Please provide a valid view."
             )
@@ -57,7 +57,7 @@ class TopSnackbar(
 
                 customView.setMessage(text)
 
-                TopSnackbar(parent, customView).setDuration(duration)
+                FTLSnackbar(parent, customView).setDuration(duration)
             } catch (e: Exception) {
                 Log.v("exception ", e.message ?: "")
                 null
