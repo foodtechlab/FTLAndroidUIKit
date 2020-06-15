@@ -52,8 +52,8 @@
 
             <View
                 android:id="@+id/v_ftl_toolbar_indicator"
-                android:layout_width="21.33dp"
-                android:layout_height="21.33dp"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
                 android:layout_gravity="center"
                 android:background="@drawable/shape_ftl_toolbar_indicator"
                 android:visibility="gone" />
@@ -77,6 +77,21 @@
             android:layout_toEndOf="@id/ib_ftl_toolbar_start"
             android:visibility="gone" />
     </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_ftl_toolbar_connectivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="center_horizontal"
+        android:paddingTop="4dp"
+        android:paddingBottom="4dp"
+        android:textColor="@color/OnPrimary"
+        android:textSize="14sp"
+        android:visibility="gone"
+        tools:background="@color/AdditionalPink"
+        tools:text="@string/connectivity_state_connected"
+        tools:visibility="visible" />
 
     <View
         android:id="@+id/v_ftl_toolbar_shadow"

@@ -55,12 +55,6 @@ class FTLToolbar @JvmOverloads constructor(
             ftlTitle.subTitle = value
         }
 
-    var connectionState: ConnectionState = ConnectionState.CONNECTED
-        set(value) {
-            field = value
-            vIndicator.background.changeColor(ContextCompat.getColor(context, value.color))
-        }
-
     var startDrawable: Drawable?
         get() = ibStart.drawable
         set(value) {
@@ -80,6 +74,10 @@ class FTLToolbar @JvmOverloads constructor(
             ivLogo.setImageDrawable(value)
         }
 
+    private val hideNetworkConnectivityBar = Runnable {
+        tvConnectivity.isGone = true
+    }
+
     var logoPlaceholder: Drawable? = null
 
     var onToolbarClickListener: OnToolbarClickListener? = null
@@ -90,6 +88,7 @@ class FTLToolbar @JvmOverloads constructor(
     private val ivLogo: ImageView
     private val vIndicator: View
     private val ftlTitle: FTLTitle
+    private val tvConnectivity: TextView
 
     private val vShadow: View
     private val flEndContainer: FrameLayout
@@ -110,6 +109,7 @@ class FTLToolbar @JvmOverloads constructor(
         flEndContainer = findViewById(R.id.fl_ftl_toolbar_end_container)
         vShadow = findViewById(R.id.v_ftl_toolbar_shadow)
         rlContainer = findViewById(R.id.rl_ftl_toolbar_container)
+        tvConnectivity = findViewById(R.id.tv_ftl_toolbar_connectivity)
 
         ibStart.setOnClickListener {
             onToolbarClickListener?.onToolbarClick(it)
@@ -175,6 +175,24 @@ class FTLToolbar @JvmOverloads constructor(
 
     fun showLogo() {
         showOnlyOneChild(ivLogo.id)
+    }
+
+    fun setNetworkConnectivityState(state: NetworkConnectivityState) {
+        tvConnectivity.apply {
+            setBackgroundColor(ContextCompat.getColor(context, state.color))
+            setText(state.message)
+            isVisible = true
+        }
+
+        if (state == NetworkConnectivityState.CONNECTED) {
+            postDelayed(hideNetworkConnectivityBar, 2500L)
+        } else {
+            removeCallbacks(hideNetworkConnectivityBar)
+        }
+    }
+
+    fun setSocketConnectivityState(state: SocketConnectivityState) {
+        vIndicator.background.changeColor(ContextCompat.getColor(context, state.color))
     }
 
     private fun showOnlyOneChild(id: Int) {
