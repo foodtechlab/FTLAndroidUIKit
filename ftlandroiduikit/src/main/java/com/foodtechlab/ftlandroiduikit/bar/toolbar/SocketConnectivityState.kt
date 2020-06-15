@@ -6,7 +6,7 @@ import com.foodtechlab.ftlandroiduikit.R
 /**
  * Created by Umalt on 28.05.2020
  */
-enum class ConnectionState(@ColorRes val color: Int) {
+enum class SocketConnectivityState(@ColorRes val color: Int) {
 
     CONNECTED(R.color.AdditionalGreen),
     DISCONNECTED(R.color.AdditionalPink)
