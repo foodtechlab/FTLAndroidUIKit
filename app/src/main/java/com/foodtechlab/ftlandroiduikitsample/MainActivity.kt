@@ -2,7 +2,7 @@ package com.foodtechlab.ftlandroiduikitsample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.foodtechlab.ftlandroiduikit.bar.toolbar.NetworkConnectivityState
+import com.foodtechlab.ftlandroiduikit.button.timer.State
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -13,18 +13,13 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.showLogo()
 
-        time.date = "2020-06-11T16:37:00.001"
-
-        timer.estimateDuration = 60 * 60 * 1000
-        timer.estimateSuccessAt = "2020-06-11T16:37:00.001"
+        ftl_timer_button.estimateDuration = 60 * 60 * 1000
+        ftl_timer_button.estimateSuccessAt = "2020-06-17T14:30:00.001"
 
         var i = 0
-
-        btn_simple.setOnClickListener {
-            toolbar.setNetworkConnectivityState(
-                if (i++ % 2 == 0) NetworkConnectivityState.CONNECTED
-                else NetworkConnectivityState.DISCONNECTED
-            )
+        ftl_timer_button.setOnClickListener {
+            ftl_timer_button.state = State.values()[i++]
+            if (i == 3) i = 0
         }
     }
 }
