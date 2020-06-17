@@ -149,7 +149,7 @@ class FTLEditTextDefault @JvmOverloads constructor(
         etInput = findViewById(R.id.et_input)
         etInput.apply {
             setOnFocusChangeListener { v, hasFocus ->
-                openKeyboard()
+                if (hasFocus) openKeyboard()
                 updateControls()
                 focusChangeListener?.onFocusChange(v, hasFocus)
             }

@@ -410,31 +410,6 @@ class FTLPlaceholderImageView @JvmOverloads constructor(
         rebuildShader = true
     }
 
-//    private fun updatePlaceholderShaderMatrix() {
-//        if (bitmapPlaceholder == null) {
-//            return
-//        }
-//        val scale: Float
-//        var dx = 0f
-//        var dy = 0f
-//        shaderMatrix.set(null)
-//        val bitmapHeight = bitmapPlaceholder!!.height
-//        val bitmapWidth = bitmapPlaceholder!!.width
-//        if (bitmapWidth * drawableRect.height() > drawableRect.width() * bitmapHeight) {
-//            scale = drawableRect.height() / bitmapHeight.toFloat()
-//            dx = (drawableRect.width() - bitmapWidth * scale) * 0.5f
-//        } else {
-//            scale = drawableRect.width() / bitmapWidth.toFloat()
-//            dy = (drawableRect.height() - bitmapHeight * scale) * 0.5f
-//        }
-//        shaderMatrix.setScale(scale, scale)
-//        shaderMatrix.postTranslate(
-//            (dx + 0.5f).toInt() + drawableRect.left,
-//            (dy + 0.5f).toInt() + drawableRect.top
-//        )
-//        rebuildShaderPlaceholder = true
-//    }
-
     @SuppressLint("ClickableViewAccessibility")
     override fun onTouchEvent(event: MotionEvent): Boolean {
         return if (disableCircularTransformation) {

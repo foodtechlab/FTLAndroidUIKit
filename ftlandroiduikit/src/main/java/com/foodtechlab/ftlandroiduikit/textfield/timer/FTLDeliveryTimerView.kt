@@ -27,6 +27,12 @@ class FTLDeliveryTimerView @JvmOverloads constructor(
 
     private val displayDensity = resources.displayMetrics.density
 
+    var autoAnimate: Boolean
+        get() = progressView.autoAnimate
+        set(value) {
+            progressView.autoAnimate = value
+        }
+
     var max: Float
         get() = progressView.max
         set(value) {
