@@ -86,6 +86,12 @@ class ProgressView @JvmOverloads constructor(
             updateProgressView()
         }
 
+    var colorProgress: Int
+        get() = progressBodyView.color
+        set(value) {
+            progressBodyView.color = value
+        }
+
     // Corner radius of the ProgressView's container
     @Px
     var radius = context.dpToPx(5f)
@@ -121,7 +127,7 @@ class ProgressView @JvmOverloads constructor(
             )
 
             with(progressBodyView) {
-                color = getColor(R.styleable.ProgressView_progressView_colorProgress, color)
+                colorProgress = getColor(R.styleable.ProgressView_progressView_colorProgress, color)
                 colorGradientStart = getColor(
                     R.styleable.ProgressView_progressView_colorGradientStart,
                     65555
@@ -181,8 +187,8 @@ class ProgressView @JvmOverloads constructor(
     private fun updateProgressView() {
         updateBackground()
         post {
-            updateHighlightView()
-            if (this.autoAnimate) {
+            updateProgressBodyView()
+            if (autoAnimate) {
                 progressAnimate()
             }
         }
@@ -195,7 +201,7 @@ class ProgressView @JvmOverloads constructor(
         }
     }
 
-    private fun updateHighlightView() {
+    private fun updateProgressBodyView() {
         val params = LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT)
         params.width = if (max <= progress) width else getProgressSize().toInt()
         this.progressBodyView.layoutParams = params
