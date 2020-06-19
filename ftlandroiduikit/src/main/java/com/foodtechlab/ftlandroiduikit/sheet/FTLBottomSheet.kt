@@ -14,7 +14,9 @@ import androidx.core.view.*
 import androidx.fragment.app.DialogFragment
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.button.FTLCancelButton
+import com.foodtechlab.ftlandroiduikit.button.FTLPrimaryButton
 import com.foodtechlab.ftlandroiduikit.button.FTLSecondaryButton
+import com.foodtechlab.ftlandroiduikit.button.additional.FTLAdditionalButton
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -106,23 +108,30 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
 
         context?.let { ctx ->
             dialogState.buttons.forEach {
-                if (it.isCancelAction) {
-                    val view = FTLCancelButton(ctx).apply {
+                val v = when (it.buttonType) {
+                    CANCEL_BUTTON -> FTLCancelButton(ctx).apply {
                         id = it.id
                         text = it.title
                         setOnClickListener(this@FTLBottomSheet)
                     }
-                    llContent.addView(view)
-                    view.setMarginTop()
-                } else {
-                    val view = FTLSecondaryButton(ctx).apply {
+                    ADDITIONAL_BUTTON -> FTLAdditionalButton(ctx).apply {
                         id = it.id
                         text = it.title
                         setOnClickListener(this@FTLBottomSheet)
                     }
-                    llContent.addView(view)
-                    view.setMarginTop()
+                    PRIMARY_BUTTON -> FTLPrimaryButton(ctx).apply {
+                        id = it.id
+                        text = it.title
+                        setOnClickListener(this@FTLBottomSheet)
+                    }
+                    else -> FTLSecondaryButton(ctx).apply {
+                        id = it.id
+                        text = it.title
+                        setOnClickListener(this@FTLBottomSheet)
+                    }
                 }
+                llContent.addView(v)
+                v.setMarginTop()
             }
         }
     }

@@ -431,4 +431,13 @@
         <attr name="progressView_progressFromPrevious" format="boolean" />
     </declare-styleable>
 
+    <declare-styleable name="FTLDotsProgress">
+        <attr name="gap" format="dimension" />
+        <attr name="dots_count" format="integer" />
+        <attr name="dot_color" format="color" />
+        <attr name="bounce_dot_color" format="color" />
+        <attr name="dot_radius" format="dimension" />
+        <attr name="dot_bounce_radius" format="dimension" />
+    </declare-styleable>
+
 </resources>

@@ -28,6 +28,13 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp" />
 
+        <com.foodtechlab.ftlandroiduikit.button.additional.FTLAdditionalButton
+            android:id="@+id/ftl_additional_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Click" />
+
     </LinearLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -32,22 +32,38 @@
             android:textSize="24sp"
             tools:text="10:00" />
 
-        <TextView
-            android:id="@+id/tv_label"
+        <FrameLayout
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:fontFamily="@font/roboto_medium"
-            android:gravity="center_vertical|end"
-            android:maxLines="1"
-            android:paddingStart="16dp"
-            android:paddingTop="12dp"
-            android:paddingEnd="16dp"
-            android:paddingBottom="12dp"
-            android:textAllCaps="true"
-            android:textColor="@color/OnPrimary"
-            android:textSize="14sp"
-            tools:text="Начать доставку" />
+            android:gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_label"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/roboto_medium"
+                android:gravity="center_vertical|end"
+                android:maxLines="1"
+                android:paddingStart="16dp"
+                android:paddingTop="12dp"
+                android:paddingEnd="16dp"
+                android:paddingBottom="12dp"
+                android:textAllCaps="true"
+                android:textSize="14sp"
+                android:visibility="gone"
+                tools:text="Начать доставку"
+                tools:visibility="visible" />
+
+            <com.foodtechlab.ftlandroiduikit.common.DotsProgress
+                android:id="@+id/dot_progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                app:bounce_dot_color="@color/PrimaryDangerPressed"
+                app:dot_color="@color/PrimaryDangerEnabled" />
+        </FrameLayout>
     </LinearLayout>
 
 </merge>

@@ -2,6 +2,7 @@
 <resources>
 
     <color name="OnPrimary">#FFFFFF</color>
+    <color name="OnPrimaryLight">#99FFFFFF</color>
 
     <color name="Surface">#FFFFFF</color>
     <color name="OnSurfacePrimaryEnabled">#F6F6F6</color>
@@ -16,11 +17,13 @@
     <color name="OnBackgroundPrimaryOpacity8">#14161616</color>
     <color name="OnBackgroundSecondary">#A4A4A4</color>
     <color name="OnBackgroundSecondaryOpacity10">#1AA4A4A4</color>
+    <color name="OnBackgroundSecondaryOpacity60">#99A4A4A4</color>
 
     <color name="PrimaryDangerEnabled">#DE2222</color>
     <color name="PrimaryDangerPressed">#C00404</color>
 
     <color name="PrimaryInfoEnabled">#039BE5</color>
+    <color name="PrimaryInfoEnabledOpacity60">#99039BE5</color>
     <color name="PrimaryInfoPressed">#0A87D1</color>
 
     <color name="PrimaryWarningEnabled">#F8AA15</color>

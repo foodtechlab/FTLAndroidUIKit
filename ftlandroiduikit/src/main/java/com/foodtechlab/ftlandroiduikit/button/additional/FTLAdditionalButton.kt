@@ -12,7 +12,7 @@ import com.foodtechlab.ftlandroiduikit.R
 /**
  * Created by Umalt on 27.04.2020
  */
-class FTLButtonAdditional @JvmOverloads constructor(
+class FTLAdditionalButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
