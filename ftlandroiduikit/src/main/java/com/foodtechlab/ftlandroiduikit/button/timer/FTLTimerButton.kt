@@ -15,8 +15,10 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.common.DotsProgress
 import com.foodtechlab.ftlandroiduikit.common.ProgressView
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.getMillis
 import java.util.*
@@ -38,6 +40,9 @@ class FTLTimerButton @JvmOverloads constructor(
     private var onClickListener: OnClickListener? = null
 
     private var timer: Timer? = null
+
+    var inProgress = false
+        private set
 
     var state: State = State.ORDER_MAKE
         set(value) {
@@ -90,6 +95,7 @@ class FTLTimerButton @JvmOverloads constructor(
     private val progressView: ProgressView
     private val tvTime: TextView
     private val tvLabel: TextView
+    private val dotProgress: DotsProgress
 
     init {
         inflate(context, R.layout.layout_ftl_timer_button, this)
@@ -98,6 +104,7 @@ class FTLTimerButton @JvmOverloads constructor(
         llContainer = findViewById(R.id.ll_container)
         tvTime = findViewById(R.id.tv_time)
         tvLabel = findViewById(R.id.tv_label)
+        dotProgress = findViewById(R.id.dot_progress)
 
         updateViewState()
 
@@ -119,17 +126,21 @@ class FTLTimerButton @JvmOverloads constructor(
 
     override fun onSaveInstanceState(): Parcelable? =
         SavedState(super.onSaveInstanceState()).apply {
+            inProgress = this@FTLTimerButton.inProgress
             estimateDuration = this@FTLTimerButton.estimateDuration
             remainedDuration = this@FTLTimerButton.remainedDuration
             estimateSuccessAt = this@FTLTimerButton.estimateSuccessAt
+            state = this@FTLTimerButton.state
         }
 
     override fun onRestoreInstanceState(state: Parcelable?) {
         if (state is SavedState) {
             super.onRestoreInstanceState(state.superState)
+            updateDotProgressVisibility(state.inProgress)
             estimateDuration = state.estimateDuration
             remainedDuration = state.remainedDuration
             estimateSuccessAt = state.estimateSuccessAt
+            this.state = state.state
         } else {
             super.onRestoreInstanceState(state)
         }
@@ -140,18 +151,32 @@ class FTLTimerButton @JvmOverloads constructor(
     }
 
     private fun updateViewState() {
-        progressView.colorBackground = ContextCompat.getColor(context, state.progressBgColor)
-        progressView.colorProgress = ContextCompat.getColor(context, state.progressColor)
+        with(dotProgress) {
+            isVisible = inProgress
+            dotColor = ContextCompat.getColor(context, state.dotColor)
+            bounceDotColor = ContextCompat.getColor(context, state.bounceDotColor)
+        }
+
+        with(progressView) {
+            colorBackground = ContextCompat.getColor(context, state.progressBgColor)
+            colorProgress = ContextCompat.getColor(context, state.progressColor)
+        }
 
         tvTime.setTextColor(ContextCompat.getColor(context, state.textColor))
 
         with(tvLabel) {
+            isVisible = !inProgress
             setTextColor(ContextCompat.getColor(context, state.textColor))
             setText(state.text)
         }
 
         with(llContainer) {
-            setOnClickListener { onClickListener?.onClick(it) }
+            setOnClickListener {
+                if (!inProgress) {
+                    updateDotProgressVisibility(true)
+                    onClickListener?.onClick(it)
+                }
+            }
             background = configureSelector(
                 ContextCompat.getColor(context, state.progressColor),
                 floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
@@ -171,7 +196,20 @@ class FTLTimerButton @JvmOverloads constructor(
             })
         }
 
+    fun updateDotProgressVisibility(isVisible: Boolean) {
+        this.inProgress = isVisible
+        tvLabel.isVisible = !isVisible
+
+        with(dotProgress) {
+            if (isVisible) startAnimation()
+            else stopAnimation()
+            this.isVisible = inProgress
+        }
+    }
+
     internal class SavedState : BaseSavedState {
+        var state = State.ORDER_MAKE
+        var inProgress = false
         var estimateDuration: Long = 0L
         var remainedDuration: Long = 0L
         var estimateSuccessAt: String? = null
@@ -179,6 +217,8 @@ class FTLTimerButton @JvmOverloads constructor(
         constructor(superState: Parcelable?) : super(superState)
 
         constructor(parcel: Parcel) : super(parcel) {
+            state = State.values()[parcel.readInt()]
+            inProgress = parcel.readByte() == 1.toByte()
             estimateDuration = parcel.readLong()
             remainedDuration = parcel.readLong()
             estimateSuccessAt = parcel.readString()
@@ -186,6 +226,8 @@ class FTLTimerButton @JvmOverloads constructor(
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
             super.writeToParcel(parcel, flags)
+            parcel.writeInt(state.ordinal)
+            parcel.writeByte(if (inProgress) 1 else 0)
             parcel.writeLong(estimateDuration)
             parcel.writeLong(remainedDuration)
             parcel.writeString(estimateSuccessAt)

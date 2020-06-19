@@ -13,13 +13,20 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.showLogo()
 
-        ftl_timer_button.estimateDuration = 60 * 60 * 1000
-        ftl_timer_button.estimateSuccessAt = "2020-06-17T14:30:00.001"
+        with(ftl_timer_button) {
+            state = State.ORDER_MAKE
+            estimateDuration = 60 * 60 * 1000
+            estimateSuccessAt = "2020-06-17T14:30:00.001"
+        }
 
         var i = 0
         ftl_timer_button.setOnClickListener {
             ftl_timer_button.state = State.values()[i++]
             if (i == 3) i = 0
+        }
+
+        ftl_additional_button.setOnClickListener {
+            ftl_timer_button.updateDotProgressVisibility(!ftl_timer_button.inProgress)
         }
     }
 }
