@@ -70,19 +70,6 @@ class FTLTimerButton @JvmOverloads constructor(
             deliveryTime = String.format(context.getString(format), abs(minutes), abs(seconds))
         }
 
-    private fun updateRemainedDuration(value: Long) {
-        remainedDuration = value
-        timer?.cancel()
-        timer = timer("Timer", false, 0L, 1000L) {
-            Handler(Looper.getMainLooper()).post {
-                remainedDuration -= 1000L
-                if (estimateDuration != 0L) {
-                    progressView.progress = remainedDuration * 100f / estimateDuration
-                }
-            }
-        }
-    }
-
     var estimateDuration = 0L
 
     var estimateSuccessAt: String? = null
@@ -148,6 +135,19 @@ class FTLTimerButton @JvmOverloads constructor(
 
     override fun setOnClickListener(l: OnClickListener?) {
         onClickListener = l
+    }
+
+    private fun updateRemainedDuration(value: Long) {
+        remainedDuration = value
+        timer?.cancel()
+        timer = timer("Timer", false, 0L, 1000L) {
+            Handler(Looper.getMainLooper()).post {
+                remainedDuration -= 1000L
+                if (estimateDuration != 0L) {
+                    progressView.progress = remainedDuration * 100f / estimateDuration
+                }
+            }
+        }
     }
 
     private fun updateViewState() {
