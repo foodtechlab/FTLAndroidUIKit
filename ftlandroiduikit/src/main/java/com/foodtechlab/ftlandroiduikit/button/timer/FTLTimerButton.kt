@@ -93,6 +93,13 @@ class FTLTimerButton @JvmOverloads constructor(
         tvLabel = findViewById(R.id.tv_label)
         dotProgress = findViewById(R.id.dot_progress)
 
+        super.setOnClickListener {
+            if (!inProgress) {
+                updateDotProgressVisibility(true)
+                onClickListener?.onClick(it)
+            }
+        }
+
         updateViewState()
 
         llContainer.apply {
@@ -170,18 +177,10 @@ class FTLTimerButton @JvmOverloads constructor(
             setText(state.text)
         }
 
-        with(llContainer) {
-            setOnClickListener {
-                if (!inProgress) {
-                    updateDotProgressVisibility(true)
-                    onClickListener?.onClick(it)
-                }
-            }
-            background = configureSelector(
-                ContextCompat.getColor(context, state.progressColor),
-                floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
-            )
-        }
+        llContainer.background = configureSelector(
+            ContextCompat.getColor(context, state.progressColor),
+            floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
+        )
     }
 
     private fun configureSelector(@ColorInt color: Int, radii: FloatArray) =
