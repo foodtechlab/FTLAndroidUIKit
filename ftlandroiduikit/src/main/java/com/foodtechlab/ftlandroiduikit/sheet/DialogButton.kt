@@ -2,12 +2,27 @@ package com.foodtechlab.ftlandroiduikit.sheet
 
 import android.os.Parcelable
 import androidx.annotation.DrawableRes
+import androidx.annotation.IntDef
 import com.foodtechlab.ftlandroiduikit.R
 import kotlinx.android.parcel.Parcelize
 
 /**
  * Created by Umalt on 20.05.2020
  */
+
+const val CANCEL_BUTTON = 1
+const val ADDITIONAL_BUTTON = 2
+const val SECONDARY_BUTTON = 3
+const val PRIMARY_BUTTON = 4
+
+@IntDef(
+    CANCEL_BUTTON,
+    ADDITIONAL_BUTTON,
+    SECONDARY_BUTTON,
+    PRIMARY_BUTTON
+)
+@Retention(AnnotationRetention.SOURCE)
+annotation class ButtonType
 
 @Parcelize
 class DialogState(
@@ -21,7 +36,7 @@ class DialogState(
 class DialogButton(
     val id: Int,
     val title: String,
-    val isCancelAction: Boolean = false
+    @ButtonType val buttonType: Int
 ) : Parcelable
 
 enum class Type(@DrawableRes val imgRes: Int) {
