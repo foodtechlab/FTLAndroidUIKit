@@ -78,6 +78,7 @@ class FTLTimerButton @JvmOverloads constructor(
             updateRemainedDuration(getMillis(value) - System.currentTimeMillis())
         }
 
+    private val rlContainer: RelativeLayout
     private val llContainer: LinearLayout
     private val progressView: ProgressView
     private val tvTime: TextView
@@ -89,6 +90,7 @@ class FTLTimerButton @JvmOverloads constructor(
 
         progressView = findViewById(R.id.progress_view)
         llContainer = findViewById(R.id.ll_container)
+        rlContainer = findViewById(R.id.rl_container)
         tvTime = findViewById(R.id.tv_time)
         tvLabel = findViewById(R.id.tv_label)
         dotProgress = findViewById(R.id.dot_progress)
@@ -172,10 +174,14 @@ class FTLTimerButton @JvmOverloads constructor(
         tvTime.setTextColor(ContextCompat.getColor(context, state.textColor))
 
         with(tvLabel) {
-            isVisible = !inProgress
             setTextColor(ContextCompat.getColor(context, state.textColor))
             setText(state.text)
         }
+
+        rlContainer.background = configureSelector(
+            ContextCompat.getColor(context, state.progressColor),
+            floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
+        )
 
         llContainer.background = configureSelector(
             ContextCompat.getColor(context, state.progressColor),
@@ -196,8 +202,8 @@ class FTLTimerButton @JvmOverloads constructor(
         }
 
     fun updateDotProgressVisibility(isVisible: Boolean) {
-        this.inProgress = isVisible
-        tvLabel.isVisible = !isVisible
+        inProgress = isVisible
+        llContainer.isVisible = !isVisible
 
         with(dotProgress) {
             if (isVisible) startAnimation()
