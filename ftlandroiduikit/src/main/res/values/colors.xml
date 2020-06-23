@@ -13,6 +13,7 @@
 
     <color name="BackgroundPrimary">#FFFFFF</color>
     <color name="BackgroundSecondary">#F5F5F5</color>
+    <color name="BackgroundSecondaryOpacity60">#99F5F5F5</color>
     <color name="OnBackgroundPrimary">#161616</color>
     <color name="OnBackgroundPrimaryOpacity8">#14161616</color>
     <color name="OnBackgroundSecondary">#A4A4A4</color>

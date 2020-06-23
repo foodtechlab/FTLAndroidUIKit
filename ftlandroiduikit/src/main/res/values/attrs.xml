@@ -306,8 +306,6 @@
         <attr name="text" format="string" />
     </declare-styleable>
 
-    <declare-styleable name="FTLBottomNavigationView"></declare-styleable>
-
     <declare-styleable name="FTLRouteTextView">
         <attr name="textAddressFrom" format="string" />
         <attr name="textAddressTo" format="string" />
@@ -344,15 +342,15 @@
     </declare-styleable>
 
     <declare-styleable name="FTLToolbar">
-        <attr name="title" format="string" />
-        <attr name="subtitle" format="string" />
-        <attr name="titleColor" format="color" />
-        <attr name="subtitleColor" format="color" />
-        <attr name="isShadowVisible" format="boolean" />
-        <attr name="endIcon" format="reference" />
-        <attr name="logoIcon" format="reference" />
-        <attr name="startIcon" format="reference" />
-        <attr name="logoPlaceholder" format="reference" />
+        <attr name="ftlToolbar_title" format="string" />
+        <attr name="ftlToolbar_subtitle" format="string" />
+        <attr name="ftlToolbar_title_color" format="color" />
+        <attr name="ftlToolbar_subtitle_color" format="color" />
+        <attr name="ftlToolbar_shadow_visible" format="boolean" />
+        <attr name="ftlToolbar_end_icon" format="reference" />
+        <attr name="ftlToolbar_logo_icon" format="reference" />
+        <attr name="ftlToolbar_start_icon" format="reference" />
+        <attr name="ftlToolbar_logo_placeholder" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="FTLTitle">
@@ -438,6 +436,15 @@
         <attr name="bounce_dot_color" format="color" />
         <attr name="dot_radius" format="dimension" />
         <attr name="dot_bounce_radius" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="FTLButton">
+        <attr name="ftlButton_type" format="enum">
+            <enum name="primary" value="0" />
+            <enum name="secondary" value="1" />
+            <enum name="cancel" value="2" />
+        </attr>
+        <attr name="ftlButton_title" format="string" />
     </declare-styleable>
 
 </resources>

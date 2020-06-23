@@ -13,9 +13,8 @@ import android.widget.TextView
 import androidx.core.view.*
 import androidx.fragment.app.DialogFragment
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.button.FTLCancelButton
-import com.foodtechlab.ftlandroiduikit.button.FTLPrimaryButton
-import com.foodtechlab.ftlandroiduikit.button.FTLSecondaryButton
+import com.foodtechlab.ftlandroiduikit.button.ButtonType
+import com.foodtechlab.ftlandroiduikit.button.FTLButton
 import com.foodtechlab.ftlandroiduikit.button.additional.FTLAdditionalButton
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -109,24 +108,20 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
         context?.let { ctx ->
             dialogState.buttons.forEach {
                 val v = when (it.buttonType) {
-                    CANCEL_BUTTON -> FTLCancelButton(ctx).apply {
-                        id = it.id
-                        text = it.title
-                        setOnClickListener(this@FTLBottomSheet)
-                    }
                     ADDITIONAL_BUTTON -> FTLAdditionalButton(ctx).apply {
                         id = it.id
                         text = it.title
                         setOnClickListener(this@FTLBottomSheet)
                     }
-                    PRIMARY_BUTTON -> FTLPrimaryButton(ctx).apply {
+                    else -> FTLButton(ctx).apply {
                         id = it.id
-                        text = it.title
-                        setOnClickListener(this@FTLBottomSheet)
-                    }
-                    else -> FTLSecondaryButton(ctx).apply {
-                        id = it.id
-                        text = it.title
+                        title = it.title
+                        val type = when (it.buttonType) {
+                            PRIMARY_BUTTON -> ButtonType.PRIMARY
+                            SECONDARY_BUTTON -> ButtonType.SECONDARY
+                            else -> ButtonType.CANCEL
+                        }
+                        setButtonType(type)
                         setOnClickListener(this@FTLBottomSheet)
                     }
                 }
