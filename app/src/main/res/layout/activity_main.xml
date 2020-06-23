@@ -17,10 +17,18 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:isShadowVisible="true"
-            app:logoIcon="@drawable/ic_info_24"
-            app:subtitle="Subtitle"
-            app:title="Title" />
+            app:ftlToolbar_logo_icon="@drawable/ic_info_24"
+            app:ftlToolbar_shadow_visible="true"
+            app:ftlToolbar_subtitle="Subtitle"
+            app:ftlToolbar_title="Title" />
+
+        <com.foodtechlab.ftlandroiduikit.button.FTLButton
+            android:id="@+id/ftl_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:ftlButton_title="Click"
+            app:ftlButton_type="cancel" />
 
         <com.foodtechlab.ftlandroiduikit.button.timer.FTLTimerButton
             android:id="@+id/ftl_timer_button"

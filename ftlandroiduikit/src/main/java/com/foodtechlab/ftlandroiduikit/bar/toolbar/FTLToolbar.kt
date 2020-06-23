@@ -124,34 +124,34 @@ class FTLToolbar @JvmOverloads constructor(
         }
 
         context.withStyledAttributes(attrs, R.styleable.FTLToolbar) {
-            if (hasValue(R.styleable.FTLToolbar_startIcon)) {
-                startDrawable = getDrawable(R.styleable.FTLToolbar_startIcon)
+            if (hasValue(R.styleable.FTLToolbar_ftlToolbar_start_icon)) {
+                startDrawable = getDrawable(R.styleable.FTLToolbar_ftlToolbar_start_icon)
             }
-            if (hasValue(R.styleable.FTLToolbar_endIcon)) {
-                endDrawable = getDrawable(R.styleable.FTLToolbar_endIcon)
+            if (hasValue(R.styleable.FTLToolbar_ftlToolbar_end_icon)) {
+                endDrawable = getDrawable(R.styleable.FTLToolbar_ftlToolbar_end_icon)
             }
             logoPlaceholder = when {
-                hasValue(R.styleable.FTLToolbar_logoPlaceholder) ->
-                    getDrawable(R.styleable.FTLToolbar_logoPlaceholder)
+                hasValue(R.styleable.FTLToolbar_ftlToolbar_logo_placeholder) ->
+                    getDrawable(R.styleable.FTLToolbar_ftlToolbar_logo_placeholder)
                         ?: ContextCompat.getDrawable(context, R.drawable.ic_restaurant_placeholder)
                 else -> ContextCompat.getDrawable(context, R.drawable.ic_restaurant_placeholder)
             }
             logoIcon = when {
-                hasValue(R.styleable.FTLToolbar_logoIcon) ->
-                    getDrawable(R.styleable.FTLToolbar_logoIcon) ?: logoPlaceholder
+                hasValue(R.styleable.FTLToolbar_ftlToolbar_logo_icon) ->
+                    getDrawable(R.styleable.FTLToolbar_ftlToolbar_logo_icon) ?: logoPlaceholder
                 else -> logoPlaceholder
             }
-            isShadowVisible = getBoolean(R.styleable.FTLToolbar_isShadowVisible, false)
+            isShadowVisible = getBoolean(R.styleable.FTLToolbar_ftlToolbar_shadow_visible, false)
             titleColor = getColor(
-                R.styleable.FTLToolbar_titleColor,
+                R.styleable.FTLToolbar_ftlToolbar_title_color,
                 ContextCompat.getColor(context, R.color.OnBackgroundPrimary)
             )
             subtitleColor = getColor(
-                R.styleable.FTLToolbar_subtitleColor,
+                R.styleable.FTLToolbar_ftlToolbar_subtitle_color,
                 ContextCompat.getColor(context, R.color.AdditionalGreen)
             )
-            title = getString(R.styleable.FTLToolbar_title)
-            subTitle = getString(R.styleable.FTLToolbar_subtitle)
+            title = getString(R.styleable.FTLToolbar_ftlToolbar_title)
+            subTitle = getString(R.styleable.FTLToolbar_ftlToolbar_subtitle)
         }
     }
 

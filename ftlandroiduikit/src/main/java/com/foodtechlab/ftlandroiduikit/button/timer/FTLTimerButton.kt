@@ -37,8 +37,6 @@ class FTLTimerButton @JvmOverloads constructor(
 
     private val radius = 8 * resources.displayMetrics.density
 
-    private var onClickListener: OnClickListener? = null
-
     private var timer: Timer? = null
 
     var inProgress = false
@@ -95,13 +93,6 @@ class FTLTimerButton @JvmOverloads constructor(
         tvLabel = findViewById(R.id.tv_label)
         dotProgress = findViewById(R.id.dot_progress)
 
-        super.setOnClickListener {
-            if (!inProgress) {
-                updateDotProgressVisibility(true)
-                onClickListener?.onClick(it)
-            }
-        }
-
         updateViewState()
 
         llContainer.apply {
@@ -140,10 +131,6 @@ class FTLTimerButton @JvmOverloads constructor(
         } else {
             super.onRestoreInstanceState(state)
         }
-    }
-
-    override fun setOnClickListener(l: OnClickListener?) {
-        onClickListener = l
     }
 
     private fun updateRemainedDuration(value: Long) {

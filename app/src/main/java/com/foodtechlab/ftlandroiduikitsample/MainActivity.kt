@@ -19,6 +19,10 @@ class MainActivity : AppCompatActivity() {
             estimateSuccessAt = "2020-06-17T14:30:00.001"
         }
 
+        ftl_button.setOnClickListener {
+            ftl_button.setProgressVisibility(!ftl_button.inProgress)
+        }
+
         var i = 0
         ftl_timer_button.setOnClickListener {
             ftl_timer_button.state = State.values()[i++]
