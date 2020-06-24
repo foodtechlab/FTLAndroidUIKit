@@ -37,7 +37,7 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
 
     private var onClickListener: View.OnClickListener? = null
 
-    private var behavior: BottomSheetBehavior<*>? = null
+    var behavior: BottomSheetBehavior<*>? = null
 
     private lateinit var ivImage: ImageView
 
