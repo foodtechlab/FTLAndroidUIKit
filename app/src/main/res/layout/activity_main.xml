@@ -23,25 +23,25 @@
             app:ftlToolbar_title="Title" />
 
         <com.foodtechlab.ftlandroiduikit.button.FTLButton
-            android:id="@+id/ftl_button"
+            android:id="@+id/ftlButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:ftlButton_title="Click"
+            app:ftlButton_text="Click"
             app:ftlButton_type="cancel" />
 
         <com.foodtechlab.ftlandroiduikit.button.timer.FTLTimerButton
-            android:id="@+id/ftl_timer_button"
+            android:id="@+id/ftlTimerButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp" />
 
-        <com.foodtechlab.ftlandroiduikit.button.additional.FTLAdditionalButton
-            android:id="@+id/ftl_additional_button"
-            android:layout_width="match_parent"
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:id="@+id/ftlImageButton"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Click" />
+            app:type="info_small" />
 
     </LinearLayout>
 

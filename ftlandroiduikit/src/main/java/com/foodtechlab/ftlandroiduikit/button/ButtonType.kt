@@ -42,6 +42,13 @@ enum class ButtonType(
         R.font.roboto_medium,
         R.color.PrimaryInfoEnabledOpacity60,
         R.color.PrimaryInfoEnabled
+    ),
+    ADDITIONAL(
+        R.color.selector_ftl_button_additional,
+        14f,
+        false,
+        R.font.roboto_regular,
+        R.color.PrimaryInfoEnabledOpacity60,
+        R.color.PrimaryInfoEnabled
     )
-
 }

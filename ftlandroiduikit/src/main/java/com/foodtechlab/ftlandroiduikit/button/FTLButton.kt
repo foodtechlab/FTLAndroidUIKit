@@ -6,6 +6,8 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
@@ -26,15 +28,15 @@ class FTLButton @JvmOverloads constructor(
 
     var inProgress = false
 
-    var title: CharSequence?
-        get() = tvTitle.text
+    var text: CharSequence?
+        get() = tvText.text
         set(value) {
-            tvTitle.text = value?.toString()
+            tvText.text = value?.toString()
         }
 
     private var buttonType = ButtonType.PRIMARY
 
-    private val tvTitle: TextView
+    private val tvText: TextView
     private val dotProgress: DotsProgress
 
     init {
@@ -42,16 +44,20 @@ class FTLButton @JvmOverloads constructor(
 
         minimumHeight = (MIN_HEIGHT * displayDensity).toInt()
 
-        tvTitle = findViewById(R.id.tv_title)
+        tvText = findViewById(R.id.tv_text)
         dotProgress = findViewById(R.id.dot_progress)
 
         context.withStyledAttributes(attrs, R.styleable.FTLButton) {
-            title = getString(R.styleable.FTLButton_ftlButton_title)
+            text = getString(R.styleable.FTLButton_ftlButton_text)
 
             val ordinal = getInt(R.styleable.FTLButton_ftlButton_type, buttonType.ordinal)
             buttonType = ButtonType.values()[ordinal]
 
-            updateViewState()
+            val textColor = getColor(R.styleable.FTLButton_ftlButton_textColor, -1)
+            val dotColor = getColor(R.styleable.FTLButton_ftlButton_dotColor, -1)
+            val bounceDotColor = getColor(R.styleable.FTLButton_ftlButton_bounceDotColor, -1)
+
+            updateViewState(textColor, dotColor, bounceDotColor)
         }
     }
 
@@ -69,25 +75,41 @@ class FTLButton @JvmOverloads constructor(
         }
     }
 
-    private fun updateViewState() {
+    private fun updateViewState(
+        @ColorInt textColor: Int = -1,
+        @ColorInt dotColor: Int = -1,
+        @ColorInt bounceDotColor: Int = -1
+    ) {
         background = buttonType.background?.let { ContextCompat.getDrawable(context, it) }
 
         with(dotProgress) {
-            dotColor = ContextCompat.getColor(context, buttonType.dotColor)
-            bounceDotColor = ContextCompat.getColor(context, buttonType.bounceDotColor)
+            this.dotColor = if (dotColor != -1) dotColor else ContextCompat.getColor(
+                context,
+                buttonType.dotColor
+            )
+
+            this.bounceDotColor =
+                if (bounceDotColor != -1) bounceDotColor else ContextCompat.getColor(
+                    context,
+                    buttonType.bounceDotColor
+                )
         }
 
-        with(tvTitle) {
+        with(tvText) {
             isAllCaps = buttonType.isAllCaps
 
             textSize = buttonType.textSize
 
-            val color = ContextCompat.getColor(context, buttonType.textColor)
-
-            if (color < 0) {
-                setTextColor(ContextCompat.getColorStateList(context, buttonType.textColor))
+            if (textColor != -1) {
+                setTextColor(textColor)
             } else {
-                setTextColor(color)
+                val color = ContextCompat.getColor(context, buttonType.textColor)
+
+                if (color < 0) {
+                    setTextColor(ContextCompat.getColorStateList(context, buttonType.textColor))
+                } else {
+                    setTextColor(color)
+                }
             }
 
             if (!isInEditMode) {
@@ -98,7 +120,7 @@ class FTLButton @JvmOverloads constructor(
 
     fun setProgressVisibility(isVisible: Boolean) {
         inProgress = isVisible
-        tvTitle.isVisible = !isVisible
+        tvText.isVisible = !isVisible
 
         with(dotProgress) {
             if (isVisible) startAnimation()
@@ -110,6 +132,23 @@ class FTLButton @JvmOverloads constructor(
     fun setButtonType(type: ButtonType) {
         buttonType = type
         updateViewState()
+    }
+
+    fun setTextColor(@ColorRes colorRes: Int) {
+        val color = ContextCompat.getColor(context, colorRes)
+        if (color < 0) {
+            tvText.setTextColor(ContextCompat.getColorStateList(context, colorRes))
+        } else {
+            tvText.setTextColor(color)
+        }
+    }
+
+    fun setDotColor(@ColorRes colorRes: Int) {
+        dotProgress.dotColor = ContextCompat.getColor(context, colorRes)
+    }
+
+    fun setBounceDotColor(@ColorRes colorRes: Int) {
+        dotProgress.dotColor = ContextCompat.getColor(context, colorRes)
     }
 
     internal class SavedState : BaseSavedState {

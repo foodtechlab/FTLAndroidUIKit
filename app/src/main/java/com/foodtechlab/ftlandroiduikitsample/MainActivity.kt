@@ -13,24 +13,32 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.showLogo()
 
-        with(ftl_timer_button) {
+        with(ftlTimerButton) {
             state = State.ORDER_MAKE
             estimateDuration = 60 * 60 * 1000
             estimateSuccessAt = "2020-06-17T14:30:00.001"
         }
 
-        ftl_button.setOnClickListener {
-            ftl_button.setProgressVisibility(!ftl_button.inProgress)
+        var j = 0
+        ftlButton.setOnClickListener {
+            ftlButton.setTextColor(
+                if (j++ % 2 == 0) {
+                    R.color.PrimaryInfoPressed
+                } else {
+                    R.color.PrimaryDangerPressed
+                }
+            )
+//            ftlButton.setProgressVisibility(!ftlButton.inProgress)
         }
 
         var i = 0
-        ftl_timer_button.setOnClickListener {
-            ftl_timer_button.state = State.values()[i++]
+        ftlTimerButton.setOnClickListener {
+            ftlTimerButton.state = State.values()[i++]
             if (i == 3) i = 0
         }
 
-        ftl_additional_button.setOnClickListener {
-            ftl_timer_button.updateDotProgressVisibility(!ftl_timer_button.inProgress)
+        ftlImageButton.setOnClickListener {
+            ftlTimerButton.updateDotProgressVisibility(!ftlTimerButton.inProgress)
         }
     }
 }
