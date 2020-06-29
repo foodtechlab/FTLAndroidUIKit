@@ -64,7 +64,10 @@ class FTLTimerButton @JvmOverloads constructor(
             val seconds = TimeUnit.MILLISECONDS.toSeconds(value - minutes * 60 * 1000) % 3600
 
             if (seconds >= 0) {
-                Log.d("timer_test", "estimateSuccessAt = $estimateSuccessAt cutTime = ${System.currentTimeMillis()} hh:mm:ss = $hours:$minutes:$seconds")
+                Log.d(
+                    "timer_test",
+                    "estimateSuccessAt = $estimateSuccessAt cutTime = ${System.currentTimeMillis()} hh:mm:ss = $hours:$minutes:$seconds"
+                )
             }
 
             val format =

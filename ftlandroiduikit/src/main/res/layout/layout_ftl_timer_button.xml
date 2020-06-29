@@ -21,9 +21,8 @@
 
         <TextView
             android:id="@+id/tv_time"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:fontFamily="@font/roboto_bold"
             android:paddingStart="16dp"
             android:paddingTop="12dp"
@@ -38,15 +37,20 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:ellipsize="end"
             android:fontFamily="@font/roboto_medium"
             android:gravity="center_vertical|end"
-            android:maxLines="1"
+            android:lines="1"
             android:paddingStart="16dp"
             android:paddingTop="12dp"
             android:paddingEnd="16dp"
             android:paddingBottom="12dp"
             android:textAllCaps="true"
             android:textSize="14sp"
+            app:autoSizeMaxTextSize="14sp"
+            app:autoSizeMinTextSize="12sp"
+            app:autoSizeStepGranularity="2sp"
+            app:autoSizeTextType="uniform"
             tools:text="Начать доставку" />
 
     </LinearLayout>
