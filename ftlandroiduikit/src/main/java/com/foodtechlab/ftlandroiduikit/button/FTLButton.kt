@@ -1,6 +1,7 @@
 package com.foodtechlab.ftlandroiduikit.button
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
@@ -28,6 +29,15 @@ class FTLButton @JvmOverloads constructor(
 
     var inProgress = false
 
+    @ColorRes
+    private var textColorRes = -1
+
+    @ColorRes
+    private var dotColorRes = -1
+
+    @ColorRes
+    private var bounceDotColorRes = -1
+
     var text: CharSequence?
         get() = tvText.text
         set(value) {
@@ -53,23 +63,30 @@ class FTLButton @JvmOverloads constructor(
             val ordinal = getInt(R.styleable.FTLButton_ftlButton_type, buttonType.ordinal)
             buttonType = ButtonType.values()[ordinal]
 
-            val textColor = getColor(R.styleable.FTLButton_ftlButton_textColor, -1)
-            val dotColor = getColor(R.styleable.FTLButton_ftlButton_dotColor, -1)
-            val bounceDotColor = getColor(R.styleable.FTLButton_ftlButton_bounceDotColor, -1)
-
-            updateViewState(textColor, dotColor, bounceDotColor)
+            updateViewState(
+                getColor(R.styleable.FTLButton_ftlButton_textColor, -1),
+                getColor(R.styleable.FTLButton_ftlButton_dotColor, -1),
+                getColor(R.styleable.FTLButton_ftlButton_bounceDotColor, -1),
+                getColorStateList(R.styleable.FTLButton_ftlButton_textColor)
+            )
         }
     }
 
     override fun onSaveInstanceState(): Parcelable? =
         SavedState(super.onSaveInstanceState()).apply {
             inProgress = this@FTLButton.inProgress
+            textColorRes = this@FTLButton.textColorRes
+            dotColorRes = this@FTLButton.dotColorRes
+            bounceDotColorRes = this@FTLButton.bounceDotColorRes
         }
 
     override fun onRestoreInstanceState(state: Parcelable?) {
         if (state is SavedState) {
             super.onRestoreInstanceState(state.superState)
             setProgressVisibility(state.inProgress)
+            updateTextColor(state.textColorRes)
+            updateDotColor(state.dotColorRes)
+            updateBounceDotColor(state.bounceDotColorRes)
         } else {
             super.onRestoreInstanceState(state)
         }
@@ -78,21 +95,23 @@ class FTLButton @JvmOverloads constructor(
     private fun updateViewState(
         @ColorInt textColor: Int = -1,
         @ColorInt dotColor: Int = -1,
-        @ColorInt bounceDotColor: Int = -1
+        @ColorInt bounceDotColor: Int = -1,
+        texColorStateList: ColorStateList? = null
     ) {
         background = buttonType.background?.let { ContextCompat.getDrawable(context, it) }
 
         with(dotProgress) {
-            this.dotColor = if (dotColor != -1) dotColor else ContextCompat.getColor(
-                context,
-                buttonType.dotColor
-            )
+            this.dotColor = if (dotColor != -1) {
+                dotColor
+            } else {
+                ContextCompat.getColor(context, buttonType.dotColor)
+            }
 
-            this.bounceDotColor =
-                if (bounceDotColor != -1) bounceDotColor else ContextCompat.getColor(
-                    context,
-                    buttonType.bounceDotColor
-                )
+            this.bounceDotColor = if (bounceDotColor != -1) {
+                bounceDotColor
+            } else {
+                ContextCompat.getColor(context, buttonType.bounceDotColor)
+            }
         }
 
         with(tvText) {
@@ -100,7 +119,9 @@ class FTLButton @JvmOverloads constructor(
 
             textSize = buttonType.textSize
 
-            if (textColor != -1) {
+            if (texColorStateList != null) {
+                setTextColor(texColorStateList)
+            } else if (textColor != -1) {
                 setTextColor(textColor)
             } else {
                 val color = ContextCompat.getColor(context, buttonType.textColor)
@@ -134,35 +155,56 @@ class FTLButton @JvmOverloads constructor(
         updateViewState()
     }
 
-    fun setTextColor(@ColorRes colorRes: Int) {
-        val color = ContextCompat.getColor(context, colorRes)
-        if (color < 0) {
-            tvText.setTextColor(ContextCompat.getColorStateList(context, colorRes))
-        } else {
-            tvText.setTextColor(color)
+    fun updateTextColor(@ColorRes colorRes: Int) {
+        textColorRes = colorRes
+        if (textColorRes != -1) {
+            val colorStateList = ContextCompat.getColorStateList(context, textColorRes)
+            if (colorStateList != null) {
+                tvText.setTextColor(colorStateList)
+            } else {
+                tvText.setTextColor(ContextCompat.getColor(context, textColorRes))
+            }
         }
     }
 
-    fun setDotColor(@ColorRes colorRes: Int) {
-        dotProgress.dotColor = ContextCompat.getColor(context, colorRes)
+    fun updateDotColor(@ColorRes colorRes: Int) {
+        dotColorRes = colorRes
+        if (dotColorRes != -1) dotProgress.dotColor = ContextCompat.getColor(context, dotColorRes)
     }
 
-    fun setBounceDotColor(@ColorRes colorRes: Int) {
-        dotProgress.dotColor = ContextCompat.getColor(context, colorRes)
+    fun updateBounceDotColor(@ColorRes colorRes: Int) {
+        bounceDotColorRes = colorRes
+        if (bounceDotColorRes != -1)
+            dotProgress.dotColor = ContextCompat.getColor(context, bounceDotColorRes)
     }
 
     internal class SavedState : BaseSavedState {
         var inProgress = false
 
+        @ColorRes
+        var textColorRes = -1
+
+        @ColorRes
+        var dotColorRes = -1
+
+        @ColorRes
+        var bounceDotColorRes = -1
+
         constructor(superState: Parcelable?) : super(superState)
 
         constructor(parcel: Parcel) : super(parcel) {
             inProgress = parcel.readByte() == 1.toByte()
+            textColorRes = parcel.readInt()
+            dotColorRes = parcel.readInt()
+            bounceDotColorRes = parcel.readInt()
         }
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
             super.writeToParcel(parcel, flags)
             parcel.writeByte(if (inProgress) 1 else 0)
+            parcel.writeInt(textColorRes)
+            parcel.writeInt(dotColorRes)
+            parcel.writeInt(bounceDotColorRes)
         }
 
         override fun describeContents(): Int {

@@ -27,7 +27,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            app:ftlButton_dotColor="@color/PrimaryDangerPressed"
             app:ftlButton_text="Click"
+            app:ftlButton_textColor="@color/selector_ftl_button_additional"
             app:ftlButton_type="cancel" />
 
         <com.foodtechlab.ftlandroiduikit.button.timer.FTLTimerButton

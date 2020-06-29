@@ -19,16 +19,8 @@ class MainActivity : AppCompatActivity() {
             estimateSuccessAt = "2020-06-17T14:30:00.001"
         }
 
-        var j = 0
         ftlButton.setOnClickListener {
-            ftlButton.setTextColor(
-                if (j++ % 2 == 0) {
-                    R.color.PrimaryInfoPressed
-                } else {
-                    R.color.PrimaryDangerPressed
-                }
-            )
-//            ftlButton.setProgressVisibility(!ftlButton.inProgress)
+            ftlButton.setProgressVisibility(!ftlButton.inProgress)
         }
 
         var i = 0
