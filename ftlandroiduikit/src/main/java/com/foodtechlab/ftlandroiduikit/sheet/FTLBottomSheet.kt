@@ -15,7 +15,7 @@ import androidx.fragment.app.DialogFragment
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.button.ButtonType
 import com.foodtechlab.ftlandroiduikit.button.FTLButton
-import com.foodtechlab.ftlandroiduikit.button.additional.FTLAdditionalButton
+import com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -108,17 +108,18 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
         context?.let { ctx ->
             dialogState.buttons.forEach {
                 val v = when (it.buttonType) {
-                    ADDITIONAL_BUTTON -> FTLAdditionalButton(ctx).apply {
+                    ADDITIONAL_BUTTON -> FTLImageButton(ctx).apply {
                         id = it.id
                         text = it.title
                         setOnClickListener(this@FTLBottomSheet)
                     }
                     else -> FTLButton(ctx).apply {
                         id = it.id
-                        title = it.title
+                        text = it.title
                         val type = when (it.buttonType) {
                             PRIMARY_BUTTON -> ButtonType.PRIMARY
                             SECONDARY_BUTTON -> ButtonType.SECONDARY
+                            ADDITIONAL_BUTTON -> ButtonType.ADDITIONAL
                             else -> ButtonType.CANCEL
                         }
                         setButtonType(type)

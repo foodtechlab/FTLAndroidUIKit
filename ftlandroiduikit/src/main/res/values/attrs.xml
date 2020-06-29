@@ -1,22 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <declare-styleable name="FTLAdditionalButton">
+    <declare-styleable name="FTLImageButton">
 
         <attr name="type" format="enum">
-            <enum name="text" value="0" />
+            <enum name="navigator_small" value="0" />
+            <enum name="navigator_medium" value="1" />
+            <enum name="navigator_large" value="2" />
 
-            <enum name="navigator_small" value="1" />
-            <enum name="navigator_medium" value="2" />
-            <enum name="navigator_large" value="3" />
+            <enum name="location_small" value="3" />
+            <enum name="location_medium" value="4" />
+            <enum name="location_large" value="5" />
 
-            <enum name="location_small" value="4" />
-            <enum name="location_medium" value="5" />
-            <enum name="location_large" value="6" />
-
-            <enum name="info_small" value="7" />
-            <enum name="info_medium" value="8" />
-            <enum name="info_large" value="9" />
+            <enum name="info_small" value="6" />
+            <enum name="info_medium" value="7" />
+            <enum name="info_large" value="8" />
         </attr>
     </declare-styleable>
 
@@ -443,8 +441,12 @@
             <enum name="primary" value="0" />
             <enum name="secondary" value="1" />
             <enum name="cancel" value="2" />
+            <enum name="additional" value="3" />
         </attr>
-        <attr name="ftlButton_title" format="string" />
+        <attr name="ftlButton_text" format="string" />
+        <attr name="ftlButton_textColor" format="color" />
+        <attr name="ftlButton_dotColor" format="color" />
+        <attr name="ftlButton_bounceDotColor" format="color" />
     </declare-styleable>
 
 </resources>
