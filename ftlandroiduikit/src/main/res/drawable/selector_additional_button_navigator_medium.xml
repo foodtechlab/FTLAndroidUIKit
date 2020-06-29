@@ -9,7 +9,7 @@
                     <solid android:color="#F6F6F6" />
                 </shape>
             </item>
-            <item android:bottom="9dp" android:drawable="@drawable/ic_navigator_selected_24" android:gravity="center" android:left="9dp" android:right="9dp" android:top="9dp" />
+            <item android:bottom="8dp" android:drawable="@drawable/ic_navigator_selected_24" android:gravity="center" android:left="8dp" android:right="8dp" android:top="8dp" />
         </layer-list>
     </item>
 
@@ -21,7 +21,7 @@
                     <solid android:color="#ECECEC" />
                 </shape>
             </item>
-            <item android:bottom="9dp" android:drawable="@drawable/ic_navigator_24" android:gravity="center" android:left="9dp" android:right="9dp" android:top="9dp" />
+            <item android:bottom="8dp" android:drawable="@drawable/ic_navigator_24" android:gravity="center" android:left="8dp" android:right="8dp" android:top="8dp" />
         </layer-list>
     </item>
 
@@ -33,7 +33,7 @@
                     <solid android:color="#F6F6F6" />
                 </shape>
             </item>
-            <item android:bottom="9dp" android:drawable="@drawable/ic_navigator_24" android:gravity="center" android:left="9dp" android:right="9dp" android:top="9dp" />
+            <item android:bottom="8dp" android:drawable="@drawable/ic_navigator_24" android:gravity="center" android:left="8dp" android:right="8dp" android:top="8dp" />
         </layer-list>
     </item>
 
