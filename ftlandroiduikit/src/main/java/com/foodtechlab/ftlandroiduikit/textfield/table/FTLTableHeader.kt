@@ -46,7 +46,7 @@ class FTLTableHeader @JvmOverloads constructor(
 
     init {
         inflate(context, R.layout.layout_ftl_table_header, this)
-        tvTitle = findViewById(R.id.tv_title)
+        tvTitle = findViewById(R.id.tv_text)
         ivImageSlot = findViewById(R.id.iv_image_slot)
         ivSwitch = findViewById(R.id.iv_switch)
         vDivider = findViewById(R.id.v_bottom_divider)

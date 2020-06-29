@@ -9,6 +9,7 @@ import android.os.Looper
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.ViewTreeObserver
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
@@ -61,6 +62,10 @@ class FTLTimerButton @JvmOverloads constructor(
             val hours = TimeUnit.MILLISECONDS.toHours(value)
             val minutes = TimeUnit.MILLISECONDS.toMinutes(value) % 60 + hours * 60
             val seconds = TimeUnit.MILLISECONDS.toSeconds(value - minutes * 60 * 1000) % 3600
+
+            if (seconds >= 0) {
+                Log.d("timer_test", "estimateSuccessAt = $estimateSuccessAt cutTime = ${System.currentTimeMillis()} hh:mm:ss = $hours:$minutes:$seconds")
+            }
 
             val format =
                 if (seconds < 0) R.string.format_negative_mm_ss else R.string.format_mm_ss

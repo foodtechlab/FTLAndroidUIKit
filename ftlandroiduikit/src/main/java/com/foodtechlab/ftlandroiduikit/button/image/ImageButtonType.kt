@@ -1,11 +1,9 @@
-package com.foodtechlab.ftlandroiduikit.button.additional
+package com.foodtechlab.ftlandroiduikit.button.image
 
 import androidx.annotation.DrawableRes
 import com.foodtechlab.ftlandroiduikit.R
 
-enum class AdditionalButtonType(@DrawableRes val bgRes: Int? = null, val size: Int = -1) {
-    TEXT,
-
+enum class ImageButtonType(@DrawableRes val bgRes: Int, val size: Int) {
     NAVIGATOR_SMALL(R.drawable.selector_additional_button_navigator_small, 32),
     NAVIGATOR_MEDIUM(R.drawable.selector_additional_button_navigator_medium, 40),
     NAVIGATOR_LARGE(R.drawable.selector_additional_button_navigator_large, 48),
