@@ -11,5 +11,6 @@ enum class ImageType(@DrawableRes val imgRes: Int) {
     DELIVERY_ADDRESS(R.drawable.ic_delivery_address),
     ORDER_SOURCE(R.drawable.ic_order_source),
     COMMENT(R.drawable.ic_comment),
-    FAST_FOOD(R.drawable.ic_fast_food)
+    FAST_FOOD(R.drawable.ic_fast_food),
+    BONUSES(R.drawable.ic_bonuses)
 }
