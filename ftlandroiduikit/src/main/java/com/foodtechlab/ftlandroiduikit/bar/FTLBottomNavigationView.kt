@@ -7,7 +7,6 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
 
@@ -23,7 +22,6 @@ class FTLBottomNavigationView @JvmOverloads constructor(
     init {
         setBackgroundColor(ContextCompat.getColor(context, R.color.OnPrimary))
 
-        minimumHeight = context.dpToPx(MIN_HEIGHT).toInt()
         itemIconTintList = null
         itemTextColor = ContextCompat.getColorStateList(
             context,
@@ -52,8 +50,6 @@ class FTLBottomNavigationView @JvmOverloads constructor(
     }
 
     companion object {
-        private const val MIN_HEIGHT = 56f
-
         const val ID_ORDERS = 2314
         const val ID_MAPS = 5634
         const val ID_HISTORY = 2378

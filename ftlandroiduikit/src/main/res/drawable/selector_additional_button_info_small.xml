@@ -9,7 +9,7 @@
                     <solid android:color="#F6F6F6" />
                 </shape>
             </item>
-            <item android:bottom="7dp" android:drawable="@drawable/ic_info_selected_24" android:gravity="center" android:left="7dp" android:right="7dp" android:top="7dp" />
+            <item android:bottom="4dp" android:drawable="@drawable/ic_info_selected_24" android:gravity="center" android:left="4dp" android:right="4dp" android:top="4dp" />
         </layer-list>
     </item>
 
@@ -21,7 +21,7 @@
                     <solid android:color="#ECECEC" />
                 </shape>
             </item>
-            <item android:bottom="7dp" android:drawable="@drawable/ic_info_24" android:gravity="center" android:left="7dp" android:right="7dp" android:top="7dp" />
+            <item android:bottom="4dp" android:drawable="@drawable/ic_info_24" android:gravity="center" android:left="4dp" android:right="4dp" android:top="4dp" />
         </layer-list>
     </item>
 
@@ -33,7 +33,7 @@
                     <solid android:color="#F6F6F6" />
                 </shape>
             </item>
-            <item android:bottom="7dp" android:drawable="@drawable/ic_info_24" android:gravity="center" android:left="7dp" android:right="7dp" android:top="7dp" />
+            <item android:bottom="4dp" android:drawable="@drawable/ic_info_24" android:gravity="center" android:left="4dp" android:right="4dp" android:top="4dp" />
         </layer-list>
     </item>
 

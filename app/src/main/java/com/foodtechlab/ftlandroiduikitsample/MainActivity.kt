@@ -2,6 +2,7 @@ package com.foodtechlab.ftlandroiduikitsample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
 import com.foodtechlab.ftlandroiduikit.button.timer.State
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -32,5 +33,14 @@ class MainActivity : AppCompatActivity() {
         ftlImageButton.setOnClickListener {
             ftlTimerButton.updateDotProgressVisibility(!ftlTimerButton.inProgress)
         }
+
+        ftlBottomNavigationView.addMenuItems(
+            listOf(
+                FTLBottomNavigationView.MenuItem.HISTORY,
+                FTLBottomNavigationView.MenuItem.MAPS,
+                FTLBottomNavigationView.MenuItem.MORE,
+                FTLBottomNavigationView.MenuItem.ORDERS
+            )
+        )
     }
 }
