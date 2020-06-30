@@ -26,11 +26,6 @@ class FTLCardView @JvmOverloads constructor(
         setWillNotDraw(false)
     }
 
-    override fun setPadding(left: Int, top: Int, right: Int, bottom: Int) {
-        val paddingValue = context.dpToPx(MARGIN_DEFAULT).toInt()
-        super.setPadding(paddingValue, paddingValue, paddingValue, paddingValue)
-    }
-
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec)
         val params = (layoutParams as MarginLayoutParams)

@@ -1,6 +1,7 @@
 package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.content.Context
+import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -49,6 +50,12 @@ class FTLMultipleTextView @JvmOverloads constructor(
         set(value) {
             field = value
             tvBottomEndSlot.text = field
+        }
+
+    var customSourceImage: Drawable?
+        get() = ivImageSlot.drawable
+        set(value) {
+            ivImageSlot.setImageDrawable(value)
         }
 
     init {

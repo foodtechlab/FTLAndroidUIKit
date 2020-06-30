@@ -336,7 +336,17 @@
             <enum name="ORDER_SOURCE" value="5" />
             <enum name="COMMENT" value="6" />
             <enum name="FAST_FOOD" value="7" />
+            <enum name="BONUSES" value="8" />
+            <enum name="FILE" value="9" />
+            <enum name="SHIELD" value="10" />
+            <enum name="INFO" value="11" />
+            <enum name="USER_PLACEHOLDER" value="12" />
         </attr>
+    </declare-styleable>
+
+    <declare-styleable name="FTLSectionTextView" parent="FTLTextFieldDefault">
+        <attr name="textForSlot" />
+        <attr name="imageType" />
     </declare-styleable>
 
     <declare-styleable name="FTLToolbar">
