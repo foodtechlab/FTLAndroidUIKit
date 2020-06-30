@@ -34,16 +34,18 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
             invalidate()
         }
 
+    var timeZoneId: String? = null
+
     var date: String? = null
         set(value) {
             field = value
-            deliveryTime = formatTime(value)
+            deliveryTime = formatTime(value, timeZoneId)
         }
 
     var deliveryTimeMillis: Long = 0L
         set(value) {
             field = value
-            deliveryTime = formatTime(value)
+            deliveryTime = formatTime(value, timeZoneId)
         }
 
     var estimateDuration = 0L

@@ -14,21 +14,30 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.showLogo()
 
-        with(ftlTimerButton) {
-            state = State.ORDER_MAKE
-            estimateDuration = 60 * 60 * 1000
-            estimateSuccessAt = "2020-06-17T14:30:00.001"
+        val zoneId = "Europe/Samara"
+
+        with(ftlTimeView) {
+            timeZoneId = zoneId
+            deliveryTimeMillis = 1593153300001
         }
 
         ftlButton.setOnClickListener {
             ftlButton.setProgressVisibility(!ftlButton.inProgress)
         }
 
-        var i = 0
-        ftlTimerButton.setOnClickListener {
-            ftlTimerButton.state = State.values()[i++]
-            if (i == 3) i = 0
+        with(ftlTimerButton) {
+            state = State.ORDER_MAKE
+            timeZoneId = zoneId
+            estimateDuration = 60 * 60 * 1000
+            estimateSuccessAt = "2020-06-30T16:22:00.001"
+
+            var i = 0
+            setOnClickListener {
+                ftlTimerButton.state = State.values()[i++]
+                if (i == 3) i = 0
+            }
         }
+
 
         ftlImageButton.setOnClickListener {
             ftlTimerButton.updateDotProgressVisibility(!ftlTimerButton.inProgress)

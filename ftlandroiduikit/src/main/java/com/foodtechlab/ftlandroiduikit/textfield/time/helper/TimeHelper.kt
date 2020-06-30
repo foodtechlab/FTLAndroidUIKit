@@ -1,29 +1,30 @@
 package com.foodtechlab.ftlandroiduikit.textfield.time.helper
 
-import android.annotation.SuppressLint
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.concurrent.TimeUnit
 
-private const val timeFormat = "%02d:%02d"
+private const val timeFormat = "hh:mm"
 private const val dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
 
-fun formatTime(millis: Long) = String.format(
-    timeFormat,
-    TimeUnit.MILLISECONDS.toHours(millis) % 24,
-    TimeUnit.MILLISECONDS.toMinutes(millis) % 60
-)
+fun formatTime(millis: Long, timeZoneId: String?) =
+    SimpleDateFormat(timeFormat, Locale.getDefault())
+        .apply {
+            timeZone = timeZoneId?.let { TimeZone.getTimeZone(timeZoneId) } ?: TimeZone.getDefault()
+        }
+        .format(Date(millis))
 
-@SuppressLint("SimpleDateFormat")
-fun formatTime(dateStr: String?): String? = dateStr?.let {
-    SimpleDateFormat(dateFormat).apply {
-        timeZone = TimeZone.getTimeZone("UTC")
-    }.parse(dateStr)?.let { formatTime(it.time) }
+fun formatTime(dateStr: String?, timeZoneId: String?) = dateStr?.let {
+    SimpleDateFormat(dateFormat, Locale.getDefault())
+        .apply {
+            timeZone = timeZoneId?.let { TimeZone.getTimeZone(timeZoneId) } ?: TimeZone.getDefault()
+        }
+        .parse(dateStr)?.let { formatTime(it.time, timeZoneId) }
 }
 
-@SuppressLint("SimpleDateFormat")
-fun getMillis(dateStr: String?): Long = dateStr?.let {
-    SimpleDateFormat(dateFormat).apply {
-//        timeZone = TimeZone.getTimeZone("UTC")
-    }.parse(dateStr)?.time ?: 0L
+fun getMillis(dateStr: String?, timeZoneId: String?) = dateStr?.let {
+    SimpleDateFormat(dateFormat, Locale.getDefault())
+        .apply {
+            timeZone = timeZoneId?.let { TimeZone.getTimeZone(timeZoneId) } ?: TimeZone.getDefault()
+        }
+        .parse(dateStr)?.time ?: 0L
 } ?: 0L

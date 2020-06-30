@@ -27,6 +27,8 @@ class FTLDeliveryTimerView @JvmOverloads constructor(
 
     private val displayDensity = resources.displayMetrics.density
 
+    var timeZoneId: String? = null
+
     var autoAnimate: Boolean
         get() = progressView.autoAnimate
         set(value) {
@@ -65,7 +67,7 @@ class FTLDeliveryTimerView @JvmOverloads constructor(
     var estimateSuccessAt: String? = null
         set(value) {
             field = value
-            remainedDuration = getMillis(value) - System.currentTimeMillis()
+            remainedDuration = getMillis(value, timeZoneId) - System.currentTimeMillis()
         }
 
     private var size: Size
