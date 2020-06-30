@@ -8,7 +8,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
         android:orientation="horizontal">
 
         <ImageView
@@ -37,7 +36,7 @@
                     android:layout_marginEnd="8dp"
                     android:layout_weight="1"
                     android:fontFamily="@font/roboto_regular"
-                    android:lineSpacingExtra="5sp"
+                    android:lineSpacingExtra="8sp"
                     android:textColor="@color/OnSurfaceSecondary"
                     android:textSize="16sp"
                     tools:text="Наличными" />
@@ -48,7 +47,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_regular"
                     android:gravity="end"
-                    android:lineSpacingExtra="5sp"
+                    android:lineSpacingExtra="8sp"
                     android:textColor="@color/OnSurfaceSecondary"
                     android:textSize="16sp"
                     tools:text="1 000 Р" />
