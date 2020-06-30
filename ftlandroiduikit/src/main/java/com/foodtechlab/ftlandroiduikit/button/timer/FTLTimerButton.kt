@@ -40,6 +40,8 @@ class FTLTimerButton @JvmOverloads constructor(
 
     private var timer: Timer? = null
 
+    var timeZoneId: String? = null
+
     var inProgress = false
         private set
 
@@ -70,8 +72,7 @@ class FTLTimerButton @JvmOverloads constructor(
                 )
             }
 
-            val format =
-                if (seconds < 0) R.string.format_negative_mm_ss else R.string.format_mm_ss
+            val format = if (seconds < 0) R.string.format_negative_mm_ss else R.string.format_mm_ss
 
             deliveryTime = String.format(context.getString(format), abs(minutes), abs(seconds))
         }
@@ -81,7 +82,7 @@ class FTLTimerButton @JvmOverloads constructor(
     var estimateSuccessAt: String? = null
         set(value) {
             field = value
-            updateRemainedDuration(getMillis(value) - System.currentTimeMillis())
+            updateRemainedDuration(getMillis(value, timeZoneId) - System.currentTimeMillis())
         }
 
     private val rlContainer: RelativeLayout

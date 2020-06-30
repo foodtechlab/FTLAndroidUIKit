@@ -32,6 +32,11 @@
             app:ftlButton_textColor="@color/selector_ftl_button_additional"
             app:ftlButton_type="additional" />
 
+        <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
+            android:id="@+id/ftlTimeView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
         <com.foodtechlab.ftlandroiduikit.button.timer.FTLTimerButton
             android:id="@+id/ftlTimerButton"
             android:layout_width="match_parent"
