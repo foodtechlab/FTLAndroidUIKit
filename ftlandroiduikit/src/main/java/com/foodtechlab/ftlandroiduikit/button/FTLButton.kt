@@ -72,6 +72,11 @@ class FTLButton @JvmOverloads constructor(
         }
     }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        setProgressVisibility(inProgress)
+    }
+
     override fun onSaveInstanceState(): Parcelable? =
         SavedState(super.onSaveInstanceState()).apply {
             inProgress = this@FTLButton.inProgress
