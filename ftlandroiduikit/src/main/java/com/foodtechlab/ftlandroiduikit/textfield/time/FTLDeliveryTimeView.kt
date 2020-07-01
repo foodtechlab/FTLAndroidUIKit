@@ -59,8 +59,11 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
                 val minutes = TimeUnit.MILLISECONDS.toMinutes(value) % 60 + hours * 60
                 val seconds = TimeUnit.MILLISECONDS.toSeconds(value - minutes * 60 * 1000) % 3600
 
-                val format =
-                    if (seconds < 0) R.string.format_negative_mm_ss else R.string.format_mm_ss
+                val format = if (seconds < 0 || minutes < 0) {
+                    R.string.format_negative_mm_ss
+                } else {
+                    R.string.format_mm_ss
+                }
 
                 deliveryTime = String.format(context.getString(format), abs(minutes), abs(seconds))
 
