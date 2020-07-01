@@ -116,6 +116,11 @@ class FTLTimerButton @JvmOverloads constructor(
         }
     }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        updateDotProgressVisibility(inProgress)
+    }
+
     override fun onSaveInstanceState(): Parcelable? =
         SavedState(super.onSaveInstanceState()).apply {
             inProgress = this@FTLTimerButton.inProgress
