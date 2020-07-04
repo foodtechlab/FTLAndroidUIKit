@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
 
         with(ftlTimeView) {
             timeZoneId = zoneId
-            deliveryTimeMillis = 1593153300001
+            deliveryTime = "23:12"
         }
 
         ftlButton.setOnClickListener {
@@ -39,7 +39,10 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+        var j = 0
+
         ftlImageButton.setOnClickListener {
+            ftlTimeView.deliveryTime = if (j++ % 2 == 0) "233333333:12" else "23:12"
             ftlTimerButton.updateDotProgressVisibility(!ftlTimerButton.inProgress)
         }
 
