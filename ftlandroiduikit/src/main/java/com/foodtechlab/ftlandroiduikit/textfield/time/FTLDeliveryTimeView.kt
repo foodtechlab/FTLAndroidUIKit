@@ -42,7 +42,7 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
             deliveryTime = formatTime(value, timeZoneId)
         }
 
-    var deliveryTimeMillis: Long = 0L
+    var deliveryTimeMillis = 0L
         set(value) {
             field = value
             deliveryTime = formatTime(value, timeZoneId)
@@ -50,7 +50,7 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
 
     var estimateDuration = 0L
 
-    var remainedDuration: Long = 0L
+    var remainedDuration = 0L
         set(value) {
             if (deliveryStatus == DeliveryStatus.IN_PROGRESS || deliveryStatus == DeliveryStatus.IN_PROGRESS_LATE) {
                 field = value

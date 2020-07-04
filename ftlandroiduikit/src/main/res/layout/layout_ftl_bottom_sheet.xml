@@ -50,6 +50,8 @@
                     android:gravity="center"
                     android:letterSpacing=".01"
                     android:lineSpacingExtra="8sp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
                     android:textColor="@color/PrimaryWarningEnabled"
                     android:textSize="24sp"
                     tools:text="Достигнут лимит по смс" />
