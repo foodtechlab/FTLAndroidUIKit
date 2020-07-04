@@ -2,6 +2,7 @@ package com.foodtechlab.ftlandroiduikitsample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
 import com.foodtechlab.ftlandroiduikit.button.timer.State
 import kotlinx.android.synthetic.main.activity_main.*
@@ -51,5 +52,13 @@ class MainActivity : AppCompatActivity() {
                 FTLBottomNavigationView.MenuItem.ORDERS
             )
         )
+        ftlFirstMarker.apply {
+            brandLogo = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_bonuses)
+            textOrdersCount = "9999"
+        }
+        ftlSecondMarker.apply {
+            isMultiBrandMarker = true
+            textOrdersCount = "78"
+        }
     }
 }
