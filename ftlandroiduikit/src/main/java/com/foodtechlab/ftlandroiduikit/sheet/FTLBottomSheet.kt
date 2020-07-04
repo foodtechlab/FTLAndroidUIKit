@@ -15,7 +15,6 @@ import androidx.fragment.app.DialogFragment
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.button.ButtonType
 import com.foodtechlab.ftlandroiduikit.button.FTLButton
-import com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -107,24 +106,17 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
 
         context?.let { ctx ->
             dialogState.buttons.forEach {
-                val v = when (it.buttonType) {
-                    ADDITIONAL_BUTTON -> FTLImageButton(ctx).apply {
-                        id = it.id
-                        text = it.title
-                        setOnClickListener(this@FTLBottomSheet)
+                val v = FTLButton(ctx).apply {
+                    id = it.id
+                    text = it.title
+                    val type = when (it.buttonType) {
+                        PRIMARY_BUTTON -> ButtonType.PRIMARY
+                        SECONDARY_BUTTON -> ButtonType.SECONDARY
+                        ADDITIONAL_BUTTON -> ButtonType.ADDITIONAL
+                        else -> ButtonType.CANCEL
                     }
-                    else -> FTLButton(ctx).apply {
-                        id = it.id
-                        text = it.title
-                        val type = when (it.buttonType) {
-                            PRIMARY_BUTTON -> ButtonType.PRIMARY
-                            SECONDARY_BUTTON -> ButtonType.SECONDARY
-                            ADDITIONAL_BUTTON -> ButtonType.ADDITIONAL
-                            else -> ButtonType.CANCEL
-                        }
-                        setButtonType(type)
-                        setOnClickListener(this@FTLBottomSheet)
-                    }
+                    setButtonType(type)
+                    setOnClickListener(this@FTLBottomSheet)
                 }
                 llContent.addView(v)
                 v.setMarginTop()
