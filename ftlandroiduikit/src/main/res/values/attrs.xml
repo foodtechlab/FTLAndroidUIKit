@@ -459,4 +459,9 @@
         <attr name="ftlButton_bounceDotColor" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="FTLRestaurantMarker">
+        <attr name="textOrdersCount" format="string" />
+        <attr name="brandLogo" format="reference" />
+        <attr name="isMultiBrandMarker" format="boolean" />
+    </declare-styleable>
 </resources>
