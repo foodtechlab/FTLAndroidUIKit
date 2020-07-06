@@ -461,6 +461,12 @@
         <attr name="ftlButton_bounceDotColor" format="color" />
     </declare-styleable>
 
+    <declare-styleable name="FTLTimerButton">
+        <attr name="ftlTimerButton_textColor" format="color" />
+        <attr name="ftlTimerButton_dotColor" format="color" />
+        <attr name="ftlTimerButton_bounceDotColor" format="color" />
+    </declare-styleable>
+
     <declare-styleable name="FTLRestaurantMarker">
         <attr name="textOrdersCount" format="string" />
         <attr name="brandLogo" format="reference" />

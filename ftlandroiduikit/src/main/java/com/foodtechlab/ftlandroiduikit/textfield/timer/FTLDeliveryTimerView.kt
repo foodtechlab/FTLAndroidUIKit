@@ -29,7 +29,7 @@ class FTLDeliveryTimerView @JvmOverloads constructor(
 
     var timeZoneId: String? = null
 
-    var autoAnimate: Boolean
+    var autoAnimateProgress: Boolean
         get() = progressView.autoAnimate
         set(value) {
             progressView.autoAnimate = value
