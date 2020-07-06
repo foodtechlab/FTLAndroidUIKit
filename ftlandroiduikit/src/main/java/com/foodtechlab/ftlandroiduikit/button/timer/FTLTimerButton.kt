@@ -1,6 +1,7 @@
 package com.foodtechlab.ftlandroiduikit.button.timer
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
@@ -14,7 +15,9 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
+import androidx.core.content.withStyledAttributes
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import com.foodtechlab.ftlandroiduikit.R
@@ -37,24 +40,25 @@ class FTLTimerButton @JvmOverloads constructor(
 
     private val radius = 8 * resources.displayMetrics.density
 
-    private var timer: Timer? = null
-
-    var timeZoneId: String? = null
-
     var inProgress = false
         private set
 
-    var state: State = State.ORDER_MAKE
+    var autoAnimateProgress: Boolean
+        get() = progressView.autoAnimate
         set(value) {
-            field = value
-            updateViewState()
+            progressView.autoAnimate = value
         }
 
-    var deliveryTime: String? = if (isInEditMode) "00:00" else null
-        set(value) {
-            field = value
-            tvTime.text = value
-        }
+    @ColorRes
+    var textColorRes = -1
+
+    @ColorRes
+    var dotColorRes = -1
+
+    @ColorRes
+    var bounceDotColorRes = -1
+
+    var estimateDuration = 0L
 
     private var remainedDuration: Long = 0L
         private set(value) {
@@ -73,7 +77,17 @@ class FTLTimerButton @JvmOverloads constructor(
             deliveryTime = String.format(context.getString(format), abs(minutes), abs(seconds))
         }
 
-    var estimateDuration = 0L
+    private var state = State.ORDER_MAKE
+
+    var deliveryTime: String? = if (isInEditMode) "00:00" else null
+        set(value) {
+            field = value
+            tvTime.text = value
+        }
+
+    var timeZoneId: String? = null
+
+    private var timer: Timer? = null
 
     var estimateSuccessAt: String? = null
         set(value) {
@@ -98,7 +112,14 @@ class FTLTimerButton @JvmOverloads constructor(
         tvLabel = findViewById(R.id.tv_label)
         dotProgress = findViewById(R.id.dot_progress)
 
-        updateViewState()
+        context.withStyledAttributes(attrs, R.styleable.FTLTimerButton) {
+            updateViewState(
+                getColor(R.styleable.FTLTimerButton_ftlTimerButton_textColor, -1),
+                getColor(R.styleable.FTLTimerButton_ftlTimerButton_dotColor, -1),
+                getColor(R.styleable.FTLTimerButton_ftlTimerButton_bounceDotColor, -1),
+                getColorStateList(R.styleable.FTLTimerButton_ftlTimerButton_textColor)
+            )
+        }
 
         llContainer.apply {
             viewTreeObserver.addOnGlobalLayoutListener(object :
@@ -127,6 +148,9 @@ class FTLTimerButton @JvmOverloads constructor(
             estimateDuration = this@FTLTimerButton.estimateDuration
             remainedDuration = this@FTLTimerButton.remainedDuration
             estimateSuccessAt = this@FTLTimerButton.estimateSuccessAt
+            textColorRes = this@FTLTimerButton.textColorRes
+            dotColorRes = this@FTLTimerButton.dotColorRes
+            bounceDotColorRes = this@FTLTimerButton.bounceDotColorRes
             state = this@FTLTimerButton.state
         }
 
@@ -138,6 +162,9 @@ class FTLTimerButton @JvmOverloads constructor(
             remainedDuration = state.remainedDuration
             estimateSuccessAt = state.estimateSuccessAt
             this.state = state.state
+            updateTextColor(state.textColorRes)
+            updateDotColor(state.dotColorRes)
+            updateBounceDotColor(state.bounceDotColorRes)
         } else {
             super.onRestoreInstanceState(state)
         }
@@ -156,11 +183,58 @@ class FTLTimerButton @JvmOverloads constructor(
         }
     }
 
-    private fun updateViewState() {
+    fun updateTextColor(@ColorRes colorRes: Int) {
+        textColorRes = colorRes
+        if (textColorRes != -1) {
+            val colorStateList = ContextCompat.getColorStateList(context, textColorRes)
+            if (colorStateList != null) {
+                tvTime.setTextColor(colorStateList)
+                tvLabel.setTextColor(colorStateList)
+            } else {
+                tvTime.setTextColor(ContextCompat.getColor(context, textColorRes))
+                tvLabel.setTextColor(ContextCompat.getColor(context, textColorRes))
+            }
+        } else {
+            setTextColorFromState()
+        }
+    }
+
+    fun updateDotColor(@ColorRes colorRes: Int) {
+        dotColorRes = colorRes
+        dotProgress.dotColor = ContextCompat.getColor(
+            context,
+            if (dotColorRes != -1) dotColorRes else state.dotColor
+        )
+    }
+
+    fun updateBounceDotColor(@ColorRes colorRes: Int) {
+        bounceDotColorRes = colorRes
+        dotProgress.dotColor = ContextCompat.getColor(
+            context,
+            if (bounceDotColorRes != -1) bounceDotColorRes else state.bounceDotColor
+        )
+    }
+
+    private fun updateViewState(
+        @ColorInt textColor: Int = -1,
+        @ColorInt dotColor: Int = -1,
+        @ColorInt bounceDotColor: Int = -1,
+        texColorStateList: ColorStateList? = null
+    ) {
         with(dotProgress) {
             isVisible = inProgress
-            dotColor = ContextCompat.getColor(context, state.dotColor)
-            bounceDotColor = ContextCompat.getColor(context, state.bounceDotColor)
+
+            this.dotColor = if (dotColor != -1) {
+                dotColor
+            } else {
+                ContextCompat.getColor(context, state.dotColor)
+            }
+
+            this.bounceDotColor = if (bounceDotColor != -1) {
+                bounceDotColor
+            } else {
+                ContextCompat.getColor(context, state.bounceDotColor)
+            }
         }
 
         with(progressView) {
@@ -168,12 +242,19 @@ class FTLTimerButton @JvmOverloads constructor(
             colorProgress = ContextCompat.getColor(context, state.progressColor)
         }
 
-        tvTime.setTextColor(ContextCompat.getColor(context, state.textColor))
-
-        with(tvLabel) {
-            setTextColor(ContextCompat.getColor(context, state.textColor))
-            setText(state.text)
+        when {
+            texColorStateList != null -> {
+                tvTime.setTextColor(texColorStateList)
+                tvLabel.setTextColor(texColorStateList)
+            }
+            textColor != -1 -> {
+                tvTime.setTextColor(textColor)
+                tvLabel.setTextColor(textColor)
+            }
+            else -> setTextColorFromState()
         }
+        tvLabel.setText(state.text)
+
 
         rlContainer.background = configureSelector(
             ContextCompat.getColor(context, state.progressColor),
@@ -209,12 +290,45 @@ class FTLTimerButton @JvmOverloads constructor(
         }
     }
 
+    fun updateState(state: State) {
+        clearCustomColors()
+        this.state = state
+        updateViewState()
+    }
+
+    private fun clearCustomColors() {
+        textColorRes = -1
+        dotColorRes = -1
+        bounceDotColorRes = -1
+    }
+
+    private fun setTextColorFromState() {
+        val color = ContextCompat.getColor(context, state.textColor)
+
+        if (color < 0) {
+            tvTime.setTextColor(ContextCompat.getColorStateList(context, state.textColor))
+            tvLabel.setTextColor(ContextCompat.getColorStateList(context, state.textColor))
+        } else {
+            tvTime.setTextColor(color)
+            tvLabel.setTextColor(color)
+        }
+    }
+
     internal class SavedState : BaseSavedState {
         var state = State.ORDER_MAKE
         var inProgress = false
         var estimateDuration: Long = 0L
         var remainedDuration: Long = 0L
         var estimateSuccessAt: String? = null
+
+        @ColorRes
+        var textColorRes = -1
+
+        @ColorRes
+        var dotColorRes = -1
+
+        @ColorRes
+        var bounceDotColorRes = -1
 
         constructor(superState: Parcelable?) : super(superState)
 
@@ -224,6 +338,9 @@ class FTLTimerButton @JvmOverloads constructor(
             estimateDuration = parcel.readLong()
             remainedDuration = parcel.readLong()
             estimateSuccessAt = parcel.readString()
+            textColorRes = parcel.readInt()
+            dotColorRes = parcel.readInt()
+            bounceDotColorRes = parcel.readInt()
         }
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -233,6 +350,9 @@ class FTLTimerButton @JvmOverloads constructor(
             parcel.writeLong(estimateDuration)
             parcel.writeLong(remainedDuration)
             parcel.writeString(estimateSuccessAt)
+            parcel.writeInt(textColorRes)
+            parcel.writeInt(dotColorRes)
+            parcel.writeInt(bounceDotColorRes)
         }
 
         override fun describeContents(): Int {
