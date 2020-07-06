@@ -124,12 +124,10 @@ class FTLButton @JvmOverloads constructor(
 
             textSize = buttonType.textSize
 
-            if (texColorStateList != null) {
-                setTextColor(texColorStateList)
-            } else if (textColor != -1) {
-                setTextColor(textColor)
-            } else {
-                setTextColorFromType()
+            when {
+                texColorStateList != null -> setTextColor(texColorStateList)
+                textColor != -1 -> setTextColor(textColor)
+                else -> setTextColorFromType()
             }
 
             if (!isInEditMode) {
