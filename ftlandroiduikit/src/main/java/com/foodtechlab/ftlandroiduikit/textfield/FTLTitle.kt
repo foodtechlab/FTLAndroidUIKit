@@ -65,9 +65,9 @@ class FTLTitle @JvmOverloads constructor(
         orientation = VERTICAL
 
         setPadding(
-            (20f * displayDensity).toInt(),
+            (16f * displayDensity).toInt(),
             (8f * displayDensity).toInt(),
-            (20f * displayDensity).toInt(),
+            (16f * displayDensity).toInt(),
             (8f * displayDensity).toInt()
         )
 

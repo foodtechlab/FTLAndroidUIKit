@@ -241,11 +241,13 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
     private fun updateViewState() {
         icon = when {
             size == Size.SMALL && deliveryStatus == DeliveryStatus.USUAL -> null
-            else -> Icon(
-                size.iconSize * displayDensity,
-                size.iconMarginEnd * displayDensity,
-                deliveryStatus.iconDrawable?.let { ContextCompat.getDrawable(context, it) }
-            )
+            else -> deliveryStatus.iconDrawable?.let {
+                Icon(
+                    size.iconSize * displayDensity,
+                    size.iconMarginEnd * displayDensity,
+                    deliveryStatus.iconDrawable?.let { ContextCompat.getDrawable(context, it) }
+                )
+            }
         }
         val radius = size.radius * displayDensity
         bgCorners.forEachIndexed { index, _ ->
