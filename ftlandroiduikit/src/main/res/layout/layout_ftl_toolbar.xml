@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -56,7 +57,9 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center"
-                android:layout_margin="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="12dp"
+                android:layout_marginBottom="8dp"
                 android:background="@drawable/shape_ftl_toolbar_indicator"
                 android:visibility="gone" />
         </FrameLayout>
@@ -69,15 +72,17 @@
             android:layout_toStartOf="@id/fl_ftl_toolbar_end_container"
             android:layout_toEndOf="@id/ib_ftl_toolbar_start" />
 
-        <ProgressBar
-            android:id="@+id/pb_loading"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignWithParentIfMissing="true"
+        <com.foodtechlab.ftlandroiduikit.common.DotsProgress
+            android:id="@+id/dot_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
             android:layout_toEndOf="@id/ib_ftl_toolbar_start"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:bounce_dot_color="@color/OnBackgroundSecondaryOpacity80"
+            app:dot_color="@color/OnBackgroundSecondaryOpacity60" />
+
     </RelativeLayout>
 
     <TextView
