@@ -41,7 +41,7 @@ class ProgressView @JvmOverloads constructor(
     var isAnimating = false
 
     // Starts progress animation automatically when [ProgressView] is initialized
-    var autoAnimate = true
+    var autoAnimate = false
 
     // Minimum value of the progress
     var min = 0f
@@ -146,6 +146,7 @@ class ProgressView @JvmOverloads constructor(
         SavedState(
             super.onSaveInstanceState()
         ).apply {
+            autoAnimate = this@ProgressView.autoAnimate
             progressFromPrevious = this@ProgressView.progressFromPrevious
             progress = this@ProgressView.progress
             previousProgress = this@ProgressView.previousProgress
@@ -154,6 +155,7 @@ class ProgressView @JvmOverloads constructor(
     override fun onRestoreInstanceState(state: Parcelable?) {
         if (state is SavedState) {
             super.onRestoreInstanceState(state.superState)
+            autoAnimate = state.autoAnimate
             progressFromPrevious = state.progressFromPrevious
             progress = state.progress
             previousProgress = state.previousProgress
@@ -276,6 +278,7 @@ class ProgressView @JvmOverloads constructor(
     }
 
     internal class SavedState : BaseSavedState {
+        var autoAnimate = false
         var progressFromPrevious = false
 
         var progress = 0f
@@ -284,6 +287,7 @@ class ProgressView @JvmOverloads constructor(
         constructor(superState: Parcelable?) : super(superState)
 
         constructor(parcel: Parcel) : super(parcel) {
+            autoAnimate = parcel.readByte() != 0.toByte()
             progressFromPrevious = parcel.readByte() != 0.toByte()
             progress = parcel.readFloat()
             previousProgress = parcel.readFloat()
@@ -291,6 +295,7 @@ class ProgressView @JvmOverloads constructor(
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
             super.writeToParcel(parcel, flags)
+            parcel.writeByte(if (autoAnimate) 1 else 0)
             parcel.writeByte(if (progressFromPrevious) 1 else 0)
             parcel.writeFloat(progress)
             parcel.writeFloat(previousProgress)

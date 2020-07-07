@@ -35,5 +35,9 @@ enum class DeliveryStatus(
         R.color.AdditionalPink,
         android.R.color.transparent,
         R.drawable.ic_timer_pink_24
+    ),
+    ACTUAL_TIME(
+        R.color.OnAdditionalDark,
+        android.R.color.transparent
     )
 }

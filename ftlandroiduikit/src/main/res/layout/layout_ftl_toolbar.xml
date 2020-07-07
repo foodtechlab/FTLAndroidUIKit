@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -17,8 +18,9 @@
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:layout_marginEnd="5dp"
             android:layout_marginBottom="16dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:visibility="gone"
@@ -26,27 +28,26 @@
 
         <FrameLayout
             android:id="@+id/fl_ftl_toolbar_end_container"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp">
+            android:layout_margin="12dp">
 
             <ImageButton
                 android:id="@+id/ib_ftl_toolbar_end"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:background="?attr/selectableItemBackgroundBorderless"
+                android:scaleType="centerInside"
                 android:visibility="gone"
                 tools:src="@drawable/ic_close_24" />
 
             <ImageView
                 android:id="@+id/iv_ftl_toolbar_logo"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
-                android:layout_gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
                 android:src="@drawable/ic_restaurant_placeholder"
                 android:visibility="gone" />
 
@@ -67,15 +68,16 @@
             android:layout_toStartOf="@id/fl_ftl_toolbar_end_container"
             android:layout_toEndOf="@id/ib_ftl_toolbar_start" />
 
-        <ProgressBar
-            android:id="@+id/pb_loading"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_alignWithParentIfMissing="true"
+        <com.foodtechlab.ftlandroiduikit.common.DotsProgress
+            android:id="@+id/dot_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_marginStart="20dp"
+            android:layout_marginStart="16dp"
             android:layout_toEndOf="@id/ib_ftl_toolbar_start"
-            android:visibility="gone" />
+            android:visibility="gone"
+            app:bounce_dot_color="@color/OnBackgroundSecondaryOpacity80"
+            app:dot_color="@color/OnBackgroundSecondaryOpacity60" />
     </RelativeLayout>
 
     <TextView
@@ -84,7 +86,9 @@
         android:layout_height="wrap_content"
         android:fontFamily="@font/roboto_regular"
         android:gravity="center_horizontal"
+        android:paddingStart="16dp"
         android:paddingTop="4dp"
+        android:paddingEnd="16dp"
         android:paddingBottom="4dp"
         android:textColor="@color/OnPrimary"
         android:textSize="14sp"
@@ -99,5 +103,4 @@
         android:layout_height="6dp"
         android:background="@drawable/shadow_top_to_bottom"
         android:visibility="gone" />
-
 </merge>

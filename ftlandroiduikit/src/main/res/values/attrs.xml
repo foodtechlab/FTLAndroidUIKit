@@ -396,6 +396,8 @@
             <enum name="delivered_late" value="3" />
             <enum name="canceled" value="4" />
             <enum name="in_progress" value="5" />
+            <enum name="in_progress_late" value="6" />
+            <enum name="actual_time" value="7" />
         </attr>
         <attr name="size" format="enum">
             <enum name="small" value="0" />
@@ -457,6 +459,12 @@
         <attr name="ftlButton_textColor" format="color" />
         <attr name="ftlButton_dotColor" format="color" />
         <attr name="ftlButton_bounceDotColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="FTLTimerButton">
+        <attr name="ftlTimerButton_textColor" format="color" />
+        <attr name="ftlTimerButton_dotColor" format="color" />
+        <attr name="ftlTimerButton_bounceDotColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="FTLRestaurantMarker">

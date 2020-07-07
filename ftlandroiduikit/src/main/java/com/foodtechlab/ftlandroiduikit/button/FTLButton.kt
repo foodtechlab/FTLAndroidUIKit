@@ -124,18 +124,10 @@ class FTLButton @JvmOverloads constructor(
 
             textSize = buttonType.textSize
 
-            if (texColorStateList != null) {
-                setTextColor(texColorStateList)
-            } else if (textColor != -1) {
-                setTextColor(textColor)
-            } else {
-                val color = ContextCompat.getColor(context, buttonType.textColor)
-
-                if (color < 0) {
-                    setTextColor(ContextCompat.getColorStateList(context, buttonType.textColor))
-                } else {
-                    setTextColor(color)
-                }
+            when {
+                texColorStateList != null -> setTextColor(texColorStateList)
+                textColor != -1 -> setTextColor(textColor)
+                else -> setTextColorFromType()
             }
 
             if (!isInEditMode) {
@@ -156,6 +148,7 @@ class FTLButton @JvmOverloads constructor(
     }
 
     fun setButtonType(type: ButtonType) {
+        clearCustomColors()
         buttonType = type
         updateViewState()
     }
@@ -169,18 +162,40 @@ class FTLButton @JvmOverloads constructor(
             } else {
                 tvText.setTextColor(ContextCompat.getColor(context, textColorRes))
             }
+        } else {
+            setTextColorFromType()
         }
     }
 
     fun updateDotColor(@ColorRes colorRes: Int) {
         dotColorRes = colorRes
-        if (dotColorRes != -1) dotProgress.dotColor = ContextCompat.getColor(context, dotColorRes)
+        dotProgress.dotColor = ContextCompat.getColor(
+            context,
+            if (dotColorRes != -1) dotColorRes else buttonType.dotColor
+        )
     }
 
     fun updateBounceDotColor(@ColorRes colorRes: Int) {
         bounceDotColorRes = colorRes
-        if (bounceDotColorRes != -1)
-            dotProgress.dotColor = ContextCompat.getColor(context, bounceDotColorRes)
+        dotProgress.bounceDotColor = ContextCompat.getColor(
+            context,
+            if (bounceDotColorRes != -1) bounceDotColorRes else buttonType.bounceDotColor
+        )
+    }
+
+    private fun clearCustomColors() {
+        textColorRes = -1
+        dotColorRes = -1
+        bounceDotColorRes = -1
+    }
+
+    private fun setTextColorFromType() {
+        val color = ContextCompat.getColor(context, buttonType.textColor)
+        if (color < 0) {
+            tvText.setTextColor(ContextCompat.getColorStateList(context, buttonType.textColor))
+        } else {
+            tvText.setTextColor(color)
+        }
     }
 
     internal class SavedState : BaseSavedState {

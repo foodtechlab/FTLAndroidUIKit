@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolbar.showLogo()
+        toolbar.showConnectionIndicator()
 
         val zoneId = "Europe/Samara"
 
@@ -22,23 +22,27 @@ class MainActivity : AppCompatActivity() {
             deliveryTime = "23:12"
         }
 
+        var i = 0
         ftlButton.setOnClickListener {
-            ftlButton.setProgressVisibility(!ftlButton.inProgress)
-        }
-
-        with(ftlTimerButton) {
-            state = State.ORDER_MAKE
-            timeZoneId = zoneId
-            estimateDuration = 60 * 60 * 1000
-            estimateSuccessAt = "2020-06-30T16:22:00.001"
-
-            var i = 0
-            setOnClickListener {
-                ftlTimerButton.state = State.values()[i++]
-                if (i == 3) i = 0
+            if (i++ % 2 == 0) {
+                toolbar.showProgress()
+            } else {
+                toolbar.hideProgress()
             }
         }
 
+        with(ftlTimerButton) {
+            timeZoneId = zoneId
+            estimateDuration = 20 * 60 * 1000
+            estimateSuccessAt = "2020-07-06T15:50:00.001"
+            autoAnimateProgress = false
+
+            var i = 0
+            setOnClickListener {
+                ftlTimerButton.updateState(State.values()[i++])
+                if (i == 3) i = 0
+            }
+        }
 
         var j = 0
 
