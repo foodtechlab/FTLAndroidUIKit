@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolbar.showLogo()
+        toolbar.showConnectionIndicator()
 
         val zoneId = "Europe/Samara"
 
