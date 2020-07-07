@@ -11,6 +11,7 @@ import androidx.core.content.withStyledAttributes
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.common.DotsProgress
 import com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
 import com.foodtechlab.ftlandroiduikit.util.changeColor
 
@@ -82,7 +83,7 @@ class FTLToolbar @JvmOverloads constructor(
 
     var onToolbarClickListener: OnToolbarClickListener? = null
 
-    private val progress: ProgressBar
+    private val progress: DotsProgress
     private val ibStart: ImageButton
     private val ibEnd: ImageButton
     private val ivLogo: ImageView
@@ -100,7 +101,7 @@ class FTLToolbar @JvmOverloads constructor(
 
         orientation = VERTICAL
 
-        progress = findViewById(R.id.pb_loading)
+        progress = findViewById(R.id.dot_progress)
         ftlTitle = findViewById(R.id.ftl_title)
         ibStart = findViewById(R.id.ib_ftl_toolbar_start)
         ibEnd = findViewById(R.id.ib_ftl_toolbar_end)
@@ -157,10 +158,12 @@ class FTLToolbar @JvmOverloads constructor(
 
     fun showProgress() {
         ftlTitle.isGone = true
+        progress.startAnimation()
         progress.isVisible = true
     }
 
     fun hideProgress() {
+        progress.stopAnimation()
         progress.isGone = true
         ftlTitle.isVisible = true
     }

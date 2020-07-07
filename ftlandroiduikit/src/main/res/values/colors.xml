@@ -18,6 +18,7 @@
     <color name="OnBackgroundPrimaryOpacity8">#14161616</color>
     <color name="OnBackgroundSecondary">#A4A4A4</color>
     <color name="OnBackgroundSecondaryOpacity10">#1AA4A4A4</color>
+    <color name="OnBackgroundSecondaryOpacity80">#CCA4A4A4</color>
     <color name="OnBackgroundSecondaryOpacity60">#99A4A4A4</color>
 
     <color name="PrimaryDangerEnabled">#DE2222</color>

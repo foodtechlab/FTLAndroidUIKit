@@ -22,8 +22,13 @@ class MainActivity : AppCompatActivity() {
             deliveryTime = "23:12"
         }
 
+        var i = 0
         ftlButton.setOnClickListener {
-            ftlButton.setProgressVisibility(!ftlButton.inProgress)
+            if (i++ % 2 == 0) {
+                toolbar.showProgress()
+            } else {
+                toolbar.hideProgress()
+            }
         }
 
         with(ftlTimerButton) {
