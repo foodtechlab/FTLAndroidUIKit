@@ -1,13 +1,17 @@
 package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.content.Context
+import android.graphics.Canvas
 import android.util.AttributeSet
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.withStyledAttributes
+import androidx.core.view.*
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
+import com.foodtechlab.ftlandroiduikit.util.dpToPx
 
 
 class FTLDefaultTextView @JvmOverloads constructor(
@@ -41,6 +45,24 @@ class FTLDefaultTextView @JvmOverloads constructor(
             ivImageSlot.setImageResource(imageType.imgRes)
             textForSlot = getString(R.styleable.FTLDefaultTextView_textForSlot) ?: ""
             tvTextSlot.text = textForSlot
+
         }
+        setWillNotDraw(false)
+    }
+
+    private fun View.updateMargins(setMargin: Boolean) {
+        val lParams = layoutParams as LayoutParams
+        val marginTop = context.dpToPx(if (setMargin) 4f else 0f).toInt()
+        lParams.updateMargins(
+            marginStart,
+            marginTop,
+            marginLeft,
+            marginBottom
+        )
+        layoutParams = lParams
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        tvTextSlot.updateMargins(tvTextSlot.lineCount == 1)
     }
 }
