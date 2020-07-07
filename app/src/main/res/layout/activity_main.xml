@@ -44,8 +44,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
-                app:size="small"
-                app:status="actual_time" />
+                app:size="large"
+                app:status="usual" />
 
             <com.foodtechlab.ftlandroiduikit.button.FTLButton
                 android:layout_width="0dp"
