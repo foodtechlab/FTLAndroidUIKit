@@ -22,16 +22,6 @@
             app:ftlToolbar_subtitle="Subtitle"
             app:ftlToolbar_title="Title" />
 
-        <com.foodtechlab.ftlandroiduikit.button.FTLButton
-            android:id="@+id/ftlButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:ftlButton_dotColor="@color/PrimaryDangerPressed"
-            app:ftlButton_text="Click"
-            app:ftlButton_textColor="@color/selector_ftl_button_additional"
-            app:ftlButton_type="additional" />
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -41,9 +31,10 @@
 
             <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
                 android:id="@+id/ftlTimeView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
+                android:layout_weight="1"
                 app:size="large"
                 app:status="usual" />
 
@@ -75,16 +66,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             app:type="info_small" />
-
-        <com.foodtechlab.ftlandroiduikit.map.FTLRestaurantMarker
-            android:id="@+id/ftlFirstMarker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <com.foodtechlab.ftlandroiduikit.map.FTLRestaurantMarker
-            android:id="@+id/ftlSecondMarker"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

@@ -2,7 +2,6 @@ package com.foodtechlab.ftlandroiduikitsample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
 import com.foodtechlab.ftlandroiduikit.button.timer.State
 import kotlinx.android.synthetic.main.activity_main.*
@@ -22,15 +21,6 @@ class MainActivity : AppCompatActivity() {
             deliveryTime = "23:12"
         }
 
-        var i = 0
-        ftlButton.setOnClickListener {
-            if (i++ % 2 == 0) {
-                toolbar.showProgress()
-            } else {
-                toolbar.hideProgress()
-            }
-        }
-
         with(ftlTimerButton) {
             timeZoneId = zoneId
             estimateDuration = 20 * 60 * 1000
@@ -45,7 +35,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         var j = 0
-
         ftlImageButton.setOnClickListener {
             ftlTimeView.deliveryTime = if (j++ % 2 == 0) "233333333:12" else "23:12"
             ftlTimerButton.updateDotProgressVisibility(!ftlTimerButton.inProgress)
@@ -59,13 +48,5 @@ class MainActivity : AppCompatActivity() {
                 FTLBottomNavigationView.MenuItem.ORDERS
             )
         )
-        ftlFirstMarker.apply {
-            brandLogo = ContextCompat.getDrawable(this@MainActivity, R.drawable.ic_bonuses)
-            textOrdersCount = "9999"
-        }
-        ftlSecondMarker.apply {
-            isMultiBrandMarker = true
-            textOrdersCount = "78"
-        }
     }
 }
