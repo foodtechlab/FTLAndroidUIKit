@@ -6,13 +6,19 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
+import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
+import androidx.core.view.marginBottom
+import androidx.core.view.marginLeft
+import androidx.core.view.marginStart
+import androidx.core.view.updateMargins
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
+import com.foodtechlab.ftlandroiduikit.util.dpToPx
 
 
 class FTLExtendableTextView @JvmOverloads constructor(
@@ -87,12 +93,25 @@ class FTLExtendableTextView @JvmOverloads constructor(
         }
     }
 
+    private fun View.updateMargins(setMargin: Boolean) {
+        val lParams = layoutParams as LayoutParams
+        val marginTop = context.dpToPx(if (setMargin) 4f else 0f).toInt()
+        lParams.updateMargins(
+            marginStart,
+            marginTop,
+            marginLeft,
+            marginBottom
+        )
+        layoutParams = lParams
+    }
+
     override fun performClick(): Boolean {
         setExpand(!isExpandText)
         return super.performClick()
     }
 
     override fun onDraw(canvas: Canvas) {
+        tvTextSlot.updateMargins(tvTextSlot.lineCount == 1)
         setExpand(isExpandText)
     }
 }
