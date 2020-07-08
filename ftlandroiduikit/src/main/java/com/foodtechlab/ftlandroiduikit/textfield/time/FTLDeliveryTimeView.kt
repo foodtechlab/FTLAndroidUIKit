@@ -28,10 +28,17 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
 
     private val displayDensity = resources.displayMetrics.density
 
+    private var textScale = 1f
+
     var deliveryTime: String? = if (isInEditMode) "00:00" else null
         set(value) {
             field = value
-            invalidate()
+
+            textScale = if (desiredTimeWidth < timeWidth) {
+                desiredTimeWidth.toFloat() / timeWidth
+            } else 1f
+
+            requestLayout()
         }
 
     var timeZoneId: String? = null
@@ -115,6 +122,24 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
             timeRect.width()
         } ?: 0
 
+    private val desiredTimeWidth by lazy {
+        val timeRect = Rect()
+        val s = textPaint.textSize
+        textPaint.textSize = size.textSize * displayDensity
+        textPaint.getTextBounds("-00:00", 0, "-00:00".length, timeRect)
+        textPaint.textSize = s
+        timeRect.width()
+    }
+
+    private val desiredTimeHeight by lazy {
+        val timeRect = Rect()
+        val s = textPaint.textSize
+        textPaint.textSize = size.textSize * displayDensity
+        textPaint.getTextBounds("-00:00", 0, "-00:00".length, timeRect)
+        textPaint.textSize = s
+        timeRect.height()
+    }
+
     var deliveryStatus: DeliveryStatus = DeliveryStatus.USUAL
         set(value) {
             field = value
@@ -190,9 +215,11 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
         val iconRequiredWidth = icon?.let { it.size + it.marginEnd } ?: 0f
 
         val desiredWidth =
-            suggestedMinimumWidth + 2 * paddingHorizontal + timeWidth + iconRequiredWidth + marginEnd
+            suggestedMinimumWidth + 2 * paddingHorizontal + desiredTimeWidth + iconRequiredWidth + marginEnd
 
-        val desiredHeight = suggestedMinimumHeight + 2 * paddingVertical + timeHeight
+        val desiredHeight = suggestedMinimumHeight + 2 * paddingVertical + desiredTimeHeight
+
+        textPaint.textSize = size.textSize * displayDensity * textScale
 
         setMeasuredDimension(
             measureDimension(desiredWidth.toInt(), widthMeasureSpec),
@@ -204,7 +231,7 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
         val specMode = MeasureSpec.getMode(measureSpec)
         val specSize = MeasureSpec.getSize(measureSpec)
 
-        val result = when (specMode) {
+        return when (specMode) {
             MeasureSpec.EXACTLY -> specSize
             else -> {
                 var tempRes = desiredSize
@@ -217,25 +244,6 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
                 tempRes
             }
         }
-
-        if (result < desiredSize) {
-            val scale = result.toFloat() / desiredSize
-            val textSize = textSize * scale
-            textPaint.textSize = min(textPaint.textSize, textSize)
-
-            paddingHorizontal = min(paddingHorizontal, paddingHorizontalOrig * scale)
-            paddingVertical = min(paddingVertical, paddingVerticalOrig * scale)
-            marginEnd = min(marginEnd, marginEndOrig * scale)
-
-            icon?.let { ic ->
-                iconOrig?.let { icOrig ->
-                    ic.size = min(ic.size, icOrig.size * scale)
-                    ic.marginEnd = min(ic.marginEnd, icOrig.marginEnd * scale)
-                }
-            }
-        }
-
-        return result
     }
 
     private fun updateViewState() {
