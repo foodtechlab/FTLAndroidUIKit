@@ -58,7 +58,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:hint="Simple hint" />
+            app:hint="Simple hint"
+            app:filters="1234567890+()- "
+            app:imeOptions="actionDone"
+            app:inputType="phone" />
 
         <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
             android:id="@+id/ftlImageButton"
