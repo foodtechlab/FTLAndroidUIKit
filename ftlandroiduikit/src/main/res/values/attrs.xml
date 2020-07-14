@@ -295,7 +295,7 @@
             <flag name="flagForceAscii" value="0x80000000" />
         </attr>
 
-        <attr name="digits" format="string" />
+        <attr name="filters" format="string" />
 
         <attr name="maxLength" format="string" />
 
