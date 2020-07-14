@@ -46,6 +46,8 @@ class FTLButton @JvmOverloads constructor(
 
     private var buttonType = ButtonType.PRIMARY
 
+    private var clickListener: OnClickListener? = null
+
     private val tvText: TextView
     private val dotProgress: DotsProgress
 
@@ -70,6 +72,8 @@ class FTLButton @JvmOverloads constructor(
                 getColorStateList(R.styleable.FTLButton_ftlButton_textColor)
             )
         }
+
+        super.setOnClickListener { if (!inProgress) clickListener?.onClick(it) }
     }
 
     override fun onAttachedToWindow() {
@@ -95,6 +99,10 @@ class FTLButton @JvmOverloads constructor(
         } else {
             super.onRestoreInstanceState(state)
         }
+    }
+
+    override fun setOnClickListener(l: OnClickListener?) {
+        clickListener = l
     }
 
     private fun updateViewState(

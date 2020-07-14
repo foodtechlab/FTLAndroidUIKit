@@ -34,10 +34,17 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
         set(value) {
             field = value
 
-            textScale = if (desiredTimeWidth < timeWidth) {
-                desiredTimeWidth.toFloat() / timeWidth
-            } else 1f
+            val length = value?.length ?: 0
+            textScale = when {
+                TIME_TEMPLATE.length < length -> TIME_TEMPLATE.length.toFloat() / length
+                textSize < size.textSize * displayDensity -> {
+                    val tSize = size.textSize * displayDensity
+                    textSize / tSize
+                }
+                else -> 1f
+            }
 
+            updateViewState()
             requestLayout()
         }
 
@@ -74,7 +81,8 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
 
                 deliveryTime = String.format(context.getString(format), abs(minutes), abs(seconds))
 
-                if (seconds < 0) deliveryStatus = DeliveryStatus.IN_PROGRESS_LATE
+                if ((seconds < 0 || minutes < 0) && deliveryStatus != DeliveryStatus.IN_PROGRESS_LATE)
+                    deliveryStatus = DeliveryStatus.IN_PROGRESS_LATE
             }
         }
 
@@ -102,43 +110,46 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
             paddingVerticalOrig = value
         }
 
-    private var textSize = 16f * displayDensity
+    var textSize = 16f * displayDensity
         set(value) {
             field = value
-            textPaint.textSize = value
+
+            val tSize = value * displayDensity
+            textScale = textSize / tSize
+//            textPaint.textSize = value
         }
 
     private val timeHeight: Int
         get() = deliveryTime?.let {
-            val timeRect = Rect()
             textPaint.getTextBounds(it, 0, it.length, timeRect)
             timeRect.height()
         } ?: 0
 
     private val timeWidth: Int
         get() = deliveryTime?.let {
-            val timeRect = Rect()
             textPaint.getTextBounds(it, 0, it.length, timeRect)
             timeRect.width()
         } ?: 0
 
-    private val desiredTimeWidth by lazy {
+    private val desiredTimeWidth by lazy(LazyThreadSafetyMode.NONE) {
         val timeRect = Rect()
-        val s = textPaint.textSize
-        textPaint.textSize = size.textSize * displayDensity
-        textPaint.getTextBounds("-00:00", 0, "-00:00".length, timeRect)
-        textPaint.textSize = s
+        val tPaint = TextPaint(TextPaint.ANTI_ALIAS_FLAG).apply {
+            textSize = size.textSize * displayDensity
+        }
+        tPaint.getTextBounds(TIME_TEMPLATE, 0, TIME_TEMPLATE.length, timeRect)
         timeRect.width()
     }
 
-    private val desiredTimeHeight by lazy {
+    private val desiredTimeHeight by lazy(LazyThreadSafetyMode.NONE) {
         val timeRect = Rect()
-        val s = textPaint.textSize
-        textPaint.textSize = size.textSize * displayDensity
-        textPaint.getTextBounds("-00:00", 0, "-00:00".length, timeRect)
-        textPaint.textSize = s
+        val tPaint = TextPaint(TextPaint.ANTI_ALIAS_FLAG).apply {
+            textSize = size.textSize * displayDensity
+        }
+        tPaint.getTextBounds(TIME_TEMPLATE, 0, TIME_TEMPLATE.length, timeRect)
         timeRect.height()
     }
+
+    private val timeRect = Rect()
 
     var deliveryStatus: DeliveryStatus = DeliveryStatus.USUAL
         set(value) {
@@ -150,6 +161,12 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
     var size: Size = Size.SMALL
         set(value) {
             field = value
+
+            textSize = value.textSize * displayDensity
+
+//            val tSize = value.textSize * displayDensity
+//            textScale = textSize / tSize
+
             updateViewState()
             requestLayout()
         }
@@ -179,9 +196,17 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
             val sizeOrdinal = getInt(R.styleable.FTLDeliveryTimeView_size, Size.SMALL.ordinal)
             size = Size.values()[sizeOrdinal]
 
+            textSize = getDimension(
+                R.styleable.FTLDeliveryTimeView_timeView_textSize,
+                size.textSize * displayDensity
+            )
+
             val statusOrdinal =
                 getInt(R.styleable.FTLDeliveryTimeView_status, DeliveryStatus.USUAL.ordinal)
             deliveryStatus = DeliveryStatus.values()[statusOrdinal]
+
+            val tSize = size.textSize * displayDensity
+            textScale = textSize / tSize
 
             updateViewState()
         }
@@ -219,8 +244,6 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
 
         val desiredHeight = suggestedMinimumHeight + 2 * paddingVertical + desiredTimeHeight
 
-        textPaint.textSize = size.textSize * displayDensity * textScale
-
         setMeasuredDimension(
             measureDimension(desiredWidth.toInt(), widthMeasureSpec),
             measureDimension(desiredHeight.toInt(), heightMeasureSpec)
@@ -231,7 +254,7 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
         val specMode = MeasureSpec.getMode(measureSpec)
         val specSize = MeasureSpec.getSize(measureSpec)
 
-        return when (specMode) {
+        val result = when (specMode) {
             MeasureSpec.EXACTLY -> specSize
             else -> {
                 var tempRes = desiredSize
@@ -244,6 +267,23 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
                 tempRes
             }
         }
+
+//        if (result < desiredSize) {
+//            val scale = result.toFloat() / desiredSize
+//
+//            paddingHorizontal = min(paddingHorizontal, paddingHorizontalOrig * scale)
+//            paddingVertical = min(paddingVertical, paddingVerticalOrig * scale)
+//            marginEnd = min(marginEnd, marginEndOrig * scale)
+//
+//            icon?.let { ic ->
+//                iconOrig?.let { icOrig ->
+//                    ic.size = min(ic.size, icOrig.size * scale)
+//                    ic.marginEnd = min(ic.marginEnd, icOrig.marginEnd * scale)
+//                }
+//            }
+//        }
+
+        return result
     }
 
     private fun updateViewState() {
@@ -265,7 +305,7 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
         marginEnd = size.marginEnd * displayDensity
         paddingHorizontal = size.paddingHorizontal * displayDensity
         paddingVertical = size.paddingVertical * displayDensity
-        textSize = size.textSize * displayDensity
+        textPaint.textSize = textSize * textScale
         textPaint.color = ContextCompat.getColor(context, deliveryStatus.textColor)
         bgPaint.color = ContextCompat.getColor(context, deliveryStatus.bgColor)
 
@@ -341,5 +381,7 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
 
     companion object {
         private const val HALF = .5f
+
+        private const val TIME_TEMPLATE = "-00:00"
     }
 }

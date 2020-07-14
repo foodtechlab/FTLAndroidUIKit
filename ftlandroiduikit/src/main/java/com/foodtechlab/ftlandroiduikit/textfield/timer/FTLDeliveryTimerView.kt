@@ -6,8 +6,6 @@ import android.os.Looper
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
-import android.view.View
-import android.view.ViewTreeObserver
 import android.widget.RelativeLayout
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.updateLayoutParams
@@ -26,6 +24,12 @@ class FTLDeliveryTimerView @JvmOverloads constructor(
 ) : RelativeLayout(context, attrs, defStyleAttrs) {
 
     private val displayDensity = resources.displayMetrics.density
+
+    private var textSize: Float
+        get() = ftlDeliveryTime.textSize
+        set(value) {
+            ftlDeliveryTime.textSize = value
+        }
 
     var timeZoneId: String? = null
 
@@ -82,26 +86,12 @@ class FTLDeliveryTimerView @JvmOverloads constructor(
     private val ftlDeliveryTime: FTLDeliveryTimeView
 
     init {
-        View.inflate(context, R.layout.layout_ftl_delivery_timer_view, this)
+        inflate(context, R.layout.layout_ftl_delivery_timer_view, this)
 
         progressView = findViewById(R.id.progress_view)
         ftlDeliveryTime = findViewById(R.id.ftl_delivery_time)
 
-        ftlDeliveryTime.apply {
-            deliveryTimeMillis = remainedDuration
-            viewTreeObserver.addOnGlobalLayoutListener(object :
-                ViewTreeObserver.OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    if (measuredWidth > 0) {
-                        progressView.updateLayoutParams {
-                            width = measuredWidth
-                            height = measuredHeight
-                        }
-                        viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    }
-                }
-            })
-        }
+        ftlDeliveryTime.deliveryTimeMillis = remainedDuration
 
         context.withStyledAttributes(attrs, R.styleable.FTLDeliveryTimerView) {
             val ordinal = getInt(
@@ -110,7 +100,25 @@ class FTLDeliveryTimerView @JvmOverloads constructor(
             )
             size = Size.values()[ordinal]
 
+            textSize = getDimension(
+                R.styleable.FTLDeliveryTimerView_timerView_textSize,
+                size.textSize * displayDensity
+            )
+
             progressView.radius = size.radius * displayDensity
+        }
+    }
+
+    override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec)
+        progressView.updateLayoutParams {
+            width = measuredWidth
+            height = measuredHeight
+        }
+
+        ftlDeliveryTime.updateLayoutParams {
+            width = measuredWidth
+            height = measuredHeight
         }
     }
 

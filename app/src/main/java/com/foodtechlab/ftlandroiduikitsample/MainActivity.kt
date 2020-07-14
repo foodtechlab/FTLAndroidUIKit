@@ -16,15 +16,22 @@ class MainActivity : AppCompatActivity() {
 
         val zoneId = "Europe/Samara"
 
+        with(ftlTimerView) {
+            timeZoneId = zoneId
+            estimateDuration = 60 * 60 * 1000
+            estimateSuccessAt = "2020-07-14T09:25:00.001"
+        }
+
         with(ftlTimeView) {
             timeZoneId = zoneId
-            deliveryTime = "23:12"
+            estimateDuration = 20 * 60 * 1000
+            deliveryTime = "28:30"
         }
 
         with(ftlTimerButton) {
             timeZoneId = zoneId
-            estimateDuration = 20 * 60 * 1000
-            estimateSuccessAt = "2020-07-06T15:50:00.001"
+            estimateDuration = 60 * 60 * 1000
+            estimateSuccessAt = "2231-12-17T23:59:00.001"
             autoAnimateProgress = false
 
             var i = 0
@@ -34,9 +41,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        var j = 0
         ftlImageButton.setOnClickListener {
-            ftlTimeView.deliveryTime = if (j++ % 2 == 0) "233333333:12" else "23:12"
             ftlTimerButton.updateDotProgressVisibility(!ftlTimerButton.inProgress)
         }
 

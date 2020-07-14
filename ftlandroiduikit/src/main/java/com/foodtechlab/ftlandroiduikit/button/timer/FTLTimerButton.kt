@@ -60,7 +60,7 @@ class FTLTimerButton @JvmOverloads constructor(
 
     var estimateDuration = 0L
 
-    private var remainedDuration: Long = 0L
+    private var remainedDuration = 0L
         private set(value) {
             field = value
 
@@ -87,13 +87,15 @@ class FTLTimerButton @JvmOverloads constructor(
 
     var timeZoneId: String? = null
 
-    private var timer: Timer? = null
-
     var estimateSuccessAt: String? = null
         set(value) {
             field = value
             updateRemainedDuration(getMillis(value, timeZoneId) - System.currentTimeMillis())
         }
+
+    private var timer: Timer? = null
+
+    private var clickListener: OnClickListener? = null
 
     private val rlContainer: RelativeLayout
     private val llContainer: LinearLayout
@@ -135,6 +137,8 @@ class FTLTimerButton @JvmOverloads constructor(
                 }
             })
         }
+
+        super.setOnClickListener { if (!inProgress) clickListener?.onClick(it) }
     }
 
     override fun onAttachedToWindow() {
@@ -168,6 +172,10 @@ class FTLTimerButton @JvmOverloads constructor(
         } else {
             super.onRestoreInstanceState(state)
         }
+    }
+
+    override fun setOnClickListener(l: OnClickListener?) {
+        clickListener = l
     }
 
     private fun updateRemainedDuration(value: Long) {
