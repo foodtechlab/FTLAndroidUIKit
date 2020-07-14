@@ -41,8 +41,13 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        var i = 0
         ftlImageButton.setOnClickListener {
-            ftlTimerButton.updateDotProgressVisibility(!ftlTimerButton.inProgress)
+            if (i++ % 2 == 0) {
+                toolbar.showProgress()
+            } else {
+                toolbar.hideProgress()
+            }
         }
 
         ftlBottomNavigationView.addMenuItems(
