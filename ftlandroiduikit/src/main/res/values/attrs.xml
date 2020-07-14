@@ -21,7 +21,7 @@
     <declare-styleable name="FTLEditTextDefault">
         <attr name="hint" format="string" />
 
-        <attr name="inputType" format="integer">
+        <attr name="inputType">
             <!-- There is no content type.  The text is not editable. -->
             <flag name="none" value="0x00000000" />
             <!-- Just plain old text.  Corresponds to
@@ -403,9 +403,11 @@
             <enum name="small" value="0" />
             <enum name="large" value="1" />
         </attr>
+        <attr name="timeView_textSize" format="dimension" />
     </declare-styleable>
 
     <declare-styleable name="FTLDeliveryTimerView">
+        <attr name="timerView_textSize" format="dimension" />
         <attr name="deliveryTimerView_size" format="enum">
             <enum name="small" value="0" />
             <enum name="large" value="1" />
