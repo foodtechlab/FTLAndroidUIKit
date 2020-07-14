@@ -448,6 +448,7 @@
         <attr name="bounce_dot_color" format="color" />
         <attr name="dot_radius" format="dimension" />
         <attr name="dot_bounce_radius" format="dimension" />
+        <attr name="animation_speed" format="integer" />
     </declare-styleable>
 
     <declare-styleable name="FTLButton">

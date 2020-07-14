@@ -11,6 +11,7 @@
         android:id="@+id/rl_ftl_toolbar_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
         android:minHeight="?attr/actionBarSize">
 
         <ImageButton
@@ -76,8 +77,10 @@
             android:layout_marginStart="16dp"
             android:layout_toEndOf="@id/ib_ftl_toolbar_start"
             android:visibility="gone"
+            app:animation_speed="150"
             app:bounce_dot_color="@color/OnBackgroundSecondaryOpacity80"
-            app:dot_color="@color/OnBackgroundSecondaryOpacity60" />
+            app:dot_color="@color/OnBackgroundSecondaryOpacity60"
+            app:gap="0dp" />
     </RelativeLayout>
 
     <TextView
