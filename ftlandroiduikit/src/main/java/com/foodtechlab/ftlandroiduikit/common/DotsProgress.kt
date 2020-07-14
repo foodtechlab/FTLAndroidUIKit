@@ -40,6 +40,8 @@ class DotsProgress @JvmOverloads constructor(
 
     private var dotsCount = 3
 
+    private var animationSpeed = 250L
+
     private var dotPosition = 0
 
     @ColorInt
@@ -50,9 +52,10 @@ class DotsProgress @JvmOverloads constructor(
 
     private val dotPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
+
     private val bounceAnimation by lazy {
         BounceAnimation().apply {
-            duration = 250
+            duration = animationSpeed
             repeatCount = Animation.INFINITE
             interpolator = LinearInterpolator()
 
@@ -71,6 +74,9 @@ class DotsProgress @JvmOverloads constructor(
     init {
         context.withStyledAttributes(attrs, R.styleable.FTLDotsProgress) {
             dotsCount = getInt(R.styleable.FTLDotsProgress_dots_count, dotsCount)
+
+            animationSpeed =
+                getInt(R.styleable.FTLDotsProgress_animation_speed, animationSpeed.toInt()).toLong()
 
             gap = getDimension(R.styleable.FTLDotsProgress_gap, gap)
             origGap = getDimension(R.styleable.FTLDotsProgress_gap, gap)

@@ -94,13 +94,6 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             app:type="info_small" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/edit_query"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="phone"
-            app:digits="1234567890+()- " />
     </LinearLayout>
 
     <com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
