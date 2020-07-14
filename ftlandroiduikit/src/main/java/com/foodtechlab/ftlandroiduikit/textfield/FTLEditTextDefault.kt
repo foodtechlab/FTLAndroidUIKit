@@ -120,9 +120,9 @@ class FTLEditTextDefault @JvmOverloads constructor(
         }
     }
 
-    private var digits: CharSequence? = null
+    private var filters: String? = null
         set(value) {
-            value?.let { etInput.keyListener = DigitsKeyListener.getInstance(it.toString()) }
+            value?.let { setFilterDigits(it) }
             field = value
         }
 
@@ -176,17 +176,17 @@ class FTLEditTextDefault @JvmOverloads constructor(
         context.withStyledAttributes(attrs, R.styleable.FTLEditTextDefault) {
             hint = getString(R.styleable.FTLEditTextDefault_hint) ?: ""
 
-            inputType = getInt(R.styleable.FTLEditTextDefault_inputType, EditorInfo.TYPE_CLASS_TEXT)
-
-            imeOptions = getInt(R.styleable.FTLEditTextDefault_imeOptions, EditorInfo.IME_NULL)
-
-            digits = getText(R.styleable.FTLEditTextDefault_digits)
-
             maxLength = getInt(R.styleable.FTLEditTextDefault_maxLength, -1)
 
             maxLines = getInt(R.styleable.FTLEditTextDefault_maxLineCount, Int.MAX_VALUE)
 
             text = getString(R.styleable.FTLEditTextDefault_text) ?: ""
+
+            inputType = getInt(R.styleable.FTLEditTextDefault_inputType, EditorInfo.TYPE_CLASS_TEXT)
+
+            imeOptions = getInt(R.styleable.FTLEditTextDefault_imeOptions, EditorInfo.IME_NULL)
+
+            filters = getString(R.styleable.FTLEditTextDefault_filters)
         }
     }
 
@@ -265,6 +265,23 @@ class FTLEditTextDefault @JvmOverloads constructor(
                 start()
             }
         }
+    }
+
+    private fun setFilterDigits(digits: String) {
+        val filters = arrayOfNulls<InputFilter>(1)
+        filters[0] =
+            InputFilter { source, start, end, _, _, _ ->
+                if (end > start) {
+                    for (index in start until end) {
+                        if (!digits.contains(source[index].toString())) {
+                            return@InputFilter ""
+                        }
+                    }
+                }
+                null
+            }
+
+        etInput.filters = filters
     }
 
     fun addTextChangedListener(watcher: TextWatcher) {
