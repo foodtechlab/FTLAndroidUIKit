@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         with(ftlTimerView) {
             timeZoneId = zoneId
             estimateDuration = 60 * 60 * 1000
-            estimateSuccessAt = "2020-07-14T09:25:00.001"
+            estimateSuccessAt = "2020-07-14T21:40:00.001"
         }
 
         with(ftlTimeView) {
