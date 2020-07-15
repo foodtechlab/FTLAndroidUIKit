@@ -10,6 +10,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
+import androidx.transition.Fade
+import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.common.DotsProgress
 import com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
@@ -157,12 +159,14 @@ class FTLToolbar @JvmOverloads constructor(
     }
 
     fun showProgress() {
+        TransitionManager.beginDelayedTransition(rlContainer, Fade().apply { duration = 100 })
         ftlTitle.isGone = true
         progress.startAnimation()
         progress.isVisible = true
     }
 
     fun hideProgress() {
+        TransitionManager.beginDelayedTransition(rlContainer, Fade().apply { duration = 100 })
         progress.stopAnimation()
         progress.isGone = true
         ftlTitle.isVisible = true
@@ -199,6 +203,7 @@ class FTLToolbar @JvmOverloads constructor(
     }
 
     private fun showOnlyOneChild(id: Int) {
+        TransitionManager.beginDelayedTransition(rlContainer, Fade().apply { duration = 100 })
         for (i in 0 until flEndContainer.childCount) {
             val child = flEndContainer.getChildAt(i)
             child.isVisible = child.id == id

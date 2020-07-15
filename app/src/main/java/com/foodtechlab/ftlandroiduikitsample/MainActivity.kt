@@ -45,9 +45,14 @@ class MainActivity : AppCompatActivity() {
         ftlImageButton.setOnClickListener {
             if (i++ % 2 == 0) {
                 toolbar.showProgress()
+                toolbar.showLogo()
             } else {
                 toolbar.hideProgress()
+                toolbar.showConnectionIndicator()
             }
+            ftlTimerButton.updateDotProgressVisibility(i % 2 != 0)
+            ftlButton1.setProgressVisibility(i % 2 != 0)
+            ftlButton2.setProgressVisibility(i % 2 != 0)
         }
 
         ftlBottomNavigationView.addMenuItems(

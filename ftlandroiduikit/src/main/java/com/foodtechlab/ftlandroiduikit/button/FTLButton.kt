@@ -13,6 +13,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.isVisible
+import androidx.transition.Fade
+import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.common.DotsProgress
 
@@ -45,6 +47,8 @@ class FTLButton @JvmOverloads constructor(
         }
 
     private var buttonType = ButtonType.PRIMARY
+
+    private val fadeTransition = Fade().apply { duration = 200 }
 
     private var clickListener: OnClickListener? = null
 
@@ -145,6 +149,7 @@ class FTLButton @JvmOverloads constructor(
     }
 
     fun setProgressVisibility(isVisible: Boolean) {
+        TransitionManager.beginDelayedTransition(this, fadeTransition)
         inProgress = isVisible
         tvText.isVisible = !isVisible
 

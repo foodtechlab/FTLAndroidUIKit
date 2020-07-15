@@ -20,6 +20,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
+import androidx.transition.Fade
+import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.common.DotsProgress
 import com.foodtechlab.ftlandroiduikit.common.ProgressView
@@ -93,11 +95,12 @@ class FTLTimerButton @JvmOverloads constructor(
             updateRemainedDuration(getMillis(value, timeZoneId) - System.currentTimeMillis())
         }
 
+    private val fadeTransition = Fade().apply { duration = 200 }
+
     private var timer: Timer? = null
 
     private var clickListener: OnClickListener? = null
 
-    private val rlContainer: RelativeLayout
     private val llContainer: LinearLayout
     private val progressView: ProgressView
     private val tvTime: TextView
@@ -109,7 +112,6 @@ class FTLTimerButton @JvmOverloads constructor(
 
         progressView = findViewById(R.id.progress_view)
         llContainer = findViewById(R.id.ll_container)
-        rlContainer = findViewById(R.id.rl_container)
         tvTime = findViewById(R.id.tv_time)
         tvLabel = findViewById(R.id.tv_label)
         dotProgress = findViewById(R.id.dot_progress)
@@ -229,6 +231,8 @@ class FTLTimerButton @JvmOverloads constructor(
         @ColorInt bounceDotColor: Int = -1,
         texColorStateList: ColorStateList? = null
     ) {
+        TransitionManager.beginDelayedTransition(this, fadeTransition)
+
         with(dotProgress) {
             isVisible = inProgress
 
@@ -264,7 +268,7 @@ class FTLTimerButton @JvmOverloads constructor(
         tvLabel.setText(state.text)
 
 
-        rlContainer.background = configureSelector(
+        background = configureSelector(
             ContextCompat.getColor(context, state.progressColor),
             floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
         )
@@ -288,6 +292,8 @@ class FTLTimerButton @JvmOverloads constructor(
         }
 
     fun updateDotProgressVisibility(isVisible: Boolean) {
+        TransitionManager.beginDelayedTransition(this, fadeTransition)
+
         inProgress = isVisible
         llContainer.isVisible = !isVisible
 
