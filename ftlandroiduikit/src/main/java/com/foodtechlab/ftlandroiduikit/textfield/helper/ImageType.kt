@@ -16,5 +16,6 @@ enum class ImageType(@DrawableRes val imgRes: Int) {
     FILE(R.drawable.ic_file),
     SHIELD(R.drawable.ic_shield),
     INFO(R.drawable.ic_data),
-    USER_PLACEHOLDER(R.drawable.ic_user_placeholder)
+    USER_PLACEHOLDER(R.drawable.ic_user_placeholder),
+    PLANE(R.drawable.ic_plane)
 }
