@@ -41,10 +41,12 @@
                 app:deliveryTimerView_size="large" />
 
             <com.foodtechlab.ftlandroiduikit.button.FTLButton
+                android:id="@+id/ftlButton1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                app:ftlButton_text="Button 1" />
         </LinearLayout>
 
         <LinearLayout
@@ -64,30 +66,30 @@
                 app:status="usual" />
 
             <com.foodtechlab.ftlandroiduikit.button.FTLButton
+                android:id="@+id/ftlButton2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_weight="1" />
+                android:layout_weight="1"
+                app:ftlButton_text="Button 2" />
         </LinearLayout>
 
         <com.foodtechlab.ftlandroiduikit.button.timer.FTLTimerButton
             android:id="@+id/ftlTimerButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:ftlTimerButton_bounceDotColor="@color/PrimaryDangerPressed"
-            app:ftlTimerButton_textColor="@color/selector_ftl_button_additional" />
+            android:layout_margin="16dp" />
 
         <com.foodtechlab.ftlandroiduikit.textfield.FTLEditTextDefault
             android:id="@+id/ftlEditTextDefault"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:hint="Simple hint"
             app:filters="1234567890+()- "
+            app:hint="Simple hint"
             app:imeOptions="actionDone"
             app:inputType="phone" />
-      
+
         <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
             android:id="@+id/ftlImageButton"
             android:layout_width="wrap_content"
