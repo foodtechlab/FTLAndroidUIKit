@@ -341,6 +341,7 @@
             <enum name="SHIELD" value="10" />
             <enum name="INFO" value="11" />
             <enum name="USER_PLACEHOLDER" value="12" />
+            <enum name="PLANE" value="13" />
         </attr>
     </declare-styleable>
 
