@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="23.5dp">
+
+    <ProgressBar
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/PrimaryInfoEnabled"
+        android:indeterminateTintMode="src_atop" />
+
+    <TextView
+        android:id="@+id/tv_ftl_progress_dialog_message"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="15.5dp"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_regular"
+        android:lineSpacingExtra="8sp"
+        android:singleLine="true"
+        android:textColor="@color/OnSurfacePrimaryAdditionalDark"
+        android:textSize="16sp"
+        tools:text="Пожалуйста, подождите" />
+
+</LinearLayout>
