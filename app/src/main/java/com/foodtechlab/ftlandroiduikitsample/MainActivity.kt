@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
 import com.foodtechlab.ftlandroiduikit.button.timer.State
+import com.foodtechlab.ftlandroiduikit.dialog.FTLProgressDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -36,6 +37,10 @@ class MainActivity : AppCompatActivity() {
 
             var i = 0
             setOnClickListener {
+
+                val dialog = FTLProgressDialog.newInstance("Пожалуйста, подождите")
+                dialog.show(supportFragmentManager, FTLProgressDialog.TAG)
+
                 ftlTimerButton.updateState(State.values()[i++])
                 if (i == 3) i = 0
             }
