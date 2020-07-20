@@ -83,6 +83,8 @@ class FTLToolbar @JvmOverloads constructor(
 
     var logoPlaceholder: Drawable? = null
 
+    var onUpdateEndContent: OnUpdateEndContent? = null
+
     var onToolbarClickListener: OnToolbarClickListener? = null
 
     private val progress: DotsProgress
@@ -208,6 +210,7 @@ class FTLToolbar @JvmOverloads constructor(
             val child = flEndContainer.getChildAt(i)
             child.isVisible = child.id == id
         }
+        onUpdateEndContent?.onUpdate(false)
     }
 
     fun hideAllChildInEndContainer() {
@@ -215,5 +218,6 @@ class FTLToolbar @JvmOverloads constructor(
         for (i in 0 until flEndContainer.childCount) {
             flEndContainer.getChildAt(i).isGone = true
         }
+        onUpdateEndContent?.onUpdate(true)
     }
 }
