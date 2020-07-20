@@ -173,15 +173,15 @@ class FTLToolbar @JvmOverloads constructor(
     }
 
     fun showConnectionIndicator() {
-        showOnlyOneChild(vIndicator.id)
+        showOnlyOneChildInEndContainer(vIndicator.id)
     }
 
     fun showEndButton() {
-        showOnlyOneChild(ibEnd.id)
+        showOnlyOneChildInEndContainer(ibEnd.id)
     }
 
     fun showLogo() {
-        showOnlyOneChild(ivLogo.id)
+        showOnlyOneChildInEndContainer(ivLogo.id)
     }
 
     fun setNetworkConnectivityState(state: NetworkConnectivityState) {
@@ -202,11 +202,18 @@ class FTLToolbar @JvmOverloads constructor(
         vIndicator.background.changeColor(ContextCompat.getColor(context, state.color))
     }
 
-    private fun showOnlyOneChild(id: Int) {
+    private fun showOnlyOneChildInEndContainer(id: Int) {
         TransitionManager.beginDelayedTransition(rlContainer, Fade().apply { duration = 100 })
         for (i in 0 until flEndContainer.childCount) {
             val child = flEndContainer.getChildAt(i)
             child.isVisible = child.id == id
+        }
+    }
+
+    private fun hideAllChildInEndContainer() {
+        TransitionManager.beginDelayedTransition(rlContainer, Fade().apply { duration = 100 })
+        for (i in 0 until flEndContainer.childCount) {
+            flEndContainer.getChildAt(i).isGone = true
         }
     }
 }
