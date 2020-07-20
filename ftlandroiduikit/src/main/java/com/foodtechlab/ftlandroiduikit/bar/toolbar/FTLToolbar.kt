@@ -210,7 +210,7 @@ class FTLToolbar @JvmOverloads constructor(
         }
     }
 
-    private fun hideAllChildInEndContainer() {
+    fun hideAllChildInEndContainer() {
         TransitionManager.beginDelayedTransition(rlContainer, Fade().apply { duration = 100 })
         for (i in 0 until flEndContainer.childCount) {
             flEndContainer.getChildAt(i).isGone = true
