@@ -1,6 +1,8 @@
 package com.foodtechlab.ftlandroiduikitsample
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
 import com.foodtechlab.ftlandroiduikit.bar.toolbar.NetworkConnectivityState
@@ -14,7 +16,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        toolbar.showConnectionIndicator()
+        with(toolbar) {
+            showConnectionIndicator()
+            onIndicatorClickListener = View.OnClickListener {
+                Toast.makeText(context, "dfdfd", Toast.LENGTH_SHORT).show()
+            }
+        }
 
         val zoneId = "Europe/Samara"
 
