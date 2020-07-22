@@ -77,9 +77,7 @@ class FTLToolbar @JvmOverloads constructor(
             ivLogo.setImageDrawable(value)
         }
 
-    private val hideNetworkConnectivityBar = Runnable {
-        tvConnectivity.isGone = true
-    }
+    private val hideNetworkConnectivityBar = Runnable { tvConnectivity.isGone = true }
 
     var logoPlaceholder: Drawable? = null
 
@@ -87,11 +85,14 @@ class FTLToolbar @JvmOverloads constructor(
 
     var onToolbarClickListener: OnToolbarClickListener? = null
 
+    var onIndicatorClickListener: OnClickListener? = null
+
     private val progress: DotsProgress
     private val ibStart: ImageButton
     private val ibEnd: ImageButton
     private val ivLogo: ImageView
     private val vIndicator: View
+    private val flIndicator: View
     private val ftlTitle: FTLTitle
     private val tvConnectivity: TextView
 
@@ -111,22 +112,19 @@ class FTLToolbar @JvmOverloads constructor(
         ibEnd = findViewById(R.id.ib_ftl_toolbar_end)
         ivLogo = findViewById(R.id.iv_ftl_toolbar_logo)
         vIndicator = findViewById(R.id.v_ftl_toolbar_indicator)
+        flIndicator = findViewById(R.id.fl_ftl_toolbar_indicator)
         flEndContainer = findViewById(R.id.fl_ftl_toolbar_end_container)
         vShadow = findViewById(R.id.v_ftl_toolbar_shadow)
         rlContainer = findViewById(R.id.rl_ftl_toolbar_container)
         tvConnectivity = findViewById(R.id.tv_ftl_toolbar_connectivity)
 
-        ibStart.setOnClickListener {
-            onToolbarClickListener?.onToolbarClick(it)
-        }
+        ibStart.setOnClickListener { onToolbarClickListener?.onToolbarClick(it) }
 
-        ibEnd.setOnClickListener {
-            onToolbarClickListener?.onToolbarClick(it)
-        }
+        ibEnd.setOnClickListener { onToolbarClickListener?.onToolbarClick(it) }
 
-        if (background == null) {
-            rlContainer.setBackgroundColor(Color.WHITE)
-        }
+        flIndicator.setOnClickListener { onIndicatorClickListener?.onClick(it) }
+
+        if (background == null) rlContainer.setBackgroundColor(Color.WHITE)
 
         context.withStyledAttributes(attrs, R.styleable.FTLToolbar) {
             if (hasValue(R.styleable.FTLToolbar_ftlToolbar_start_icon)) {
@@ -175,7 +173,7 @@ class FTLToolbar @JvmOverloads constructor(
     }
 
     fun showConnectionIndicator() {
-        showOnlyOneChildInEndContainer(vIndicator.id)
+        showOnlyOneChildInEndContainer(flIndicator.id)
     }
 
     fun showEndButton() {

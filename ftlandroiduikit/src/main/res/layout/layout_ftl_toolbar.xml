@@ -51,13 +51,20 @@
                 android:src="@drawable/ic_restaurant_placeholder"
                 android:visibility="gone" />
 
-            <View
-                android:id="@+id/v_ftl_toolbar_indicator"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_gravity="center"
-                android:background="@drawable/shape_ftl_toolbar_indicator"
-                android:visibility="gone" />
+            <FrameLayout
+                android:id="@+id/fl_ftl_toolbar_indicator"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:visibility="gone">
+
+                <View
+                    android:id="@+id/v_ftl_toolbar_indicator"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/shape_ftl_toolbar_indicator" />
+            </FrameLayout>
         </FrameLayout>
 
         <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
