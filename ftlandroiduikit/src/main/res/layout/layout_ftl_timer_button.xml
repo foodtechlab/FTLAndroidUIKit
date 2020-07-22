@@ -60,8 +60,10 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:visibility="gone"
+        app:animation_speed="150"
         app:bounce_dot_color="@color/PrimaryDangerPressed"
         app:dot_color="@color/PrimaryDangerEnabled"
+        app:gap="0dp"
         tools:visibility="visible" />
 
 </merge>
