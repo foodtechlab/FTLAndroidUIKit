@@ -343,9 +343,9 @@
             <enum name="USER_PLACEHOLDER" value="12" />
             <enum name="PLANE" value="13" />
             <enum name="SETTINGS" value="14" />
-            <enum name="NOTIFICATIONS" value="14" />
-            <enum name="NAVIGATOR" value="15" />
-            <enum name="THEME" value="16" />
+            <enum name="NOTIFICATIONS" value="15" />
+            <enum name="NAVIGATOR" value="16" />
+            <enum name="THEME" value="17" />
         </attr>
     </declare-styleable>
 
