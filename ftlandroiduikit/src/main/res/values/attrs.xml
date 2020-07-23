@@ -342,6 +342,7 @@
             <enum name="INFO" value="11" />
             <enum name="USER_PLACEHOLDER" value="12" />
             <enum name="PLANE" value="13" />
+            <enum name="SETTINGS" value="14" />
         </attr>
     </declare-styleable>
 
