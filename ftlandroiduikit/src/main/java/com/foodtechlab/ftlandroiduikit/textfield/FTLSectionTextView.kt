@@ -23,8 +23,6 @@ class FTLSectionTextView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : LinearLayout(context, attrs, defStyle) {
 
-    private var tvTextSlot: TextView
-    private var ivImageSlot: ImageView
     var textForSlot: String = ""
         set(value) {
             field = value
@@ -37,6 +35,9 @@ class FTLSectionTextView @JvmOverloads constructor(
             field = value
             ivImageSlot.setImageResource(field.imgRes)
         }
+
+    private var tvTextSlot: TextView
+    private var ivImageSlot: ImageView
 
     init {
         inflate(context, R.layout.layout_ftl_section_text_view, this)
