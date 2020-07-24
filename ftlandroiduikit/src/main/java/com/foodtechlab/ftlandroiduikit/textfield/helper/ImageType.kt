@@ -21,5 +21,8 @@ enum class ImageType(@DrawableRes val imgRes: Int) {
     SETTINGS(R.drawable.ic_settings),
     NOTIFICATIONS(R.drawable.ic_notification),
     NAVIGATOR(R.drawable.ic_navigation),
-    THEME(R.drawable.ic_theme)
+    THEME(R.drawable.ic_theme),
+    UNKNOWN_PAYMENT(R.drawable.ic_unknown_dots),
+    ALL_PAID(R.drawable.ic_double_check),
+    NOT_ALL_PAID(R.drawable.ic_warning_info)
 }

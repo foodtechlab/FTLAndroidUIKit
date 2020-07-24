@@ -346,6 +346,9 @@
             <enum name="NOTIFICATIONS" value="15" />
             <enum name="NAVIGATOR" value="16" />
             <enum name="THEME" value="17" />
+            <enum name="UNKNOWN_PAYMENT" value="18" />
+            <enum name="ALL_PAID" value="19" />
+            <enum name="NOT_ALL_PAID" value="20" />
         </attr>
     </declare-styleable>
 
@@ -381,9 +384,11 @@
     </declare-styleable>
 
     <declare-styleable name="FTLTableHeader" parent="FTLTextFieldDefault">
-        <attr name="titleForHeader" format="string" />
+        <attr name="headerTitle" format="string" />
+        <attr name="headerSubtitle" format="string" />
         <attr name="isUnwrapped" format="boolean" />
         <attr name="imageType" />
+        <attr name="showSubtitle" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="FTLTableRow">
