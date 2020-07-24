@@ -9,13 +9,14 @@
         android:id="@+id/ll_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:background="?attr/selectableItemBackground">
+        android:background="?attr/selectableItemBackground"
+        android:orientation="vertical">
 
         <View
+            android:id="@+id/v_top_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/OnBackgroundPrimaryOpacity8"/>
+            android:background="@color/OnBackgroundPrimaryOpacity8" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -35,17 +36,40 @@
                 app:srcCompat="@drawable/ic_fast_food"
                 tools:ignore="ContentDescription" />
 
-            <TextView
-                android:id="@+id/tv_text"
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                android:fontFamily="@font/roboto_regular"
-                android:textColor="@color/OnBackgroundPrimary"
-                android:textSize="16sp"
-                tools:text="New Text" />
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="5dp"
+                    android:fontFamily="@font/roboto_regular"
+                    android:lineSpacingExtra="8sp"
+                    android:textColor="@color/OnBackgroundPrimary"
+                    android:textSize="16sp"
+                    tools:text="New Text" />
+
+                <TextView
+                    android:id="@+id/tv_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="5dp"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/roboto_regular"
+                    android:lineSpacingExtra="4sp"
+                    android:maxLines="1"
+                    android:textColor="@color/OnSurfacePrimaryAdditionalDark"
+                    android:textSize="12sp"
+                    android:visibility="gone"
+                    tools:visibility="visible"
+                    tools:text="New Text" />
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/iv_switch"
@@ -59,6 +83,6 @@
             android:id="@+id/v_bottom_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="@color/OnBackgroundPrimaryOpacity8"/>
+            android:background="@color/OnBackgroundPrimaryOpacity8" />
     </LinearLayout>
 </merge>

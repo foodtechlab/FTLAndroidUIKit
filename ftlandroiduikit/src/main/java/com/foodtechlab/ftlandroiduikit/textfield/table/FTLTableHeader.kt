@@ -18,16 +18,30 @@ class FTLTableHeader @JvmOverloads constructor(
 ) : LinearLayout(context, attrs, defStyle) {
 
     private var tvTitle: TextView
+    private var tvSubtitle: TextView
     private var ivImageSlot: ImageView
     private var ivSwitch: ImageView
-    private var vDivider: View
+    private var vTopDivider: View
+    private var vBottomDivider: View
     private var llContainer: LinearLayout
 
-    var titleForHeader: String = ""
+    var headerTitle: String = ""
         set(value) {
             field = value
             tvTitle.text = field
 
+        }
+
+    var headerSubtitle: String = ""
+        set(value) {
+            field = value
+            tvSubtitle.text = field
+        }
+
+    var showSubtitle = false
+        set(value) {
+            field = value
+            initStateHeader()
         }
 
     var isUnwrapped = false
@@ -46,10 +60,12 @@ class FTLTableHeader @JvmOverloads constructor(
 
     init {
         inflate(context, R.layout.layout_ftl_table_header, this)
-        tvTitle = findViewById(R.id.tv_text)
+        tvTitle = findViewById(R.id.tv_title)
+        tvSubtitle = findViewById(R.id.tv_subtitle)
         ivImageSlot = findViewById(R.id.iv_image_slot)
         ivSwitch = findViewById(R.id.iv_switch)
-        vDivider = findViewById(R.id.v_bottom_divider)
+        vBottomDivider = findViewById(R.id.v_bottom_divider)
+        vTopDivider = findViewById(R.id.v_top_divider)
         llContainer = findViewById(R.id.ll_container)
         llContainer.setOnClickListener {
             changeStateHeader()
@@ -58,30 +74,48 @@ class FTLTableHeader @JvmOverloads constructor(
         context.withStyledAttributes(attrs, R.styleable.FTLTableHeader) {
             imageType = ImageType.values()[getInt(R.styleable.FTLTableHeader_imageType, 7)]
             ivImageSlot.setImageResource(imageType.imgRes)
-            titleForHeader = getString(R.styleable.FTLTableHeader_titleForHeader) ?: ""
+            headerTitle = getString(R.styleable.FTLTableHeader_headerTitle) ?: ""
+            headerSubtitle = getString(R.styleable.FTLTableHeader_headerSubtitle) ?: ""
             isUnwrapped = getBoolean(R.styleable.FTLTableHeader_isUnwrapped, false)
-            tvTitle.text = titleForHeader
+            showSubtitle = getBoolean(R.styleable.FTLTableHeader_showSubtitle, false)
             initStateHeader()
         }
     }
 
-    private fun initStateHeader(){
+    private fun initStateHeader() {
         if (isUnwrapped) {
             ivSwitch.animate().rotation(180f).start()
-            vDivider.visibility = View.INVISIBLE
+            if (showSubtitle) {
+                tvSubtitle.visibility = View.VISIBLE
+                vTopDivider.visibility = View.GONE
+                vBottomDivider.visibility = View.GONE
+            } else {
+                tvSubtitle.visibility = View.GONE
+                vTopDivider.visibility = View.VISIBLE
+                vBottomDivider.visibility = View.INVISIBLE
+            }
         } else {
             ivSwitch.animate().rotation(0f).start()
-            vDivider.visibility = View.VISIBLE
+
+            if (showSubtitle) {
+                tvSubtitle.visibility = View.VISIBLE
+                vTopDivider.visibility = View.GONE
+                vBottomDivider.visibility = View.GONE
+            } else {
+                tvSubtitle.visibility = View.GONE
+                vTopDivider.visibility = View.VISIBLE
+                vBottomDivider.visibility = View.VISIBLE
+            }
         }
     }
 
     private fun changeStateHeader() {
         if (isUnwrapped) {
             ivSwitch.animate().rotation(0f).start()
-            vDivider.visibility = View.VISIBLE
+            if (!showSubtitle) vBottomDivider.visibility = View.VISIBLE
         } else {
             ivSwitch.animate().rotation(180f).start()
-            vDivider.visibility = View.INVISIBLE
+            if (!showSubtitle) vBottomDivider.visibility = View.INVISIBLE
         }
         isUnwrapped = !isUnwrapped
     }
