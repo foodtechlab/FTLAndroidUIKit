@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
+import com.foodtechlab.ftlandroiduikit.util.dpToPx
 
 
 class FTLTableHeader @JvmOverloads constructor(
@@ -23,7 +24,8 @@ class FTLTableHeader @JvmOverloads constructor(
     private var ivSwitch: ImageView
     private var vTopDivider: View
     private var vBottomDivider: View
-    private var llContainer: LinearLayout
+    private var llMainContainer: LinearLayout
+    private var llContentContainer: LinearLayout
 
     var headerTitle: String = ""
         set(value) {
@@ -66,8 +68,9 @@ class FTLTableHeader @JvmOverloads constructor(
         ivSwitch = findViewById(R.id.iv_switch)
         vBottomDivider = findViewById(R.id.v_bottom_divider)
         vTopDivider = findViewById(R.id.v_top_divider)
-        llContainer = findViewById(R.id.ll_container)
-        llContainer.setOnClickListener {
+        llMainContainer = findViewById(R.id.ll_container)
+        llContentContainer = findViewById(R.id.ll_content_container)
+        llMainContainer.setOnClickListener {
             changeStateHeader()
             tableHeaderClickListener?.onSwitchClick(isUnwrapped)
         }
@@ -107,6 +110,15 @@ class FTLTableHeader @JvmOverloads constructor(
                 vBottomDivider.visibility = View.VISIBLE
             }
         }
+    }
+
+    fun updatePaddingForContent(start: Float, top: Float, end: Float, bottom: Float) {
+        llContentContainer.setPadding(
+            context.dpToPx(start).toInt(),
+            context.dpToPx(top).toInt(),
+            context.dpToPx(end).toInt(),
+            context.dpToPx(bottom).toInt()
+        )
     }
 
     private fun changeStateHeader() {
