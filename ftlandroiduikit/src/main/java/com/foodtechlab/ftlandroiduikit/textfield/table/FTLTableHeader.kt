@@ -2,6 +2,7 @@ package com.foodtechlab.ftlandroiduikit.textfield.table
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.TypedValue
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -119,6 +120,19 @@ class FTLTableHeader @JvmOverloads constructor(
             context.dpToPx(end).toInt(),
             context.dpToPx(bottom).toInt()
         )
+    }
+
+    fun setRippleBackground(forButton: Boolean) {
+        val typedValue = TypedValue()
+        if (forButton) {
+            context.theme
+                .resolveAttribute(android.R.attr.selectableItemBackgroundBorderless, typedValue, true)
+            ivSwitch.setBackgroundResource(typedValue.resourceId)
+        } else {
+            context.theme
+                .resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true)
+            llContentContainer.setBackgroundResource(typedValue.resourceId)
+        }
     }
 
     private fun changeStateHeader() {
