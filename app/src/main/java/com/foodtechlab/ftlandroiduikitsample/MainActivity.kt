@@ -4,10 +4,8 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
-import com.foodtechlab.ftlandroiduikit.bar.toolbar.NetworkConnectivityState
-import com.foodtechlab.ftlandroiduikit.button.timer.State
-import com.foodtechlab.ftlandroiduikit.dialog.FTLProgressDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -37,36 +35,11 @@ class MainActivity : AppCompatActivity() {
             deliveryTime = "28:30"
         }
 
-        with(ftlTimerButton) {
-            timeZoneId = zoneId
-            estimateDuration = 60 * 60 * 1000
-            estimateSuccessAt = "2231-12-17T23:59:00.001"
-            autoAnimateProgress = false
-
-            var i = 0
-            setOnClickListener {
-                val dialog = FTLProgressDialog.newInstance("Пожалуйста, подождите")
-                dialog.show(supportFragmentManager, FTLProgressDialog.TAG)
-
-                ftlTimerButton.updateState(State.values()[i++])
-                if (i == 3) i = 0
-            }
-        }
-
-        var i = 0
-        ftlImageButton.setOnClickListener {
-            if (i++ % 2 == 0) {
-                toolbar.showProgress()
-                toolbar.showLogo()
-                toolbar.setNetworkConnectivityState(NetworkConnectivityState.DISCONNECTED)
-            } else {
-                toolbar.hideProgress()
-                toolbar.showConnectionIndicator()
-                toolbar.setNetworkConnectivityState(NetworkConnectivityState.CONNECTED)
-            }
-            ftlTimerButton.updateDotProgressVisibility(i % 2 != 0)
-            ftlButton1.setProgressVisibility(i % 2 != 0)
-            ftlButton2.setProgressVisibility(i % 2 != 0)
+        rgContent.check(R.id.rb2)
+        rb2.colorStyle = ContextCompat.getColor(this, R.color.AdditionalOrange)
+        with(mtvPayment) {
+            colorBottomEndSlot = ContextCompat.getColor(this@MainActivity, R.color.AdditionalDarkBlue)
+            colorBottomStartSlot = ContextCompat.getColor(this@MainActivity, R.color.AdditionalPink)
         }
 
         ftlBottomNavigationView.addMenuItems(

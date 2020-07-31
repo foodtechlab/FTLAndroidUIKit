@@ -315,6 +315,8 @@
         <attr name="textBottomStartSlot" format="string" />
         <attr name="textTopEndSlot" format="string" />
         <attr name="textBottomEndSlot" format="string" />
+        <attr name="colorBottomEndSlot" format="color" />
+        <attr name="colorBottomStartSlot" format="color" />
     </declare-styleable>
 
     <declare-styleable name="FTLExtendableTextView" parent="FTLTextFieldDefault">
@@ -485,5 +487,9 @@
         <attr name="textOrdersCount" format="string" />
         <attr name="brandLogo" format="reference" />
         <attr name="isMultiBrandMarker" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="FTLRadioButton">
+        <attr name="accentColor" format="color" />
     </declare-styleable>
 </resources>
