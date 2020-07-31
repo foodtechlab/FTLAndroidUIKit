@@ -25,6 +25,45 @@
             app:ftlToolbar_subtitle="Subtitle"
             app:ftlToolbar_title="Title" />
 
+        <RadioGroup
+            android:id="@+id/rgContent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
+                android:id="@+id/rb1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Первый"
+                app:accentColor="@color/PrimaryInfoEnabled" />
+
+            <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
+                android:id="@+id/rb2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Второй" />
+
+            <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
+                android:id="@+id/rb3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Третий" />
+
+        </RadioGroup>
+
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLMultipleTextView
+            android:id="@+id/mtvPayment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            app:imageType="CARD_ONLINE"
+            app:textBottomEndSlot="Сдача: 300 ₽"
+            app:textBottomStartSlot="Примите оплату"
+            app:textTopEndSlot="1 000 ₽"
+            app:textTopStartSlot="Картой курьеру" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,28 +113,6 @@
                 app:ftlButton_text="Button 2" />
         </LinearLayout>
 
-        <com.foodtechlab.ftlandroiduikit.button.timer.FTLTimerButton
-            android:id="@+id/ftlTimerButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp" />
-
-        <com.foodtechlab.ftlandroiduikit.textfield.FTLEditTextDefault
-            android:id="@+id/ftlEditTextDefault"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:filters="1234567890+()- "
-            app:hint="Simple hint"
-            app:imeOptions="actionDone"
-            app:inputType="phone" />
-
-        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
-            android:id="@+id/ftlImageButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:type="info_small" />
     </LinearLayout>
 
     <com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView

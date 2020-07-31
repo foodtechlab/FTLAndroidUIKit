@@ -6,6 +6,8 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.ColorInt
+import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
@@ -52,6 +54,20 @@ class FTLMultipleTextView @JvmOverloads constructor(
             tvBottomEndSlot.text = field
         }
 
+    @ColorInt
+    var colorBottomEndSlot: Int = ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
+        set(value) {
+            field = value
+            tvBottomEndSlot.setTextColor(field)
+        }
+
+    @ColorInt
+    var colorBottomStartSlot: Int = ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
+        set(value) {
+            field = value
+            tvBottomStartSlot.setTextColor(field)
+        }
+
     var customSourceImage: Drawable?
         get() = ivImageSlot.drawable
         set(value) {
@@ -74,6 +90,14 @@ class FTLMultipleTextView @JvmOverloads constructor(
             textTopEndSlot = getString(R.styleable.FTLMultipleTextView_textTopEndSlot) ?: ""
             textBottomEndSlot = getString(R.styleable.FTLMultipleTextView_textBottomEndSlot) ?: ""
             ivImageSlot.setImageResource(imageType.imgRes)
+            colorBottomStartSlot = getColor(
+                R.styleable.FTLMultipleTextView_colorBottomStartSlot,
+                ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
+            )
+            colorBottomEndSlot = getColor(
+                R.styleable.FTLMultipleTextView_colorBottomEndSlot,
+                ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
+            )
         }
     }
 }
