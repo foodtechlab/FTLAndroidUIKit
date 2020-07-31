@@ -64,6 +64,32 @@
             app:textTopEndSlot="1 000 ₽"
             app:textTopStartSlot="Картой курьеру" />
 
+        <com.foodtechlab.ftlandroiduikit.switch.FTLSwitch
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Switcher1" />
+
+        <com.foodtechlab.ftlandroiduikit.switch.FTLSwitch
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:checked="true"
+            android:text="Switcher2"
+            app:highlightOffColor="@color/AdditionalViolet"
+            app:highlightOnColor="@color/AdditionalDarkBlue"
+            app:thumbOffColor="@color/AdditionalPink"
+            app:thumbOnColor="@color/AdditionalOrange"
+            app:trackOffColor="@color/AdditionalCyan"
+            app:trackOnColor="@color/AdditionalYellow" />
+
+        <com.foodtechlab.ftlandroiduikit.switch.FTLSwitch
+            android:id="@+id/ftls"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Switcher3" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

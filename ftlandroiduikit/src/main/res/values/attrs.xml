@@ -492,4 +492,13 @@
     <declare-styleable name="FTLRadioButton">
         <attr name="accentColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="FTLSwitch">
+        <attr name="thumbOnColor" format="color" />
+        <attr name="thumbOffColor" format="color" />
+        <attr name="trackOnColor" format="color" />
+        <attr name="trackOffColor" format="color" />
+        <attr name="highlightOnColor" format="color" />
+        <attr name="highlightOffColor" format="color" />
+    </declare-styleable>
 </resources>
