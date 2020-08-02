@@ -352,6 +352,7 @@
             <enum name="ALL_PAID" value="19" />
             <enum name="NOT_ALL_PAID" value="20" />
             <enum name="MORE_DETAILS" value="21" />
+            <enum name="DOCS" value="22" />
         </attr>
     </declare-styleable>
 
@@ -500,5 +501,11 @@
         <attr name="trackOffColor" format="color" />
         <attr name="highlightOnColor" format="color" />
         <attr name="highlightOffColor" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="FTLCircleProgressIndicator">
+        <attr name="hideBackground" format="boolean" />
+        <attr name="progressBackgroundColor" format="color" />
+        <attr name="progressColor" format="color" />
     </declare-styleable>
 </resources>
