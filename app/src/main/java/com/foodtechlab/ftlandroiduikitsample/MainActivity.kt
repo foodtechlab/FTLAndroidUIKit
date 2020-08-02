@@ -35,28 +35,8 @@ class MainActivity : AppCompatActivity() {
             deliveryTime = "28:30"
         }
 
-        rgContent.check(R.id.rb2)
-        rb2.colorStyle = ContextCompat.getColor(this, R.color.AdditionalOrange)
-        with(mtvPayment) {
-            colorBottomEndSlot =
-                ContextCompat.getColor(this@MainActivity, R.color.AdditionalDarkBlue)
-            colorBottomStartSlot = ContextCompat.getColor(this@MainActivity, R.color.AdditionalPink)
-        }
-
-        with(ftls) {
-            setThumbColors(
-                ContextCompat.getColor(this@MainActivity, R.color.AdditionalDarkBlue),
-                ContextCompat.getColor(this@MainActivity, R.color.AdditionalOrange)
-            )
-            setTrackColors(
-                ContextCompat.getColor(this@MainActivity, R.color.AdditionalCyan),
-                ContextCompat.getColor(this@MainActivity, R.color.AdditionalYellow)
-            )
-            setHighlightColors(
-                ContextCompat.getColor(this@MainActivity, R.color.AdditionalGreen),
-                ContextCompat.getColor(this@MainActivity, R.color.AdditionalLightGreen)
-            )
-        }
+        pbIndicator.progressBackgroundColor = ContextCompat.getColor(this, R.color.BackgroundSecondary)
+        pbIndicator.progressColor = ContextCompat.getColor(this, R.color.AdditionalViolet)
 
         ftlBottomNavigationView.addMenuItems(
             listOf(

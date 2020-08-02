@@ -25,5 +25,6 @@ enum class ImageType(@DrawableRes val imgRes: Int) {
     UNKNOWN_PAYMENT(R.drawable.ic_unknown_dots),
     ALL_PAID(R.drawable.ic_double_check),
     NOT_ALL_PAID(R.drawable.ic_warning_info),
-    MORE_DETAILS(R.drawable.ic_more_details)
+    MORE_DETAILS(R.drawable.ic_more_details),
+    DOCS(R.drawable.ic_docs)
 }
