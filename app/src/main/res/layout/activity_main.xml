@@ -25,70 +25,21 @@
             app:ftlToolbar_subtitle="Subtitle"
             app:ftlToolbar_title="Title" />
 
-        <RadioGroup
-            android:id="@+id/rgContent"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
-                android:id="@+id/rb1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Первый"
-                app:accentColor="@color/PrimaryInfoEnabled" />
-
-            <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
-                android:id="@+id/rb2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Второй" />
-
-            <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
-                android:id="@+id/rb3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Третий" />
-
-        </RadioGroup>
-
-        <com.foodtechlab.ftlandroiduikit.textfield.FTLMultipleTextView
-            android:id="@+id/mtvPayment"
-            android:layout_width="match_parent"
+        <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            app:imageType="CARD_ONLINE"
-            app:textBottomEndSlot="Сдача: 300 ₽"
-            app:textBottomStartSlot="Примите оплату"
-            app:textTopEndSlot="1 000 ₽"
-            app:textTopStartSlot="Картой курьеру" />
+            app:hideBackground="true" />
 
-        <com.foodtechlab.ftlandroiduikit.switch.FTLSwitch
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="Switcher1" />
+        <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
+            android:id="@+id/pbIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-        <com.foodtechlab.ftlandroiduikit.switch.FTLSwitch
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:checked="true"
-            android:text="Switcher2"
-            app:highlightOffColor="@color/AdditionalViolet"
-            app:highlightOnColor="@color/AdditionalDarkBlue"
-            app:thumbOffColor="@color/AdditionalPink"
-            app:thumbOnColor="@color/AdditionalOrange"
-            app:trackOffColor="@color/AdditionalCyan"
-            app:trackOnColor="@color/AdditionalYellow" />
-
-        <com.foodtechlab.ftlandroiduikit.switch.FTLSwitch
-            android:id="@+id/ftls"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="Switcher3" />
+        <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:progressBackgroundColor="@color/AdditionalDarkBlue"
+            app:progressColor="@color/AdditionalPink" />
 
         <LinearLayout
             android:layout_width="match_parent"
