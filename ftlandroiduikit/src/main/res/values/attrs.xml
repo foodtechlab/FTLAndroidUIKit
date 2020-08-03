@@ -353,6 +353,7 @@
             <enum name="NOT_ALL_PAID" value="20" />
             <enum name="MORE_DETAILS" value="21" />
             <enum name="DOCS" value="22" />
+            <enum name="NONE" value="23" />
         </attr>
     </declare-styleable>
 

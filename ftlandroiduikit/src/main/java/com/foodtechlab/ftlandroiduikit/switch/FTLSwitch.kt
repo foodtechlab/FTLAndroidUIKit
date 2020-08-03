@@ -94,7 +94,10 @@ class FTLSwitch : SwitchCompat {
         setTextColor(ContextCompat.getColor(context, R.color.OnSurfaceSecondary))
         textSize = 16f
         setLineSpacing(context.dpToPx(5f), 1.0f)
-        typeface = ResourcesCompat.getFont(context, R.font.roboto_regular)
+
+        if (!isInEditMode) {
+            typeface = ResourcesCompat.getFont(context, R.font.roboto_regular)
+        }
 
         setThumbColors(thumbOnColor, thumbOffColor)
         setTrackColors(trackOnColor, trackOffColor)
