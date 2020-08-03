@@ -25,6 +25,16 @@
             app:ftlToolbar_subtitle="Subtitle"
             app:ftlToolbar_title="Title" />
 
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLSectionTextView
+            android:id="@+id/ftlSectionTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:padding="12dp"
+            app:textForSlot="simple text" />
+
         <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

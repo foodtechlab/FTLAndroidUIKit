@@ -21,6 +21,8 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
+        ftlSectionTextView.setOnClickListener { }
+
         val zoneId = "Europe/Samara"
 
         with(ftlTimerView) {
@@ -35,7 +37,8 @@ class MainActivity : AppCompatActivity() {
             deliveryTime = "28:30"
         }
 
-        pbIndicator.progressBackgroundColor = ContextCompat.getColor(this, R.color.BackgroundSecondary)
+        pbIndicator.progressBackgroundColor =
+            ContextCompat.getColor(this, R.color.BackgroundSecondary)
         pbIndicator.progressColor = ContextCompat.getColor(this, R.color.AdditionalViolet)
 
         ftlBottomNavigationView.addMenuItems(
