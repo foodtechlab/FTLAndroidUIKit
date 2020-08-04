@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -36,10 +35,6 @@ class MainActivity : AppCompatActivity() {
             estimateDuration = 20 * 60 * 1000
             deliveryTime = "28:30"
         }
-
-        pbIndicator.progressBackgroundColor =
-            ContextCompat.getColor(this, R.color.BackgroundSecondary)
-        pbIndicator.progressColor = ContextCompat.getColor(this, R.color.AdditionalViolet)
 
         ftlBottomNavigationView.addMenuItems(
             listOf(

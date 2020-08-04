@@ -35,21 +35,18 @@
             android:padding="12dp"
             app:textForSlot="simple text" />
 
-        <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
-            android:layout_width="wrap_content"
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLRouteTextView
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:hideBackground="true" />
+            android:layout_margin="16dp"
+            app:textAddressFrom="Волгоград, ул. им Рокоссовского д.6"
+            app:textAddressTo="Волгоград, ул. им Рокоссовского д.62" />
 
-        <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
-            android:id="@+id/pbIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            app:progressBackgroundColor="@color/AdditionalDarkBlue"
-            app:progressColor="@color/AdditionalPink" />
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLDefaultTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:textForSlot="Hello world" />
 
         <LinearLayout
             android:layout_width="match_parent"

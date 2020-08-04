@@ -307,9 +307,11 @@
     <declare-styleable name="FTLRouteTextView">
         <attr name="textAddressFrom" format="string" />
         <attr name="textAddressTo" format="string" />
+        <attr name="isBoldStyleAddressFrom" format="boolean" />
+        <attr name="isBoldStyleAddressTo" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="FTLMultipleTextView" parent="FTLTextFieldDefault">
+    <declare-styleable name="FTLMultipleTextView" parent="FTLDefaultTextView">
         <attr name="imageType" />
         <attr name="textTopStartSlot" format="string" />
         <attr name="textBottomStartSlot" format="string" />
@@ -319,7 +321,7 @@
         <attr name="colorBottomStartSlot" format="color" />
     </declare-styleable>
 
-    <declare-styleable name="FTLExtendableTextView" parent="FTLTextFieldDefault">
+    <declare-styleable name="FTLExtendableTextView" parent="FTLDefaultTextView">
         <attr name="isExpand" format="boolean" />
         <attr name="collapseLines" format="integer" />
         <attr name="fullText" format="string" />
@@ -329,6 +331,7 @@
 
     <declare-styleable name="FTLDefaultTextView">
         <attr name="textForSlot" format="string" />
+        <attr name="isBoldStyle" format="boolean" />
         <attr name="imageType" format="enum">
             <enum name="CASH" value="0" />
             <enum name="CARD_COURIER" value="1" />
@@ -357,7 +360,7 @@
         </attr>
     </declare-styleable>
 
-    <declare-styleable name="FTLSectionTextView" parent="FTLTextFieldDefault">
+    <declare-styleable name="FTLSectionTextView" parent="FTLDefaultTextView">
         <attr name="textForSlot" />
         <attr name="imageType" />
     </declare-styleable>
@@ -388,7 +391,7 @@
         <attr name="border_overlay" format="boolean" />
     </declare-styleable>
 
-    <declare-styleable name="FTLTableHeader" parent="FTLTextFieldDefault">
+    <declare-styleable name="FTLTableHeader" parent="FTLDefaultTextView">
         <attr name="headerTitle" format="string" />
         <attr name="headerSubtitle" format="string" />
         <attr name="isUnwrapped" format="boolean" />
