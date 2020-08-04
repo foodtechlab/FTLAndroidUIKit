@@ -38,6 +38,7 @@
     <color name="AdditionalCyan">#00ACC1</color>
     <color name="AdditionalGreen">#4CB944</color>
     <color name="AdditionalLightGreen">#DBF1DA</color>
+    <color name="AdditionalDarkGreen">#299421</color>
     <color name="AdditionalViolet">#BD15F8</color>
 
     <color name="OnAdditionalLight">#FFFFFF</color>
