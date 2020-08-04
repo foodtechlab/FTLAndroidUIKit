@@ -15,8 +15,7 @@ enum class State(
     @ColorRes val dotColor: Int,
     @ColorRes val bounceDotColor: Int
 ) {
-
-    ORDER_MAKE(
+    NEW(
         R.string.ftl_timer_button_order_make,
         R.color.OnSurfacePrimaryAdditionalDark,
         R.color.OnSurfacePrimaryPressed,
@@ -24,7 +23,7 @@ enum class State(
         R.color.OnBackgroundSecondaryOpacity60,
         R.color.OnBackgroundSecondary
     ),
-    START_DELIVERY(
+    READY_FOR_DELIVERY(
         R.string.ftl_timer_button_start_delivery,
         R.color.OnPrimary,
         R.color.PrimaryDangerPressed,
@@ -32,11 +31,11 @@ enum class State(
         R.color.OnPrimaryLight,
         R.color.OnPrimary
     ),
-    DELIVERED(
+    IN_DELIVERY(
         R.string.ftl_timer_button_delivered,
-        R.color.PrimaryInfoEnabled,
-        R.color.OnSurfacePrimaryPressed,
-        R.color.OnSurfacePrimaryEnabled,
+        R.color.BackgroundPrimary,
+        R.color.AdditionalGreen,
+        R.color.AdditionalDarkGreen,
         R.color.PrimaryInfoEnabledOpacity60,
         R.color.PrimaryInfoEnabled
     )
