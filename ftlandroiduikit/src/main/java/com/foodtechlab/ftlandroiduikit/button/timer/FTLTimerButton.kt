@@ -79,7 +79,7 @@ class FTLTimerButton @JvmOverloads constructor(
             deliveryTime = String.format(context.getString(format), abs(minutes), abs(seconds))
         }
 
-    private var state = State.ORDER_MAKE
+    private var state = State.NEW
 
     var deliveryTime: String? = if (isInEditMode) "00:00" else null
         set(value) {
@@ -329,7 +329,7 @@ class FTLTimerButton @JvmOverloads constructor(
     }
 
     internal class SavedState : BaseSavedState {
-        var state = State.ORDER_MAKE
+        var state = State.NEW
         var inProgress = false
         var estimateDuration: Long = 0L
         var remainedDuration: Long = 0L
