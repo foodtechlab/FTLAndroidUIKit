@@ -5,6 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
+import com.foodtechlab.ftlandroiduikit.button.timer.State
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -28,6 +29,13 @@ class MainActivity : AppCompatActivity() {
             timeZoneId = zoneId
             estimateDuration = 60 * 60 * 1000
             estimateSuccessAt = "2020-07-14T21:40:00.001"
+        }
+
+        with(ftlTimerButton) {
+            timeZoneId = zoneId
+            estimateDuration = 60 * 60 * 1000
+            estimateSuccessAt = "2020-08-04T14:30:00.001"
+            updateState(State.IN_DELIVERY)
         }
 
         with(ftlTimeView) {

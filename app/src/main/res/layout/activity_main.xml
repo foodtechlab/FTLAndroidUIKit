@@ -97,6 +97,12 @@
                 app:ftlButton_text="Button 2" />
         </LinearLayout>
 
+        <com.foodtechlab.ftlandroiduikit.button.timer.FTLTimerButton
+            android:id="@+id/ftlTimerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp" />
+
     </LinearLayout>
 
     <com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
