@@ -5,113 +5,12 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".main.MainActivity">
 
-    <LinearLayout
-        android:id="@+id/linearLayout"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTimers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center_horizontal"
-        android:orientation="vertical"
-        app:layout_anchor="@+id/linearLayout"
-        app:layout_anchorGravity="center">
-
-        <com.foodtechlab.ftlandroiduikit.bar.toolbar.FTLToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:ftlToolbar_logo_icon="@drawable/ic_info_24"
-            app:ftlToolbar_shadow_visible="true"
-            app:ftlToolbar_subtitle="Subtitle"
-            app:ftlToolbar_title="Title" />
-
-        <com.foodtechlab.ftlandroiduikit.textfield.FTLSectionTextView
-            android:id="@+id/ftlSectionTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:background="?attr/selectableItemBackground"
-            android:padding="12dp"
-            app:textForSlot="simple text" />
-
-        <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:hideBackground="true" />
-
-        <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
-            android:id="@+id/pbIndicator"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
-
-        <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            app:progressBackgroundColor="@color/AdditionalDarkBlue"
-            app:progressColor="@color/AdditionalPink" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <com.foodtechlab.ftlandroiduikit.textfield.timer.FTLDeliveryTimerView
-                android:id="@+id/ftlTimerView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                app:deliveryTimerView_size="large" />
-
-            <com.foodtechlab.ftlandroiduikit.button.FTLButton
-                android:id="@+id/ftlButton1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                app:ftlButton_text="Button 1" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
-
-            <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
-                android:id="@+id/ftlTimeView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_weight="1"
-                app:size="large"
-                app:status="usual" />
-
-            <com.foodtechlab.ftlandroiduikit.button.FTLButton
-                android:id="@+id/ftlButton2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                app:ftlButton_text="Button 2" />
-        </LinearLayout>
-
-        <com.foodtechlab.ftlandroiduikit.button.timer.FTLTimerButton
-            android:id="@+id/ftlTimerButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp" />
-
-    </LinearLayout>
-
-    <com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
-        android:id="@+id/ftlBottomNavigationView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

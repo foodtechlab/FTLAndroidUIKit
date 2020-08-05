@@ -28,6 +28,8 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.4'
+
     implementation project(':ftlandroiduikit')
 
     testImplementation 'junit:junit:4.13'
