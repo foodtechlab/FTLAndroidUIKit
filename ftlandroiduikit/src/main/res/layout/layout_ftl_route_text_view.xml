@@ -19,7 +19,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <com.foodtechlab.ftlandroiduikit.common.DotsLine
-            android:layout_width="wrap_content"
+            android:layout_width="4dp"
             android:layout_height="0dp"
             android:layout_marginTop="4dp"
             android:layout_marginBottom="4dp"
@@ -59,7 +59,7 @@
             android:id="@+id/iv_address_to"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
+            android:layout_marginTop="12dp"
             android:paddingBottom="8dp"
             app:layout_constraintEnd_toEndOf="@id/v_road"
             app:layout_constraintStart_toStartOf="@id/v_road"
@@ -72,8 +72,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="24dp"
-            android:fontFamily="@font/roboto_regular"
+            android:layout_marginTop="8dp"
+            android:fontFamily="@font/roboto_bold"
             android:lineSpacingExtra="8sp"
             android:textColor="@color/OnBackgroundPrimary"
             android:textSize="16sp"

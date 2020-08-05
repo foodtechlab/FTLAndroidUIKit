@@ -7,6 +7,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.*
 import com.foodtechlab.ftlandroiduikit.R
@@ -26,13 +27,21 @@ class FTLDefaultTextView @JvmOverloads constructor(
         set(value) {
             field = value
             tvTextSlot.text = field
-
         }
 
     var imageType: ImageType = ImageType.CUSTOMER
         set(value) {
             field = value
             ivImageSlot.setImageResource(field.imgRes)
+        }
+
+    var isBoldStyle: Boolean = false
+        set(value) {
+            field = value
+            tvTextSlot.typeface = if (field) ResourcesCompat.getFont(
+                context,
+                R.font.roboto_bold
+            ) else ResourcesCompat.getFont(context, R.font.roboto_regular)
         }
 
     init {
@@ -44,8 +53,7 @@ class FTLDefaultTextView @JvmOverloads constructor(
             imageType = ImageType.values()[getInt(R.styleable.FTLDefaultTextView_imageType, 3)]
             ivImageSlot.setImageResource(imageType.imgRes)
             textForSlot = getString(R.styleable.FTLDefaultTextView_textForSlot) ?: ""
-            tvTextSlot.text = textForSlot
-
+            isBoldStyle = getBoolean(R.styleable.FTLDefaultTextView_isBoldStyle, false)
         }
         setWillNotDraw(false)
     }

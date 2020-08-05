@@ -35,7 +35,7 @@ class FTLSwitch : SwitchCompat {
     private var thumbOnColor = ContextCompat.getColor(context, R.color.PrimaryDangerEnabled)
 
     @ColorInt
-    private var thumbOffColor = ContextCompat.getColor(context, R.color.PrimaryDangerEnabled)
+    private var thumbOffColor = ContextCompat.getColor(context, R.color.OnBackgroundSecondary)
 
     @ColorInt
     private var trackOnColor =
@@ -43,7 +43,7 @@ class FTLSwitch : SwitchCompat {
 
     @ColorInt
     private var trackOffColor =
-        ContextCompat.getColor(context, R.color.PrimaryDangerEnabledOpacity30)
+        ContextCompat.getColor(context, R.color.OnBackgroundSecondaryOpacity30)
 
     @ColorInt
     private var highlightOnColor =
@@ -67,7 +67,7 @@ class FTLSwitch : SwitchCompat {
 
             thumbOffColor = getColor(
                 R.styleable.FTLSwitch_thumbOffColor,
-                ContextCompat.getColor(context, R.color.PrimaryDangerEnabled)
+                ContextCompat.getColor(context, R.color.OnBackgroundSecondary)
             )
 
             trackOnColor = getColor(
@@ -77,7 +77,7 @@ class FTLSwitch : SwitchCompat {
 
             trackOffColor = getColor(
                 R.styleable.FTLSwitch_trackOffColor,
-                ContextCompat.getColor(context, R.color.PrimaryDangerEnabledOpacity30)
+                ContextCompat.getColor(context, R.color.OnBackgroundSecondaryOpacity30)
             )
 
             highlightOnColor = getColor(
