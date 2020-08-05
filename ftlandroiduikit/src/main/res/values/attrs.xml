@@ -495,7 +495,8 @@
     </declare-styleable>
 
     <declare-styleable name="FTLRadioButton">
-        <attr name="accentColor" format="color" />
+        <attr name="colorForStateChecked" format="color" />
+        <attr name="colorForStateUnchecked" format="color" />
     </declare-styleable>
 
     <declare-styleable name="FTLSwitch">
