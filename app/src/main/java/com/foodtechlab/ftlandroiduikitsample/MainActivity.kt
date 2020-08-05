@@ -6,51 +6,26 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
 import com.foodtechlab.ftlandroiduikit.button.timer.State
+import com.foodtechlab.ftlandroiduikitsample.main.TimerItem
+import com.foodtechlab.ftlandroiduikitsample.main.TimersRVAdapter
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
+    private val rvAdapter by lazy { TimersRVAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        with(toolbar) {
-            showConnectionIndicator()
-            onIndicatorClickListener = View.OnClickListener {
-                Toast.makeText(context, "dfdfd", Toast.LENGTH_SHORT).show()
-            }
+        rvTimers.adapter = rvAdapter
+
+        val list = arrayListOf<TimerItem>()
+
+        for (i in 0..40) {
+            list.add(TimerItem(i))
         }
 
-        ftlSectionTextView.setOnClickListener { }
-
-        val zoneId = "Europe/Samara"
-
-        with(ftlTimerView) {
-            timeZoneId = zoneId
-            estimateDuration = 60 * 60 * 1000
-            estimateSuccessAt = "2020-07-14T21:40:00.001"
-        }
-
-        with(ftlTimerButton) {
-            timeZoneId = zoneId
-            estimateDuration = 60 * 60 * 1000
-            estimateSuccessAt = "2020-08-04T14:30:00.001"
-            updateState(State.IN_DELIVERY)
-        }
-
-        with(ftlTimeView) {
-            timeZoneId = zoneId
-            estimateDuration = 20 * 60 * 1000
-            deliveryTime = "28:30"
-        }
-
-        ftlBottomNavigationView.addMenuItems(
-            listOf(
-                FTLBottomNavigationView.MenuItem.HISTORY,
-                FTLBottomNavigationView.MenuItem.MAPS,
-                FTLBottomNavigationView.MenuItem.MORE,
-                FTLBottomNavigationView.MenuItem.ORDERS
-            )
-        )
+        rvAdapter.update(list)
     }
 }
