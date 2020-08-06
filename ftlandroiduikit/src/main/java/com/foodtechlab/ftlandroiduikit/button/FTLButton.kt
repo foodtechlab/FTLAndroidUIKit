@@ -2,6 +2,9 @@ package com.foodtechlab.ftlandroiduikit.button
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.graphics.Bitmap
+import android.graphics.drawable.BitmapDrawable
+import android.graphics.drawable.Drawable
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
@@ -18,6 +21,7 @@ import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.common.DotsProgress
 
+
 /**
  * Created by Umalt on 23.06.2020
  */
@@ -33,6 +37,8 @@ class FTLButton @JvmOverloads constructor(
 
     @ColorRes
     private var textColorRes = -1
+
+    private var backgroundDrawableRes: Drawable? = null
 
     @ColorRes
     private var dotColorRes = -1
@@ -73,7 +79,8 @@ class FTLButton @JvmOverloads constructor(
                 getColor(R.styleable.FTLButton_ftlButton_textColor, -1),
                 getColor(R.styleable.FTLButton_ftlButton_dotColor, -1),
                 getColor(R.styleable.FTLButton_ftlButton_bounceDotColor, -1),
-                getColorStateList(R.styleable.FTLButton_ftlButton_textColor)
+                getColorStateList(R.styleable.FTLButton_ftlButton_textColor),
+                getDrawable(R.styleable.FTLButton_ftlButton_backgroundDrawable)
             )
         }
 
@@ -91,6 +98,7 @@ class FTLButton @JvmOverloads constructor(
             textColorRes = this@FTLButton.textColorRes
             dotColorRes = this@FTLButton.dotColorRes
             bounceDotColorRes = this@FTLButton.bounceDotColorRes
+            backgroundBitmapRes = (backgroundDrawableRes as BitmapDrawable).bitmap
         }
 
     override fun onRestoreInstanceState(state: Parcelable?) {
@@ -100,6 +108,7 @@ class FTLButton @JvmOverloads constructor(
             updateTextColor(state.textColorRes)
             updateDotColor(state.dotColorRes)
             updateBounceDotColor(state.bounceDotColorRes)
+            updateBackgroundDrawable(BitmapDrawable(context.resources, state.backgroundBitmapRes))
         } else {
             super.onRestoreInstanceState(state)
         }
@@ -113,9 +122,15 @@ class FTLButton @JvmOverloads constructor(
         @ColorInt textColor: Int = -1,
         @ColorInt dotColor: Int = -1,
         @ColorInt bounceDotColor: Int = -1,
-        texColorStateList: ColorStateList? = null
+        texColorStateList: ColorStateList? = null,
+        backgroundDrawableRes: Drawable? = null
     ) {
-        background = buttonType.background?.let { ContextCompat.getDrawable(context, it) }
+        background = backgroundDrawableRes ?: buttonType.background?.let {
+            ContextCompat.getDrawable(
+                context,
+                it
+            )
+        }
 
         with(dotProgress) {
             this.dotColor = if (dotColor != -1) {
@@ -196,6 +211,16 @@ class FTLButton @JvmOverloads constructor(
         )
     }
 
+    fun updateBackgroundDrawable(drawable: Drawable?) {
+        backgroundDrawableRes = drawable
+        background = backgroundDrawableRes ?: buttonType.background?.let {
+            ContextCompat.getDrawable(
+                context,
+                it
+            )
+        }
+    }
+
     private fun clearCustomColors() {
         textColorRes = -1
         dotColorRes = -1
@@ -223,6 +248,8 @@ class FTLButton @JvmOverloads constructor(
         @ColorRes
         var bounceDotColorRes = -1
 
+        var backgroundBitmapRes: Bitmap? = null
+
         constructor(superState: Parcelable?) : super(superState)
 
         constructor(parcel: Parcel) : super(parcel) {
@@ -230,6 +257,7 @@ class FTLButton @JvmOverloads constructor(
             textColorRes = parcel.readInt()
             dotColorRes = parcel.readInt()
             bounceDotColorRes = parcel.readInt()
+            backgroundBitmapRes = parcel.readParcelable(javaClass.classLoader)
         }
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -238,6 +266,7 @@ class FTLButton @JvmOverloads constructor(
             parcel.writeInt(textColorRes)
             parcel.writeInt(dotColorRes)
             parcel.writeInt(bounceDotColorRes)
+            parcel.writeParcelable(backgroundBitmapRes, flags)
         }
 
         override fun describeContents(): Int {
