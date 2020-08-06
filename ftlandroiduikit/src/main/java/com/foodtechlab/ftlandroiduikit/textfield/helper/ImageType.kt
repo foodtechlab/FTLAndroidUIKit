@@ -27,5 +27,6 @@ enum class ImageType(@DrawableRes val imgRes: Int) {
     NOT_ALL_PAID(R.drawable.ic_warning_info),
     MORE_DETAILS(R.drawable.ic_more_details),
     DOCS(R.drawable.ic_docs),
-    NONE(-1)
+    NONE(-1),
+    PURSE(R.drawable.ic_purse)
 }

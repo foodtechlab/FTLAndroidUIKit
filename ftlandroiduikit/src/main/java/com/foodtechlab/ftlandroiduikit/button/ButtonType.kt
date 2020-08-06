@@ -27,12 +27,12 @@ enum class ButtonType(
         R.drawable.selector_ftl_primary_button
     ),
     SECONDARY(
-        R.color.selector_ftl_button_secondary,
+        R.color.BackgroundPrimary,
         14f,
         true,
         R.font.roboto_medium,
-        R.color.PrimaryInfoEnabledOpacity60,
-        R.color.PrimaryInfoEnabled,
+        R.color.BackgroundSecondaryOpacity60,
+        R.color.BackgroundSecondary,
         R.drawable.selector_ftl_button_secondary
     ),
     CANCEL(
