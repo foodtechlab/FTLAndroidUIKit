@@ -2,8 +2,6 @@ package com.foodtechlab.ftlandroiduikit.button
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.Drawable
 import android.os.Parcel
 import android.os.Parcelable
@@ -98,7 +96,6 @@ class FTLButton @JvmOverloads constructor(
             textColorRes = this@FTLButton.textColorRes
             dotColorRes = this@FTLButton.dotColorRes
             bounceDotColorRes = this@FTLButton.bounceDotColorRes
-            backgroundBitmapRes = (backgroundDrawableRes as? BitmapDrawable)?.bitmap
         }
 
     override fun onRestoreInstanceState(state: Parcelable?) {
@@ -108,7 +105,6 @@ class FTLButton @JvmOverloads constructor(
             updateTextColor(state.textColorRes)
             updateDotColor(state.dotColorRes)
             updateBounceDotColor(state.bounceDotColorRes)
-            updateBackgroundDrawable(BitmapDrawable(context.resources, state.backgroundBitmapRes))
         } else {
             super.onRestoreInstanceState(state)
         }
@@ -248,8 +244,6 @@ class FTLButton @JvmOverloads constructor(
         @ColorRes
         var bounceDotColorRes = -1
 
-        var backgroundBitmapRes: Bitmap? = null
-
         constructor(superState: Parcelable?) : super(superState)
 
         constructor(parcel: Parcel) : super(parcel) {
@@ -257,7 +251,6 @@ class FTLButton @JvmOverloads constructor(
             textColorRes = parcel.readInt()
             dotColorRes = parcel.readInt()
             bounceDotColorRes = parcel.readInt()
-            backgroundBitmapRes = parcel.readParcelable(javaClass.classLoader)
         }
 
         override fun writeToParcel(parcel: Parcel, flags: Int) {
@@ -266,7 +259,6 @@ class FTLButton @JvmOverloads constructor(
             parcel.writeInt(textColorRes)
             parcel.writeInt(dotColorRes)
             parcel.writeInt(bounceDotColorRes)
-            parcel.writeParcelable(backgroundBitmapRes, flags)
         }
 
         override fun describeContents(): Int {
