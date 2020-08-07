@@ -18,6 +18,7 @@ import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.view.updateLayoutParams
 import androidx.transition.Fade
@@ -310,7 +311,7 @@ class FTLTimerButton @JvmOverloads constructor(
         TransitionManager.beginDelayedTransition(rlRoot, fadeTransition)
 
         inProgress = isVisible
-        llContainer.isVisible = !isVisible
+        llContainer.isInvisible = isVisible
 
         with(dotProgress) {
             if (isVisible) startAnimation()
