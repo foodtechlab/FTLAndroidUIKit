@@ -11,6 +11,7 @@ const val ITEM_TIMER = R.layout.rv_timers_item
 
 data class TimerItem(
     val id: Int,
+    var remainedDuration: Long,
     override val itemViewType: Int = ITEM_TIMER
 ) : ItemBase {
     override fun getItemId() = id

@@ -36,7 +36,7 @@ enum class State(
         R.color.BackgroundPrimary,
         R.color.AdditionalGreen,
         R.color.AdditionalDarkGreen,
-        R.color.PrimaryInfoEnabledOpacity60,
-        R.color.PrimaryInfoEnabled
+        R.color.OnPrimaryLight,
+        R.color.OnPrimary
     )
 }
