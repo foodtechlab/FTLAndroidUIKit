@@ -42,6 +42,8 @@ class FTLTimerButton @JvmOverloads constructor(
 
     private val radius = 8 * resources.displayMetrics.density
 
+    private var isTimerRenewableInside = true
+
     var inProgress = false
         private set
 
@@ -92,7 +94,9 @@ class FTLTimerButton @JvmOverloads constructor(
     var estimateSuccessAt: String? = null
         set(value) {
             field = value
-            updateRemainedDuration(getMillis(value, timeZoneId) - System.currentTimeMillis())
+            if (isTimerRenewableInside) {
+                launchTimerTask(getMillis(value, timeZoneId) - System.currentTimeMillis())
+            }
         }
 
     private val fadeTransition = Fade().apply { duration = 200 }
@@ -101,6 +105,7 @@ class FTLTimerButton @JvmOverloads constructor(
 
     private var clickListener: OnClickListener? = null
 
+    private val rlRoot: RelativeLayout
     private val llContainer: LinearLayout
     private val progressView: ProgressView
     private val tvTime: TextView
@@ -110,6 +115,7 @@ class FTLTimerButton @JvmOverloads constructor(
     init {
         inflate(context, R.layout.layout_ftl_timer_button, this)
 
+        rlRoot = findViewById(R.id.rl_root)
         progressView = findViewById(R.id.progress_view)
         llContainer = findViewById(R.id.ll_container)
         tvTime = findViewById(R.id.tv_time)
@@ -117,6 +123,8 @@ class FTLTimerButton @JvmOverloads constructor(
         dotProgress = findViewById(R.id.dot_progress)
 
         context.withStyledAttributes(attrs, R.styleable.FTLTimerButton) {
+            isTimerRenewableInside = getBoolean(R.styleable.FTLTimerButton_isRenewableInside, true)
+
             updateViewState(
                 getColor(R.styleable.FTLTimerButton_ftlTimerButton_textColor, -1),
                 getColor(R.styleable.FTLTimerButton_ftlTimerButton_dotColor, -1),
@@ -180,7 +188,7 @@ class FTLTimerButton @JvmOverloads constructor(
         clickListener = l
     }
 
-    private fun updateRemainedDuration(value: Long) {
+    private fun launchTimerTask(value: Long) {
         remainedDuration = value
         timer?.cancel()
         timer = timer("Timer", false, 0L, 1000L) {
@@ -190,6 +198,13 @@ class FTLTimerButton @JvmOverloads constructor(
                     progressView.progress = remainedDuration * 100f / estimateDuration
                 }
             }
+        }
+    }
+
+    fun updateRemainedDuration(remDuration: Long) {
+        remainedDuration = remDuration
+        if (estimateDuration != 0L) {
+            progressView.progress = remainedDuration * 100f / estimateDuration
         }
     }
 
@@ -231,7 +246,7 @@ class FTLTimerButton @JvmOverloads constructor(
         @ColorInt bounceDotColor: Int = -1,
         texColorStateList: ColorStateList? = null
     ) {
-        TransitionManager.beginDelayedTransition(this, fadeTransition)
+        TransitionManager.beginDelayedTransition(rlRoot, fadeTransition)
 
         with(dotProgress) {
             isVisible = inProgress
@@ -292,7 +307,7 @@ class FTLTimerButton @JvmOverloads constructor(
         }
 
     fun updateDotProgressVisibility(isVisible: Boolean) {
-        TransitionManager.beginDelayedTransition(this, fadeTransition)
+        TransitionManager.beginDelayedTransition(rlRoot, fadeTransition)
 
         inProgress = isVisible
         llContainer.isVisible = !isVisible
