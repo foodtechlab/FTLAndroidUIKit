@@ -98,7 +98,7 @@ class FTLButton @JvmOverloads constructor(
             textColorRes = this@FTLButton.textColorRes
             dotColorRes = this@FTLButton.dotColorRes
             bounceDotColorRes = this@FTLButton.bounceDotColorRes
-            backgroundBitmapRes = (backgroundDrawableRes as BitmapDrawable).bitmap
+            backgroundBitmapRes = (backgroundDrawableRes as? BitmapDrawable)?.bitmap
         }
 
     override fun onRestoreInstanceState(state: Parcelable?) {
