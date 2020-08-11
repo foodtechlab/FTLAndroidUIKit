@@ -3,6 +3,7 @@ package com.foodtechlab.ftlandroiduikit.textfield.table
 import android.content.Context
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
@@ -93,10 +94,13 @@ class FTLTableHeader @JvmOverloads constructor(
                 tvSubtitle.visibility = View.VISIBLE
                 vTopDivider.visibility = View.GONE
                 vBottomDivider.visibility = View.GONE
+                llContentContainer.gravity = Gravity.NO_GRAVITY
             } else {
                 tvSubtitle.visibility = View.GONE
                 vTopDivider.visibility = View.VISIBLE
                 vBottomDivider.visibility = View.INVISIBLE
+                llContentContainer.gravity = Gravity.CENTER_VERTICAL
+
             }
         } else {
             ivSwitch.animate().rotation(0f).start()
@@ -105,10 +109,12 @@ class FTLTableHeader @JvmOverloads constructor(
                 tvSubtitle.visibility = View.VISIBLE
                 vTopDivider.visibility = View.GONE
                 vBottomDivider.visibility = View.GONE
+                llContentContainer.gravity = Gravity.NO_GRAVITY
             } else {
                 tvSubtitle.visibility = View.GONE
                 vTopDivider.visibility = View.VISIBLE
                 vBottomDivider.visibility = View.VISIBLE
+                llContentContainer.gravity = Gravity.CENTER_VERTICAL
             }
         }
     }
