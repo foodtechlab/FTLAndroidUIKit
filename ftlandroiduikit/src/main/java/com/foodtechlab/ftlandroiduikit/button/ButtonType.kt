@@ -40,8 +40,9 @@ enum class ButtonType(
         14f,
         true,
         R.font.roboto_medium,
-        R.color.PrimaryInfoEnabledOpacity60,
-        R.color.PrimaryInfoEnabled
+        R.color.PrimaryDangerEnabledOpacity60,
+        R.color.PrimaryDangerEnabled,
+        R.drawable.selector_ftl_button_cancel
     ),
     ADDITIONAL(
         R.color.selector_ftl_button_additional,
