@@ -24,6 +24,7 @@
 
     <color name="PrimaryDangerEnabled">#DE2222</color>
     <color name="PrimaryDangerEnabledOpacity30">#4DDE2222</color>
+    <color name="PrimaryDangerEnabledOpacity60">#99DE2222</color>
     <color name="PrimaryDangerPressed">#C00404</color>
 
     <color name="PrimaryInfoEnabled">#039BE5</color>
