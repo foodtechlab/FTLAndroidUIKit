@@ -3,15 +3,14 @@ package com.foodtechlab.ftlandroiduikit.textfield.table
 import android.content.Context
 import android.util.AttributeSet
 import android.util.TypedValue
-import android.view.Gravity
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
-import com.foodtechlab.ftlandroiduikit.util.dpToPx
 
 
 class FTLTableHeader @JvmOverloads constructor(
@@ -26,14 +25,12 @@ class FTLTableHeader @JvmOverloads constructor(
     private var ivSwitch: ImageView
     private var vTopDivider: View
     private var vBottomDivider: View
-    private var llMainContainer: LinearLayout
-    private var llContentContainer: LinearLayout
+    private var rlContainer: RelativeLayout
 
     var headerTitle: String = ""
         set(value) {
             field = value
             tvTitle.text = field
-
         }
 
     var headerSubtitle: String = ""
@@ -64,18 +61,22 @@ class FTLTableHeader @JvmOverloads constructor(
 
     init {
         inflate(context, R.layout.layout_ftl_table_header, this)
-        tvTitle = findViewById(R.id.tv_title)
-        tvSubtitle = findViewById(R.id.tv_subtitle)
-        ivImageSlot = findViewById(R.id.iv_image_slot)
-        ivSwitch = findViewById(R.id.iv_switch)
-        vBottomDivider = findViewById(R.id.v_bottom_divider)
-        vTopDivider = findViewById(R.id.v_top_divider)
-        llMainContainer = findViewById(R.id.ll_container)
-        llContentContainer = findViewById(R.id.ll_content_container)
-        llMainContainer.setOnClickListener {
+
+        orientation = VERTICAL
+
+        tvTitle = findViewById(R.id.tvTitle)
+        tvSubtitle = findViewById(R.id.tvSubtitle)
+        ivImageSlot = findViewById(R.id.ivImageSlot)
+        ivSwitch = findViewById(R.id.ivSwitch)
+        vBottomDivider = findViewById(R.id.vBottomDivider)
+        vTopDivider = findViewById(R.id.vTopDivider)
+        rlContainer = findViewById(R.id.rlContainer)
+
+        super.setOnClickListener {
             changeStateHeader()
             tableHeaderClickListener?.onSwitchClick(isUnwrapped)
         }
+
         context.withStyledAttributes(attrs, R.styleable.FTLTableHeader) {
             imageType = ImageType.values()[getInt(R.styleable.FTLTableHeader_imageType, 7)]
             ivImageSlot.setImageResource(imageType.imgRes)
@@ -88,56 +89,38 @@ class FTLTableHeader @JvmOverloads constructor(
     }
 
     private fun initStateHeader() {
-        if (isUnwrapped) {
-            ivSwitch.animate().rotation(180f).start()
-            if (showSubtitle) {
-                tvSubtitle.visibility = View.VISIBLE
-                vTopDivider.visibility = View.GONE
-                vBottomDivider.visibility = View.GONE
-                llContentContainer.gravity = Gravity.NO_GRAVITY
-            } else {
-                tvSubtitle.visibility = View.GONE
-                vTopDivider.visibility = View.VISIBLE
-                vBottomDivider.visibility = View.INVISIBLE
-                llContentContainer.gravity = Gravity.CENTER_VERTICAL
+        ivSwitch.animate().rotation(if (isUnwrapped) 180f else 0f).start()
 
-            }
+        val titleLayoutParams = tvTitle.layoutParams as RelativeLayout.LayoutParams
+        if (showSubtitle) {
+            tvSubtitle.visibility = View.VISIBLE
+            vTopDivider.visibility = View.GONE
+            vBottomDivider.visibility = View.GONE
+            titleLayoutParams.removeRule(RelativeLayout.CENTER_VERTICAL)
+            tvTitle.layoutParams = titleLayoutParams
         } else {
-            ivSwitch.animate().rotation(0f).start()
-
-            if (showSubtitle) {
-                tvSubtitle.visibility = View.VISIBLE
-                vTopDivider.visibility = View.GONE
-                vBottomDivider.visibility = View.GONE
-                llContentContainer.gravity = Gravity.NO_GRAVITY
-            } else {
-                tvSubtitle.visibility = View.GONE
-                vTopDivider.visibility = View.VISIBLE
-                vBottomDivider.visibility = View.VISIBLE
-                llContentContainer.gravity = Gravity.CENTER_VERTICAL
-            }
+            tvSubtitle.visibility = View.GONE
+            vTopDivider.visibility = View.VISIBLE
+            vBottomDivider.visibility = View.INVISIBLE
+            titleLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL)
+            tvTitle.layoutParams = titleLayoutParams
         }
-    }
-
-    fun updatePaddingForContent(start: Float, top: Float, end: Float, bottom: Float) {
-        llContentContainer.setPadding(
-            context.dpToPx(start).toInt(),
-            context.dpToPx(top).toInt(),
-            context.dpToPx(end).toInt(),
-            context.dpToPx(bottom).toInt()
-        )
     }
 
     fun setRippleBackground(forButton: Boolean) {
         val typedValue = TypedValue()
         if (forButton) {
             context.theme
-                .resolveAttribute(android.R.attr.selectableItemBackgroundBorderless, typedValue, true)
+                .resolveAttribute(
+                    android.R.attr.selectableItemBackgroundBorderless,
+                    typedValue,
+                    true
+                )
             ivSwitch.setBackgroundResource(typedValue.resourceId)
         } else {
             context.theme
                 .resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true)
-            llContentContainer.setBackgroundResource(typedValue.resourceId)
+            rlContainer.setBackgroundResource(typedValue.resourceId)
         }
     }
 
