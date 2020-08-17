@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
+import com.foodtechlab.ftlandroiduikit.util.dpToPx
 
 
 class FTLTableHeader @JvmOverloads constructor(
@@ -122,6 +123,15 @@ class FTLTableHeader @JvmOverloads constructor(
                 .resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true)
             rlContainer.setBackgroundResource(typedValue.resourceId)
         }
+    }
+
+    fun updatePaddingForContent(start: Float, top: Float, end: Float, bottom: Float) {
+        rlContainer.setPadding(
+            context.dpToPx(start).toInt(),
+            context.dpToPx(top).toInt(),
+            context.dpToPx(end).toInt(),
+            context.dpToPx(bottom).toInt()
+        )
     }
 
     private fun changeStateHeader() {
