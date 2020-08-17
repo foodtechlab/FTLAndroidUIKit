@@ -5,82 +5,77 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <View
+        android:id="@+id/v_road"
+        android:layout_width="32dp"
+        android:layout_height="0dp"
+        android:background="@drawable/shape_ftl_text_addresses"
+        app:layout_constraintBottom_toBottomOf="@id/iv_address_to"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <View
-            android:id="@+id/v_road"
-            android:layout_width="32dp"
-            android:layout_height="0dp"
-            android:background="@drawable/shape_ftl_text_addresses"
-            app:layout_constraintBottom_toBottomOf="@id/iv_address_to"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <com.foodtechlab.ftlandroiduikit.common.DotsLine
+        android:layout_width="4dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layerType="software"
+        app:layout_constraintBottom_toTopOf="@id/iv_address_to"
+        app:layout_constraintEnd_toEndOf="@id/v_road"
+        app:layout_constraintStart_toStartOf="@id/v_road"
+        app:layout_constraintTop_toBottomOf="@id/iv_address_from" />
 
-        <com.foodtechlab.ftlandroiduikit.common.DotsLine
-            android:layout_width="4dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="4dp"
-            android:layout_marginBottom="4dp"
-            android:layerType="software"
-            app:layout_constraintBottom_toTopOf="@id/iv_address_to"
-            app:layout_constraintEnd_toEndOf="@id/v_road"
-            app:layout_constraintStart_toStartOf="@id/v_road"
-            app:layout_constraintTop_toBottomOf="@id/iv_address_from" />
+    <ImageView
+        android:id="@+id/iv_address_from"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        app:layout_constraintEnd_toEndOf="@id/v_road"
+        app:layout_constraintStart_toStartOf="@id/v_road"
+        app:layout_constraintTop_toTopOf="@id/v_road"
+        app:srcCompat="@drawable/ic_shop_16"
+        tools:ignore="ContentDescription" />
 
-        <ImageView
-            android:id="@+id/iv_address_from"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="8dp"
-            app:layout_constraintEnd_toEndOf="@id/v_road"
-            app:layout_constraintStart_toStartOf="@id/v_road"
-            app:layout_constraintTop_toTopOf="@id/v_road"
-            app:srcCompat="@drawable/ic_shop_16"
-            tools:ignore="ContentDescription" />
+    <TextView
+        android:id="@+id/tv_address_from"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/roboto_regular"
+        android:lineSpacingExtra="8sp"
+        android:textColor="@color/OnBackgroundPrimary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/v_road"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Адрес Откуда" />
 
-        <TextView
-            android:id="@+id/tv_address_from"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/roboto_regular"
-            android:lineSpacingExtra="8sp"
-            android:textColor="@color/OnBackgroundPrimary"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/v_road"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Адрес Откуда" />
+    <ImageView
+        android:id="@+id/iv_address_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:paddingBottom="8dp"
+        app:layout_constraintEnd_toEndOf="@id/v_road"
+        app:layout_constraintStart_toStartOf="@id/v_road"
+        app:layout_constraintTop_toBottomOf="@id/tv_address_from"
+        app:srcCompat="@drawable/ic_home_16"
+        tools:ignore="ContentDescription" />
 
-        <ImageView
-            android:id="@+id/iv_address_to"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:paddingBottom="8dp"
-            app:layout_constraintEnd_toEndOf="@id/v_road"
-            app:layout_constraintStart_toStartOf="@id/v_road"
-            app:layout_constraintTop_toBottomOf="@id/tv_address_from"
-            app:srcCompat="@drawable/ic_home_16"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/tv_address_to"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:paddingBottom="4dp"
-            android:fontFamily="@font/roboto_bold"
-            android:lineSpacingExtra="8sp"
-            android:textColor="@color/OnBackgroundPrimary"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/v_road"
-            app:layout_constraintTop_toBottomOf="@id/tv_address_from"
-            tools:text="Адрес Куда" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tv_address_to"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/roboto_bold"
+        android:lineSpacingExtra="8sp"
+        android:paddingBottom="4dp"
+        android:textColor="@color/OnBackgroundPrimary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/v_road"
+        app:layout_constraintTop_toBottomOf="@id/tv_address_from"
+        tools:text="Адрес Куда" />
 </merge>
