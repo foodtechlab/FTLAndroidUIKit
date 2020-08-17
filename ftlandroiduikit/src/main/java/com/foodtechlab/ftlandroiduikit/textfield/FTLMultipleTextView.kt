@@ -55,14 +55,16 @@ class FTLMultipleTextView @JvmOverloads constructor(
         }
 
     @ColorInt
-    var colorBottomEndSlot: Int = ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
+    var colorBottomEndSlot: Int =
+        ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
         set(value) {
             field = value
             tvBottomEndSlot.setTextColor(field)
         }
 
     @ColorInt
-    var colorBottomStartSlot: Int = ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
+    var colorBottomStartSlot: Int =
+        ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
         set(value) {
             field = value
             tvBottomStartSlot.setTextColor(field)
@@ -76,6 +78,9 @@ class FTLMultipleTextView @JvmOverloads constructor(
 
     init {
         inflate(context, R.layout.layout_ftl_multiple_text_view, this)
+
+        orientation = HORIZONTAL
+
         tvTopStartSlot = findViewById(R.id.tv_top_start_slot)
         tvBottomStartSlot = findViewById(R.id.tv_bottom_start_slot)
         tvTopEndSlot = findViewById(R.id.tv_top_end_slot)
