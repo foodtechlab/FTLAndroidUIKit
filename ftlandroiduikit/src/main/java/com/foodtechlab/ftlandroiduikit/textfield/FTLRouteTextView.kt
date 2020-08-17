@@ -49,6 +49,7 @@ class FTLRouteTextView @JvmOverloads constructor(
 
     init {
         inflate(context, R.layout.layout_ftl_route_text_view, this)
+
         tvAddressFrom = findViewById(R.id.tv_address_from)
         tvAddressTo = findViewById(R.id.tv_address_to)
 
