@@ -14,5 +14,9 @@ enum class ImageButtonType(@DrawableRes val bgRes: Int, val size: Int) {
 
     INFO_SMALL(R.drawable.selector_additional_button_info_small, 32),
     INFO_MEDIUM(R.drawable.selector_additional_button_info_medium, 40),
-    INFO_LARGE(R.drawable.selector_additional_button_info_large, 48)
+    INFO_LARGE(R.drawable.selector_additional_button_info_large, 48),
+
+    REPLAY_SMALL(R.drawable.selector_additional_button_replay_small, 32),
+    REPLAY_MEDIUM(R.drawable.selector_additional_button_replay_medium, 40),
+    REPLAY_LARGE(R.drawable.selector_additional_button_replay_large, 48)
 }
