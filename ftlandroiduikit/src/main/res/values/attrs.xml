@@ -520,4 +520,13 @@
         <attr name="progressBackgroundColor" format="color" />
         <attr name="progressColor" format="color" />
     </declare-styleable>
+
+    <declare-styleable name="FTLDoubleTextView" parent="FTLDefaultTextView">
+        <attr name="textForStartSlot" format="string" />
+        <attr name="textForEndSlot" format="string" />
+        <attr name="isBoldStyleForStartSlot" format="boolean" />
+        <attr name="isBoldStyleForEndSlot" format="boolean" />
+        <attr name="isVisibleImageSlot" format="boolean" />
+        <attr name="imageType" />
+    </declare-styleable>
 </resources>
