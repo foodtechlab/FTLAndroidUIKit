@@ -24,7 +24,6 @@
             android:id="@+id/ivImageSlot"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
             app:srcCompat="@drawable/ic_fast_food"
             tools:ignore="ContentDescription" />
 

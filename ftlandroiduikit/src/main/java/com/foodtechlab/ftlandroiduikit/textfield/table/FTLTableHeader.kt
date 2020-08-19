@@ -52,6 +52,12 @@ class FTLTableHeader @JvmOverloads constructor(
             initStateHeader()
         }
 
+    var isDividersEnabled = false
+        set(value) {
+            field = value
+            initStateHeader()
+        }
+
     var imageType: ImageType = ImageType.CUSTOMER
         set(value) {
             field = value
@@ -85,26 +91,34 @@ class FTLTableHeader @JvmOverloads constructor(
             headerSubtitle = getString(R.styleable.FTLTableHeader_headerSubtitle) ?: ""
             isUnwrapped = getBoolean(R.styleable.FTLTableHeader_isUnwrapped, false)
             showSubtitle = getBoolean(R.styleable.FTLTableHeader_showSubtitle, false)
+            isDividersEnabled = getBoolean(R.styleable.FTLTableHeader_isDividersEnabled, false)
             initStateHeader()
         }
     }
 
     private fun initStateHeader() {
-        ivSwitch.animate().rotation(if (isUnwrapped) 180f else 0f).start()
-
         val titleLayoutParams = tvTitle.layoutParams as RelativeLayout.LayoutParams
+        val switchLayoutParams = ivSwitch.layoutParams as RelativeLayout.LayoutParams
+        ivSwitch.animate().rotation(if (isUnwrapped) 180f else 0f).start()
         if (showSubtitle) {
             tvSubtitle.visibility = View.VISIBLE
-            vTopDivider.visibility = View.GONE
-            vBottomDivider.visibility = View.GONE
             titleLayoutParams.removeRule(RelativeLayout.CENTER_VERTICAL)
-            tvTitle.layoutParams = titleLayoutParams
+            switchLayoutParams.removeRule(RelativeLayout.CENTER_VERTICAL)
         } else {
             tvSubtitle.visibility = View.GONE
-            vTopDivider.visibility = View.VISIBLE
-            vBottomDivider.visibility = View.INVISIBLE
             titleLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL)
-            tvTitle.layoutParams = titleLayoutParams
+            switchLayoutParams.addRule(RelativeLayout.CENTER_VERTICAL)
+        }
+        if (isDividersEnabled) {
+            vTopDivider.visibility = if (showSubtitle) View.GONE else View.VISIBLE
+            vBottomDivider.visibility = if (showSubtitle) {
+                View.GONE
+            } else {
+                if (isUnwrapped) View.INVISIBLE else View.VISIBLE
+            }
+        } else {
+            vTopDivider.visibility = View.GONE
+            vBottomDivider.visibility = View.GONE
         }
     }
 
@@ -135,13 +149,12 @@ class FTLTableHeader @JvmOverloads constructor(
     }
 
     private fun changeStateHeader() {
-        if (isUnwrapped) {
-            ivSwitch.animate().rotation(0f).start()
-            if (!showSubtitle) vBottomDivider.visibility = View.VISIBLE
-        } else {
-            ivSwitch.animate().rotation(180f).start()
-            if (!showSubtitle) vBottomDivider.visibility = View.INVISIBLE
+        ivSwitch.animate().rotation(if (isUnwrapped) 0f else 180f).start()
+        vBottomDivider.visibility
+        if (!showSubtitle && isDividersEnabled) {
+            vBottomDivider.visibility = if (isUnwrapped) View.VISIBLE else View.INVISIBLE
         }
+
         isUnwrapped = !isUnwrapped
     }
 }
