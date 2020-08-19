@@ -402,6 +402,7 @@
         <attr name="isUnwrapped" format="boolean" />
         <attr name="imageType" />
         <attr name="showSubtitle" format="boolean" />
+        <attr name="isDividersEnabled" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="FTLTableRow">
