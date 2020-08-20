@@ -1,6 +1,8 @@
 package com.foodtechlab.ftlandroiduikitsample.main
 
 import android.os.Bundle
+import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.getMillis
 import com.foodtechlab.ftlandroiduikitsample.R
@@ -29,6 +31,11 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        ftlToolbar.onActionClickListener = View.OnClickListener {
+            Toast.makeText(this, "Action Click", Toast.LENGTH_SHORT).show()
+            ftlToolbar.showLogo()
+        }
 
         rvTimers.adapter = rvAdapter
 
