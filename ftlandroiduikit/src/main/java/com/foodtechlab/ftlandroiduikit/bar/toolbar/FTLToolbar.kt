@@ -38,6 +38,12 @@ class FTLToolbar @JvmOverloads constructor(
             ftlTitle.titleColor = value
         }
 
+    var actionTextColor: Int
+        get() = tvAction.currentTextColor
+        set(value) {
+            tvAction.setTextColor(value)
+        }
+
     var subtitleColor: Int
         get() = ftlTitle.subtitleColor
         set(value) {
@@ -58,6 +64,12 @@ class FTLToolbar @JvmOverloads constructor(
             ftlTitle.subTitle = value
         }
 
+    var actionText: CharSequence?
+        get() = tvAction.text
+        set(value) {
+            tvAction.text = value
+        }
+
     var startDrawable: Drawable?
         get() = ibStart.drawable
         set(value) {
@@ -69,6 +81,13 @@ class FTLToolbar @JvmOverloads constructor(
         get() = ibEnd.drawable
         set(value) {
             ibEnd.setImageDrawable(value)
+        }
+
+
+    var actionDrawable: Drawable?
+        get() = tvAction.compoundDrawables.firstOrNull()
+        private set(value) {
+            tvAction.setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, value, null)
         }
 
     var logoIcon: Drawable?
@@ -87,6 +106,8 @@ class FTLToolbar @JvmOverloads constructor(
 
     var onIndicatorClickListener: OnClickListener? = null
 
+    var onActionClickListener: OnClickListener? = null
+
     private val progress: DotsProgress
     private val ibStart: ImageButton
     private val ibEnd: ImageButton
@@ -95,6 +116,7 @@ class FTLToolbar @JvmOverloads constructor(
     private val flIndicator: View
     private val ftlTitle: FTLTitle
     private val tvConnectivity: TextView
+    private val tvAction: TextView
 
     private val vShadow: View
     private val flEndContainer: FrameLayout
@@ -106,6 +128,7 @@ class FTLToolbar @JvmOverloads constructor(
 
         orientation = VERTICAL
 
+        tvAction = findViewById(R.id.tv_ftl_toolbar_action)
         progress = findViewById(R.id.dot_progress)
         ftlTitle = findViewById(R.id.ftl_title)
         ibStart = findViewById(R.id.ib_ftl_toolbar_start)
@@ -123,6 +146,8 @@ class FTLToolbar @JvmOverloads constructor(
         ibEnd.setOnClickListener { onToolbarClickListener?.onToolbarClick(it) }
 
         flIndicator.setOnClickListener { onIndicatorClickListener?.onClick(it) }
+
+        tvAction.setOnClickListener { onActionClickListener?.onClick(it) }
 
         if (background == null) rlContainer.setBackgroundColor(Color.WHITE)
 
@@ -144,16 +169,26 @@ class FTLToolbar @JvmOverloads constructor(
                     getDrawable(R.styleable.FTLToolbar_ftlToolbar_logo_icon) ?: logoPlaceholder
                 else -> logoPlaceholder
             }
+            actionDrawable = when {
+                hasValue(R.styleable.FTLToolbar_ftlToolbar_action_drawable) ->
+                    getDrawable(R.styleable.FTLToolbar_ftlToolbar_action_drawable)
+                else -> null
+            }
             isShadowVisible = getBoolean(R.styleable.FTLToolbar_ftlToolbar_shadow_visible, false)
             titleColor = getColor(
                 R.styleable.FTLToolbar_ftlToolbar_title_color,
                 ContextCompat.getColor(context, R.color.OnBackgroundPrimary)
+            )
+            actionTextColor = getColor(
+                R.styleable.FTLToolbar_ftlToolbar_action_color,
+                ContextCompat.getColor(context, R.color.PrimaryInfoEnabled)
             )
             subtitleColor = getColor(
                 R.styleable.FTLToolbar_ftlToolbar_subtitle_color,
                 ContextCompat.getColor(context, R.color.AdditionalGreen)
             )
             title = getString(R.styleable.FTLToolbar_ftlToolbar_title)
+            actionText = getString(R.styleable.FTLToolbar_ftlToolbar_action_text)
             subTitle = getString(R.styleable.FTLToolbar_ftlToolbar_subtitle)
         }
     }
@@ -182,6 +217,10 @@ class FTLToolbar @JvmOverloads constructor(
 
     fun showLogo() {
         showOnlyOneChildInEndContainer(ivLogo.id)
+    }
+
+    fun showActionText() {
+        showOnlyOneChildInEndContainer(tvAction.id)
     }
 
     fun setNetworkConnectivityState(state: NetworkConnectivityState) {

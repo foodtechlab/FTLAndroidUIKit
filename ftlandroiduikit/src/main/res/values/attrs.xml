@@ -380,6 +380,9 @@
         <attr name="ftlToolbar_logo_icon" format="reference" />
         <attr name="ftlToolbar_start_icon" format="reference" />
         <attr name="ftlToolbar_logo_placeholder" format="reference" />
+        <attr name="ftlToolbar_action_text" format="string" />
+        <attr name="ftlToolbar_action_color" format="color" />
+        <attr name="ftlToolbar_action_drawable" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="FTLTitle">
