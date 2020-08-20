@@ -530,4 +530,9 @@
         <attr name="isVisibleImageSlot" format="boolean" />
         <attr name="imageType" />
     </declare-styleable>
+
+    <declare-styleable name="FTLFloatingActionButton">
+        <attr name="fabImageResource" format="reference" />
+        <attr name="fabBackgroundTintList" format="reference" />
+    </declare-styleable>
 </resources>
