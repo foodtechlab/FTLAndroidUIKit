@@ -1,11 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".main.MainActivity">
+
+    <com.foodtechlab.ftlandroiduikit.bar.toolbar.FTLToolbar
+        android:id="@+id/ftlToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ftlToolbar_action_color="@color/PrimaryDangerPressed"
+        app:ftlToolbar_action_drawable="@drawable/ic_arrow_down_24"
+        app:ftlToolbar_action_text="Action"
+        app:ftlToolbar_title="Title" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTimers"
@@ -13,4 +23,4 @@
         android:layout_height="match_parent"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>
