@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
         ftlToolbar.onActionClickListener = View.OnClickListener {
             Toast.makeText(this, "Action Click", Toast.LENGTH_SHORT).show()
-            ftlToolbar.showLogo()
+            ftlToolbar.showConnectionIndicator()
         }
 
         rvTimers.adapter = rvAdapter
