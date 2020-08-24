@@ -32,9 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_margin="12dp"
-            android:minWidth="32dp"
-            android:minHeight="32dp">
+            android:layout_margin="12dp">
 
             <TextView
                 android:id="@+id/tv_ftl_toolbar_action"
@@ -46,9 +44,7 @@
                 android:gravity="center_vertical"
                 android:includeFontPadding="false"
                 android:maxLines="1"
-                android:paddingStart="12dp"
                 android:paddingTop="4dp"
-                android:paddingEnd="12dp"
                 android:paddingBottom="4dp"
                 android:textSize="16sp"
                 tools:drawableEnd="@drawable/ic_arrow_down_24"

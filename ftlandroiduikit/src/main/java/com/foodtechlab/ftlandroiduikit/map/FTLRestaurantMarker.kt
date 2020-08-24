@@ -22,7 +22,7 @@ class FTLRestaurantMarker @JvmOverloads constructor(
 
     private val tvCount: TextView
     private val vPlaceholderShadow: View
-    private val ivBrandLogo: FTLPlaceholderImageView
+    val ivBrandLogo: FTLPlaceholderImageView
 
     var textOrdersCount: String = ""
         set(value) {

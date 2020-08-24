@@ -16,6 +16,7 @@ import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.common.DotsProgress
 import com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
 import com.foodtechlab.ftlandroiduikit.util.changeColor
+import com.foodtechlab.ftlandroiduikit.util.dpToPx
 
 /**
  * Created by Umalt on 28.05.2020
@@ -243,6 +244,18 @@ class FTLToolbar @JvmOverloads constructor(
 
     private fun showOnlyOneChildInEndContainer(id: Int) {
         TransitionManager.beginDelayedTransition(rlContainer, Fade().apply { duration = 100 })
+
+        val endContainerSize = if (id == tvAction.id) {
+            RelativeLayout.LayoutParams.WRAP_CONTENT
+        } else {
+            context.dpToPx(32f).toInt()
+        }
+
+        val lParams = flEndContainer.layoutParams as RelativeLayout.LayoutParams
+        lParams.width = endContainerSize
+        lParams.height = endContainerSize
+        flEndContainer.layoutParams = lParams
+
         for (i in 0 until flEndContainer.childCount) {
             val child = flEndContainer.getChildAt(i)
             child.isVisible = child.id == id
