@@ -41,22 +41,10 @@ class FTLTableHeader @JvmOverloads constructor(
         }
 
     var showSubtitle = false
-        set(value) {
-            field = value
-            initStateHeader()
-        }
 
     var isUnwrapped = false
-        set(value) {
-            field = value
-            initStateHeader()
-        }
 
     var isDividersEnabled = false
-        set(value) {
-            field = value
-            initStateHeader()
-        }
 
     var imageType: ImageType = ImageType.CUSTOMER
         set(value) {
