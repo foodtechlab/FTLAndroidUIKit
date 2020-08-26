@@ -89,8 +89,18 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
-            android:layout_toStartOf="@id/fl_ftl_toolbar_end_container"
+            android:layout_toStartOf="@id/tv_ftl_toolbar_time"
             android:layout_toEndOf="@id/ib_ftl_toolbar_start" />
+
+        <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
+            android:id="@+id/tv_ftl_toolbar_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/fl_ftl_toolbar_end_container"
+            android:layout_toEndOf="@id/ib_ftl_toolbar_start"
+            android:visibility="gone"
+            app:size="small" />
 
         <com.foodtechlab.ftlandroiduikit.common.DotsProgress
             android:id="@+id/dot_progress"

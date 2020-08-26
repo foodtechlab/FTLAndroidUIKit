@@ -15,6 +15,8 @@ import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.common.DotsProgress
 import com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+import com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
+import com.foodtechlab.ftlandroiduikit.textfield.time.helper.DeliveryStatus
 import com.foodtechlab.ftlandroiduikit.util.changeColor
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 
@@ -117,6 +119,7 @@ class FTLToolbar @JvmOverloads constructor(
     private val flIndicator: View
     private val ftlTitle: FTLTitle
     private val tvConnectivity: TextView
+    private val tvTime: FTLDeliveryTimeView
     private val tvAction: TextView
 
     private val vShadow: View
@@ -141,6 +144,7 @@ class FTLToolbar @JvmOverloads constructor(
         vShadow = findViewById(R.id.v_ftl_toolbar_shadow)
         rlContainer = findViewById(R.id.rl_ftl_toolbar_container)
         tvConnectivity = findViewById(R.id.tv_ftl_toolbar_connectivity)
+        tvTime = findViewById(R.id.tv_ftl_toolbar_time)
 
         ibStart.setOnClickListener { onToolbarClickListener?.onToolbarClick(it) }
 
@@ -210,6 +214,15 @@ class FTLToolbar @JvmOverloads constructor(
 
     fun showConnectionIndicator() {
         showOnlyOneChildInEndContainer(flIndicator.id)
+    }
+
+    fun showTime(timeZone: String?, deliveryTime: Long, status: DeliveryStatus) {
+        with(tvTime) {
+            visibility = View.VISIBLE
+            timeZoneId = timeZone
+            deliveryTimeMillis = deliveryTime
+            deliveryStatus = status
+        }
     }
 
     fun showEndButton() {

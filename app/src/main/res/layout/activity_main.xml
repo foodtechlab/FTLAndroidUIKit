@@ -12,15 +12,6 @@
         android:id="@+id/ftlToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:ftlToolbar_action_color="@color/PrimaryDangerPressed"
-        app:ftlToolbar_action_drawable="@drawable/ic_arrow_down_24"
-        app:ftlToolbar_action_text="Action"
-        app:ftlToolbar_title="Title" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTimers"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:ftlToolbar_title="TitleTitleTitleTitleTitleTitleTitleTitleTitleTitle" />
 
 </LinearLayout>
