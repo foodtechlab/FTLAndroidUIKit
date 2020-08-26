@@ -14,7 +14,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        ftlToolbar.showTime("Europe/Samara", 1598372100001, DeliveryStatus.URGENT)
-        ftlToolbar.showLogo()
+        with(ftlToolbar) {
+            title = "№ Title title title title title title title"
+            showTime("Europe/Samara", 1598372100001, DeliveryStatus.URGENT)
+            showLogo()
+        }
     }
 }
