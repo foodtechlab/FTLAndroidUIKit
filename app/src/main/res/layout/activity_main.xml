@@ -14,4 +14,10 @@
         android:layout_height="wrap_content"
         app:ftlToolbar_start_icon="@drawable/ic_close_24" />
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTimers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
 </LinearLayout>

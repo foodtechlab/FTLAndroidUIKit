@@ -5,6 +5,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.foodtechlab.ftlandroiduikit.button.timer.State
 import com.foodtechlab.ftlandroiduikitsample.base.BaseListAdapter
 import kotlinx.android.synthetic.main.rv_timers_item.view.*
 
@@ -42,9 +43,11 @@ class TimersRVAdapter :
             val item = getItem(adapterPosition)
 
             with(ftlTimerButton) {
+                accompanyingText = "Завершить"
                 timeZoneId = "Europe/Samara"
-                estimateSuccessAt = "2020-08-06T20:00:00.001"
+                estimateSuccessAt = "2020-08-26T16:00:00.001"
                 estimateDuration = 60 * 60 * 1000
+                updateState(State.IN_DELIVERY)
                 updateRemainedDuration(item.remainedDuration)
             }
 

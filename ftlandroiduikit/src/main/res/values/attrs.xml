@@ -497,6 +497,7 @@
         <attr name="ftlTimerButton_dotColor" format="color" />
         <attr name="ftlTimerButton_bounceDotColor" format="color" />
         <attr name="isRenewableInside" format="boolean" />
+        <attr name="accompanyingText" format="string" />
     </declare-styleable>
 
     <declare-styleable name="FTLRestaurantMarker">
