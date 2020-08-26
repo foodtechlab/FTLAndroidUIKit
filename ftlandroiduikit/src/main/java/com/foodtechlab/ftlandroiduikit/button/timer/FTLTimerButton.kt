@@ -65,6 +65,12 @@ class FTLTimerButton @JvmOverloads constructor(
 
     var estimateDuration = 0L
 
+    var accompanyingText: String? = null
+        set(value) {
+            field = value
+            tvLabel.text = value
+        }
+
     private var remainedDuration = 0L
         private set(value) {
             field = value
@@ -125,6 +131,7 @@ class FTLTimerButton @JvmOverloads constructor(
 
         context.withStyledAttributes(attrs, R.styleable.FTLTimerButton) {
             isTimerRenewableInside = getBoolean(R.styleable.FTLTimerButton_isRenewableInside, true)
+            accompanyingText = getString(R.styleable.FTLTimerButton_accompanyingText)
 
             updateViewState(
                 getColor(R.styleable.FTLTimerButton_ftlTimerButton_textColor, -1),
@@ -281,7 +288,6 @@ class FTLTimerButton @JvmOverloads constructor(
             }
             else -> setTextColorFromState()
         }
-        tvLabel.setText(state.text)
 
 
         background = configureSelector(

@@ -15,8 +15,4 @@
 
     <string name="connectivity_state_connected">Соединение установлено</string>
     <string name="connectivity_state_disconnected">Отсутствует подключение к сети</string>
-
-    <string name="ftl_timer_button_order_make">Заказ готовится</string>
-    <string name="ftl_timer_button_start_delivery">Начать доставку</string>
-    <string name="ftl_timer_button_delivered">В доставке</string>
 </resources>
