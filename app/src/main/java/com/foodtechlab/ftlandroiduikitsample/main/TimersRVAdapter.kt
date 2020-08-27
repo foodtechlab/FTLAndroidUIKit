@@ -49,6 +49,7 @@ class TimersRVAdapter :
                 estimateDuration = 60 * 60 * 1000
                 updateState(State.IN_DELIVERY)
                 updateRemainedDuration(item.remainedDuration)
+                heightButton = 48f
             }
 
             ftlTimerButton.setOnClickListener(object : View.OnClickListener {
