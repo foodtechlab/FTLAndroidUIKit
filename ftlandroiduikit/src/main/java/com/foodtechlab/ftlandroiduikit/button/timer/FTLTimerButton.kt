@@ -27,6 +27,7 @@ import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.common.DotsProgress
 import com.foodtechlab.ftlandroiduikit.common.ProgressView
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.getMillis
+import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import java.util.*
 import java.util.concurrent.TimeUnit
 import kotlin.concurrent.timer
@@ -106,6 +107,14 @@ class FTLTimerButton @JvmOverloads constructor(
             }
         }
 
+    var heightButton: Float = 40f
+        set(value) {
+            field = value
+            val params: LayoutParams = rlRoot.layoutParams as LayoutParams
+            params.height = context.dpToPx(value).toInt()
+            rlRoot.layoutParams = params
+        }
+
     private val fadeTransition = Fade().apply { duration = 200 }
 
     private var timer: Timer? = null
@@ -132,7 +141,7 @@ class FTLTimerButton @JvmOverloads constructor(
         context.withStyledAttributes(attrs, R.styleable.FTLTimerButton) {
             isTimerRenewableInside = getBoolean(R.styleable.FTLTimerButton_isRenewableInside, true)
             accompanyingText = getString(R.styleable.FTLTimerButton_accompanyingText)
-
+            heightButton = getFloat(R.styleable.FTLTimerButton_heightButton, 40f)
             updateViewState(
                 getColor(R.styleable.FTLTimerButton_ftlTimerButton_textColor, -1),
                 getColor(R.styleable.FTLTimerButton_ftlTimerButton_dotColor, -1),
@@ -141,7 +150,7 @@ class FTLTimerButton @JvmOverloads constructor(
             )
         }
 
-        llContainer.apply {
+        rlRoot.apply {
             viewTreeObserver.addOnGlobalLayoutListener(object :
                 ViewTreeObserver.OnGlobalLayoutListener {
                 override fun onGlobalLayout() {
