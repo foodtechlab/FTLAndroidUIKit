@@ -43,13 +43,12 @@ class TimersRVAdapter :
             val item = getItem(adapterPosition)
 
             with(ftlTimerButton) {
-                accompanyingText = "Завершить"
+                accompanyingText = "Начать доставку"
                 timeZoneId = "Europe/Samara"
                 estimateSuccessAt = "2020-08-26T16:00:00.001"
                 estimateDuration = 60 * 60 * 1000
                 updateState(State.IN_DELIVERY)
                 updateRemainedDuration(item.remainedDuration)
-                heightButton = 48f
             }
 
             ftlTimerButton.setOnClickListener(object : View.OnClickListener {
