@@ -8,16 +8,53 @@
     android:orientation="vertical"
     tools:context=".main.MainActivity">
 
-    <com.foodtechlab.ftlandroiduikit.bar.toolbar.FTLToolbar
-        android:id="@+id/ftlToolbar"
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLDefaultTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:ftlToolbar_start_icon="@drawable/ic_close_24" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rvTimers"
+        app:imageType="CUSTOMER"
+        app:textForSlot="Hello world"
+        app:imageColorRes="@color/AdditionalDarkBlue"
+        android:layout_margin="8dp"
+        app:backgroundColorRes="@color/OnSurfacePrimaryEnabled"/>
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLRouteTextView
+        android:id="@+id/tv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        android:layout_height="wrap_content"
+        app:textAddressFrom="Hello world"
+        app:textAddressTo="Hello world1"
+        android:layout_margin="8dp" />
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLDoubleTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:imageType="MORE_DETAILS"
+        app:textForStartSlot="Hello world"
+        app:imageColorRes="@color/AdditionalDarkBlue"
+        android:layout_margin="8dp"
+        app:isVisibleImageSlot="true"
+        app:backgroundColorRes="@color/OnSurfacePrimaryEnabled"/>
 
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLSectionTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:imageType="SHIELD"
+        app:textForSlot="Hello world"
+        app:imageColorRes="@color/AdditionalYellow"
+        android:layout_margin="8dp"
+        app:backgroundColorRes="@color/AdditionalOrange"/>
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLMultipleTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:imageType="CARD_ONLINE"
+        app:textTopStartSlot="Hello world"
+        app:textBottomStartSlot="Hello world1"
+        android:layout_margin="8dp"
+        app:backgroundColorRes="@color/AdditionalGreen"/>
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLExtendableTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:imageType="COMMENT"
+        app:fullText="Hello world"
+        app:imageColorRes="@color/AdditionalCyan"
+        android:layout_margin="8dp"
+        app:backgroundColorRes="@color/AdditionalDarkBlue"/>
 </LinearLayout>

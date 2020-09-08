@@ -7,11 +7,12 @@
 
     <ImageView
         android:id="@+id/iv_image_slot"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginEnd="8dp"
         android:visibility="gone"
         app:srcCompat="@drawable/ic_file"
+        android:background="@drawable/shape_oval_solid_white"
         tools:ignore="ContentDescription"
         tools:visibility="visible" />
 
