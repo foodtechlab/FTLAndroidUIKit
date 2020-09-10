@@ -2,14 +2,11 @@ package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
-import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.annotation.ColorRes
+import androidx.annotation.ColorInt
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
@@ -60,15 +57,15 @@ class FTLRouteTextView @JvmOverloads constructor(
             ) else ResourcesCompat.getFont(context, R.font.roboto_regular)
         }
 
-    @ColorRes
-    var backgroundColorRes = -1
+    @ColorInt
+    var backgroundColorRes = ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
         set(value) {
             field = value
             vRoad.backgroundTintList = ColorStateList.valueOf(field)
         }
 
-    @ColorRes
-    var imageColorRes = -1
+    @ColorInt
+    var imageColorRes = ContextCompat.getColor(context, R.color.BackgroundPrimary)
         set(value) {
             field = value
             ivAddressFrom.setColorFilter(field)

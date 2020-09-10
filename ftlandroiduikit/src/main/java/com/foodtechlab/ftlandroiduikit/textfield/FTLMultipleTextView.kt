@@ -2,16 +2,12 @@ package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.content.Context
 import android.content.res.ColorStateList
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.Drawable
-import android.os.Build
 import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
@@ -81,15 +77,15 @@ class FTLMultipleTextView @JvmOverloads constructor(
             ivImageSlot.setImageDrawable(value)
         }
 
-    @ColorRes
-    var backgroundColorRes = -1
+    @ColorInt
+    var backgroundColorRes = ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
         set(value) {
             field = value
             ivImageSlot.backgroundTintList = ColorStateList.valueOf(field)
         }
 
-    @ColorRes
-    var imageColorRes = -1
+    @ColorInt
+    var imageColorRes = ContextCompat.getColor(context, R.color.BackgroundPrimary)
         set(value) {
             field = value
             ivImageSlot.setColorFilter(field)
