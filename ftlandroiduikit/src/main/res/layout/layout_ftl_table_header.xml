@@ -22,8 +22,9 @@
 
         <ImageView
             android:id="@+id/ivImageSlot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/shape_oval_solid_white"
             app:srcCompat="@drawable/ic_fast_food"
             tools:ignore="ContentDescription" />
 

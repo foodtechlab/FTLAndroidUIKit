@@ -1,10 +1,16 @@
 package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import android.os.Build
 import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.isVisible
 import com.foodtechlab.ftlandroiduikit.R
@@ -29,6 +35,20 @@ class FTLSectionTextView @JvmOverloads constructor(
             if (value != ImageType.NONE) ivImageSlot.setImageResource(field.imgRes)
         }
 
+    @ColorRes
+    var backgroundColorRes = -1
+        set(value) {
+            field = value
+            ivImageSlot.backgroundTintList = ColorStateList.valueOf(field)
+        }
+
+    @ColorRes
+    var imageColorRes = -1
+        set(value) {
+            field = value
+            ivImageSlot.setColorFilter(field)
+        }
+
     private var tvTextSlot: TextView
     private var ivImageSlot: ImageView
 
@@ -45,7 +65,14 @@ class FTLSectionTextView @JvmOverloads constructor(
                 imageType.ordinal
             )]
             textForSlot = getString(R.styleable.FTLDefaultTextView_textForSlot) ?: ""
-            tvTextSlot.text = textForSlot
+            backgroundColorRes = getColor(
+                R.styleable.FTLDefaultTextView_backgroundColorRes,
+                ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+            )
+            imageColorRes = getColor(
+                R.styleable.FTLDefaultTextView_imageColorRes,
+                ContextCompat.getColor(context, R.color.BackgroundPrimary)
+            )
         }
 
         setWillNotDraw(false)
