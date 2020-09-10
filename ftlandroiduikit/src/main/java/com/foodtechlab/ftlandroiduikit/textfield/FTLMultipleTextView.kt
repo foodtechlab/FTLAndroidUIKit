@@ -1,12 +1,17 @@
 package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.graphics.drawable.Drawable
+import android.os.Build
 import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
@@ -76,6 +81,20 @@ class FTLMultipleTextView @JvmOverloads constructor(
             ivImageSlot.setImageDrawable(value)
         }
 
+    @ColorRes
+    var backgroundColorRes = -1
+        set(value) {
+            field = value
+            ivImageSlot.backgroundTintList = ColorStateList.valueOf(field)
+        }
+
+    @ColorRes
+    var imageColorRes = -1
+        set(value) {
+            field = value
+            ivImageSlot.setColorFilter(field)
+        }
+
     init {
         inflate(context, R.layout.layout_ftl_multiple_text_view, this)
 
@@ -94,7 +113,6 @@ class FTLMultipleTextView @JvmOverloads constructor(
                 getString(R.styleable.FTLMultipleTextView_textBottomStartSlot) ?: ""
             textTopEndSlot = getString(R.styleable.FTLMultipleTextView_textTopEndSlot) ?: ""
             textBottomEndSlot = getString(R.styleable.FTLMultipleTextView_textBottomEndSlot) ?: ""
-            ivImageSlot.setImageResource(imageType.imgRes)
             colorBottomStartSlot = getColor(
                 R.styleable.FTLMultipleTextView_colorBottomStartSlot,
                 ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
@@ -102,6 +120,14 @@ class FTLMultipleTextView @JvmOverloads constructor(
             colorBottomEndSlot = getColor(
                 R.styleable.FTLMultipleTextView_colorBottomEndSlot,
                 ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
+            )
+            backgroundColorRes = getColor(
+                R.styleable.FTLMultipleTextView_backgroundColorRes,
+                ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+            )
+            imageColorRes = getColor(
+                R.styleable.FTLMultipleTextView_imageColorRes,
+                ContextCompat.getColor(context, R.color.BackgroundPrimary)
             )
         }
     }

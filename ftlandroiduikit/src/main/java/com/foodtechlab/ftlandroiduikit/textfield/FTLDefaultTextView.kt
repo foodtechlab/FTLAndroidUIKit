@@ -1,15 +1,24 @@
 package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Canvas
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import android.os.Build
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.ColorRes
+import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
-import androidx.core.view.*
+import androidx.core.view.marginBottom
+import androidx.core.view.marginLeft
+import androidx.core.view.marginStart
+import androidx.core.view.updateMargins
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
@@ -35,6 +44,20 @@ class FTLDefaultTextView @JvmOverloads constructor(
             ivImageSlot.setImageResource(field.imgRes)
         }
 
+    @ColorRes
+    var backgroundColorRes = -1
+        set(value) {
+            field = value
+            ivImageSlot.backgroundTintList = ColorStateList.valueOf(field)
+        }
+
+    @ColorRes
+    var imageColorRes = -1
+        set(value) {
+            field = value
+            ivImageSlot.setColorFilter(field)
+        }
+
     var isBoldStyle: Boolean = false
         set(value) {
             field = value
@@ -51,9 +74,16 @@ class FTLDefaultTextView @JvmOverloads constructor(
 
         context.withStyledAttributes(attrs, R.styleable.FTLDefaultTextView) {
             imageType = ImageType.values()[getInt(R.styleable.FTLDefaultTextView_imageType, 3)]
-            ivImageSlot.setImageResource(imageType.imgRes)
             textForSlot = getString(R.styleable.FTLDefaultTextView_textForSlot) ?: ""
             isBoldStyle = getBoolean(R.styleable.FTLDefaultTextView_isBoldStyle, false)
+            backgroundColorRes = getColor(
+                R.styleable.FTLDefaultTextView_backgroundColorRes,
+                ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+            )
+            imageColorRes = getColor(
+                R.styleable.FTLDefaultTextView_imageColorRes,
+                ContextCompat.getColor(context, R.color.BackgroundPrimary)
+            )
         }
         setWillNotDraw(false)
     }

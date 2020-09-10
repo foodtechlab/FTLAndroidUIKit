@@ -1,7 +1,11 @@
 package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Canvas
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
+import android.os.Build
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
@@ -10,6 +14,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.marginBottom
@@ -45,6 +50,20 @@ class FTLExtendableTextView @JvmOverloads constructor(
             ivImageSlot.setImageResource(field.imgRes)
         }
 
+    @ColorRes
+    var backgroundColorRes = -1
+        set(value) {
+            field = value
+            ivImageSlot.backgroundTintList = ColorStateList.valueOf(field)
+        }
+
+    @ColorRes
+    var imageColorRes = -1
+        set(value) {
+            field = value
+            ivImageSlot.setColorFilter(field)
+        }
+
     init {
         inflate(context, R.layout.layout_ftl_extendable_text_view, this)
         tvTextSlot = findViewById(R.id.tv_text_slot)
@@ -53,12 +72,18 @@ class FTLExtendableTextView @JvmOverloads constructor(
         context.withStyledAttributes(attrs, R.styleable.FTLExtendableTextView) {
             isClickable = true
             imageType = ImageType.values()[getInt(R.styleable.FTLExtendableTextView_imageType, 6)]
-            ivImageSlot.setImageResource(imageType.imgRes)
             fullText = getString(R.styleable.FTLExtendableTextView_fullText) ?: ""
             collapseLines = getInt(R.styleable.FTLExtendableTextView_collapseLines, 3)
             ellipsizedText = getString(R.styleable.FTLExtendableTextView_ellipsizedText) ?: ""
             isExpandText = getBoolean(R.styleable.FTLExtendableTextView_isExpand, false)
-            tvTextSlot.text = fullText
+            backgroundColorRes = getColor(
+                R.styleable.FTLExtendableTextView_backgroundColorRes,
+                ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+            )
+            imageColorRes = getColor(
+                R.styleable.FTLExtendableTextView_imageColorRes,
+                ContextCompat.getColor(context, R.color.BackgroundPrimary)
+            )
         }
         setWillNotDraw(false)
     }
