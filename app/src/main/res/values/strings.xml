@@ -6,6 +6,13 @@
     <string name="activity_main_input_email">Введите E-mail</string>
     <string name="activity_main_input_phone">Введите номер</string>
 
+    <string name="common_buttons">Buttons</string>
+    <string name="common_text_fields">Text Fields</string>
+    <string name="common_edit_fields">Edit Fields</string>
+    <string name="common_table_fields">Table Fields</string>
+    <string name="common_cards">Cards</string>
+    <string name="common_times">Times</string>
+
     <string name="dialog_sad_title">Достигнут лимит по смс</string>
     <string name="dialog_sad_message">К сожалению, сегодня вы запросили максимальное количество кодов доступа, ждем вас завтра. и тут еще очень много текста, должно быть, ниже сдублирую часть текста. К сожалению, сегодня вы запросили максимальное количество кодов доступа, ждем вас завтра</string>
 </resources>
