@@ -9,7 +9,7 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
-import androidx.annotation.ColorRes
+import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
@@ -57,15 +57,15 @@ class FTLTableHeader @JvmOverloads constructor(
 
     var tableHeaderClickListener: OnTableHeaderClickListener? = null
 
-    @ColorRes
-    var backgroundColorRes = -1
+    @ColorInt
+    var backgroundColorRes = ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
         set(value) {
             field = value
             ivImageSlot.backgroundTintList = ColorStateList.valueOf(field)
         }
 
-    @ColorRes
-    var imageColorRes = -1
+    @ColorInt
+    var imageColorRes = ContextCompat.getColor(context, R.color.BackgroundPrimary)
         set(value) {
             field = value
             ivImageSlot.setColorFilter(field)
