@@ -1,6 +1,7 @@
 package com.foodtechlab.ftlandroiduikit.textfield.table
 
 import android.content.Context
+import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
@@ -8,6 +9,8 @@ import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.annotation.ColorInt
+import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
@@ -54,6 +57,20 @@ class FTLTableHeader @JvmOverloads constructor(
 
     var tableHeaderClickListener: OnTableHeaderClickListener? = null
 
+    @ColorInt
+    var backgroundColorRes = ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+        set(value) {
+            field = value
+            ivImageSlot.backgroundTintList = ColorStateList.valueOf(field)
+        }
+
+    @ColorInt
+    var imageColorRes = ContextCompat.getColor(context, R.color.BackgroundPrimary)
+        set(value) {
+            field = value
+            ivImageSlot.setColorFilter(field)
+        }
+
     init {
         inflate(context, R.layout.layout_ftl_table_header, this)
 
@@ -74,12 +91,19 @@ class FTLTableHeader @JvmOverloads constructor(
 
         context.withStyledAttributes(attrs, R.styleable.FTLTableHeader) {
             imageType = ImageType.values()[getInt(R.styleable.FTLTableHeader_imageType, 7)]
-            ivImageSlot.setImageResource(imageType.imgRes)
             headerTitle = getString(R.styleable.FTLTableHeader_headerTitle) ?: ""
             headerSubtitle = getString(R.styleable.FTLTableHeader_headerSubtitle) ?: ""
             isUnwrapped = getBoolean(R.styleable.FTLTableHeader_isUnwrapped, false)
             showSubtitle = getBoolean(R.styleable.FTLTableHeader_showSubtitle, false)
             isDividersEnabled = getBoolean(R.styleable.FTLTableHeader_isDividersEnabled, false)
+            backgroundColorRes = getColor(
+                R.styleable.FTLTableHeader_backgroundColorRes,
+                ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+            )
+            imageColorRes = getColor(
+                R.styleable.FTLTableHeader_imageColorRes,
+                ContextCompat.getColor(context, R.color.BackgroundPrimary)
+            )
             initStateHeader()
         }
     }

@@ -11,6 +11,7 @@
         android:layout_height="32dp"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/ic_money"
+        android:background="@drawable/shape_oval_solid_white"
         tools:ignore="ContentDescription" />
 
     <LinearLayout

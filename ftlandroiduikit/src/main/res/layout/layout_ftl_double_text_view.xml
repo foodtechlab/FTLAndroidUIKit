@@ -16,6 +16,7 @@
             android:id="@+id/iv_image_slot"
             android:layout_width="32dp"
             android:layout_height="32dp"
+            android:background="@drawable/shape_oval_solid_white"
             app:srcCompat="@drawable/ic_person"
             tools:ignore="ContentDescription" />
 
