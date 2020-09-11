@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/BackgroundPrimary"
+    android:orientation="vertical"
+    android:paddingBottom="8dp">
+
+    <TextView
+        android:id="@+id/tvTimeDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/times_description_ftl_delivery_time_view"
+        android:textColor="@color/OnBackgroundPrimary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
+        android:id="@+id/dtvLargeUsual"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvTimeDescription"
+        app:size="large"
+        app:status="usual" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
+        android:id="@+id/dtvLargeUrgent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/dtvLargeUsual"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dtvLargeUsual"
+        app:size="large"
+        app:status="urgent" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
+        android:id="@+id/dtvSmallDeliveredLate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dtvLargeUsual"
+        app:size="small"
+        app:status="delivered_late" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
+        android:id="@+id/dtvSmallCanceled"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/dtvSmallDeliveredLate"
+        app:layout_constraintEnd_toStartOf="@id/dtvSmallDelivered"
+        app:layout_constraintStart_toEndOf="@id/dtvSmallDeliveredLate"
+        app:layout_constraintTop_toTopOf="@+id/dtvSmallDeliveredLate"
+        app:size="small"
+        app:status="canceled" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
+        android:id="@+id/dtvSmallDelivered"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/dtvSmallDeliveredLate"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dtvSmallDeliveredLate"
+        app:size="small"
+        app:status="delivered" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
+        android:id="@+id/dtvSmallActualTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dtvSmallDeliveredLate"
+        app:size="small"
+        app:status="actual_time" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
+        android:id="@+id/dtvSmallInProgress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/dtvSmallActualTime"
+        app:layout_constraintEnd_toStartOf="@id/dtvSmallInProgressLate"
+        app:layout_constraintStart_toEndOf="@id/dtvSmallActualTime"
+        app:layout_constraintTop_toTopOf="@+id/dtvSmallActualTime"
+        app:size="small"
+        app:status="in_progress" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
+        android:id="@+id/dtvSmallInProgressLate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/dtvSmallActualTime"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/dtvSmallActualTime"
+        app:size="small"
+        app:status="in_progress_late" />
+
+    <View
+        android:id="@+id/vDivider"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/OnSurfacePrimaryEnabled"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dtvSmallActualTime" />
+
+    <TextView
+        android:id="@+id/tvTimerDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/times_description_ftl_delivery_timer_view"
+        android:textColor="@color/OnBackgroundPrimary"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/vDivider" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.timer.FTLDeliveryTimerView
+        android:id="@+id/dtvTimer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:deliveryTimerView_size="large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTimerDescription" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

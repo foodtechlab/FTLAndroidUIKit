@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/BackgroundPrimary"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/text_fields_description_ftl_route_text_view"
+        android:textColor="@color/OnBackgroundPrimary"
+        android:textSize="16sp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLRouteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:textAddressFrom="@string/common_first_address"
+        app:textAddressTo="@string/common_second_address" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/OnSurfacePrimaryEnabled" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/text_fields_description_ftl_default_text_view"
+        android:textColor="@color/OnBackgroundPrimary"
+        android:textSize="16sp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLDefaultTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:imageType="CUSTOMER"
+        app:textForSlot="@string/text_fields_user_bio" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/OnSurfacePrimaryEnabled" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/text_fields_description_ftl_section_text_view"
+        android:textColor="@color/OnBackgroundPrimary"
+        android:textSize="16sp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLSectionTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:backgroundColorRes="@color/OnSurfacePrimaryEnabled"
+        app:imageColorRes="@color/AdditionalDarkBlue"
+        app:imageType="INFO"
+        app:textForSlot="@string/text_fields_about_app" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/OnSurfacePrimaryEnabled" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/text_fields_description_ftl_multiple_text_view"
+        android:textColor="@color/OnBackgroundPrimary"
+        android:textSize="16sp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLMultipleTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:backgroundColorRes="@color/AdditionalOrange"
+        app:imageType="CASH"
+        app:textBottomEndSlot="@string/text_fields_amount"
+        app:textBottomStartSlot="@string/text_fields_not_changed"
+        app:textTopEndSlot="@string/text_fields_test_amount"
+        app:textTopStartSlot="@string/text_fields_cash" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/OnSurfacePrimaryEnabled" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/text_fields_description_ftl_extendable_text_view"
+        android:textColor="@color/OnBackgroundPrimary"
+        android:textSize="16sp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLExtendableTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:backgroundColorRes="@color/AdditionalViolet"
+        app:collapseLines="4"
+        app:ellipsizedText="@string/text_fields_description_ftl_extendable_ellipsized_text"
+        app:fullText="@string/text_fields_description_ftl_extendable_full_text"
+        app:imageType="COMMENT" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/OnSurfacePrimaryEnabled" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/text_fields_description_ftl_double_text_view"
+        android:textColor="@color/OnBackgroundPrimary"
+        android:textSize="16sp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLDoubleTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:backgroundColorRes="@color/AdditionalCyan"
+        app:imageType="CARD_ONLINE"
+        app:isVisibleImageSlot="true"
+        app:textForEndSlot="@string/text_fields_test_amount"
+        app:textForStartSlot="@string/text_fields_total" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLDoubleTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:textForEndSlot="@string/text_fields_test_amount"
+        app:textForStartSlot="@string/text_fields_total" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

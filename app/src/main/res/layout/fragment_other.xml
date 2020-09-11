@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/BackgroundPrimary"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/other_description_ftl_marker"
+        android:textColor="@color/OnBackgroundPrimary"
+        android:textSize="16sp" />
+
+    <com.foodtechlab.ftlandroiduikit.map.FTLRestaurantMarker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:isMultiBrandMarker="true"
+        app:textOrdersCount="999" />
+
+    <com.foodtechlab.ftlandroiduikit.map.FTLRestaurantMarker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:textOrdersCount="1" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/OnSurfacePrimaryEnabled" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/other_description_ftl_circle_progress"
+        android:textColor="@color/OnBackgroundPrimary"
+        android:textSize="16sp" />
+
+    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:hideBackground="true"
+        app:progressColor="@color/AdditionalViolet" />
+
+    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/OnSurfacePrimaryEnabled" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:fontFamily="@font/roboto_medium"
+        android:text="@string/other_description_ftl_placeholder"
+        android:textColor="@color/OnBackgroundPrimary"
+        android:textSize="16sp" />
+
+    <com.foodtechlab.ftlandroiduikit.imageview.FTLPlaceholderImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="8dp"
+        app:placeholder="@drawable/ic_restaurant_placeholder" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
