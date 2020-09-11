@@ -16,7 +16,9 @@ class ShowroomPagerAdapter(fragmentManager: FragmentManager) :
         getString(R.string.common_edit_fields),
         getString(R.string.common_table_fields),
         getString(R.string.common_cards),
-        getString(R.string.common_times)
+        getString(R.string.common_times),
+        getString(R.string.common_bottomsheets),
+        getString(R.string.common_other)
     )
 
     override fun getItem(position: Int): Fragment = ComponentsFragment.newInstance(position)

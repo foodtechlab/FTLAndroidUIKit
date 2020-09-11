@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:fontFamily="@font/roboto_medium"
-        android:text="FTLCardView со стилем FTLCardViewStyle"
+        android:text="@string/cardviews_description_ftl_cardview"
         android:textColor="@color/OnBackgroundPrimary"
         android:textSize="16sp" />
 
@@ -60,9 +60,9 @@
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="center_vertical"
                 android:minHeight="32dp"
+                android:text="@string/cardviews_name_test_order"
                 android:textColor="@color/OnBackgroundPrimary"
-                android:textSize="16sp"
-                android:text="№ 333" />
+                android:textSize="16sp" />
 
             <com.foodtechlab.ftlandroiduikit.textfield.FTLRouteTextView
                 android:id="@+id/tvRoute"

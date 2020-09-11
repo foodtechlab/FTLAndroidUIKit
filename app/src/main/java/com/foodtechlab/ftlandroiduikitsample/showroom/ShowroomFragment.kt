@@ -18,7 +18,6 @@ class ShowroomFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val fragmentAdapter = ShowroomPagerAdapter(childFragmentManager)
         vpShowroomContent.adapter = fragmentAdapter
-        vpShowroomContent.offscreenPageLimit = 6
         tblShowroomCategories.setupWithViewPager(vpShowroomContent)
     }
 

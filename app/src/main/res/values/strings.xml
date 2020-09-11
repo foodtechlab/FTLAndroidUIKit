@@ -12,6 +12,54 @@
     <string name="common_table_fields">Table Fields</string>
     <string name="common_cards">Cards</string>
     <string name="common_times">Times</string>
+    <string name="common_bottomsheets">Bottomsheets</string>
+    <string name="common_other">Other</string>
+    <string name="common_ok">Ок</string>
+    <string name="common_first_address">Волгоград, ул. им Рокоссовского д.62 кв./оф. 102 под.1 эт 24</string>
+    <string name="common_second_address">Волгоград, ул. им Маршала Чуйкова д.37</string>
+
+    <string name="other_description_ftl_circle_progress">FTLCircleProgressIndicator различного типа</string>
+    <string name="other_description_ftl_placeholder">FTLPlaceholderImageView</string>
+    <string name="other_description_ftl_marker">FTLRestaurantMarker различного типа</string>
+
+    <string name="buttons_description_ftl_button">FTLButton различного типа</string>
+    <string name="buttons_description_ftl_fab">FTLFloatingActionButton</string>
+    <string name="buttons_description_ftl_image_button">FTLImageButton различного типа</string>
+    <string name="buttons_description_ftl_timer_button">FTLTimerButton различного типа</string>
+    <string name="buttons_description_ftl_switchers">Переключатели различного типа</string>
+    <string name="buttons_name_ftl_switch">FTLSwitch</string>
+    <string name="buttons_name_ftl_radio_button">FTLRadioButton</string>
+
+    <string name="cardviews_description_ftl_cardview">FTLCardView со стилем FTLCardViewStyle</string>
+    <string name="cardviews_name_test_order">№ 333</string>
+
+    <string name="edit_fields_show_error">Отобразить состояние при ошибке</string>
+    <string name="edit_fields_description_ftl_edit_text_default">FTLEditTextDefault</string>
+    <string name="edit_fields_description_ftl_auth_code_edit_text">FTLAuthCodeEditText</string>
+
+    <string name="table_fields_description_ftl_table_header">FTLTableHeader без Subtitle</string>
+    <string name="table_fields_description_ftl_table_header_with_subtitle">FTLTableHeader с Subtitle</string>
+
+    <string name="bottomsheets_description_ftl_bottomsheet">FTLDeliveryTimeView различного типа</string>
+
+    <string name="times_description_ftl_delivery_time_view">FTLDeliveryTimeView различного типа</string>
+    <string name="times_description_ftl_delivery_timer_view">FTLDeliveryTimerView</string>
+
+    <string name="text_fields_description_ftl_route_text_view">FTLRouteTextView</string>
+    <string name="text_fields_description_ftl_default_text_view">FTLDefaultTextView</string>
+    <string name="text_fields_description_ftl_section_text_view">FTLSectionTextView</string>
+    <string name="text_fields_description_ftl_multiple_text_view">FTLMultipleTextView</string>
+    <string name="text_fields_description_ftl_extendable_text_view">FTLExtendableTextView</string>
+    <string name="text_fields_description_ftl_double_text_view">FTLDoubleTextView</string>
+    <string name="text_fields_description_ftl_extendable_ellipsized_text">…Ещё</string>
+    <string name="text_fields_test_amount">1 000 ₽</string>
+    <string name="text_fields_about_app">О приложении</string>
+    <string name="text_fields_user_bio">Петров Иван Иванович</string>
+    <string name="text_fields_not_changed">Без сдачи</string>
+    <string name="text_fields_amount">Сумма: 1 000 ₽</string>
+    <string name="text_fields_total">Итого</string>
+    <string name="text_fields_cash">Наличными</string>
+    <string name="text_fields_description_ftl_extendable_full_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
 
     <string name="common_count_positions">%d шт.</string>
     <string name="common_price_format">%s ₽</string>

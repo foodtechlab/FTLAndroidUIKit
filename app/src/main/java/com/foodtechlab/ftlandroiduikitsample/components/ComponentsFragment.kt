@@ -4,14 +4,19 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.annotation.IntDef
 import androidx.fragment.app.Fragment
 import com.foodtechlab.ftlandroiduikit.button.timer.State
+import com.foodtechlab.ftlandroiduikit.sheet.*
 import com.foodtechlab.ftlandroiduikit.textfield.table.OnTableHeaderClickListener
 import com.foodtechlab.ftlandroiduikitsample.R
 import com.foodtechlab.ftlandroiduikitsample.utils.argument
+import kotlinx.android.synthetic.main.fragment_bottomsheet.*
 import kotlinx.android.synthetic.main.fragment_buttons.*
 import kotlinx.android.synthetic.main.fragment_cards.*
+import kotlinx.android.synthetic.main.fragment_cards.tvRoute
 import kotlinx.android.synthetic.main.fragment_component.*
 import kotlinx.android.synthetic.main.fragment_edit_fields.*
 import kotlinx.android.synthetic.main.fragment_table_fields.*
@@ -22,6 +27,7 @@ import java.util.*
 class ComponentsFragment : Fragment() {
 
     private var type: Int by argument(TYPE_ID)
+    private var bottomSheetDialog: FTLBottomSheet? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,7 +45,16 @@ class ComponentsFragment : Fragment() {
             EDIT_FIELDS -> initEditTexts()
             TABLE_FIELDS -> initTableComponents()
             CARDS -> initCards()
+            BOTTOMSHEETS -> initBottomsheets()
+            OTHER -> initOther()
             else -> initTimesComponents()
+        }
+    }
+
+    private fun initOther() {
+        with(vsComponentContainer) {
+            layoutResource = R.layout.fragment_other
+            inflate()
         }
     }
 
@@ -149,12 +164,74 @@ class ComponentsFragment : Fragment() {
             inflate()
         }
         with(tvRoute) {
-            textAddressTo ="Волгоград, ул. им Рокоссовского д.62 кв./оф. 102 под.1 эт 24"
+            textAddressTo = "Волгоград, ул. им Рокоссовского д.62 кв./оф. 102 под.1 эт 24"
             textAddressFrom = "Волгоград, ул. им Маршала Чуйкова д.37"
             isBoldStyleAddressTo = false
         }
         tvTimeDelivery.deliveryTime = getHoursAndMinutesString(Calendar.getInstance().time)
     }
+
+    private fun initBottomsheets() {
+        with(vsComponentContainer) {
+            layoutResource = R.layout.fragment_bottomsheet
+            inflate()
+        }
+        val bottomsheetTypes = arrayListOf(
+            "NONE",
+            Type.ISSUE.name,
+            Type.GEOLOCATION.name,
+            Type.SAD.name,
+            Type.WARNING.name,
+            Type.SUCCESS.name
+        )
+        val arrayAdapter = ArrayAdapter<String>(
+            requireContext(),
+            android.R.layout.simple_spinner_item,
+            bottomsheetTypes
+        )
+        with(snr) {
+            adapter = arrayAdapter
+            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>?,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    when (position) {
+                        1 -> showBottomSheetDialog(Type.ISSUE)
+                        2 -> showBottomSheetDialog(Type.GEOLOCATION)
+                        3 -> showBottomSheetDialog(Type.SAD)
+                        4 -> showBottomSheetDialog(Type.WARNING)
+                        5 -> showBottomSheetDialog(Type.SUCCESS)
+                    }
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>?) {}
+            }
+        }
+    }
+
+    private fun showBottomSheetDialog(type: Type) {
+        if (bottomSheetDialog?.isAdded == true) bottomSheetDialog?.dismiss()
+        bottomSheetDialog =
+            FTLBottomSheet.newInstance(
+                DialogState(
+                    getString(R.string.dialog_sad_title),
+                    getString(R.string.dialog_sad_message),
+                    type,
+                    listOf(
+                        DialogButton(
+                            1111,
+                            getString(R.string.common_ok),
+                            SECONDARY_BUTTON
+                        )
+                    )
+                )
+            )
+        bottomSheetDialog?.show(childFragmentManager, FTLBottomSheet.TAG)
+    }
+
 
     private fun initTimesComponents() {
         with(vsComponentContainer) {
@@ -181,7 +258,7 @@ class ComponentsFragment : Fragment() {
     }
 
     /**
-     * Метод для определения видимости RecyclerView с позициями заказа
+     * Метод для определения видимости RecyclerView
      * @param hide - флаг видимости, в случае если true - то RecyclerView будет скрыт,
      * в противном случае RecyclerView станет видимым
      */
@@ -192,13 +269,18 @@ class ComponentsFragment : Fragment() {
             rvPaymentTypes.visibility = if (hide) View.GONE else View.VISIBLE
     }
 
-
+    /**
+     * Метод для конвертирования даты в текстовый формат (ISO)
+     */
     private fun getDateString(date: Date): String {
         val formatDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS", Locale.getDefault())
         formatDate.timeZone = TimeZone.getDefault()
         return formatDate.format(date)
     }
 
+    /**
+     * Метод для конвертирования даты в текстовый формат (Часы и минуты)
+     */
     private fun getHoursAndMinutesString(date: Date): String {
         val formatDate = SimpleDateFormat("HH:mm", Locale.getDefault())
         formatDate.timeZone = TimeZone.getDefault()
@@ -212,9 +294,11 @@ class ComponentsFragment : Fragment() {
         const val TABLE_FIELDS = 3
         const val CARDS = 4
         const val TIMES = 5
+        const val BOTTOMSHEETS = 6
+        const val OTHER = 7
         const val TYPE_ID = "TYPE_ID"
 
-        @IntDef(BUTTONS, TEXT_FIELDS, EDIT_FIELDS, TABLE_FIELDS, CARDS, TIMES)
+        @IntDef(BUTTONS, TEXT_FIELDS, EDIT_FIELDS, TABLE_FIELDS, CARDS, TIMES, BOTTOMSHEETS, OTHER)
         @Retention(AnnotationRetention.SOURCE)
         annotation class ComponentType
 
