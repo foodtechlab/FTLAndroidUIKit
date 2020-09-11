@@ -61,6 +61,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        app:backgroundColorRes="@color/OnSurfacePrimaryEnabled"
+        app:imageColorRes="@color/AdditionalDarkBlue"
         app:imageType="INFO"
         app:textForSlot="@string/text_fields_about_app" />
 
@@ -82,6 +84,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        app:backgroundColorRes="@color/AdditionalOrange"
         app:imageType="CASH"
         app:textBottomEndSlot="@string/text_fields_amount"
         app:textBottomStartSlot="@string/text_fields_not_changed"
@@ -106,6 +109,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        app:backgroundColorRes="@color/AdditionalViolet"
         app:collapseLines="4"
         app:ellipsizedText="@string/text_fields_description_ftl_extendable_ellipsized_text"
         app:fullText="@string/text_fields_description_ftl_extendable_full_text"
@@ -129,6 +133,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
+        app:backgroundColorRes="@color/AdditionalCyan"
         app:imageType="CARD_ONLINE"
         app:isVisibleImageSlot="true"
         app:textForEndSlot="@string/text_fields_test_amount"
