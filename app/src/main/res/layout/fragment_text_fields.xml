@@ -2,7 +2,8 @@
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/BackgroundPrimary"
     android:orientation="vertical">
 
     <TextView
@@ -19,7 +20,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:textAddressFrom="Волгоград, ул. им Рокоссовского д.62 кв./оф. 102 под.1 эт 24"
-        app:textAddressTo="Волгоград, ул. им Маршала Чуйкова д.37"/>
+        app:textAddressTo="Волгоград, ул. им Маршала Чуйкова д.37" />
 
     <View
         android:layout_width="match_parent"
@@ -39,8 +40,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:textForSlot="Петров Иван Иванович"
-        app:imageType="CUSTOMER"/>
+        app:imageType="CUSTOMER"
+        app:textForSlot="Петров Иван Иванович" />
 
     <View
         android:layout_width="match_parent"
@@ -105,10 +106,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:imageType="COMMENT"
-        app:fullText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        app:collapseLines="4"
         app:ellipsizedText="...Ещё"
-        app:collapseLines="4"/>
+        app:fullText="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        app:imageType="COMMENT" />
 
     <View
         android:layout_width="match_parent"
@@ -128,8 +129,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:isVisibleImageSlot="true"
         app:imageType="CARD_ONLINE"
+        app:isVisibleImageSlot="true"
         app:textForEndSlot="1 000 ₽"
         app:textForStartSlot="Итого" />
 

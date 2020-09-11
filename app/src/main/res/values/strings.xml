@@ -13,6 +13,9 @@
     <string name="common_cards">Cards</string>
     <string name="common_times">Times</string>
 
+    <string name="common_count_positions">%d шт.</string>
+    <string name="common_price_format">%s ₽</string>
+
     <string name="dialog_sad_title">Достигнут лимит по смс</string>
     <string name="dialog_sad_message">К сожалению, сегодня вы запросили максимальное количество кодов доступа, ждем вас завтра. и тут еще очень много текста, должно быть, ниже сдублирую часть текста. К сожалению, сегодня вы запросили максимальное количество кодов доступа, ждем вас завтра</string>
 </resources>

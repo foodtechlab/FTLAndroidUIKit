@@ -4,10 +4,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.foodtechlab.ftlandroiduikitsample.R
-import com.foodtechlab.ftlandroiduikitsample.showroom.components.ItemFragment
+import com.foodtechlab.ftlandroiduikitsample.components.ComponentsFragment
 import com.foodtechlab.ftlandroiduikitsample.utils.Utils.getString
 
-class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
+class ShowroomPagerAdapter(fragmentManager: FragmentManager) :
+    FragmentPagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
     private val categories = arrayListOf(
         getString(R.string.common_buttons),
@@ -18,7 +19,7 @@ class PagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
         getString(R.string.common_times)
     )
 
-    override fun getItem(position: Int): Fragment = ItemFragment.newInstance(position)
+    override fun getItem(position: Int): Fragment = ComponentsFragment.newInstance(position)
 
     override fun getCount(): Int = categories.size
 
