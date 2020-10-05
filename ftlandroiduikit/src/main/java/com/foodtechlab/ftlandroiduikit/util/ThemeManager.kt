@@ -95,7 +95,9 @@ object ThemeManager {
         val ftlCircleProgressIndicatorTheme: FTLCircleProgressIndicatorTheme,
         val ftlProgressDialogTheme: FTLProgressDialogTheme,
         val ftlEmptyListImageViewTheme: FTLEmptyListImageViewTheme,
-        val ftlCardViewTheme: FTLCardViewTheme
+        val ftlCardViewTheme: FTLCardViewTheme,
+        val ftlShimmerViewTheme: FTLShimmerViewTheme,
+        val ftlShimmerFrameLayoutTheme: FTLShimmerFrameLayoutTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -167,7 +169,12 @@ object ThemeManager {
                 R.color.SurfaceFourthLight
             ),
             FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_light),
-            FTLCardViewTheme(R.color.SurfaceFirstLight)
+            FTLCardViewTheme(R.color.SurfaceFirstLight),
+            FTLShimmerViewTheme(R.color.ShimmerBackgroundLight),
+            FTLShimmerFrameLayoutTheme(
+                R.color.ShimmerBaseLight,
+                R.color.ShimmerHighlightingLight,
+            )
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
@@ -239,7 +246,12 @@ object ThemeManager {
                 R.color.SurfaceFourthDark
             ),
             FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_dark),
-            FTLCardViewTheme(R.color.SurfaceFirstDark)
+            FTLCardViewTheme(R.color.SurfaceFirstDark),
+            FTLShimmerViewTheme(R.color.ShimmerBackgroundDark),
+            FTLShimmerFrameLayoutTheme(
+                R.color.ShimmerBaseDark,
+                R.color.ShimmerHighlightingDark,
+            )
         )
     }
 
@@ -290,6 +302,15 @@ object ThemeManager {
 
     data class FTLCardViewTheme(
         @ColorRes val bgColor: Int
+    )
+
+    data class FTLShimmerViewTheme(
+        @ColorRes val bgColor: Int
+    )
+
+    data class FTLShimmerFrameLayoutTheme(
+        @ColorRes val baseColor: Int,
+        @ColorRes val highlightingColor: Int
     )
 
     interface ThemeChangedListener {

@@ -271,4 +271,15 @@
     <color name="IconBackgroundOrangeLight">#F57C00</color>
     <color name="IconBackgroundOrangeDark">#F57C00</color>
 
+
+    <!--  Shimmer  -->
+    <color name="ShimmerBackgroundLight">#F6F6F6</color>
+    <color name="ShimmerBackgroundDark">#484848</color>
+
+    <color name="ShimmerBaseLight">#F6F6F6</color>
+    <color name="ShimmerBaseDark">#484848</color>
+
+    <color name="ShimmerHighlightingLight">#E5E5E5</color>
+    <color name="ShimmerHighlightingDark">#E5E5E5</color>
+
 </resources>

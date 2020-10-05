@@ -40,7 +40,7 @@ class FTLCardView @JvmOverloads constructor(
     }
 
     override fun onThemeChanged(theme: ThemeManager.Theme) {
-        setBackgroundColor(ContextCompat.getColor(context, theme.ftlCardViewTheme.bgColor))
+        setCardBackgroundColor(ContextCompat.getColor(context, theme.ftlCardViewTheme.bgColor))
     }
 
     companion object {
