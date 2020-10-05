@@ -190,7 +190,7 @@ object ThemeManager {
             FTLDeliveryTimeViewTheme(
                 R.color.TextOnColorPrimaryDark,
                 R.color.TimeUrgentDark,
-                R.color.PrimaryDangerEnabled
+                R.color.IconPrimaryDark
             ), // urgent
             FTLDeliveryTimeViewTheme(
                 R.color.TimerPositiveDark,
