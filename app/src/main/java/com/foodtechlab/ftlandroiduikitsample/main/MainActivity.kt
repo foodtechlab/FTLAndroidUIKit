@@ -2,13 +2,21 @@ package com.foodtechlab.ftlandroiduikitsample.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.foodtechlab.ftlandroiduikit.dialog.FTLProgressDialog
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.DeliveryStatus
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikitsample.R
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.ObsoleteCoroutinesApi
+import kotlinx.coroutines.*
+import kotlin.coroutines.CoroutineContext
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity(), CoroutineScope {
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + parentJob
+
+    private val parentJob = Job()
+
+    private var progressDialog: FTLProgressDialog? = null
 
     @ObsoleteCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +47,25 @@ class MainActivity : AppCompatActivity() {
                 .putInt("key_theme", ThemeManager.theme.ordinal)
                 .apply()
         }
+
+        cpbIndicator.setOnClickListener {
+            showProgressDialog()
+            launch {
+                delay(5000)
+                hideProgressDialog()
+            }
+        }
+    }
+
+    private fun showProgressDialog() {
+        if (progressDialog?.isAdded != true) {
+            progressDialog = FTLProgressDialog.newInstance("Пожалуйста, подождите...")
+            progressDialog?.show(supportFragmentManager, FTLProgressDialog.TAG)
+        }
+    }
+
+    private fun hideProgressDialog() {
+        progressDialog?.dismiss()
     }
 
 //    override fun onDestroy() {

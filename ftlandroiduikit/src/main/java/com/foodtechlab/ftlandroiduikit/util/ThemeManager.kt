@@ -90,7 +90,9 @@ object ThemeManager {
         val ftlDeliveryTimeViewDeliveredLateTheme: FTLDeliveryTimeViewTheme,
         val ftlDeliveryTimeViewCanceledTheme: FTLDeliveryTimeViewTheme,
         val ftlDeliveryTimeViewInProgressTheme: FTLDeliveryTimeViewTheme,
-        val ftlDeliveryTimeViewInProgressLateTheme: FTLDeliveryTimeViewTheme
+        val ftlDeliveryTimeViewInProgressLateTheme: FTLDeliveryTimeViewTheme,
+        val ftlCircleProgressIndicatorTheme: FTLCircleProgressIndicatorTheme,
+        val ftlProgressDialogTheme: FTLProgressDialogTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -153,7 +155,14 @@ object ThemeManager {
                 R.color.TimerNegativeLight,
                 android.R.color.transparent,
                 R.color.TimerNegativeLight
-            ) // in progress late
+            ), // in progress late
+            FTLCircleProgressIndicatorTheme(
+                R.color.SurfaceFourthLight
+            ),
+            FTLProgressDialogTheme(
+                R.color.TextOnColorAdditionalLight,
+                R.color.SurfaceFourthLight
+            )
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
@@ -216,7 +225,14 @@ object ThemeManager {
                 R.color.TimerNegativeDark,
                 android.R.color.transparent,
                 R.color.TimerNegativeDark
-            ) // in progress late
+            ), // in progress late
+            FTLCircleProgressIndicatorTheme(
+                R.color.SurfaceFourthDark
+            ),
+            FTLProgressDialogTheme(
+                R.color.TextOnColorAdditionalDark,
+                R.color.SurfaceFourthDark
+            )
         )
     }
 
@@ -250,6 +266,15 @@ object ThemeManager {
         @ColorRes val textColor: Int,
         @ColorRes val bgColor: Int,
         @ColorRes val iconColor: Int? = null
+    )
+
+    data class FTLCircleProgressIndicatorTheme(
+        @ColorRes val bgColor: Int
+    )
+
+    data class FTLProgressDialogTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val bgColor: Int
     )
 
     interface ThemeChangedListener {
