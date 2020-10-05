@@ -6,6 +6,7 @@ import android.view.ViewAnimationUtils
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import com.foodtechlab.ftlandroiduikit.R
@@ -92,7 +93,8 @@ object ThemeManager {
         val ftlDeliveryTimeViewInProgressTheme: FTLDeliveryTimeViewTheme,
         val ftlDeliveryTimeViewInProgressLateTheme: FTLDeliveryTimeViewTheme,
         val ftlCircleProgressIndicatorTheme: FTLCircleProgressIndicatorTheme,
-        val ftlProgressDialogTheme: FTLProgressDialogTheme
+        val ftlProgressDialogTheme: FTLProgressDialogTheme,
+        val ftlEmptyListImageViewTheme: FTLEmptyListImageViewTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -162,7 +164,8 @@ object ThemeManager {
             FTLProgressDialogTheme(
                 R.color.TextOnColorAdditionalLight,
                 R.color.SurfaceFourthLight
-            )
+            ),
+            FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_light)
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
@@ -232,7 +235,8 @@ object ThemeManager {
             FTLProgressDialogTheme(
                 R.color.TextOnColorAdditionalDark,
                 R.color.SurfaceFourthDark
-            )
+            ),
+            FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_dark)
         )
     }
 
@@ -275,6 +279,10 @@ object ThemeManager {
     data class FTLProgressDialogTheme(
         @ColorRes val textColor: Int,
         @ColorRes val bgColor: Int
+    )
+
+    data class FTLEmptyListImageViewTheme(
+        @DrawableRes val imgSrc: Int
     )
 
     interface ThemeChangedListener {
