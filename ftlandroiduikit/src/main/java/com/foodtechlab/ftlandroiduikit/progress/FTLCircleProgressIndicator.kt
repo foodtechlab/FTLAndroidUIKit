@@ -9,20 +9,21 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 
 
 class FTLCircleProgressIndicator @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : ConstraintLayout(context, attrs, defStyleAttr) {
+) : ConstraintLayout(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
 
     private var vBackground: View
     private var pbProgress: ProgressBar
 
     @ColorInt
-    var progressBackgroundColor = ContextCompat.getColor(context, R.color.OnPrimary)
-        set(value) {
+    var progressBackgroundColor = ContextCompat.getColor(context, R.color.SurfaceFourthLight)
+        private set(value) {
             field = value
             vBackground.background.setTint(field)
         }
@@ -51,12 +52,29 @@ class FTLCircleProgressIndicator @JvmOverloads constructor(
                 R.styleable.FTLCircleProgressIndicator_progressColor,
                 ContextCompat.getColor(context, R.color.PrimaryInfoEnabled)
             )
-            progressBackgroundColor = getColor(
-                R.styleable.FTLCircleProgressIndicator_progressBackgroundColor,
-                ContextCompat.getColor(context, R.color.OnPrimary)
-            )
             hideBackground =
                 getBoolean(R.styleable.FTLCircleProgressIndicator_hideBackground, false)
         }
+        onThemeChanged(ThemeManager.theme)
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        progressBackgroundColor =
+            ContextCompat.getColor(context, theme.ftlCircleProgressIndicatorTheme.bgColor)
     }
 }

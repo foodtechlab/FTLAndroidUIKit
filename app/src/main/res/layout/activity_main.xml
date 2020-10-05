@@ -31,6 +31,11 @@
             android:gravity="center"
             android:padding="12dp"
             android:text="Switch theme" />
+
+        <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
+            android:id="@+id/cpbIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
     </com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout>
 
     <ImageView
