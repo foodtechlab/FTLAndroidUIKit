@@ -53,6 +53,7 @@ class FTLSectionTextView @JvmOverloads constructor(
         inflate(context, R.layout.layout_ftl_section_text_view, this)
 
         orientation = HORIZONTAL
+
         tvTextSlot = findViewById(R.id.tv_text_slot)
         ivImageSlot = findViewById(R.id.iv_image_slot)
 

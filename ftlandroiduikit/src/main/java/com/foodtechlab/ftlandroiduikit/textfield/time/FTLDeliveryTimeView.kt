@@ -16,6 +16,7 @@ import com.foodtechlab.ftlandroiduikit.textfield.time.helper.DeliveryStatus
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.Icon
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.Size
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.formatTime
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import java.util.concurrent.TimeUnit
 import kotlin.math.abs
 import kotlin.math.min
@@ -24,7 +25,7 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : View(context, attrs, defStyleAttr) {
+) : View(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
 
     private val displayDensity = resources.displayMetrics.density
 
@@ -116,7 +117,6 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
 
             val tSize = value * displayDensity
             textScale = textSize / tSize
-//            textPaint.textSize = value
         }
 
     private val timeHeight: Int
@@ -161,12 +161,7 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
     var size: Size = Size.SMALL
         set(value) {
             field = value
-
             textSize = value.textSize * displayDensity
-
-//            val tSize = value.textSize * displayDensity
-//            textScale = textSize / tSize
-
             updateViewState()
             requestLayout()
         }
@@ -210,6 +205,8 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
 
             updateViewState()
         }
+
+//        onThemeChanged(ThemeManager.theme)
     }
 
     override fun onSaveInstanceState(): Parcelable? =
@@ -226,6 +223,21 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
         } else {
             super.onRestoreInstanceState(state)
         }
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -250,11 +262,50 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
         )
     }
 
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        DeliveryStatus.USUAL.textColor = theme.ftlDeliveryTimeViewUsualTheme.textColor
+        DeliveryStatus.USUAL.bgColor = theme.ftlDeliveryTimeViewUsualTheme.bgColor
+        DeliveryStatus.USUAL.iconColor = theme.ftlDeliveryTimeViewUsualTheme.iconColor
+
+        DeliveryStatus.URGENT.textColor = theme.ftlDeliveryTimeViewUrgentTheme.textColor
+        DeliveryStatus.URGENT.bgColor = theme.ftlDeliveryTimeViewUrgentTheme.bgColor
+        DeliveryStatus.URGENT.iconColor = theme.ftlDeliveryTimeViewUrgentTheme.iconColor
+
+        DeliveryStatus.DELIVERED.textColor = theme.ftlDeliveryTimeViewDeliveredTheme.textColor
+        DeliveryStatus.DELIVERED.bgColor = theme.ftlDeliveryTimeViewDeliveredTheme.bgColor
+        DeliveryStatus.DELIVERED.iconColor = theme.ftlDeliveryTimeViewDeliveredTheme.iconColor
+
+        DeliveryStatus.DELIVERED_LATE.textColor =
+            theme.ftlDeliveryTimeViewDeliveredLateTheme.textColor
+        DeliveryStatus.DELIVERED_LATE.bgColor = theme.ftlDeliveryTimeViewDeliveredLateTheme.bgColor
+        DeliveryStatus.DELIVERED_LATE.iconColor =
+            theme.ftlDeliveryTimeViewDeliveredLateTheme.iconColor
+
+        DeliveryStatus.CANCELED.textColor = theme.ftlDeliveryTimeViewCanceledTheme.textColor
+        DeliveryStatus.CANCELED.bgColor = theme.ftlDeliveryTimeViewCanceledTheme.bgColor
+        DeliveryStatus.CANCELED.iconColor = theme.ftlDeliveryTimeViewCanceledTheme.iconColor
+
+        DeliveryStatus.IN_PROGRESS.textColor = theme.ftlDeliveryTimeViewInProgressTheme.textColor
+        DeliveryStatus.IN_PROGRESS.bgColor = theme.ftlDeliveryTimeViewInProgressTheme.bgColor
+        DeliveryStatus.IN_PROGRESS.iconColor = theme.ftlDeliveryTimeViewInProgressTheme.iconColor
+
+        DeliveryStatus.IN_PROGRESS_LATE.textColor =
+            theme.ftlDeliveryTimeViewInProgressLateTheme.textColor
+        DeliveryStatus.IN_PROGRESS_LATE.bgColor =
+            theme.ftlDeliveryTimeViewInProgressLateTheme.bgColor
+        DeliveryStatus.IN_PROGRESS_LATE.iconColor =
+            theme.ftlDeliveryTimeViewInProgressLateTheme.iconColor
+
+        updateViewState()
+
+        requestLayout()
+    }
+
     private fun measureDimension(desiredSize: Int, measureSpec: Int): Int {
         val specMode = MeasureSpec.getMode(measureSpec)
         val specSize = MeasureSpec.getSize(measureSpec)
 
-        val result = when (specMode) {
+        return when (specMode) {
             MeasureSpec.EXACTLY -> specSize
             else -> {
                 var tempRes = desiredSize
@@ -267,23 +318,6 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
                 tempRes
             }
         }
-
-//        if (result < desiredSize) {
-//            val scale = result.toFloat() / desiredSize
-//
-//            paddingHorizontal = min(paddingHorizontal, paddingHorizontalOrig * scale)
-//            paddingVertical = min(paddingVertical, paddingVerticalOrig * scale)
-//            marginEnd = min(marginEnd, marginEndOrig * scale)
-//
-//            icon?.let { ic ->
-//                iconOrig?.let { icOrig ->
-//                    ic.size = min(ic.size, icOrig.size * scale)
-//                    ic.marginEnd = min(ic.marginEnd, icOrig.marginEnd * scale)
-//                }
-//            }
-//        }
-
-        return result
     }
 
     private fun updateViewState() {

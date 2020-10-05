@@ -19,6 +19,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import kotlin.math.min
 import kotlin.math.pow
 
@@ -26,15 +27,13 @@ class FTLPlaceholderImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : AppCompatImageView(context, attrs, defStyleAttr) {
+) : AppCompatImageView(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
 
-    private var drawableRadius = 0f
     private var borderRadius = 0f
+    private var drawableRadius = 0f
 
     private var initialized = false
-
     private var rebuildShader = false
-
     private var drawableDirty = false
 
     private var borderOverlay = false
@@ -168,6 +167,22 @@ class FTLPlaceholderImageView @JvmOverloads constructor(
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             outlineProvider = OutlineProvider()
         }
+
+        onThemeChanged(ThemeManager.theme)
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        // TODO: 04.10.2020
     }
 
     override fun setScaleType(scaleType: ScaleType) {
@@ -375,7 +390,6 @@ class FTLPlaceholderImageView @JvmOverloads constructor(
         }
         drawableRadius = min(drawableRect.height() / 2.0f, drawableRect.width() / 2.0f)
         updateShaderMatrix(bitmap ?: bitmapPlaceholder)
-//        updatePlaceholderShaderMatrix()
     }
 
     private fun calculateBounds(): RectF {

@@ -24,7 +24,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.transition.Fade
 import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.common.DotsProgress
+import com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLToolbarDotsProgress
 import com.foodtechlab.ftlandroiduikit.common.ProgressView
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.getMillis
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
@@ -126,7 +126,7 @@ class FTLTimerButton @JvmOverloads constructor(
     private val progressView: ProgressView
     private val tvTime: TextView
     private val tvLabel: TextView
-    private val dotProgress: DotsProgress
+    private val dotProgress: FTLToolbarDotsProgress
 
     init {
         inflate(context, R.layout.layout_ftl_timer_button, this)

@@ -46,4 +46,229 @@
     <color name="OnAdditionalLight">#FFFFFF</color>
     <color name="OnAdditionalDark">#161616</color>
 
+
+    <!--  Light Theme  -->
+
+    <color name="FTLSectionTextViewTextColorLight">#161616</color>
+    <color name="FTLSectionTextViewArrowColorLight">#161616</color>
+
+
+    <!--  Dark Theme  -->
+
+    <color name="FTLSectionTextViewTextColorDark">#E2E2E2</color>
+    <color name="FTLSectionTextViewArrowColorDark">#E2E2E2</color>
+
+
+    <!--  Background  -->
+    <color name="BackgroundDefaultLight">#FFFFFF</color>
+    <color name="BackgroundDefaultDark">#121212</color>
+    <color name="BackgroundSecondaryLight">#F5F5F5</color>
+    <color name="BackgroundSecondaryDark">#121212</color>
+
+    <!--  Surface  -->
+    <color name="SurfaceFirstLight">#FFFFFF</color>
+    <color name="SurfaceFirstDark">#1E1E1E</color>
+
+    <color name="SurfaceSecondLight">#FFFFFF</color>
+    <color name="SurfaceSecondDark">#242424</color>
+
+    <color name="SurfaceThirdLight">#FFFFFF</color>
+    <color name="SurfaceThirdDark">#272727</color>
+
+    <color name="SurfaceFourthLight">#FFFFFF</color>
+    <color name="SurfaceFourthDark">#323232</color>
+
+
+    <!--  Button Background  -->
+    <color name="ButtonDangerEnableLight">#DE2222</color>
+    <color name="ButtonDangerEnableDark">#DE2222</color>
+    <color name="ButtonDangerPressedLight">#C00404</color>
+    <color name="ButtonDangerPressedDark">#C00404</color>
+
+    <color name="ButtonInfoEnableLight">#039BE5</color>
+    <color name="ButtonInfoEnableDark">#28B5F6</color>
+    <color name="ButtonInfoPressedLight">#0A87D1</color>
+    <color name="ButtonInfoPressedDark">#4AC1F7</color>
+
+    <color name="ButtonSuccessEnableLight">#4CB944</color>
+    <color name="ButtonSuccessEnableDark">#4CB944</color>
+    <color name="ButtonSuccessPressedLight">#299421</color>
+    <color name="ButtonSuccessPressedDark">#69C462</color>
+
+    <color name="ButtonSecondaryEnableLight">#F2F2F2</color>
+    <color name="ButtonSecondaryEnableDark">#212121</color>
+    <color name="ButtonSecondaryPressedLight">#DBDBDB</color>
+    <color name="ButtonSecondaryPressedDark">#161616</color>
+
+    <color name="ButtonDisableLight">#F6F6F6</color>
+    <color name="ButtonDisableDark">#212121</color>
+
+
+    <!--  Timer & Time  -->
+    <color name="TimeDefaultLight">#DBF1DA</color>
+    <color name="TimeDefaultDark">#C3EAC1</color>
+
+    <color name="TimeUsualLight">#1E1E1E</color>
+    <color name="TimeUsualDark">#FFFFFF</color>
+
+    <color name="TimeUrgentLight">#EA2249</color>
+    <color name="TimeUrgentDark">#4CB944</color>
+
+    <color name="TimerPositiveLight">#4CB944</color>
+    <color name="TimerPositiveDark">#4CB944</color>
+
+    <color name="TimerNegativeLight">#EA2249</color>
+    <color name="TimerNegativeDark">#EF3F63</color>
+
+    <color name="TimerBackgroundLight">#F6F6F6</color>
+    <color name="TimerBackgroundDark">#2C2C2C</color>
+
+
+    <!--  Text  -->
+    <color name="TextPrimaryLight">#121212</color>
+    <color name="TextPrimaryDark">#EFEFEF</color>
+
+    <color name="TextOnColorPrimaryLight">#FFFFFF</color>
+    <color name="TextOnColorPrimaryLightOpacity60">#99FFFFFF</color>
+    <color name="TextOnColorPrimaryDark">#FFFFFF</color>
+    <color name="TextOnColorPrimaryDarkOpacity60">#99FFFFFF</color>
+
+    <color name="TextOnColorSecondaryLight">#1E1E1E</color>
+    <color name="TextOnColorSecondaryDark">#1E1E1E</color>
+
+    <color name="TextOnColorAdditionalLight">#A4A4A4</color>
+    <color name="TextOnColorAdditionalDark">#B2B2B2</color>
+
+    <color name="TextDangerEnabledLight">#DE2222</color>
+    <color name="TextDangerEnabledDark">#DE2222</color>
+
+    <color name="TextDangerPressedLight">#DE2222</color>
+    <color name="TextDangerPressedDark">#DE2222</color>
+
+    <color name="TextWarningLight">#F8AA15</color>
+    <color name="TextWarningDark">#F8AA15</color>
+
+    <color name="TextInfoEnabledLight">#039BE5</color>
+    <color name="TextInfoEnabledDark">#28B5F6</color>
+
+    <color name="TextInfoPressedLight">#0A87D1</color>
+    <color name="TextInfoPressedDark">#4AC1F7</color>
+
+    <color name="TextSuccessEnabledLight">#4CB944</color>
+    <color name="TextSuccessEnabledDark">#4CB944</color>
+
+    <color name="TextSuccessPressedLight">#299421</color>
+    <color name="TextSuccessPressedDark">#69C462</color>
+
+    <color name="TextSecondaryLight">#1C497C</color>
+    <color name="TextSecondaryDark">#3C86BF</color>
+
+    <color name="TextPlaceholderLight">#A4A4A4</color>
+    <color name="TextPlaceholderDark">#B2B2B2</color>
+
+    <color name="TextPinkLight">#EA2249</color>
+    <color name="TextPinkDark">#EF3F63</color>
+
+
+    <!--  Link  -->
+    <color name="LinkPrimaryLight">#039BE5</color>
+    <color name="LinkPrimaryDark">#28B5F6</color>
+
+
+    <!--  Text View  -->
+    <color name="TextViewPrimaryLight">#F6F6F6</color>
+    <color name="TextViewPrimaryDark">#2C2C2C</color>
+
+    <color name="TextViewDividerEnabledLight">#A4A4A4</color>
+    <color name="TextViewDividerEnabledDark">#B2B2B2</color>
+
+    <color name="TextViewDividerErrorLight">#DE2222</color>
+    <color name="TextViewDividerErrorDark">#DE2222</color>
+
+    <color name="TextViewDividerFocusedLight">#039BE5</color>
+    <color name="TextViewDividerFocusedDark">#28B5F6</color>
+
+
+    <!--  Error  -->
+    <color name="ErrorDangerLight">#DE2222</color>
+    <color name="ErrorDangerDark">#DE2222</color>
+
+    <color name="ErrorSuccessLight">#4CB944</color>
+    <color name="ErrorSuccessDark">#4CB944</color>
+
+
+    <!--  Marker  -->
+    <color name="MarkerPrimaryLight">#DE2222</color>
+    <color name="MarkerPrimaryDark">#DE2222</color>
+
+    <color name="MarkerSecondaryLight">#FFFFFF</color>
+    <color name="MarkerSecondaryDark">#FFFFFF</color>
+
+
+    <!--  Scrollbar  -->
+    <color name="ScrollbarPrimaryLight">#DADADA</color>
+    <color name="ScrollbarPrimaryDark">#DADADA</color>
+
+
+    <!--  Progress  -->
+    <color name="ProgressPrimaryLight">#039BE5</color>
+    <color name="ProgressPrimaryDark">#28B5F6</color>
+
+
+    <!--  Divider  -->
+    <color name="DividerPrimaryLight">#F6F6F6</color>
+    <color name="DividerPrimaryDark">#121212</color>
+
+
+    <!--  Icon & Icon Backgrounds  -->
+    <color name="IconPrimaryLight">#FFFFFF</color>
+    <color name="IconPrimaryDark">#EFEFEF</color>
+
+    <color name="IconSecondaryLight">#000000</color>
+    <color name="IconSecondaryDark">#EFEFEF</color>
+
+    <color name="IconBlueLight">#1C497C</color>
+    <color name="IconBlueDark">#3C86BF</color>
+
+    <color name="IconWarningLight">#F8AA15</color>
+    <color name="IconWarningDark">#F8AA15</color>
+
+    <color name="IconInfoLight">#039BE5</color>
+    <color name="IconInfoDark">#039BE5</color>
+
+    <color name="IconGreyLight">#A4A4A4</color>
+    <color name="IconGreyLightOpacity80">#CCA4A4A4</color>
+    <color name="IconGreyLightOpacity60">#99A4A4A4</color>
+    <color name="IconGreyDark">#B2B2B2</color>
+
+    <color name="IconDangerLight">#DE2222</color>
+    <color name="IconDangerDark">#DE2222</color>
+
+    <color name="IconPinkLight">#EA2249</color>
+    <color name="IconPinkDark">#EF3F63</color>
+
+    <color name="IconBackgroundDefaultLight">#F6F6F6</color>
+    <color name="IconBackgroundDefaultDark">#2C2C2C</color>
+
+    <color name="IconBackgroundYellowLight">#FFB300</color>
+    <color name="IconBackgroundYellowDark">#FFCA28</color>
+
+    <color name="IconBackgroundGreenLight">#4CB944</color>
+    <color name="IconBackgroundGreenDark">#4CB944</color>
+
+    <color name="IconBackgroundCyanLight">#00ACC1</color>
+    <color name="IconBackgroundCyanDark">#25C5DA</color>
+
+    <color name="IconBackgroundVioletLight">#BD15F8</color>
+    <color name="IconBackgroundVioletDark">#BD15F8</color>
+
+    <color name="IconBackgroundBlueLight">#1C497C</color>
+    <color name="IconBackgroundBlueDark">#3C86BF</color>
+
+    <color name="IconBackgroundGreyLight">#A4A4A4</color>
+    <color name="IconBackgroundGreyDark">#B2B2B2</color>
+
+    <color name="IconBackgroundOrangeLight">#F57C00</color>
+    <color name="IconBackgroundOrangeDark">#F57C00</color>
+
 </resources>

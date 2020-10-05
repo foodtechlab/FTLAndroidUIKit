@@ -17,7 +17,7 @@ import androidx.core.view.isVisible
 import androidx.transition.Fade
 import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.common.DotsProgress
+import com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLToolbarDotsProgress
 
 
 /**
@@ -57,7 +57,7 @@ class FTLButton @JvmOverloads constructor(
     private var clickListener: OnClickListener? = null
 
     private val tvText: TextView
-    private val dotProgress: DotsProgress
+    private val dotProgress: FTLToolbarDotsProgress
 
     init {
         inflate(context, R.layout.layout_ftl_button, this)

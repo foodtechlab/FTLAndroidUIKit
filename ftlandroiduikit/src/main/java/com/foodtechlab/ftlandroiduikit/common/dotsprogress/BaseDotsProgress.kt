@@ -1,6 +1,7 @@
-package com.foodtechlab.ftlandroiduikit.common
+package com.foodtechlab.ftlandroiduikit.common.dotsprogress
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Paint
@@ -13,16 +14,17 @@ import android.view.animation.Transformation
 import androidx.annotation.ColorInt
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import kotlin.math.min
 
 /**
- * Created by Umalt on 18.06.2020
+ * Created by Umalt on 30.09.2020
  */
-class DotsProgress @JvmOverloads constructor(
+abstract class BaseDotsProgress @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : View(context, attrs, defStyleAttr) {
+) : View(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
 
     private val displayDensity = resources.displayMetrics.density
 
@@ -52,7 +54,6 @@ class DotsProgress @JvmOverloads constructor(
 
     private val dotPaint = Paint(Paint.ANTI_ALIAS_FLAG)
 
-
     private val bounceAnimation by lazy {
         BounceAnimation().apply {
             duration = animationSpeed
@@ -81,8 +82,9 @@ class DotsProgress @JvmOverloads constructor(
             gap = getDimension(R.styleable.FTLDotsProgress_gap, gap)
             origGap = getDimension(R.styleable.FTLDotsProgress_gap, gap)
 
-            dotColor = getColor(R.styleable.FTLDotsProgress_dot_color, dotColor)
-            bounceDotColor = getColor(R.styleable.FTLDotsProgress_bounce_dot_color, dotColor)
+            setupDotColor()
+
+            setupBounceDotColor()
 
             dotRadius = getDimension(R.styleable.FTLDotsProgress_dot_radius, dotRadius)
             origDotRadius = getDimension(R.styleable.FTLDotsProgress_dot_radius, dotRadius)
@@ -116,6 +118,21 @@ class DotsProgress @JvmOverloads constructor(
             measureDimension(desiredWidth.toInt(), widthMeasureSpec),
             measureDimension(desiredHeight.toInt(), heightMeasureSpec)
         )
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
     }
 
     private fun Canvas.drawDots() {
@@ -153,7 +170,8 @@ class DotsProgress @JvmOverloads constructor(
             val scale = result.toFloat() / desiredSize
             gap = min(gap, origGap * scale)
             dotRadius = min(dotRadius, origDotRadius * HALF)
-            bounceDotRadius = min(bounceDotRadius, origBounceDotRadius * HALF)
+            bounceDotRadius =
+                min(bounceDotRadius, origBounceDotRadius * HALF)
         }
 
         return result
@@ -167,6 +185,10 @@ class DotsProgress @JvmOverloads constructor(
         bounceAnimation.cancel()
         animation = null
     }
+
+    protected abstract fun TypedArray.setupDotColor()
+
+    protected abstract fun TypedArray.setupBounceDotColor()
 
     private inner class BounceAnimation : Animation() {
         override fun applyTransformation(interpolatedTime: Float, t: Transformation?) {

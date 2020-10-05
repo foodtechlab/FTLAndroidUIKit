@@ -382,15 +382,20 @@
     <declare-styleable name="FTLToolbar">
         <attr name="ftlToolbar_title" format="string" />
         <attr name="ftlToolbar_subtitle" format="string" />
-        <attr name="ftlToolbar_title_color" format="color" />
-        <attr name="ftlToolbar_subtitle_color" format="color" />
+        <attr name="ftlToolbar_title_color_light" format="color" />
+        <attr name="ftlToolbar_title_color_dark" format="color" />
+        <attr name="ftlToolbar_subtitle_color_light" format="color" />
+        <attr name="ftlToolbar_subtitle_color_dark" format="color" />
         <attr name="ftlToolbar_shadow_visible" format="boolean" />
         <attr name="ftlToolbar_end_icon" format="reference" />
         <attr name="ftlToolbar_logo_icon" format="reference" />
         <attr name="ftlToolbar_start_icon" format="reference" />
+        <attr name="ftlToolbar_start_icon_color_light" format="color" />
+        <attr name="ftlToolbar_start_icon_color_dark" format="color" />
         <attr name="ftlToolbar_logo_placeholder" format="reference" />
         <attr name="ftlToolbar_action_text" format="string" />
-        <attr name="ftlToolbar_action_color" format="color" />
+        <attr name="ftlToolbar_action_color_light" format="color" />
+        <attr name="ftlToolbar_action_color_dark" format="color" />
         <attr name="ftlToolbar_action_drawable" format="reference" />
     </declare-styleable>
 
@@ -482,8 +487,10 @@
     <declare-styleable name="FTLDotsProgress">
         <attr name="gap" format="dimension" />
         <attr name="dots_count" format="integer" />
-        <attr name="dot_color" format="color" />
-        <attr name="bounce_dot_color" format="color" />
+        <attr name="dot_color_dark" format="color" />
+        <attr name="dot_color_light" format="color" />
+        <attr name="bounce_dot_color_dark" format="color" />
+        <attr name="bounce_dot_color_light" format="color" />
         <attr name="dot_radius" format="dimension" />
         <attr name="dot_bounce_radius" format="dimension" />
         <attr name="animation_speed" format="integer" />

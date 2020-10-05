@@ -32,10 +32,10 @@
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:layout_marginBottom="12dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:layout_marginEnd="12dp"
-            android:layout_marginStart="8dp">
+            android:layout_marginBottom="12dp">
 
             <TextView
                 android:id="@+id/tv_ftl_toolbar_action"
@@ -63,13 +63,11 @@
                 android:visibility="gone"
                 tools:src="@drawable/ic_close_24" />
 
-            <ImageView
+            <com.foodtechlab.ftlandroiduikit.imageview.FTLPlaceholderImageView
                 android:id="@+id/iv_ftl_toolbar_logo"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerInside"
                 android:layout_marginEnd="4dp"
-                android:src="@drawable/ic_restaurant_placeholder"
                 android:visibility="gone" />
 
             <FrameLayout
@@ -105,7 +103,7 @@
             android:visibility="gone"
             app:size="small" />
 
-        <com.foodtechlab.ftlandroiduikit.common.DotsProgress
+        <com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLToolbarDotsProgress
             android:id="@+id/dot_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -114,8 +112,6 @@
             android:layout_toEndOf="@id/ib_ftl_toolbar_start"
             android:visibility="gone"
             app:animation_speed="150"
-            app:bounce_dot_color="@color/OnBackgroundSecondaryOpacity80"
-            app:dot_color="@color/OnBackgroundSecondaryOpacity60"
             app:gap="0dp" />
     </RelativeLayout>
 
