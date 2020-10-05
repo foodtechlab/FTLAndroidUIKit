@@ -36,6 +36,11 @@
             android:id="@+id/cpbIndicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
+
+        <com.foodtechlab.ftlandroiduikit.card.FTLCardView
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:layout_margin="16dp" />
     </com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout>
 
     <ImageView

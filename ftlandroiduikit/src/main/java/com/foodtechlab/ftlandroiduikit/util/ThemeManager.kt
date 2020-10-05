@@ -94,7 +94,8 @@ object ThemeManager {
         val ftlDeliveryTimeViewInProgressLateTheme: FTLDeliveryTimeViewTheme,
         val ftlCircleProgressIndicatorTheme: FTLCircleProgressIndicatorTheme,
         val ftlProgressDialogTheme: FTLProgressDialogTheme,
-        val ftlEmptyListImageViewTheme: FTLEmptyListImageViewTheme
+        val ftlEmptyListImageViewTheme: FTLEmptyListImageViewTheme,
+        val ftlCardViewTheme: FTLCardViewTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -165,7 +166,8 @@ object ThemeManager {
                 R.color.TextOnColorAdditionalLight,
                 R.color.SurfaceFourthLight
             ),
-            FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_light)
+            FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_light),
+            FTLCardViewTheme(R.color.SurfaceFirstLight)
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
@@ -236,7 +238,8 @@ object ThemeManager {
                 R.color.TextOnColorAdditionalDark,
                 R.color.SurfaceFourthDark
             ),
-            FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_dark)
+            FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_dark),
+            FTLCardViewTheme(R.color.SurfaceFirstDark)
         )
     }
 
@@ -283,6 +286,10 @@ object ThemeManager {
 
     data class FTLEmptyListImageViewTheme(
         @DrawableRes val imgSrc: Int
+    )
+
+    data class FTLCardViewTheme(
+        @ColorRes val bgColor: Int
     )
 
     interface ThemeChangedListener {
