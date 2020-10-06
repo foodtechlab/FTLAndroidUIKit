@@ -11,10 +11,11 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.graphics.drawable.DrawableCompat
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 
 
-class FTLSwitch : SwitchCompat {
+class FTLSwitch : SwitchCompat, ThemeManager.ThemeChangedListener {
     constructor(context: Context) : super(context) {
         init(null)
     }
@@ -35,7 +36,7 @@ class FTLSwitch : SwitchCompat {
     private var thumbOnColor = ContextCompat.getColor(context, R.color.PrimaryDangerEnabled)
 
     @ColorInt
-    private var thumbOffColor = ContextCompat.getColor(context, R.color.OnBackgroundSecondary)
+    private var thumbOffColor = ContextCompat.getColor(context, R.color.ButtonSecondaryEnableLight)
 
     @ColorInt
     private var trackOnColor =
@@ -43,7 +44,7 @@ class FTLSwitch : SwitchCompat {
 
     @ColorInt
     private var trackOffColor =
-        ContextCompat.getColor(context, R.color.OnBackgroundSecondaryOpacity30)
+        ContextCompat.getColor(context, R.color.SwitchTrackEnableLight)
 
     @ColorInt
     private var highlightOnColor =
@@ -51,7 +52,7 @@ class FTLSwitch : SwitchCompat {
 
     @ColorInt
     private var highlightOffColor =
-        ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
+        ContextCompat.getColor(context, R.color.SwitchTrackEnableLight)
 
     private val states = arrayOf(
         intArrayOf(-android.R.attr.state_checked),
@@ -61,37 +62,21 @@ class FTLSwitch : SwitchCompat {
     private fun init(attrs: AttributeSet?) {
         context.withStyledAttributes(attrs, R.styleable.FTLSwitch) {
             thumbOnColor = getColor(
-                R.styleable.FTLSwitch_thumbOnColor,
+                R.styleable.FTLSwitch_thumbAccentColor,
                 ContextCompat.getColor(context, R.color.PrimaryDangerEnabled)
             )
 
-            thumbOffColor = getColor(
-                R.styleable.FTLSwitch_thumbOffColor,
-                ContextCompat.getColor(context, R.color.OnBackgroundSecondary)
-            )
-
             trackOnColor = getColor(
-                R.styleable.FTLSwitch_trackOnColor,
+                R.styleable.FTLSwitch_trackAccentColor,
                 ContextCompat.getColor(context, R.color.PrimaryDangerEnabledOpacity30)
-            )
-
-            trackOffColor = getColor(
-                R.styleable.FTLSwitch_trackOffColor,
-                ContextCompat.getColor(context, R.color.OnBackgroundSecondaryOpacity30)
             )
 
             highlightOnColor = getColor(
-                R.styleable.FTLSwitch_highlightOnColor,
+                R.styleable.FTLSwitch_highlightAccentColor,
                 ContextCompat.getColor(context, R.color.PrimaryDangerEnabledOpacity30)
-            )
-
-            highlightOffColor = getColor(
-                R.styleable.FTLSwitch_highlightOffColor,
-                ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
             )
         }
 
-        setTextColor(ContextCompat.getColor(context, R.color.OnSurfaceSecondary))
         textSize = 16f
         setLineSpacing(context.dpToPx(5f), 1.0f)
 
@@ -99,31 +84,55 @@ class FTLSwitch : SwitchCompat {
             typeface = ResourcesCompat.getFont(context, R.font.roboto_regular)
         }
 
-        setThumbColors(thumbOnColor, thumbOffColor)
-        setTrackColors(trackOnColor, trackOffColor)
-        setHighlightColors(highlightOnColor, highlightOffColor)
+        onThemeChanged(ThemeManager.theme)
     }
 
-    fun setThumbColors(@ColorInt onColor: Int, @ColorInt offColor: Int) {
-        val thumbColors = intArrayOf(offColor, onColor)
+    fun setThumbColors(@ColorInt accentThumbColor: Int) {
+        val thumbColors = intArrayOf(thumbOffColor, accentThumbColor)
         DrawableCompat.setTintList(
             DrawableCompat.wrap(thumbDrawable),
             ColorStateList(states, thumbColors)
         )
     }
 
-    fun setTrackColors(@ColorInt onColor: Int, @ColorInt offColor: Int) {
-        val trackColors = intArrayOf(offColor, onColor)
+    fun setTrackColors(@ColorInt accentTrackColor: Int) {
+        val trackColors = intArrayOf(trackOffColor, accentTrackColor)
         DrawableCompat.setTintList(
             DrawableCompat.wrap(trackDrawable),
             ColorStateList(states, trackColors)
         )
     }
 
-    fun setHighlightColors(@ColorInt onColor: Int, @ColorInt offColor: Int) {
-        val controlHighlightColors = intArrayOf(offColor, onColor)
+    fun setHighlightColors(@ColorInt accentHighlightColor: Int) {
+        val controlHighlightColors = intArrayOf(highlightOffColor, accentHighlightColor)
         val rippleDrawable = background as RippleDrawable
         rippleDrawable.setColor(ColorStateList(states, controlHighlightColors))
         background = rippleDrawable
     }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        setTextColor(ContextCompat.getColor(context, theme.ftlSwitchTheme.textColor))
+        thumbOffColor = ContextCompat.getColor(context, theme.ftlSwitchTheme.thumbColor)
+        trackOffColor = ContextCompat.getColor(context, theme.ftlSwitchTheme.trackColor)
+        highlightOffColor = ContextCompat.getColor(context, theme.ftlSwitchTheme.highlightColor)
+        setThumbColors(thumbOnColor)
+        setTrackColors(trackOnColor)
+        setHighlightColors(highlightOnColor)
+    }
+
 }

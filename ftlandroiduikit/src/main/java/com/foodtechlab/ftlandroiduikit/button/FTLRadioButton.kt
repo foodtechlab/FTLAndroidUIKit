@@ -11,9 +11,10 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.updatePadding
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 
-class FTLRadioButton : AppCompatRadioButton {
+class FTLRadioButton : AppCompatRadioButton, ThemeManager.ThemeChangedListener {
     constructor(context: Context?) : super(context) {
         init(null)
     }
@@ -35,7 +36,7 @@ class FTLRadioButton : AppCompatRadioButton {
 
     @ColorInt
     private var colorForStateUnchecked =
-        ContextCompat.getColor(context, R.color.PrimaryDangerEnabled)
+        ContextCompat.getColor(context, R.color.ButtonSecondaryEnableLight)
 
     private val states = arrayOf(
         intArrayOf(-android.R.attr.state_checked),
@@ -48,14 +49,9 @@ class FTLRadioButton : AppCompatRadioButton {
                 R.styleable.FTLRadioButton_colorForStateChecked,
                 ContextCompat.getColor(context, R.color.PrimaryDangerEnabled)
             )
-            colorForStateUnchecked = getColor(
-                R.styleable.FTLRadioButton_colorForStateUnchecked,
-                ContextCompat.getColor(context, R.color.OnBackgroundSecondary)
-            )
         }
-        updateColorStyle(colorForStateChecked, colorForStateUnchecked)
+        onThemeChanged(ThemeManager.theme)
 
-        setTextColor(ContextCompat.getColor(context, R.color.OnSurfaceSecondary))
         textSize = 16f
         setLineSpacing(context.dpToPx(5f), 1.0f)
         typeface = ResourcesCompat.getFont(context, R.font.roboto_regular)
@@ -69,8 +65,30 @@ class FTLRadioButton : AppCompatRadioButton {
         updatePaddingForComponent()
     }
 
-    fun updateColorStyle(@ColorInt onColor: Int, @ColorInt offColor: Int) {
-        val rbColors = intArrayOf(offColor, onColor)
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        setTextColor(ContextCompat.getColor(context, theme.ftlRadioButtonTheme.textColor))
+        colorForStateUnchecked =
+            ContextCompat.getColor(context, theme.ftlRadioButtonTheme.uncheckedStateColor)
+        updateColorStyle(colorForStateChecked)
+    }
+
+    fun updateColorStyle(@ColorInt checkedStateColor: Int) {
+        val rbColors = intArrayOf(colorForStateUnchecked, checkedStateColor)
         val typedValue = TypedValue()
         context.theme.resolveAttribute(
             android.R.attr.listChoiceIndicatorSingle,

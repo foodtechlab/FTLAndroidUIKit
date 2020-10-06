@@ -94,10 +94,13 @@ object ThemeManager {
         val ftlDeliveryTimeViewInProgressLateTheme: FTLDeliveryTimeViewTheme,
         val ftlCircleProgressIndicatorTheme: FTLCircleProgressIndicatorTheme,
         val ftlProgressDialogTheme: FTLProgressDialogTheme,
+        val ftlRadioButtonTheme: FTLRadioButtonTheme,
+        val ftlSwitchTheme: FTLSwitchTheme,
         val ftlEmptyListImageViewTheme: FTLEmptyListImageViewTheme,
         val ftlCardViewTheme: FTLCardViewTheme,
         val ftlShimmerViewTheme: FTLShimmerViewTheme,
-        val ftlShimmerFrameLayoutTheme: FTLShimmerFrameLayoutTheme
+        val ftlShimmerFrameLayoutTheme: FTLShimmerFrameLayoutTheme,
+        val ftlFloatingActionButtonTheme: FTLFloatingActionButtonTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -168,12 +171,25 @@ object ThemeManager {
                 R.color.TextOnColorAdditionalLight,
                 R.color.SurfaceFourthLight
             ),
+            FTLRadioButtonTheme(
+                R.color.TextPrimaryLight,
+                R.color.ButtonSecondaryEnableLight
+            ),
+            FTLSwitchTheme(
+                R.color.TextPrimaryLight,
+                R.color.SwitchTrackEnableLight,
+                R.color.ButtonSecondaryEnableLight,
+                R.color.ButtonSecondaryEnableLight
+            ),
             FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_light),
             FTLCardViewTheme(R.color.SurfaceFirstLight),
             FTLShimmerViewTheme(R.color.ShimmerBackgroundLight),
             FTLShimmerFrameLayoutTheme(
                 R.color.ShimmerBaseLight,
                 R.color.ShimmerHighlightingLight,
+            ),
+            FTLFloatingActionButtonTheme(
+                R.color.selector_ftl_fab_light,
             )
         ),
         DARK(
@@ -245,12 +261,25 @@ object ThemeManager {
                 R.color.TextOnColorAdditionalDark,
                 R.color.SurfaceFourthDark
             ),
+            FTLRadioButtonTheme(
+                R.color.TextPrimaryDark,
+                R.color.ButtonSecondaryEnableDark
+            ),
+            FTLSwitchTheme(
+                R.color.TextPrimaryDark,
+                R.color.SwitchTrackEnableDark,
+                R.color.ButtonSecondaryEnableDark,
+                R.color.ButtonSecondaryEnableDark
+            ),
             FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_dark),
             FTLCardViewTheme(R.color.SurfaceFirstDark),
             FTLShimmerViewTheme(R.color.ShimmerBackgroundDark),
             FTLShimmerFrameLayoutTheme(
                 R.color.ShimmerBaseDark,
                 R.color.ShimmerHighlightingDark,
+            ),
+            FTLFloatingActionButtonTheme(
+                R.color.selector_ftl_fab_dark,
             )
         )
     }
@@ -296,6 +325,18 @@ object ThemeManager {
         @ColorRes val bgColor: Int
     )
 
+    data class FTLRadioButtonTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val uncheckedStateColor: Int
+    )
+
+    data class FTLSwitchTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val trackColor: Int,
+        @ColorRes val thumbColor: Int,
+        @ColorRes val highlightColor: Int
+    )
+
     data class FTLEmptyListImageViewTheme(
         @DrawableRes val imgSrc: Int
     )
@@ -311,6 +352,10 @@ object ThemeManager {
     data class FTLShimmerFrameLayoutTheme(
         @ColorRes val baseColor: Int,
         @ColorRes val highlightingColor: Int
+    )
+
+    data class FTLFloatingActionButtonTheme(
+        @ColorRes val bgColor: Int
     )
 
     interface ThemeChangedListener {
