@@ -2,12 +2,16 @@ package com.foodtechlab.ftlandroiduikitsample.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.foodtechlab.ftlandroiduikit.sheet.DialogState
+import com.foodtechlab.ftlandroiduikit.sheet.FTLBottomSheet
+import com.foodtechlab.ftlandroiduikit.sheet.Type
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikitsample.R
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 
 class MainActivity : AppCompatActivity() {
+    private var bottomSheetDialog: FTLBottomSheet? = null
 
     @ObsoleteCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +43,19 @@ class MainActivity : AppCompatActivity() {
                 .apply()
         }
 
-        fab.setOnClickListener { }
+        fab.setOnClickListener {
+            if (bottomSheetDialog?.isAdded != true) {
+                bottomSheetDialog =
+                    FTLBottomSheet.newInstance(
+                        DialogState(
+                            "Ошибка",
+                            "В приложении не предвиденная ошибка",
+                            Type.SAD,
+                            listOf()
+                        )
+                    )
+                bottomSheetDialog?.show(supportFragmentManager, FTLBottomSheet.TAG)
+            }
+        }
     }
 }

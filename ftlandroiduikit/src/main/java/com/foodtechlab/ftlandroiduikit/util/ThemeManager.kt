@@ -101,7 +101,8 @@ object ThemeManager {
         val ftlShimmerViewTheme: FTLShimmerViewTheme,
         val ftlShimmerFrameLayoutTheme: FTLShimmerFrameLayoutTheme,
         val ftlFloatingActionButtonTheme: FTLFloatingActionButtonTheme,
-        val ftlImageButtonTheme: FTLImageButtonTheme
+        val ftlImageButtonTheme: FTLImageButtonTheme,
+        val ftlBottomSheetTheme: FTLBottomSheetTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -117,18 +118,12 @@ object ThemeManager {
                 R.color.ErrorSuccessLight,
                 R.color.ErrorDangerLight
             ),
-            DotsProgressTheme(
-                R.color.IconGreyLightOpacity60,
-                R.color.IconGreyLightOpacity80
-            ),
+            DotsProgressTheme(R.color.IconGreyLightOpacity60, R.color.IconGreyLightOpacity80),
             DotsProgressTheme(
                 R.color.TextOnColorPrimaryLightOpacity60,
                 R.color.TextOnColorPrimaryLight
             ),
-            DotsProgressTheme(
-                R.color.IconGreyLightOpacity60,
-                R.color.IconGreyLightOpacity80
-            ),
+            DotsProgressTheme(R.color.IconGreyLightOpacity60, R.color.IconGreyLightOpacity80),
             FTLPlaceholderImageViewTheme(R.drawable.ic_restaurant_placeholder_light),
             FTLDeliveryTimeViewTheme(
                 R.color.TimeUsualLight,
@@ -166,14 +161,8 @@ object ThemeManager {
                 R.color.TimerNegativeLight
             ), // in progress late
             FTLCircleProgressIndicatorTheme(R.color.SurfaceFourthLight),
-            FTLProgressDialogTheme(
-                R.color.TextOnColorAdditionalLight,
-                R.color.SurfaceFourthLight
-            ),
-            FTLRadioButtonTheme(
-                R.color.TextPrimaryLight,
-                R.color.ButtonSecondaryEnableLight
-            ),
+            FTLProgressDialogTheme(R.color.TextOnColorAdditionalLight, R.color.SurfaceFourthLight),
+            FTLRadioButtonTheme(R.color.TextPrimaryLight, R.color.ButtonSecondaryEnableLight),
             FTLSwitchTheme(
                 R.color.TextPrimaryLight,
                 R.color.SwitchTrackEnableLight,
@@ -198,8 +187,10 @@ object ThemeManager {
                 R.drawable.selector_additional_button_replay_small_light,
                 R.drawable.selector_additional_button_replay_medium_light,
                 R.drawable.selector_additional_button_replay_large_light
-            )
+            ),
+            FTLBottomSheetTheme(R.color.TextPrimaryLight, R.color.SurfaceFourthLight)
         ),
+
         DARK(
             FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
             FTLToolbarTheme(
@@ -214,18 +205,12 @@ object ThemeManager {
                 R.color.ErrorSuccessDark,
                 R.color.ErrorDangerDark
             ),
-            DotsProgressTheme(
-                R.color.IconGreyLightOpacity60,
-                R.color.IconGreyLightOpacity80
-            ),
+            DotsProgressTheme(R.color.IconGreyLightOpacity60, R.color.IconGreyLightOpacity80),
             DotsProgressTheme(
                 R.color.TextOnColorPrimaryDarkOpacity60,
                 R.color.TextOnColorPrimaryDark
             ),
-            DotsProgressTheme(
-                R.color.IconGreyLightOpacity60,
-                R.color.IconGreyLightOpacity80
-            ),
+            DotsProgressTheme(R.color.IconGreyLightOpacity60, R.color.IconGreyLightOpacity80),
             FTLPlaceholderImageViewTheme(R.drawable.ic_restaurant_placeholder_dark),
             FTLDeliveryTimeViewTheme(
                 R.color.TimeUsualDark,
@@ -262,17 +247,9 @@ object ThemeManager {
                 android.R.color.transparent,
                 R.color.TimerNegativeDark
             ), // in progress late
-            FTLCircleProgressIndicatorTheme(
-                R.color.SurfaceFourthDark
-            ),
-            FTLProgressDialogTheme(
-                R.color.TextOnColorAdditionalDark,
-                R.color.SurfaceFourthDark
-            ),
-            FTLRadioButtonTheme(
-                R.color.TextPrimaryDark,
-                R.color.ButtonSecondaryEnableDark
-            ),
+            FTLCircleProgressIndicatorTheme(R.color.SurfaceFourthDark),
+            FTLProgressDialogTheme(R.color.TextOnColorAdditionalDark, R.color.SurfaceFourthDark),
+            FTLRadioButtonTheme(R.color.TextPrimaryDark, R.color.ButtonSecondaryEnableDark),
             FTLSwitchTheme(
                 R.color.TextPrimaryDark,
                 R.color.SwitchTrackEnableDark,
@@ -297,7 +274,8 @@ object ThemeManager {
                 R.drawable.selector_additional_button_replay_small_dark,
                 R.drawable.selector_additional_button_replay_medium_dark,
                 R.drawable.selector_additional_button_replay_large_dark
-            )
+            ),
+            FTLBottomSheetTheme(R.color.TextPrimaryDark, R.color.SurfaceFourthDark)
         )
     }
 
@@ -392,6 +370,11 @@ object ThemeManager {
         @DrawableRes val replaySmall: Int,
         @DrawableRes val replayMedium: Int,
         @DrawableRes val replayLarge: Int
+    )
+
+    data class FTLBottomSheetTheme(
+        @ColorRes val messageColor: Int,
+        @ColorRes val bgColor: Int
     )
 
     interface ThemeChangedListener {
