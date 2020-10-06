@@ -125,7 +125,7 @@ object ThemeManager {
                 R.color.IconGreyLightOpacity60,
                 R.color.IconGreyLightOpacity80
             ),
-            FTLPlaceholderImageViewTheme(R.color.IconBackgroundDefaultLight),
+            FTLPlaceholderImageViewTheme(R.drawable.ic_restaurant_placeholder_light),
             FTLDeliveryTimeViewTheme(
                 R.color.TimeUsualLight,
                 R.color.TimeDefaultLight,
@@ -202,7 +202,7 @@ object ThemeManager {
                 R.color.IconGreyLightOpacity60,
                 R.color.IconGreyLightOpacity80
             ),
-            FTLPlaceholderImageViewTheme(R.color.PrimaryDangerEnabled),
+            FTLPlaceholderImageViewTheme(R.drawable.ic_restaurant_placeholder_dark),
             FTLDeliveryTimeViewTheme(
                 R.color.TimeUsualDark,
                 R.color.TimeDefaultDark,
@@ -265,7 +265,8 @@ object ThemeManager {
         @ColorRes var socketConnected: Int,
         @ColorRes var socketDisconnected: Int,
         @ColorRes var networkConnected: Int,
-        @ColorRes var networkDisconnected: Int
+        @ColorRes var networkDisconnected: Int,
+        @DrawableRes var logoIcon: Int = -1
     )
 
     data class DotsProgressTheme(
@@ -274,7 +275,7 @@ object ThemeManager {
     )
 
     data class FTLPlaceholderImageViewTheme(
-        @ColorRes val placeholderColor: Int
+        @DrawableRes var placeholder: Int
     )
 
     data class FTLLinearLayoutTheme(

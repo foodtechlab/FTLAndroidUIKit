@@ -111,8 +111,6 @@ class FTLToolbar @JvmOverloads constructor(
 
     private val hideNetworkConnectivityBar = Runnable { tvConnectivity.isGone = true }
 
-    var logoPlaceholder: Drawable? = null
-
     var onUpdateEndContent: OnUpdateEndContent? = null
 
     var onToolbarClickListener: OnToolbarClickListener? = null
@@ -173,23 +171,14 @@ class FTLToolbar @JvmOverloads constructor(
             if (hasValue(R.styleable.FTLToolbar_ftlToolbar_end_icon)) {
                 endDrawable = getDrawable(R.styleable.FTLToolbar_ftlToolbar_end_icon)
             }
-            logoPlaceholder = when {
-                hasValue(R.styleable.FTLToolbar_ftlToolbar_logo_placeholder) ->
-                    getDrawable(R.styleable.FTLToolbar_ftlToolbar_logo_placeholder)
-                        ?: ContextCompat.getDrawable(context, R.drawable.ic_restaurant_placeholder)
-                else -> ContextCompat.getDrawable(context, R.drawable.ic_restaurant_placeholder)
-            }
-            logoIcon = when {
-                hasValue(R.styleable.FTLToolbar_ftlToolbar_logo_icon) ->
-                    getDrawable(R.styleable.FTLToolbar_ftlToolbar_logo_icon) ?: logoPlaceholder
-                else -> logoPlaceholder
-            }
             actionDrawable = when {
                 hasValue(R.styleable.FTLToolbar_ftlToolbar_action_drawable) ->
                     getDrawable(R.styleable.FTLToolbar_ftlToolbar_action_drawable)
                 else -> null
             }
             isShadowVisible = getBoolean(R.styleable.FTLToolbar_ftlToolbar_shadow_visible, false)
+
+            setupLogoIcon()
 
             setupTitleColor()
 
@@ -239,6 +228,9 @@ class FTLToolbar @JvmOverloads constructor(
                 theme.ftlToolbarTheme.startIconColor
             )
         )
+        if (theme.ftlToolbarTheme.logoIcon != -1) {
+            logoIcon = ContextCompat.getDrawable(context, theme.ftlToolbarTheme.logoIcon)
+        }
         titleColor = ContextCompat.getColor(context, theme.ftlToolbarTheme.titleColor)
         subtitleColor = ContextCompat.getColor(context, theme.ftlToolbarTheme.subtitleColor)
         actionTextColor = ContextCompat.getColor(context, theme.ftlToolbarTheme.actionColor)
@@ -335,6 +327,23 @@ class FTLToolbar @JvmOverloads constructor(
             flEndContainer.getChildAt(i).isGone = true
         }
         onUpdateEndContent?.onUpdate(true)
+    }
+
+    private fun TypedArray.setupLogoIcon() {
+        ThemeManager.Theme.LIGHT.ftlToolbarTheme.logoIcon = getResourceId(
+            R.styleable.FTLToolbar_ftlToolbar_logo_icon_light,
+            ThemeManager.Theme.LIGHT.ftlToolbarTheme.logoIcon
+        )
+        ThemeManager.Theme.DARK.ftlToolbarTheme.logoIcon = getResourceId(
+            R.styleable.FTLToolbar_ftlToolbar_logo_icon_dark,
+            ThemeManager.Theme.DARK.ftlToolbarTheme.logoIcon
+        )
+        if (ThemeManager.theme.ftlToolbarTheme.logoIcon != -1) {
+            logoIcon = ContextCompat.getDrawable(
+                context,
+                ThemeManager.theme.ftlToolbarTheme.logoIcon
+            )
+        }
     }
 
     private fun TypedArray.setupTitleColor() {

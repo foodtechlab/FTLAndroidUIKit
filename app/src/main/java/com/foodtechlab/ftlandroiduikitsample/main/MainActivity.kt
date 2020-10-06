@@ -29,11 +29,12 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
 
         setContentView(R.layout.activity_main)
 
-        toolbar.showTime(
-            "Europe/Samara",
-            60 * 60 * 1000,
-            DeliveryStatus.URGENT
-        )
+//        toolbar.showTime(
+//            "Europe/Samara",
+//            60 * 60 * 1000,
+//            DeliveryStatus.URGENT
+//        )
+        toolbar.showLogo()
 
         btnSwitchTheme.setOnClickListener {
             ThemeManager.setTheme(
