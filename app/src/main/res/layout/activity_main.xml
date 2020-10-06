@@ -32,23 +32,138 @@
             android:padding="12dp"
             android:text="Switch theme" />
 
-        <RadioGroup
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+        <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
+            android:id="@+id/cpbIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
 
-        <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
+        <com.foodtechlab.ftlandroiduikit.card.FTLCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Hello world"/>
-            <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
+            android:layout_margin="16dp">
+
+            <com.foodtechlab.ftlandroiduikit.shimmer.FTLShimmerFrameLayout
+                android:id="@+id/sflPlaceholderContainer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Hello world2"/>
-        </RadioGroup>
-        <com.foodtechlab.ftlandroiduikit.switch.FTLSwitch
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Hello world"/>
+                app:shimmer_base_alpha="100"
+                app:shimmer_colored="true"
+                app:shimmer_duration="1000"
+                app:shimmer_highlight_alpha="100">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:orientation="vertical">
+
+                    <com.foodtechlab.ftlandroiduikit.shimmer.FTLShimmerView
+                        android:id="@+id/vPlaceholderBrandLogo"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/shape_placeholder_rect_round_16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.foodtechlab.ftlandroiduikit.shimmer.FTLShimmerView
+                        android:layout_width="70dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/shape_placeholder_rect_round_8dp"
+                        app:layout_constraintStart_toEndOf="@id/vPlaceholderBrandLogo"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.foodtechlab.ftlandroiduikit.shimmer.FTLShimmerView
+                        android:id="@+id/vPlaceholderTimeDelivery"
+                        android:layout_width="78dp"
+                        android:layout_height="32dp"
+                        android:layout_marginEnd="8dp"
+                        android:background="@drawable/shape_placeholder_rect_round_16dp"
+                        app:layout_constraintEnd_toStartOf="@id/vPlaceholderDetails"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.foodtechlab.ftlandroiduikit.shimmer.FTLShimmerView
+                        android:id="@+id/vPlaceholderDetails"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:background="@drawable/shape_placeholder_rect_round_8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <com.foodtechlab.ftlandroiduikit.shimmer.FTLShimmerView
+                        android:id="@+id/vPlaceholderRoute"
+                        android:layout_width="32dp"
+                        android:layout_height="64dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/shape_placeholder_rect_round_16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/vPlaceholderBrandLogo" />
+
+                    <com.foodtechlab.ftlandroiduikit.shimmer.FTLShimmerView
+                        android:id="@+id/vPlaceholderRouteAddressFrom"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:background="@drawable/shape_placeholder_rect_round_8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/vPlaceholderRoute"
+                        app:layout_constraintTop_toBottomOf="@id/vPlaceholderBrandLogo" />
+
+                    <com.foodtechlab.ftlandroiduikit.shimmer.FTLShimmerView
+                        android:id="@+id/vPlaceholderRouteAddressTo"
+                        android:layout_width="0dp"
+                        android:layout_height="32dp"
+                        android:layout_marginStart="8dp"
+                        android:background="@drawable/shape_placeholder_rect_round_8dp"
+                        app:layout_constraintBottom_toBottomOf="@id/vPlaceholderRoute"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/vPlaceholderRoute" />
+
+                    <com.foodtechlab.ftlandroiduikit.shimmer.FTLShimmerView
+                        android:id="@+id/vPlaceholderPriceImageSlot"
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/shape_placeholder_rect_round_16dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/vPlaceholderRoute" />
+
+                    <com.foodtechlab.ftlandroiduikit.shimmer.FTLShimmerView
+                        android:id="@+id/vPlaceholderPriceTopSlot"
+                        android:layout_width="0dp"
+                        android:layout_height="18dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/shape_placeholder_rect_round_4dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/vPlaceholderPriceImageSlot"
+                        app:layout_constraintTop_toBottomOf="@id/vPlaceholderRoute" />
+
+                    <com.foodtechlab.ftlandroiduikit.shimmer.FTLShimmerView
+                        android:id="@+id/vPlaceholderPriceBottomSlot"
+                        android:layout_width="0dp"
+                        android:layout_height="18dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/shape_placeholder_rect_round_4dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/vPlaceholderPriceImageSlot"
+                        app:layout_constraintTop_toBottomOf="@id/vPlaceholderPriceTopSlot" />
+
+                    <com.foodtechlab.ftlandroiduikit.shimmer.FTLShimmerView
+                        android:id="@+id/vPlaceholderAction"
+                        android:layout_width="0dp"
+                        android:layout_height="40dp"
+                        android:layout_marginTop="16dp"
+                        android:background="@drawable/shape_placeholder_rect_round_8dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/vPlaceholderPriceBottomSlot" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </com.foodtechlab.ftlandroiduikit.shimmer.FTLShimmerFrameLayout>
+        </com.foodtechlab.ftlandroiduikit.card.FTLCardView>
     </com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout>
 
     <ImageView

@@ -94,7 +94,11 @@ object ThemeManager {
         val ftlCircleProgressIndicatorTheme: FTLCircleProgressIndicatorTheme,
         val ftlProgressDialogTheme: FTLProgressDialogTheme,
         val ftlRadioButtonTheme: FTLRadioButtonTheme,
-        val ftlSwitchTheme: FTLSwitchTheme
+        val ftlSwitchTheme: FTLSwitchTheme,
+        val ftlEmptyListImageViewTheme: FTLEmptyListImageViewTheme,
+        val ftlCardViewTheme: FTLCardViewTheme,
+        val ftlShimmerViewTheme: FTLShimmerViewTheme,
+        val ftlShimmerFrameLayoutTheme: FTLShimmerFrameLayoutTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -174,6 +178,13 @@ object ThemeManager {
                 R.color.SwitchTrackEnableLight,
                 R.color.ButtonSecondaryEnableLight,
                 R.color.ButtonSecondaryEnableLight
+            ),
+            FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_light),
+            FTLCardViewTheme(R.color.SurfaceFirstLight),
+            FTLShimmerViewTheme(R.color.ShimmerBackgroundLight),
+            FTLShimmerFrameLayoutTheme(
+                R.color.ShimmerBaseLight,
+                R.color.ShimmerHighlightingLight,
             )
         ),
         DARK(
@@ -254,6 +265,13 @@ object ThemeManager {
                 R.color.SwitchTrackEnableDark,
                 R.color.ButtonSecondaryEnableDark,
                 R.color.ButtonSecondaryEnableDark
+            ),
+            FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_dark),
+            FTLCardViewTheme(R.color.SurfaceFirstDark),
+            FTLShimmerViewTheme(R.color.ShimmerBackgroundDark),
+            FTLShimmerFrameLayoutTheme(
+                R.color.ShimmerBaseDark,
+                R.color.ShimmerHighlightingDark,
             )
         )
     }
@@ -309,6 +327,23 @@ object ThemeManager {
         @ColorRes val trackColor: Int,
         @ColorRes val thumbColor: Int,
         @ColorRes val highlightColor: Int
+    )
+
+    data class FTLEmptyListImageViewTheme(
+        @DrawableRes val imgSrc: Int
+    )
+
+    data class FTLCardViewTheme(
+        @ColorRes val bgColor: Int
+    )
+
+    data class FTLShimmerViewTheme(
+        @ColorRes val bgColor: Int
+    )
+
+    data class FTLShimmerFrameLayoutTheme(
+        @ColorRes val baseColor: Int,
+        @ColorRes val highlightingColor: Int
     )
 
     interface ThemeChangedListener {
