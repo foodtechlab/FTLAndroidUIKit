@@ -100,7 +100,8 @@ object ThemeManager {
         val ftlCardViewTheme: FTLCardViewTheme,
         val ftlShimmerViewTheme: FTLShimmerViewTheme,
         val ftlShimmerFrameLayoutTheme: FTLShimmerFrameLayoutTheme,
-        val ftlFloatingActionButtonTheme: FTLFloatingActionButtonTheme
+        val ftlFloatingActionButtonTheme: FTLFloatingActionButtonTheme,
+        val ftlBottomSheetTheme: FTLBottomSheetTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -190,6 +191,10 @@ object ThemeManager {
             ),
             FTLFloatingActionButtonTheme(
                 R.color.selector_ftl_fab_light,
+            ),
+            FTLBottomSheetTheme(
+                R.color.TextPrimaryLight,
+                R.color.SurfaceFourthLight
             )
         ),
         DARK(
@@ -280,6 +285,10 @@ object ThemeManager {
             ),
             FTLFloatingActionButtonTheme(
                 R.color.selector_ftl_fab_dark,
+            ),
+            FTLBottomSheetTheme(
+                R.color.TextPrimaryDark,
+                R.color.SurfaceFourthDark
             )
         )
     }
@@ -356,6 +365,11 @@ object ThemeManager {
     )
 
     data class FTLFloatingActionButtonTheme(
+        @ColorRes val bgColor: Int
+    )
+
+    data class FTLBottomSheetTheme(
+        @ColorRes val messageColor: Int,
         @ColorRes val bgColor: Int
     )
 
