@@ -2,6 +2,7 @@ package com.foodtechlab.ftlandroiduikit.sheet
 
 import android.app.Dialog
 import android.content.Context
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,11 +11,13 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.view.*
 import androidx.fragment.app.DialogFragment
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.button.ButtonType
 import com.foodtechlab.ftlandroiduikit.button.FTLButton
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -23,7 +26,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 /**
  * Created by Umalt on 20.05.2020
  */
-class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
+class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
+    ThemeManager.ThemeChangedListener {
 
     private val dialogState by lazy {
         arguments?.getParcelable(KEY_DIALOG_STATE) ?: DialogState(
@@ -41,6 +45,9 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
     private lateinit var ivImage: ImageView
 
     private lateinit var llContent: LinearLayout
+    private lateinit var llContainer: LinearLayout
+
+    private lateinit var vTop: View
 
     private lateinit var tvTitle: TextView
     private lateinit var tvMessage: TextView
@@ -88,8 +95,10 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
         tvMessage = view.findViewById(R.id.tv_ftl_bottom_sheet_message)
         ivImage = view.findViewById(R.id.iv_ftl_bottom_sheet_image)
         llContent = view.findViewById(R.id.ll_ftl_bottom_sheet)
+        llContainer = view.findViewById(R.id.ll_container)
+        vTop = view.findViewById(R.id.v_top)
 
-        setupUI()
+        onThemeChanged(ThemeManager.theme)
 
         return view
     }
@@ -122,6 +131,28 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
                 v.setMarginTop()
             }
         }
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        llContainer.backgroundTintList = ColorStateList.valueOf(
+            ContextCompat.getColor(
+                requireContext(),
+                theme.ftlBottomSheetTheme.bgColor
+            )
+        )
+        vTop.backgroundTintList = ColorStateList.valueOf(
+            ContextCompat.getColor(
+                requireContext(),
+                theme.ftlBottomSheetTheme.bgColor
+            )
+        )
+        tvMessage.setTextColor(
+            ContextCompat.getColor(
+                requireContext(),
+                theme.ftlBottomSheetTheme.messageColor
+            )
+        )
+        setupUI()
     }
 
     private fun View.setMarginTop() {

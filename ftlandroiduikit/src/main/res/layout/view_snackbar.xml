@@ -4,7 +4,7 @@
     android:id="@+id/rl_snackbar_root"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    tools:background="#323232">
+    tools:background="@color/SurfaceFourthDark">
 
     <androidx.appcompat.widget.AppCompatTextView
         android:id="@+id/tv_snackbar_message"
@@ -15,7 +15,7 @@
         android:lineSpacingExtra="4sp"
         android:paddingStart="14dp"
         android:paddingEnd="14dp"
-        android:textColor="@color/OnPrimary"
+        android:textColor="@color/TextPrimaryDark"
         android:textSize="14sp"
         tools:text="В работе приложения произошла ошибка. Мы работаем над ее устранением. Пожалуйста, повторите попытку позже" />
 
