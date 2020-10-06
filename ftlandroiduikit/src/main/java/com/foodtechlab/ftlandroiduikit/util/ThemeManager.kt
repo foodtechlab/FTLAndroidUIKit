@@ -100,7 +100,8 @@ object ThemeManager {
         val ftlCardViewTheme: FTLCardViewTheme,
         val ftlShimmerViewTheme: FTLShimmerViewTheme,
         val ftlShimmerFrameLayoutTheme: FTLShimmerFrameLayoutTheme,
-        val ftlFloatingActionButtonTheme: FTLFloatingActionButtonTheme
+        val ftlFloatingActionButtonTheme: FTLFloatingActionButtonTheme,
+        val ftlImageButtonTheme: FTLImageButtonTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -164,9 +165,7 @@ object ThemeManager {
                 android.R.color.transparent,
                 R.color.TimerNegativeLight
             ), // in progress late
-            FTLCircleProgressIndicatorTheme(
-                R.color.SurfaceFourthLight
-            ),
+            FTLCircleProgressIndicatorTheme(R.color.SurfaceFourthLight),
             FTLProgressDialogTheme(
                 R.color.TextOnColorAdditionalLight,
                 R.color.SurfaceFourthLight
@@ -184,12 +183,21 @@ object ThemeManager {
             FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_light),
             FTLCardViewTheme(R.color.SurfaceFirstLight),
             FTLShimmerViewTheme(R.color.ShimmerBackgroundLight),
-            FTLShimmerFrameLayoutTheme(
-                R.color.ShimmerBaseLight,
-                R.color.ShimmerHighlightingLight,
-            ),
-            FTLFloatingActionButtonTheme(
-                R.color.selector_ftl_fab_light,
+            FTLShimmerFrameLayoutTheme(R.color.ShimmerBaseLight, R.color.ShimmerHighlightingLight),
+            FTLFloatingActionButtonTheme(R.color.selector_ftl_fab_light),
+            FTLImageButtonTheme(
+                R.drawable.selector_additional_button_navigator_small_light,
+                R.drawable.selector_additional_button_navigator_medium_light,
+                R.drawable.selector_additional_button_navigator_large_light,
+                R.drawable.selector_additional_button_location_small_light,
+                R.drawable.selector_additional_button_location_medium_light,
+                R.drawable.selector_additional_button_location_large_light,
+                R.drawable.selector_additional_button_info_small_light,
+                R.drawable.selector_additional_button_info_medium_light,
+                R.drawable.selector_additional_button_info_large_light,
+                R.drawable.selector_additional_button_replay_small_light,
+                R.drawable.selector_additional_button_replay_medium_light,
+                R.drawable.selector_additional_button_replay_large_light
             )
         ),
         DARK(
@@ -274,12 +282,21 @@ object ThemeManager {
             FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_dark),
             FTLCardViewTheme(R.color.SurfaceFirstDark),
             FTLShimmerViewTheme(R.color.ShimmerBackgroundDark),
-            FTLShimmerFrameLayoutTheme(
-                R.color.ShimmerBaseDark,
-                R.color.ShimmerHighlightingDark,
-            ),
-            FTLFloatingActionButtonTheme(
-                R.color.selector_ftl_fab_dark,
+            FTLShimmerFrameLayoutTheme(R.color.ShimmerBaseDark, R.color.ShimmerHighlightingDark),
+            FTLFloatingActionButtonTheme(R.color.selector_ftl_fab_dark),
+            FTLImageButtonTheme(
+                R.drawable.selector_additional_button_navigator_small_dark,
+                R.drawable.selector_additional_button_navigator_medium_dark,
+                R.drawable.selector_additional_button_navigator_large_dark,
+                R.drawable.selector_additional_button_location_small_dark,
+                R.drawable.selector_additional_button_location_medium_dark,
+                R.drawable.selector_additional_button_location_large_dark,
+                R.drawable.selector_additional_button_info_small_dark,
+                R.drawable.selector_additional_button_info_medium_dark,
+                R.drawable.selector_additional_button_info_large_dark,
+                R.drawable.selector_additional_button_replay_small_dark,
+                R.drawable.selector_additional_button_replay_medium_dark,
+                R.drawable.selector_additional_button_replay_large_dark
             )
         )
     }
@@ -357,6 +374,24 @@ object ThemeManager {
 
     data class FTLFloatingActionButtonTheme(
         @ColorRes val bgColor: Int
+    )
+
+    data class FTLImageButtonTheme(
+        @DrawableRes val navigatorSmall: Int,
+        @DrawableRes val navigatorMedium: Int,
+        @DrawableRes val navigatorLarge: Int,
+
+        @DrawableRes val locationSmall: Int,
+        @DrawableRes val locationMedium: Int,
+        @DrawableRes val locationLarge: Int,
+
+        @DrawableRes val infoSmall: Int,
+        @DrawableRes val infoMedium: Int,
+        @DrawableRes val infoLarge: Int,
+
+        @DrawableRes val replaySmall: Int,
+        @DrawableRes val replayMedium: Int,
+        @DrawableRes val replayLarge: Int
     )
 
     interface ThemeChangedListener {

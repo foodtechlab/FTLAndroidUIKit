@@ -2,11 +2,10 @@ package com.foodtechlab.ftlandroiduikitsample.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.foodtechlab.ftlandroiduikit.textfield.time.helper.DeliveryStatus
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikitsample.R
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.*
+import kotlinx.coroutines.ObsoleteCoroutinesApi
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,12 +20,11 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
-//        toolbar.showTime(
-//            "Europe/Samara",
-//            60 * 60 * 1000,
-//            DeliveryStatus.URGENT
-//        )
         toolbar.showLogo()
+
+        imageButton.setOnClickListener {
+            // Some code
+        }
 
         btnSwitchTheme.setOnClickListener {
             ThemeManager.setTheme(
@@ -43,9 +41,4 @@ class MainActivity : AppCompatActivity() {
 
         fab.setOnClickListener { }
     }
-
-//    override fun onDestroy() {
-//        super.onDestroy()
-//        ThemeManager.removeListeners()
-//    }
 }
