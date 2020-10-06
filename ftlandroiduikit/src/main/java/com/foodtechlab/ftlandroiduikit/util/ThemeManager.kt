@@ -99,7 +99,8 @@ object ThemeManager {
         val ftlEmptyListImageViewTheme: FTLEmptyListImageViewTheme,
         val ftlCardViewTheme: FTLCardViewTheme,
         val ftlShimmerViewTheme: FTLShimmerViewTheme,
-        val ftlShimmerFrameLayoutTheme: FTLShimmerFrameLayoutTheme
+        val ftlShimmerFrameLayoutTheme: FTLShimmerFrameLayoutTheme,
+        val ftlFloatingActionButtonTheme: FTLFloatingActionButtonTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -186,6 +187,9 @@ object ThemeManager {
             FTLShimmerFrameLayoutTheme(
                 R.color.ShimmerBaseLight,
                 R.color.ShimmerHighlightingLight,
+            ),
+            FTLFloatingActionButtonTheme(
+                R.color.selector_ftl_fab_light,
             )
         ),
         DARK(
@@ -273,6 +277,9 @@ object ThemeManager {
             FTLShimmerFrameLayoutTheme(
                 R.color.ShimmerBaseDark,
                 R.color.ShimmerHighlightingDark,
+            ),
+            FTLFloatingActionButtonTheme(
+                R.color.selector_ftl_fab_dark,
             )
         )
     }
@@ -345,6 +352,10 @@ object ThemeManager {
     data class FTLShimmerFrameLayoutTheme(
         @ColorRes val baseColor: Int,
         @ColorRes val highlightingColor: Int
+    )
+
+    data class FTLFloatingActionButtonTheme(
+        @ColorRes val bgColor: Int
     )
 
     interface ThemeChangedListener {

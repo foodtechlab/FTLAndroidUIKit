@@ -553,6 +553,5 @@
 
     <declare-styleable name="FTLFloatingActionButton">
         <attr name="fabImageResource" format="reference" />
-        <attr name="fabBackgroundTintList" format="reference" />
     </declare-styleable>
 </resources>

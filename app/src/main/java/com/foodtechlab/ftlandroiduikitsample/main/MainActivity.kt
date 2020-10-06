@@ -39,6 +39,8 @@ class MainActivity : AppCompatActivity() {
                 .putInt("key_theme", ThemeManager.theme.ordinal)
                 .apply()
         }
+
+        fab.setOnClickListener { }
     }
 
 //    override fun onDestroy() {
