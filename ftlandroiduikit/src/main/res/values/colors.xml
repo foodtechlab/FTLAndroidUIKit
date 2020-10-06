@@ -169,6 +169,9 @@
     <color name="TextPinkLight">#EA2249</color>
     <color name="TextPinkDark">#EF3F63</color>
 
+    <!--  Switch  -->
+    <color name="SwitchTrackEnableLight">#4DF2F2F2</color>
+    <color name="SwitchTrackEnableDark">#4D212121</color>
 
     <!--  Link  -->
     <color name="LinkPrimaryLight">#039BE5</color>

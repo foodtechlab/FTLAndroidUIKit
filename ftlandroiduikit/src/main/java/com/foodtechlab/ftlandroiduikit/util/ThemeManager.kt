@@ -92,7 +92,9 @@ object ThemeManager {
         val ftlDeliveryTimeViewInProgressTheme: FTLDeliveryTimeViewTheme,
         val ftlDeliveryTimeViewInProgressLateTheme: FTLDeliveryTimeViewTheme,
         val ftlCircleProgressIndicatorTheme: FTLCircleProgressIndicatorTheme,
-        val ftlProgressDialogTheme: FTLProgressDialogTheme
+        val ftlProgressDialogTheme: FTLProgressDialogTheme,
+        val ftlRadioButtonTheme: FTLRadioButtonTheme,
+        val ftlSwitchTheme: FTLSwitchTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -162,6 +164,16 @@ object ThemeManager {
             FTLProgressDialogTheme(
                 R.color.TextOnColorAdditionalLight,
                 R.color.SurfaceFourthLight
+            ),
+            FTLRadioButtonTheme(
+                R.color.TextPrimaryLight,
+                R.color.ButtonSecondaryEnableLight
+            ),
+            FTLSwitchTheme(
+                R.color.TextPrimaryLight,
+                R.color.SwitchTrackEnableLight,
+                R.color.ButtonSecondaryEnableLight,
+                R.color.ButtonSecondaryEnableLight
             )
         ),
         DARK(
@@ -232,6 +244,16 @@ object ThemeManager {
             FTLProgressDialogTheme(
                 R.color.TextOnColorAdditionalDark,
                 R.color.SurfaceFourthDark
+            ),
+            FTLRadioButtonTheme(
+                R.color.TextPrimaryDark,
+                R.color.ButtonSecondaryEnableDark
+            ),
+            FTLSwitchTheme(
+                R.color.TextPrimaryDark,
+                R.color.SwitchTrackEnableDark,
+                R.color.ButtonSecondaryEnableDark,
+                R.color.ButtonSecondaryEnableDark
             )
         )
     }
@@ -275,6 +297,18 @@ object ThemeManager {
     data class FTLProgressDialogTheme(
         @ColorRes val textColor: Int,
         @ColorRes val bgColor: Int
+    )
+
+    data class FTLRadioButtonTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val uncheckedStateColor: Int
+    )
+
+    data class FTLSwitchTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val trackColor: Int,
+        @ColorRes val thumbColor: Int,
+        @ColorRes val highlightColor: Int
     )
 
     interface ThemeChangedListener {
