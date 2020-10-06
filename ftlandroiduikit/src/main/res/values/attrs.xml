@@ -355,18 +355,17 @@
             <enum name="FILE" value="9" />
             <enum name="SHIELD" value="10" />
             <enum name="INFO" value="11" />
-            <enum name="USER_PLACEHOLDER" value="12" />
-            <enum name="PLANE" value="13" />
-            <enum name="SETTINGS" value="14" />
-            <enum name="NOTIFICATIONS" value="15" />
-            <enum name="NAVIGATOR" value="16" />
-            <enum name="THEME" value="17" />
-            <enum name="ALL_PAID" value="18" />
-            <enum name="NOT_ALL_PAID" value="19" />
-            <enum name="MORE_DETAILS" value="20" />
-            <enum name="DOCS" value="21" />
-            <enum name="NONE" value="22" />
-            <enum name="PURSE" value="23" />
+            <enum name="PLANE" value="12" />
+            <enum name="SETTINGS" value="13" />
+            <enum name="NOTIFICATIONS" value="14" />
+            <enum name="NAVIGATOR" value="15" />
+            <enum name="THEME" value="16" />
+            <enum name="ALL_PAID" value="17" />
+            <enum name="NOT_ALL_PAID" value="18" />
+            <enum name="MORE_DETAILS" value="19" />
+            <enum name="DOCS" value="20" />
+            <enum name="NONE" value="21" />
+            <enum name="PURSE" value="22" />
         </attr>
         <attr name="backgroundColorRes" format="color" />
         <attr name="imageColorRes" format="color" />
@@ -528,16 +527,12 @@
 
     <declare-styleable name="FTLRadioButton">
         <attr name="colorForStateChecked" format="color" />
-        <attr name="colorForStateUnchecked" format="color" />
     </declare-styleable>
 
     <declare-styleable name="FTLSwitch">
-        <attr name="thumbOnColor" format="color" />
-        <attr name="thumbOffColor" format="color" />
-        <attr name="trackOnColor" format="color" />
-        <attr name="trackOffColor" format="color" />
-        <attr name="highlightOnColor" format="color" />
-        <attr name="highlightOffColor" format="color" />
+        <attr name="thumbAccentColor" format="color" />
+        <attr name="trackAccentColor" format="color" />
+        <attr name="highlightAccentColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="FTLCircleProgressIndicator">
@@ -559,6 +554,5 @@
 
     <declare-styleable name="FTLFloatingActionButton">
         <attr name="fabImageResource" format="reference" />
-        <attr name="fabBackgroundTintList" format="reference" />
     </declare-styleable>
 </resources>
