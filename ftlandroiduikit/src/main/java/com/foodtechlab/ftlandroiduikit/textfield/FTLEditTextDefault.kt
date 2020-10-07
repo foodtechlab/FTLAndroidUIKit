@@ -2,12 +2,12 @@ package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.animation.ValueAnimator
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.text.Editable
 import android.text.InputFilter
 import android.text.TextWatcher
-import android.text.method.DigitsKeyListener
 import android.util.AttributeSet
 import android.view.Gravity
 import android.view.View
@@ -23,6 +23,7 @@ import androidx.core.view.marginBottom
 import androidx.core.view.marginTop
 import androidx.core.view.updateMargins
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import com.foodtechlab.ftlandroiduikit.util.openKeyboard
 import com.foodtechlab.ftlandroiduikit.util.spToPx
@@ -34,7 +35,7 @@ class FTLEditTextDefault @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : RelativeLayout(context, attrs, defStyle) {
+) : RelativeLayout(context, attrs, defStyle), ThemeManager.ThemeChangedListener {
 
     var textGravity: Int = Gravity.START
         set(value) {
@@ -50,10 +51,10 @@ class FTLEditTextDefault @JvmOverloads constructor(
     private val controlsColor: Int
         get() = ContextCompat.getColor(
             context, when {
-                isErrorEnabled -> R.color.PrimaryDangerEnabled
-                !etInput.hasFocus() && !etInput.text.isNullOrEmpty() -> R.color.OnBackgroundSecondary
-                isHintOnTop -> R.color.PrimaryInfoEnabled
-                else -> R.color.OnBackgroundSecondary
+                isErrorEnabled -> ThemeManager.theme.ftlEditTextDefaultTheme.errorControlColor
+                !etInput.hasFocus() && !etInput.text.isNullOrEmpty() -> ThemeManager.theme.ftlEditTextDefaultTheme.defaultControlColor
+                isHintOnTop -> ThemeManager.theme.ftlEditTextDefaultTheme.activeControlColor
+                else -> ThemeManager.theme.ftlEditTextDefaultTheme.defaultControlColor
             }
         )
 
@@ -165,6 +166,7 @@ class FTLEditTextDefault @JvmOverloads constructor(
         minimumHeight = context.dpToPx(MIN_HEIGHT).toInt()
 
         background = ContextCompat.getDrawable(context, R.drawable.shape_ftl_edit_text_default)
+        onThemeChanged(ThemeManager.theme)
 
         super.setOnClickListener {
             etInput.openKeyboard()
@@ -210,6 +212,39 @@ class FTLEditTextDefault @JvmOverloads constructor(
 
     override fun setOnFocusChangeListener(l: OnFocusChangeListener?) {
         focusChangeListener = l
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        with(etInput) {
+            setTextColor(ContextCompat.getColor(context, theme.ftlEditTextDefaultTheme.textColor))
+            setHintTextColor(
+                ContextCompat.getColor(
+                    context,
+                    theme.ftlEditTextDefaultTheme.hintColor
+                )
+            )
+        }
+        backgroundTintList = ColorStateList.valueOf(
+            ContextCompat.getColor(
+                context,
+                theme.ftlEditTextDefaultTheme.bgColor
+            )
+        )
     }
 
     private fun Canvas.drawHint() {

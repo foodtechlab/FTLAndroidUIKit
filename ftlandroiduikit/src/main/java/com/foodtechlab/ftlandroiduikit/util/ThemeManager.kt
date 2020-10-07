@@ -101,7 +101,8 @@ object ThemeManager {
         val ftlShimmerViewTheme: FTLShimmerViewTheme,
         val ftlShimmerFrameLayoutTheme: FTLShimmerFrameLayoutTheme,
         val ftlFloatingActionButtonTheme: FTLFloatingActionButtonTheme,
-        val ftlBottomSheetTheme: FTLBottomSheetTheme
+        val ftlBottomSheetTheme: FTLBottomSheetTheme,
+        val ftlEditTextDefaultTheme: FTLEditTextDefaultTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -195,6 +196,14 @@ object ThemeManager {
             FTLBottomSheetTheme(
                 R.color.TextPrimaryLight,
                 R.color.SurfaceFourthLight
+            ),
+            FTLEditTextDefaultTheme(
+                R.color.TextPrimaryLight,
+                R.color.TextPlaceholderLight,
+                R.color.TextViewPrimaryLight,
+                R.color.TextViewDividerEnabledLight,
+                R.color.TextViewDividerErrorLight,
+                R.color.TextViewDividerFocusedLight
             )
         ),
         DARK(
@@ -289,6 +298,14 @@ object ThemeManager {
             FTLBottomSheetTheme(
                 R.color.TextPrimaryDark,
                 R.color.SurfaceFourthDark
+            ),
+            FTLEditTextDefaultTheme(
+                R.color.TextPrimaryDark,
+                R.color.TextPlaceholderDark,
+                R.color.TextViewPrimaryDark,
+                R.color.TextViewDividerEnabledDark,
+                R.color.TextViewDividerErrorDark,
+                R.color.TextViewDividerFocusedDark
             )
         )
     }
@@ -371,6 +388,15 @@ object ThemeManager {
     data class FTLBottomSheetTheme(
         @ColorRes val messageColor: Int,
         @ColorRes val bgColor: Int
+    )
+
+    data class FTLEditTextDefaultTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val hintColor: Int,
+        @ColorRes val bgColor: Int,
+        @ColorRes val defaultControlColor: Int,
+        @ColorRes val errorControlColor: Int,
+        @ColorRes val activeControlColor: Int
     )
 
     interface ThemeChangedListener {

@@ -32,27 +32,15 @@
             android:padding="12dp"
             android:text="Switch theme" />
 
-        <com.foodtechlab.ftlandroiduikit.card.FTLCardView
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLEditTextDefault
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp">
+            android:layout_margin="16dp"
+            app:hint="Hello"/>
 
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="200dp">
-
-                <com.foodtechlab.ftlandroiduikit.imageview.FTLPlaceholderImageView
-                    android:layout_width="56dp"
-                    android:layout_height="56dp"
-                    android:layout_gravity="center" />
-            </FrameLayout>
-
-        </com.foodtechlab.ftlandroiduikit.card.FTLCardView>
-
-        <com.foodtechlab.ftlandroiduikit.button.FTLFloatingActionButton
-            android:id="@+id/fab"
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLAuthCodeEditText
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
     </com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout>
 
     <ImageView
