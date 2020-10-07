@@ -102,7 +102,8 @@ object ThemeManager {
         val ftlShimmerFrameLayoutTheme: FTLShimmerFrameLayoutTheme,
         val ftlFloatingActionButtonTheme: FTLFloatingActionButtonTheme,
         val ftlImageButtonTheme: FTLImageButtonTheme,
-        val ftlBottomSheetTheme: FTLBottomSheetTheme
+        val ftlBottomSheetTheme: FTLBottomSheetTheme,
+        val ftlRouteTextViewTheme: FTLRouteTextViewTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -188,9 +189,14 @@ object ThemeManager {
                 R.drawable.selector_additional_button_replay_medium_light,
                 R.drawable.selector_additional_button_replay_large_light
             ),
-            FTLBottomSheetTheme(R.color.TextPrimaryLight, R.color.SurfaceFourthLight)
+            FTLBottomSheetTheme(R.color.TextPrimaryLight, R.color.SurfaceFourthLight),
+            FTLRouteTextViewTheme(
+                R.color.IconBackgroundBlueLight,
+                R.color.IconPrimaryLight,
+                R.color.TextPrimaryLight,
+                R.color.TextPrimaryLight
+            )
         ),
-
         DARK(
             FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
             FTLToolbarTheme(
@@ -275,7 +281,13 @@ object ThemeManager {
                 R.drawable.selector_additional_button_replay_medium_dark,
                 R.drawable.selector_additional_button_replay_large_dark
             ),
-            FTLBottomSheetTheme(R.color.TextPrimaryDark, R.color.SurfaceFourthDark)
+            FTLBottomSheetTheme(R.color.TextPrimaryDark, R.color.SurfaceFourthDark),
+            FTLRouteTextViewTheme(
+                R.color.IconBackgroundBlueDark,
+                R.color.IconPrimaryDark,
+                R.color.TextPrimaryDark,
+                R.color.TextPrimaryDark
+            )
         )
     }
 
@@ -375,6 +387,13 @@ object ThemeManager {
     data class FTLBottomSheetTheme(
         @ColorRes val messageColor: Int,
         @ColorRes val bgColor: Int
+    )
+
+    data class FTLRouteTextViewTheme(
+        @ColorRes var routeBackgroundColor: Int,
+        @ColorRes var routItemsColor: Int,
+        @ColorRes var addressToColor: Int,
+        @ColorRes var addressFromColor: Int
     )
 
     interface ThemeChangedListener {

@@ -313,8 +313,10 @@
         <attr name="textAddressTo" format="string" />
         <attr name="isBoldStyleAddressFrom" format="boolean" />
         <attr name="isBoldStyleAddressTo" format="boolean" />
-        <attr name="backgroundColorRes" />
-        <attr name="imageColorRes" />
+        <attr name="routeBackgroundColorLight" format="color" />
+        <attr name="routeItemsColorLight" format="color" />
+        <attr name="routeBackgroundColorDark" format="color" />
+        <attr name="routeItemsColorDark" format="color" />
     </declare-styleable>
 
     <declare-styleable name="FTLMultipleTextView" parent="FTLDefaultTextView">

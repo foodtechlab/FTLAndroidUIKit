@@ -1,26 +1,26 @@
 package com.foodtechlab.ftlandroiduikit.common
 
 import android.content.Context
-import android.content.res.ColorStateList
-import android.graphics.*
-import android.os.Build
+import android.graphics.Canvas
+import android.graphics.Color
+import android.graphics.Paint
 import android.util.AttributeSet
 import android.view.View
-import androidx.annotation.ColorRes
-import androidx.core.content.ContextCompat
-import androidx.core.content.res.ResourcesCompat
-import com.foodtechlab.ftlandroiduikit.R
+import androidx.annotation.ColorInt
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import kotlin.math.floor
 
-class DotsLine
-@JvmOverloads constructor(context: Context, attrs: AttributeSet? = null, defStyleAttr: Int = 0) :
-    View(context, attrs, defStyleAttr) {
+class DotsLine @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : View(context, attrs, defStyleAttr) {
 
     private var dotRadius = context.dpToPx(2f)
-    private val paint: Paint = Paint()
+    private val paint = Paint()
 
-    var lineColorRes = Color.WHITE
+    @ColorInt
+    var lineColor = Color.WHITE
         set(value) {
             field = value
             paint.color = field
@@ -28,7 +28,7 @@ class DotsLine
         }
 
     init {
-        paint.color = lineColorRes
+        paint.color = lineColor
         paint.style = Paint.Style.FILL
         paint.flags = Paint.ANTI_ALIAS_FLAG
     }

@@ -26,6 +26,11 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.showLogo()
 
+        with(ftlRouteTextView) {
+            textAddressFrom = "Address From"
+            textAddressTo = "Address To"
+        }
+
         imageButton.setOnClickListener {
             // Some code
         }

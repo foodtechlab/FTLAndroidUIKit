@@ -1,7 +1,7 @@
 package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.content.Context
-import android.content.res.ColorStateList
+import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
@@ -13,12 +13,14 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.common.DotsLine
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.changeColor
 
 class FTLRouteTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : ConstraintLayout(context, attrs, defStyle) {
+) : ConstraintLayout(context, attrs, defStyle), ThemeManager.ThemeChangedListener {
 
     private var tvAddressFrom: TextView
     private var tvAddressTo: TextView
@@ -58,19 +60,23 @@ class FTLRouteTextView @JvmOverloads constructor(
         }
 
     @ColorInt
-    var backgroundColorRes = ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+    var routeBackgroundColor = ContextCompat.getColor(
+        context,
+        ThemeManager.theme.ftlRouteTextViewTheme.routeBackgroundColor
+    )
         set(value) {
             field = value
-            vRoad.backgroundTintList = ColorStateList.valueOf(field)
+            vRoad.background?.changeColor(value)
         }
 
     @ColorInt
-    var imageColorRes = ContextCompat.getColor(context, R.color.BackgroundPrimary)
+    var routeItemsColor =
+        ContextCompat.getColor(context, ThemeManager.theme.ftlRouteTextViewTheme.routItemsColor)
         set(value) {
             field = value
             ivAddressFrom.setColorFilter(field)
             ivAddressTo.setColorFilter(field)
-            dlRoad.lineColorRes = field
+            dlRoad.lineColor = field
         }
 
     init {
@@ -84,21 +90,91 @@ class FTLRouteTextView @JvmOverloads constructor(
         dlRoad = findViewById(R.id.dl_road)
 
         context.withStyledAttributes(attrs, R.styleable.FTLRouteTextView) {
-            textAddressFrom = getString(R.styleable.FTLRouteTextView_textAddressFrom) ?: ""
             textAddressTo = getString(R.styleable.FTLRouteTextView_textAddressTo) ?: ""
-            isBoldStyleAddressFrom =
-                getBoolean(R.styleable.FTLRouteTextView_isBoldStyleAddressFrom, false)
-            isBoldStyleAddressTo =
-                getBoolean(R.styleable.FTLRouteTextView_isBoldStyleAddressTo, true)
-            backgroundColorRes = getColor(
-                R.styleable.FTLRouteTextView_backgroundColorRes,
-                ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+            textAddressFrom = getString(R.styleable.FTLRouteTextView_textAddressFrom) ?: ""
+
+            isBoldStyleAddressFrom = getBoolean(
+                R.styleable.FTLRouteTextView_isBoldStyleAddressFrom,
+                false
             )
-            imageColorRes = getColor(
-                R.styleable.FTLRouteTextView_imageColorRes,
-                ContextCompat.getColor(context, R.color.BackgroundPrimary)
+
+            isBoldStyleAddressTo = getBoolean(
+                R.styleable.FTLRouteTextView_isBoldStyleAddressTo,
+                true
             )
+
+            setupRouteItemsColor()
+
+            setupRouteBackgroundColor()
         }
+
+        onThemeChanged(ThemeManager.theme)
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        tvAddressTo.setTextColor(
+            ContextCompat.getColor(
+                context,
+                theme.ftlRouteTextViewTheme.addressToColor
+            )
+        )
+        tvAddressFrom.setTextColor(
+            ContextCompat.getColor(
+                context,
+                theme.ftlRouteTextViewTheme.addressFromColor
+            )
+        )
+        routeItemsColor = ContextCompat.getColor(
+            context,
+            theme.ftlRouteTextViewTheme.routItemsColor
+        )
+        routeBackgroundColor = ContextCompat.getColor(
+            context,
+            theme.ftlRouteTextViewTheme.routeBackgroundColor
+        )
+    }
+
+    private fun TypedArray.setupRouteItemsColor() {
+        ThemeManager.Theme.LIGHT.ftlRouteTextViewTheme.routItemsColor = getResourceId(
+            R.styleable.FTLRouteTextView_routeItemsColorLight,
+            ThemeManager.Theme.LIGHT.ftlRouteTextViewTheme.routItemsColor
+        )
+        ThemeManager.Theme.DARK.ftlRouteTextViewTheme.routItemsColor = getResourceId(
+            R.styleable.FTLRouteTextView_routeItemsColorDark,
+            ThemeManager.Theme.DARK.ftlRouteTextViewTheme.routItemsColor
+        )
+        routeItemsColor =
+            ContextCompat.getColor(context, ThemeManager.theme.ftlRouteTextViewTheme.routItemsColor)
+    }
+
+    private fun TypedArray.setupRouteBackgroundColor() {
+        ThemeManager.Theme.LIGHT.ftlRouteTextViewTheme.routeBackgroundColor = getResourceId(
+            R.styleable.FTLRouteTextView_routeBackgroundColorLight,
+            ThemeManager.Theme.LIGHT.ftlRouteTextViewTheme.routeBackgroundColor
+        )
+        ThemeManager.Theme.DARK.ftlRouteTextViewTheme.routeBackgroundColor = getResourceId(
+            R.styleable.FTLRouteTextView_routeBackgroundColorDark,
+            ThemeManager.Theme.DARK.ftlRouteTextViewTheme.routeBackgroundColor
+        )
+        routeBackgroundColor = ContextCompat.getColor(
+            context,
+            ThemeManager.theme.ftlRouteTextViewTheme.routeBackgroundColor
+        )
     }
 }
 
