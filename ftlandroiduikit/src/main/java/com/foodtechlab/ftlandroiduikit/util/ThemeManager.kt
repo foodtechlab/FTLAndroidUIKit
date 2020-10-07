@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.annotation.FontRes
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import com.foodtechlab.ftlandroiduikit.R
@@ -103,7 +104,8 @@ object ThemeManager {
         val ftlFloatingActionButtonTheme: FTLFloatingActionButtonTheme,
         val ftlImageButtonTheme: FTLImageButtonTheme,
         val ftlBottomSheetTheme: FTLBottomSheetTheme,
-        val ftlEditTextDefaultTheme: FTLEditTextDefaultTheme
+        val ftlEditTextDefaultTheme: FTLEditTextDefaultTheme,
+        val ftlButtonAdditionalTheme: FTLButtonAdditionalTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -203,6 +205,11 @@ object ThemeManager {
                 R.color.TextViewDividerEnabledLight,
                 R.color.TextViewDividerErrorLight,
                 R.color.TextViewDividerFocusedLight
+            ),
+            FTLButtonAdditionalTheme(
+                R.color.selector_ftl_button_additional_light,
+                R.color.TextInfoPressedLightOpacity60,
+                R.color.TextInfoPressedLight
             )
         ),
         DARK(
@@ -303,6 +310,11 @@ object ThemeManager {
                 R.color.TextViewDividerEnabledDark,
                 R.color.TextViewDividerErrorDark,
                 R.color.TextViewDividerFocusedDark
+            ),
+            FTLButtonAdditionalTheme(
+                R.color.selector_ftl_button_additional_dark,
+                R.color.TextInfoPressedDarkOpacity60,
+                R.color.TextInfoPressedDark
             )
         )
     }
@@ -412,6 +424,12 @@ object ThemeManager {
         @ColorRes val defaultControlColor: Int,
         @ColorRes val errorControlColor: Int,
         @ColorRes val activeControlColor: Int
+    )
+
+    data class FTLButtonAdditionalTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val dotColor: Int,
+        @ColorRes val bounceDotColor: Int
     )
 
     interface ThemeChangedListener {

@@ -21,11 +21,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         toolbar.showLogo()
-
-        imageButton.setOnClickListener {
-            // Some code
+        btn.setOnClickListener {
+            btn.setProgressVisibility(true)
         }
-
+        btn2.setOnClickListener {
+            btn.setProgressVisibility(false)
+        }
         btnSwitchTheme.setOnClickListener {
             ThemeManager.setTheme(
                 when (ThemeManager.theme) {

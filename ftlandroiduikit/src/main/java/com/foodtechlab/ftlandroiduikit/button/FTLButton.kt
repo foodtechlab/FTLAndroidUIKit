@@ -17,7 +17,10 @@ import androidx.core.view.isVisible
 import androidx.transition.Fade
 import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.button.image.ImageButtonType
 import com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLToolbarDotsProgress
+import com.foodtechlab.ftlandroiduikit.sheet.ADDITIONAL_BUTTON
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 
 
 /**
@@ -27,7 +30,7 @@ class FTLButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : RelativeLayout(context, attrs, defStyleAttr) {
+) : RelativeLayout(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
 
     private val displayDensity = resources.displayMetrics.density
 
@@ -66,13 +69,12 @@ class FTLButton @JvmOverloads constructor(
 
         tvText = findViewById(R.id.tv_text)
         dotProgress = findViewById(R.id.dot_progress)
-
         context.withStyledAttributes(attrs, R.styleable.FTLButton) {
             text = getString(R.styleable.FTLButton_ftlButton_text)
 
             val ordinal = getInt(R.styleable.FTLButton_ftlButton_type, buttonType.ordinal)
             buttonType = ButtonType.values()[ordinal]
-
+            onThemeChanged(ThemeManager.theme)
             updateViewState(
                 getColor(R.styleable.FTLButton_ftlButton_textColor, -1),
                 getColor(R.styleable.FTLButton_ftlButton_dotColor, -1),
@@ -87,7 +89,26 @@ class FTLButton @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
+        ThemeManager.addListener(this)
         setProgressVisibility(inProgress)
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        if (buttonType == ButtonType.ADDITIONAL) {
+            ButtonType.ADDITIONAL.dotColor = theme.ftlButtonAdditionalTheme.dotColor
+            dotColorRes = ButtonType.ADDITIONAL.dotColor
+            updateDotColor(dotColorRes)
+        }
     }
 
     override fun onSaveInstanceState(): Parcelable? =

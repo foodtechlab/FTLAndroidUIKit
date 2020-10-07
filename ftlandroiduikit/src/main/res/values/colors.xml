@@ -154,6 +154,9 @@
     <color name="TextInfoPressedLight">#0A87D1</color>
     <color name="TextInfoPressedDark">#4AC1F7</color>
 
+    <color name="TextInfoPressedLightOpacity60">#990A87D1</color>
+    <color name="TextInfoPressedDarkOpacity60">#994AC1F7</color>
+
     <color name="TextSuccessEnabledLight">#4CB944</color>
     <color name="TextSuccessEnabledDark">#4CB944</color>
 

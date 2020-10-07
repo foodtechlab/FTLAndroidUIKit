@@ -4,18 +4,19 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.annotation.FontRes
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 
 /**
  * Created by Umalt on 23.06.2020
  */
 enum class ButtonType(
-    @ColorRes val textColor: Int,
-    val textSize: Float,
+    @ColorRes var textColor: Int,
+    var textSize: Float,
     val isAllCaps: Boolean,
     @FontRes val font: Int,
-    @ColorRes val dotColor: Int,
-    @ColorRes val bounceDotColor: Int,
-    @DrawableRes val background: Int? = null
+    @ColorRes var dotColor: Int,
+    @ColorRes var bounceDotColor: Int,
+    @DrawableRes var background: Int? = null
 ) {
     PRIMARY(
         R.color.BackgroundPrimary,
@@ -45,11 +46,11 @@ enum class ButtonType(
         R.drawable.selector_ftl_button_cancel
     ),
     ADDITIONAL(
-        R.color.selector_ftl_button_additional,
+        ThemeManager.theme.ftlButtonAdditionalTheme.textColor,
         14f,
         false,
         R.font.roboto_regular,
-        R.color.PrimaryInfoEnabledOpacity60,
-        R.color.PrimaryInfoEnabled
+        ThemeManager.theme.ftlButtonAdditionalTheme.dotColor,
+        ThemeManager.theme.ftlButtonAdditionalTheme.bounceDotColor
     )
 }
