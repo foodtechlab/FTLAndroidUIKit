@@ -101,7 +101,9 @@ object ThemeManager {
         val ftlShimmerViewTheme: FTLShimmerViewTheme,
         val ftlShimmerFrameLayoutTheme: FTLShimmerFrameLayoutTheme,
         val ftlFloatingActionButtonTheme: FTLFloatingActionButtonTheme,
-        val ftlBottomSheetTheme: FTLBottomSheetTheme
+        val ftlImageButtonTheme: FTLImageButtonTheme,
+        val ftlBottomSheetTheme: FTLBottomSheetTheme,
+        val ftlEditTextDefaultTheme: FTLEditTextDefaultTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -165,17 +167,9 @@ object ThemeManager {
                 android.R.color.transparent,
                 R.color.TimerNegativeLight
             ), // in progress late
-            FTLCircleProgressIndicatorTheme(
-                R.color.SurfaceFourthLight
-            ),
-            FTLProgressDialogTheme(
-                R.color.TextOnColorAdditionalLight,
-                R.color.SurfaceFourthLight
-            ),
-            FTLRadioButtonTheme(
-                R.color.TextPrimaryLight,
-                R.color.ButtonSecondaryEnableLight
-            ),
+            FTLCircleProgressIndicatorTheme(R.color.SurfaceFourthLight),
+            FTLProgressDialogTheme(R.color.TextOnColorAdditionalLight, R.color.SurfaceFourthLight),
+            FTLRadioButtonTheme(R.color.TextPrimaryLight, R.color.ButtonSecondaryEnableLight),
             FTLSwitchTheme(
                 R.color.TextPrimaryLight,
                 R.color.SwitchTrackEnableLight,
@@ -185,16 +179,30 @@ object ThemeManager {
             FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_light),
             FTLCardViewTheme(R.color.SurfaceFirstLight),
             FTLShimmerViewTheme(R.color.ShimmerBackgroundLight),
-            FTLShimmerFrameLayoutTheme(
-                R.color.ShimmerBaseLight,
-                R.color.ShimmerHighlightingLight,
+            FTLShimmerFrameLayoutTheme(R.color.ShimmerBaseLight, R.color.ShimmerHighlightingLight),
+            FTLFloatingActionButtonTheme(R.color.selector_ftl_fab_light),
+            FTLImageButtonTheme(
+                R.drawable.selector_additional_button_navigator_small_light,
+                R.drawable.selector_additional_button_navigator_medium_light,
+                R.drawable.selector_additional_button_navigator_large_light,
+                R.drawable.selector_additional_button_location_small_light,
+                R.drawable.selector_additional_button_location_medium_light,
+                R.drawable.selector_additional_button_location_large_light,
+                R.drawable.selector_additional_button_info_small_light,
+                R.drawable.selector_additional_button_info_medium_light,
+                R.drawable.selector_additional_button_info_large_light,
+                R.drawable.selector_additional_button_replay_small_light,
+                R.drawable.selector_additional_button_replay_medium_light,
+                R.drawable.selector_additional_button_replay_large_light
             ),
-            FTLFloatingActionButtonTheme(
-                R.color.selector_ftl_fab_light,
-            ),
-            FTLBottomSheetTheme(
+            FTLBottomSheetTheme(R.color.TextPrimaryLight, R.color.SurfaceFourthLight),
+            FTLEditTextDefaultTheme(
                 R.color.TextPrimaryLight,
-                R.color.SurfaceFourthLight
+                R.color.TextPlaceholderLight,
+                R.color.TextViewPrimaryLight,
+                R.color.TextViewDividerEnabledLight,
+                R.color.TextViewDividerErrorLight,
+                R.color.TextViewDividerFocusedLight
             )
         ),
         DARK(
@@ -259,17 +267,9 @@ object ThemeManager {
                 android.R.color.transparent,
                 R.color.TimerNegativeDark
             ), // in progress late
-            FTLCircleProgressIndicatorTheme(
-                R.color.SurfaceFourthDark
-            ),
-            FTLProgressDialogTheme(
-                R.color.TextOnColorAdditionalDark,
-                R.color.SurfaceFourthDark
-            ),
-            FTLRadioButtonTheme(
-                R.color.TextPrimaryDark,
-                R.color.ButtonSecondaryEnableDark
-            ),
+            FTLCircleProgressIndicatorTheme(R.color.SurfaceFourthDark),
+            FTLProgressDialogTheme(R.color.TextOnColorAdditionalDark, R.color.SurfaceFourthDark),
+            FTLRadioButtonTheme(R.color.TextPrimaryDark, R.color.ButtonSecondaryEnableDark),
             FTLSwitchTheme(
                 R.color.TextPrimaryDark,
                 R.color.SwitchTrackEnableDark,
@@ -279,16 +279,30 @@ object ThemeManager {
             FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_dark),
             FTLCardViewTheme(R.color.SurfaceFirstDark),
             FTLShimmerViewTheme(R.color.ShimmerBackgroundDark),
-            FTLShimmerFrameLayoutTheme(
-                R.color.ShimmerBaseDark,
-                R.color.ShimmerHighlightingDark,
+            FTLShimmerFrameLayoutTheme(R.color.ShimmerBaseDark, R.color.ShimmerHighlightingDark),
+            FTLFloatingActionButtonTheme(R.color.selector_ftl_fab_dark),
+            FTLImageButtonTheme(
+                R.drawable.selector_additional_button_navigator_small_dark,
+                R.drawable.selector_additional_button_navigator_medium_dark,
+                R.drawable.selector_additional_button_navigator_large_dark,
+                R.drawable.selector_additional_button_location_small_dark,
+                R.drawable.selector_additional_button_location_medium_dark,
+                R.drawable.selector_additional_button_location_large_dark,
+                R.drawable.selector_additional_button_info_small_dark,
+                R.drawable.selector_additional_button_info_medium_dark,
+                R.drawable.selector_additional_button_info_large_dark,
+                R.drawable.selector_additional_button_replay_small_dark,
+                R.drawable.selector_additional_button_replay_medium_dark,
+                R.drawable.selector_additional_button_replay_large_dark
             ),
-            FTLFloatingActionButtonTheme(
-                R.color.selector_ftl_fab_dark,
-            ),
-            FTLBottomSheetTheme(
+            FTLBottomSheetTheme(R.color.TextPrimaryDark, R.color.SurfaceFourthDark),
+            FTLEditTextDefaultTheme(
                 R.color.TextPrimaryDark,
-                R.color.SurfaceFourthDark
+                R.color.TextPlaceholderDark,
+                R.color.TextViewPrimaryDark,
+                R.color.TextViewDividerEnabledDark,
+                R.color.TextViewDividerErrorDark,
+                R.color.TextViewDividerFocusedDark
             )
         )
     }
