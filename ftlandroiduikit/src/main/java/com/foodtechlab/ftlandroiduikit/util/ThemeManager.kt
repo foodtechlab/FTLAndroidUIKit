@@ -101,8 +101,7 @@ object ThemeManager {
         val ftlShimmerViewTheme: FTLShimmerViewTheme,
         val ftlShimmerFrameLayoutTheme: FTLShimmerFrameLayoutTheme,
         val ftlFloatingActionButtonTheme: FTLFloatingActionButtonTheme,
-        val ftlBottomSheetTheme: FTLBottomSheetTheme,
-        val ftlEditTextDefaultTheme: FTLEditTextDefaultTheme
+        val ftlBottomSheetTheme: FTLBottomSheetTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -196,14 +195,6 @@ object ThemeManager {
             FTLBottomSheetTheme(
                 R.color.TextPrimaryLight,
                 R.color.SurfaceFourthLight
-            ),
-            FTLEditTextDefaultTheme(
-                R.color.TextPrimaryLight,
-                R.color.TextPlaceholderLight,
-                R.color.TextViewPrimaryLight,
-                R.color.TextViewDividerEnabledLight,
-                R.color.TextViewDividerErrorLight,
-                R.color.TextViewDividerFocusedLight
             )
         ),
         DARK(
@@ -298,14 +289,6 @@ object ThemeManager {
             FTLBottomSheetTheme(
                 R.color.TextPrimaryDark,
                 R.color.SurfaceFourthDark
-            ),
-            FTLEditTextDefaultTheme(
-                R.color.TextPrimaryDark,
-                R.color.TextPlaceholderDark,
-                R.color.TextViewPrimaryDark,
-                R.color.TextViewDividerEnabledDark,
-                R.color.TextViewDividerErrorDark,
-                R.color.TextViewDividerFocusedDark
             )
         )
     }
@@ -383,6 +366,24 @@ object ThemeManager {
 
     data class FTLFloatingActionButtonTheme(
         @ColorRes val bgColor: Int
+    )
+
+    data class FTLImageButtonTheme(
+        @DrawableRes val navigatorSmall: Int,
+        @DrawableRes val navigatorMedium: Int,
+        @DrawableRes val navigatorLarge: Int,
+
+        @DrawableRes val locationSmall: Int,
+        @DrawableRes val locationMedium: Int,
+        @DrawableRes val locationLarge: Int,
+
+        @DrawableRes val infoSmall: Int,
+        @DrawableRes val infoMedium: Int,
+        @DrawableRes val infoLarge: Int,
+
+        @DrawableRes val replaySmall: Int,
+        @DrawableRes val replayMedium: Int,
+        @DrawableRes val replayLarge: Int
     )
 
     data class FTLBottomSheetTheme(

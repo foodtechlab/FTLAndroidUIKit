@@ -7,10 +7,10 @@
                 <shape android:shape="rectangle">
                     <size android:width="32dp" android:height="32dp" />
                     <corners android:radius="8dp" />
-                    <solid android:color="#F6F6F6" />
+                    <solid android:color="#212121" />
                 </shape>
             </item>
-            <item android:bottom="4dp" android:drawable="@drawable/ic_replay_selected_24" android:gravity="center" android:left="4dp" android:right="4dp" android:top="4dp" />
+            <item android:bottom="4dp" android:drawable="@drawable/ic_navigator_selected_dark_24" android:gravity="center" android:left="4dp" android:right="4dp" android:top="4dp" />
         </layer-list>
     </item>
 
@@ -20,10 +20,10 @@
                 <shape android:shape="rectangle">
                     <size android:width="32dp" android:height="32dp" />
                     <corners android:radius="8dp" />
-                    <solid android:color="#ECECEC" />
+                    <solid android:color="#161616" />
                 </shape>
             </item>
-            <item android:bottom="4dp" android:drawable="@drawable/ic_replay_24" android:gravity="center" android:left="4dp" android:right="4dp" android:top="4dp" />
+            <item android:bottom="4dp" android:drawable="@drawable/ic_navigator_24" android:gravity="center" android:left="4dp" android:right="4dp" android:top="4dp" />
         </layer-list>
     </item>
 
@@ -33,10 +33,10 @@
                 <shape android:shape="rectangle">
                     <size android:width="32dp" android:height="32dp" />
                     <corners android:radius="8dp" />
-                    <solid android:color="#F6F6F6" />
+                    <solid android:color="#212121" />
                 </shape>
             </item>
-            <item android:bottom="4dp" android:drawable="@drawable/ic_replay_24" android:gravity="center" android:left="4dp" android:right="4dp" android:top="4dp" />
+            <item android:bottom="4dp" android:drawable="@drawable/ic_navigator_24" android:gravity="center" android:left="4dp" android:right="4dp" android:top="4dp" />
         </layer-list>
     </item>
 
