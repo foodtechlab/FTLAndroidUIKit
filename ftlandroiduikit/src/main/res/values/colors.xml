@@ -141,6 +141,8 @@
 
     <color name="TextDangerEnabledLight">#DE2222</color>
     <color name="TextDangerEnabledDark">#DE2222</color>
+    <color name="TextDangerEnabledLightOpacity60">#99DE2222</color>
+    <color name="TextDangerEnabledDarkOpacity60">#99DE2222</color>
 
     <color name="TextDangerPressedLight">#DE2222</color>
     <color name="TextDangerPressedDark">#DE2222</color>
@@ -153,6 +155,9 @@
 
     <color name="TextInfoPressedLight">#0A87D1</color>
     <color name="TextInfoPressedDark">#4AC1F7</color>
+
+    <color name="TextInfoPressedLightOpacity60">#990A87D1</color>
+    <color name="TextInfoPressedDarkOpacity60">#994AC1F7</color>
 
     <color name="TextSuccessEnabledLight">#4CB944</color>
     <color name="TextSuccessEnabledDark">#4CB944</color>

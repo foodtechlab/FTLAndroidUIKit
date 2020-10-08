@@ -17,7 +17,8 @@ import androidx.core.view.isVisible
 import androidx.transition.Fade
 import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLToolbarDotsProgress
+import com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLButtonDotsProgress
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 
 
 /**
@@ -27,7 +28,7 @@ class FTLButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : RelativeLayout(context, attrs, defStyleAttr) {
+) : RelativeLayout(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
 
     private val displayDensity = resources.displayMetrics.density
 
@@ -57,7 +58,7 @@ class FTLButton @JvmOverloads constructor(
     private var clickListener: OnClickListener? = null
 
     private val tvText: TextView
-    private val dotProgress: FTLToolbarDotsProgress
+    private val dotProgress: FTLButtonDotsProgress
 
     init {
         inflate(context, R.layout.layout_ftl_button, this)
@@ -66,13 +67,12 @@ class FTLButton @JvmOverloads constructor(
 
         tvText = findViewById(R.id.tv_text)
         dotProgress = findViewById(R.id.dot_progress)
-
         context.withStyledAttributes(attrs, R.styleable.FTLButton) {
             text = getString(R.styleable.FTLButton_ftlButton_text)
 
             val ordinal = getInt(R.styleable.FTLButton_ftlButton_type, buttonType.ordinal)
             buttonType = ButtonType.values()[ordinal]
-
+            onThemeChanged(ThemeManager.theme)
             updateViewState(
                 getColor(R.styleable.FTLButton_ftlButton_textColor, -1),
                 getColor(R.styleable.FTLButton_ftlButton_dotColor, -1),
@@ -87,7 +87,64 @@ class FTLButton @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
+        ThemeManager.addListener(this)
         setProgressVisibility(inProgress)
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        val dotThemeColor: Int
+        val bounceDotThemeColor: Int
+        when (buttonType) {
+            ButtonType.ADDITIONAL -> {
+                ButtonType.ADDITIONAL.dotColor = theme.ftlButtonAdditionalTheme.dotColor
+                ButtonType.ADDITIONAL.bounceDotColor = theme.ftlButtonAdditionalTheme.bounceDotColor
+                ButtonType.ADDITIONAL.textColor = theme.ftlButtonAdditionalTheme.textColor
+                dotThemeColor = ButtonType.ADDITIONAL.dotColor
+                bounceDotThemeColor = ButtonType.ADDITIONAL.bounceDotColor
+            }
+            ButtonType.CANCEL -> {
+                ButtonType.CANCEL.dotColor = theme.ftlButtonCancelTheme.dotColor
+                ButtonType.CANCEL.bounceDotColor = theme.ftlButtonCancelTheme.bounceDotColor
+                ButtonType.CANCEL.background = theme.ftlButtonCancelTheme.bgDrawable
+                ButtonType.CANCEL.textColor = theme.ftlButtonCancelTheme.textColor
+                dotThemeColor = ButtonType.CANCEL.dotColor
+                bounceDotThemeColor = ButtonType.CANCEL.bounceDotColor
+            }
+            ButtonType.SECONDARY -> {
+                ButtonType.SECONDARY.dotColor = theme.ftlButtonSecondaryTheme.dotColor
+                ButtonType.SECONDARY.bounceDotColor = theme.ftlButtonSecondaryTheme.bounceDotColor
+                ButtonType.SECONDARY.background = theme.ftlButtonSecondaryTheme.bgDrawable
+                ButtonType.SECONDARY.textColor = theme.ftlButtonSecondaryTheme.textColor
+                dotThemeColor = ButtonType.SECONDARY.dotColor
+                bounceDotThemeColor = ButtonType.SECONDARY.bounceDotColor
+            }
+            else -> {
+                ButtonType.PRIMARY.dotColor = theme.ftlButtonPrimaryTheme.dotColor
+                ButtonType.PRIMARY.bounceDotColor = theme.ftlButtonPrimaryTheme.bounceDotColor
+                ButtonType.PRIMARY.background = theme.ftlButtonPrimaryTheme.bgDrawable
+                ButtonType.PRIMARY.textColor = theme.ftlButtonPrimaryTheme.textColor
+                dotThemeColor = ButtonType.PRIMARY.dotColor
+                bounceDotThemeColor = ButtonType.PRIMARY.bounceDotColor
+            }
+        }
+
+        updateTextColor(textColorRes)
+        updateBackgroundDrawable(backgroundDrawableRes)
+
+        theme.ftlButtonDotsProgressTheme.dotColor =
+            if (dotColorRes != -1) dotColorRes else dotThemeColor
+        theme.ftlButtonDotsProgressTheme.bounceDotColor =
+            if (bounceDotColorRes != -1) bounceDotColorRes else bounceDotThemeColor
     }
 
     override fun onSaveInstanceState(): Parcelable? =
