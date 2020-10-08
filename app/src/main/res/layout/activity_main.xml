@@ -67,6 +67,16 @@
             app:headerTitle="Title"
             app:isDividersEnabled="true"
             app:showSubtitle="false" />
+
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLMultipleTextView
+            android:id="@+id/ftlMultipleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:textBottomEndSlot="Bottom end"
+            app:textBottomStartSlot="Bottom start"
+            app:textTopEndSlot="Top end"
+            app:textTopStartSlot="Top start" />
     </com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout>
 
     <ImageView

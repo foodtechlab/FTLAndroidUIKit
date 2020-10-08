@@ -74,11 +74,11 @@ class FTLExtendableTextView @JvmOverloads constructor(
             ellipsizedText = getString(R.styleable.FTLExtendableTextView_ellipsizedText) ?: ""
             isExpandText = getBoolean(R.styleable.FTLExtendableTextView_isExpand, false)
             backgroundColorRes = getColor(
-                R.styleable.FTLExtendableTextView_backgroundColorRes,
+                R.styleable.FTLExtendableTextView_imageBackgroundColor,
                 ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
             )
             imageColorRes = getColor(
-                R.styleable.FTLExtendableTextView_imageColorRes,
+                R.styleable.FTLExtendableTextView_imageColor,
                 ContextCompat.getColor(context, R.color.BackgroundPrimary)
             )
         }

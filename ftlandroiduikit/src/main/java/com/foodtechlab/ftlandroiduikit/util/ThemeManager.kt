@@ -109,7 +109,8 @@ object ThemeManager {
         val ftlButtonAdditionalTheme: FTLButtonAdditionalTheme,
         val ftlButtonPrimaryTheme: FTLButtonPrimaryTheme,
         val ftlButtonSecondaryTheme: FTLButtonSecondaryTheme,
-        val ftlButtonCancelTheme: FTLButtonCancelTheme
+        val ftlButtonCancelTheme: FTLButtonCancelTheme,
+        val ftlMultipleTextViewTheme: FTLMultipleTextViewTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -212,7 +213,8 @@ object ThemeManager {
                 R.color.DividerPrimaryLight,
                 R.color.IconSecondaryLight,
                 R.color.TextPrimaryLight,
-                R.color.TextOnColorAdditionalLight),
+                R.color.TextOnColorAdditionalLight
+            ),
             FTLEditTextDefaultTheme(
                 R.color.TextPrimaryLight,
                 R.color.TextPlaceholderLight,
@@ -243,7 +245,8 @@ object ThemeManager {
                 R.color.TextDangerEnabledLightOpacity60,
                 R.color.TextDangerEnabledLight,
                 R.drawable.selector_ftl_button_cancel_light
-            )
+            ),
+            FTLMultipleTextViewTheme(R.color.TextPrimaryLight)
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
@@ -378,7 +381,8 @@ object ThemeManager {
                 R.color.TextDangerEnabledLightOpacity60,
                 R.color.TextDangerEnabledLight,
                 R.drawable.selector_ftl_button_cancel_dark
-            )
+            ),
+            FTLMultipleTextViewTheme(R.color.TextPrimaryDark)
         )
     }
 
@@ -528,6 +532,10 @@ object ThemeManager {
         @ColorRes val textColor: Int,
         @ColorRes val dotColor: Int,
         @ColorRes val bounceDotColor: Int
+    )
+
+    data class FTLMultipleTextViewTheme(
+        @ColorRes val topSlotsColor: Int
     )
 
     interface ThemeChangedListener {

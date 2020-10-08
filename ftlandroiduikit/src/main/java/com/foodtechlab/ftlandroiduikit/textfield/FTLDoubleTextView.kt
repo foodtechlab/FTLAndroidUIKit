@@ -96,11 +96,11 @@ class FTLDoubleTextView @JvmOverloads constructor(
                 getBoolean(R.styleable.FTLDoubleTextView_isBoldStyleForEndSlot, true)
             isVisibleImageSlot = getBoolean(R.styleable.FTLDoubleTextView_isVisibleImageSlot, false)
             backgroundColorRes = getColor(
-                R.styleable.FTLDoubleTextView_backgroundColorRes,
+                R.styleable.FTLDoubleTextView_imageBackgroundColor,
                 ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
             )
             imageColorRes = getColor(
-                R.styleable.FTLDoubleTextView_imageColorRes,
+                R.styleable.FTLDoubleTextView_imageColor,
                 ContextCompat.getColor(context, R.color.BackgroundPrimary)
             )
         }

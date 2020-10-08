@@ -42,14 +42,14 @@ class FTLDefaultTextView @JvmOverloads constructor(
         }
 
     @ColorInt
-    var backgroundColorRes = ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+    var imageBackgroundColor = ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
         set(value) {
             field = value
             ivImageSlot.backgroundTintList = ColorStateList.valueOf(field)
         }
 
     @ColorInt
-    var imageColorRes = ContextCompat.getColor(context, R.color.BackgroundPrimary)
+    var imageColor = ContextCompat.getColor(context, R.color.BackgroundPrimary)
         set(value) {
             field = value
             ivImageSlot.setColorFilter(field)
@@ -73,12 +73,12 @@ class FTLDefaultTextView @JvmOverloads constructor(
             imageType = ImageType.values()[getInt(R.styleable.FTLDefaultTextView_imageType, 3)]
             textForSlot = getString(R.styleable.FTLDefaultTextView_textForSlot) ?: ""
             isBoldStyle = getBoolean(R.styleable.FTLDefaultTextView_isBoldStyle, false)
-            backgroundColorRes = getColor(
-                R.styleable.FTLDefaultTextView_backgroundColorRes,
+            imageBackgroundColor = getColor(
+                R.styleable.FTLDefaultTextView_imageBackgroundColor,
                 ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
             )
-            imageColorRes = getColor(
-                R.styleable.FTLDefaultTextView_imageColorRes,
+            imageColor = getColor(
+                R.styleable.FTLDefaultTextView_imageColor,
                 ContextCompat.getColor(context, R.color.BackgroundPrimary)
             )
         }

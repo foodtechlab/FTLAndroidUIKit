@@ -64,11 +64,11 @@ class FTLSectionTextView @JvmOverloads constructor(
             )]
             textForSlot = getString(R.styleable.FTLDefaultTextView_textForSlot) ?: ""
             backgroundColorRes = getColor(
-                R.styleable.FTLDefaultTextView_backgroundColorRes,
+                R.styleable.FTLDefaultTextView_imageBackgroundColor,
                 ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
             )
             imageColorRes = getColor(
-                R.styleable.FTLDefaultTextView_imageColorRes,
+                R.styleable.FTLDefaultTextView_imageColor,
                 ContextCompat.getColor(context, R.color.BackgroundPrimary)
             )
         }

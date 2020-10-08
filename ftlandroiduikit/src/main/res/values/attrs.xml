@@ -327,8 +327,8 @@
         <attr name="textBottomEndSlot" format="string" />
         <attr name="colorBottomEndSlot" format="color" />
         <attr name="colorBottomStartSlot" format="color" />
-        <attr name="backgroundColorRes" />
-        <attr name="imageColorRes" />
+        <attr name="imageColor" />
+        <attr name="imageBackgroundColor" />
     </declare-styleable>
 
     <declare-styleable name="FTLExtendableTextView" parent="FTLDefaultTextView">
@@ -337,8 +337,8 @@
         <attr name="fullText" format="string" />
         <attr name="ellipsizedText" format="string" />
         <attr name="imageType" />
-        <attr name="backgroundColorRes" />
-        <attr name="imageColorRes" />
+        <attr name="imageBackgroundColor" />
+        <attr name="imageColor" />
     </declare-styleable>
 
     <declare-styleable name="FTLDefaultTextView">
@@ -369,15 +369,15 @@
             <enum name="NONE" value="21" />
             <enum name="PURSE" value="22" />
         </attr>
-        <attr name="backgroundColorRes" format="color" />
-        <attr name="imageColorRes" format="color" />
+        <attr name="imageBackgroundColor" format="color" />
+        <attr name="imageColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="FTLSectionTextView" parent="FTLDefaultTextView">
         <attr name="textForSlot" />
         <attr name="imageType" />
-        <attr name="backgroundColorRes" />
-        <attr name="imageColorRes" />
+        <attr name="imageBackgroundColor" />
+        <attr name="imageColor" />
     </declare-styleable>
 
     <declare-styleable name="FTLToolbar">
@@ -422,8 +422,8 @@
         <attr name="imageType" />
         <attr name="showSubtitle" format="boolean" />
         <attr name="isDividersEnabled" format="boolean" />
-        <attr name="imageBackgroundColor" format="color" />
-        <attr name="imageColor" format="color" />
+        <attr name="imageColor" />
+        <attr name="imageBackgroundColor" />
     </declare-styleable>
 
     <declare-styleable name="FTLTableRow">
@@ -550,8 +550,8 @@
         <attr name="isBoldStyleForEndSlot" format="boolean" />
         <attr name="isVisibleImageSlot" format="boolean" />
         <attr name="imageType" />
-        <attr name="backgroundColorRes" />
-        <attr name="imageColorRes" />
+        <attr name="imageBackgroundColor" />
+        <attr name="imageColor" />
     </declare-styleable>
 
     <declare-styleable name="FTLFloatingActionButton">

@@ -1,7 +1,6 @@
 package com.foodtechlab.ftlandroiduikit.textfield.table
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
@@ -63,7 +62,7 @@ class FTLTableHeader @JvmOverloads constructor(
     var imageBackgroundColor = ContextCompat.getColor(context, R.color.IconBackgroundBlueLight)
         set(value) {
             field = value
-            ivImageSlot.backgroundTintList = ColorStateList.valueOf(field)
+            ivImageSlot.background?.changeColor(value)
         }
 
     @ColorInt
