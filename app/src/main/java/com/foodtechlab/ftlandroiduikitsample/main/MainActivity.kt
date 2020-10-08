@@ -27,10 +27,6 @@ class MainActivity : AppCompatActivity() {
             textAddressTo = "Address To"
         }
 
-//        imageButton.setOnClickListener {
-//            // Some code
-//        }
-
         btn.setOnClickListener {
             btn.setProgressVisibility(true)
         }
