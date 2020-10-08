@@ -5,7 +5,7 @@
         <shape android:shape="rectangle">
             <size android:height="48dp" />
             <padding android:bottom="8dp" android:left="16dp" android:right="16dp" android:top="8dp" />
-            <solid android:color="@color/OnSurfacePrimaryAdditionalDark" />
+            <solid android:color="@color/ButtonDisableLight" />
             <corners android:radius="8dp" />
         </shape>
     </item>
@@ -14,7 +14,7 @@
         <shape android:shape="rectangle">
             <size android:height="48dp" />
             <padding android:bottom="8dp" android:left="16dp" android:right="16dp" android:top="8dp" />
-            <solid android:color="@color/PrimaryInfoPressed" />
+            <solid android:color="@color/ButtonInfoPressedLight" />
             <corners android:radius="8dp" />
         </shape>
     </item>
@@ -23,7 +23,7 @@
         <shape android:shape="rectangle">
             <size android:height="48dp" />
             <padding android:bottom="8dp" android:left="16dp" android:right="16dp" android:top="8dp" />
-            <solid android:color="@color/PrimaryInfoEnabled" />
+            <solid android:color="@color/ButtonInfoEnableLight" />
             <corners android:radius="8dp" />
         </shape>
     </item>

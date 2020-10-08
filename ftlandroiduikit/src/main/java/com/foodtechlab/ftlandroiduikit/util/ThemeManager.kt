@@ -104,7 +104,12 @@ object ThemeManager {
         val ftlImageButtonTheme: FTLImageButtonTheme,
         val ftlBottomSheetTheme: FTLBottomSheetTheme,
         val ftlRouteTextViewTheme: FTLRouteTextViewTheme,
-        val ftlTableHeaderTheme: FTLTableHeaderTheme
+        val ftlTableHeaderTheme: FTLTableHeaderTheme,
+        val ftlEditTextDefaultTheme: FTLEditTextDefaultTheme,
+        val ftlButtonAdditionalTheme: FTLButtonAdditionalTheme,
+        val ftlButtonPrimaryTheme: FTLButtonPrimaryTheme,
+        val ftlButtonSecondaryTheme: FTLButtonSecondaryTheme,
+        val ftlButtonCancelTheme: FTLButtonCancelTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -120,12 +125,18 @@ object ThemeManager {
                 R.color.ErrorSuccessLight,
                 R.color.ErrorDangerLight
             ),
-            DotsProgressTheme(R.color.IconGreyLightOpacity60, R.color.IconGreyLightOpacity80),
+            DotsProgressTheme(
+                R.color.IconGreyLightOpacity60,
+                R.color.IconGreyLightOpacity80
+            ),
             DotsProgressTheme(
                 R.color.TextOnColorPrimaryLightOpacity60,
                 R.color.TextOnColorPrimaryLight
             ),
-            DotsProgressTheme(R.color.IconGreyLightOpacity60, R.color.IconGreyLightOpacity80),
+            DotsProgressTheme(
+                R.color.IconGreyLightOpacity60,
+                R.color.IconGreyLightOpacity80
+            ),
             FTLPlaceholderImageViewTheme(R.drawable.ic_restaurant_placeholder_light),
             FTLDeliveryTimeViewTheme(
                 R.color.TimeUsualLight,
@@ -201,7 +212,37 @@ object ThemeManager {
                 R.color.DividerPrimaryLight,
                 R.color.IconSecondaryLight,
                 R.color.TextPrimaryLight,
-                R.color.TextOnColorAdditionalLight
+                R.color.TextOnColorAdditionalLight),
+            FTLEditTextDefaultTheme(
+                R.color.TextPrimaryLight,
+                R.color.TextPlaceholderLight,
+                R.color.TextViewPrimaryLight,
+                R.color.TextViewDividerEnabledLight,
+                R.color.TextViewDividerErrorLight,
+                R.color.TextViewDividerFocusedLight
+            ),
+            FTLButtonAdditionalTheme(
+                R.color.selector_ftl_button_additional_light,
+                R.color.TextInfoPressedLightOpacity60,
+                R.color.TextInfoPressedLight
+            ),
+            FTLButtonPrimaryTheme(
+                R.color.selector_ftl_button_primary_or_secondary_text_light,
+                R.color.TextOnColorPrimaryLightOpacity60,
+                R.color.TextOnColorPrimaryLight,
+                R.drawable.selector_ftl_button_primary_light
+            ),
+            FTLButtonSecondaryTheme(
+                R.color.selector_ftl_button_primary_or_secondary_text_light,
+                R.color.TextOnColorPrimaryLightOpacity60,
+                R.color.TextOnColorPrimaryLight,
+                R.drawable.selector_ftl_button_secondary_light
+            ),
+            FTLButtonCancelTheme(
+                R.color.selector_ftl_button_cancel_text_light,
+                R.color.TextDangerEnabledLightOpacity60,
+                R.color.TextDangerEnabledLight,
+                R.drawable.selector_ftl_button_cancel_light
             )
         ),
         DARK(
@@ -218,12 +259,18 @@ object ThemeManager {
                 R.color.ErrorSuccessDark,
                 R.color.ErrorDangerDark
             ),
-            DotsProgressTheme(R.color.IconGreyLightOpacity60, R.color.IconGreyLightOpacity80),
+            DotsProgressTheme(
+                R.color.IconGreyLightOpacity60,
+                R.color.IconGreyLightOpacity80
+            ),
             DotsProgressTheme(
                 R.color.TextOnColorPrimaryDarkOpacity60,
                 R.color.TextOnColorPrimaryDark
             ),
-            DotsProgressTheme(R.color.IconGreyLightOpacity60, R.color.IconGreyLightOpacity80),
+            DotsProgressTheme(
+                R.color.IconGreyLightOpacity60,
+                R.color.IconGreyLightOpacity80
+            ),
             FTLPlaceholderImageViewTheme(R.drawable.ic_restaurant_placeholder_dark),
             FTLDeliveryTimeViewTheme(
                 R.color.TimeUsualDark,
@@ -300,6 +347,37 @@ object ThemeManager {
                 R.color.IconSecondaryDark,
                 R.color.TextPrimaryDark,
                 R.color.TextOnColorAdditionalDark
+            ),
+            FTLEditTextDefaultTheme(
+                R.color.TextPrimaryDark,
+                R.color.TextPlaceholderDark,
+                R.color.TextViewPrimaryDark,
+                R.color.TextViewDividerEnabledDark,
+                R.color.TextViewDividerErrorDark,
+                R.color.TextViewDividerFocusedDark
+            ),
+            FTLButtonAdditionalTheme(
+                R.color.selector_ftl_button_additional_dark,
+                R.color.TextInfoPressedDarkOpacity60,
+                R.color.TextInfoPressedDark
+            ),
+            FTLButtonPrimaryTheme(
+                R.color.selector_ftl_button_primary_or_secondary_text_dark,
+                R.color.TextOnColorPrimaryDarkOpacity60,
+                R.color.TextOnColorPrimaryDark,
+                R.drawable.selector_ftl_button_primary_dark
+            ),
+            FTLButtonSecondaryTheme(
+                R.color.selector_ftl_button_primary_or_secondary_text_dark,
+                R.color.TextOnColorPrimaryDarkOpacity60,
+                R.color.TextOnColorPrimaryDark,
+                R.drawable.selector_ftl_button_secondary_dark
+            ),
+            FTLButtonCancelTheme(
+                R.color.selector_ftl_button_cancel_text_dark,
+                R.color.TextDangerEnabledLightOpacity60,
+                R.color.TextDangerEnabledLight,
+                R.drawable.selector_ftl_button_cancel_dark
             )
         )
     }
@@ -414,6 +492,42 @@ object ThemeManager {
         @ColorRes val switchIconColor: Int,
         @ColorRes val titleColor: Int,
         @ColorRes val subtitleColor: Int
+    )
+
+    data class FTLEditTextDefaultTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val hintColor: Int,
+        @ColorRes val bgColor: Int,
+        @ColorRes val defaultControlColor: Int,
+        @ColorRes val errorControlColor: Int,
+        @ColorRes val activeControlColor: Int
+    )
+
+    data class FTLButtonPrimaryTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val dotColor: Int,
+        @ColorRes val bounceDotColor: Int,
+        @DrawableRes val bgDrawable: Int
+    )
+
+    data class FTLButtonSecondaryTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val dotColor: Int,
+        @ColorRes val bounceDotColor: Int,
+        @DrawableRes val bgDrawable: Int
+    )
+
+    data class FTLButtonCancelTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val dotColor: Int,
+        @ColorRes val bounceDotColor: Int,
+        @DrawableRes val bgDrawable: Int
+    )
+
+    data class FTLButtonAdditionalTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val dotColor: Int,
+        @ColorRes val bounceDotColor: Int
     )
 
     interface ThemeChangedListener {

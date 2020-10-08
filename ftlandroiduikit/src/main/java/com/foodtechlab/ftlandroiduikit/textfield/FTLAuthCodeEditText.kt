@@ -16,6 +16,7 @@ import androidx.appcompat.widget.AppCompatEditText
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikit.util.spToPx
 import kotlin.math.min
 
@@ -26,7 +27,7 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
-) : AppCompatEditText(context, attrs, defStyleAttr) {
+) : AppCompatEditText(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
 
     private val displayDensity = resources.displayMetrics.density
 
@@ -69,7 +70,7 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
 
     private val bgPaint by lazy {
         Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = ContextCompat.getColor(context, R.color.OnBackgroundSecondaryOpacity10)
+            color = ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.bgColor)
         }
     }
 
@@ -79,7 +80,7 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
 
     private val textPaint by lazy {
         Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = ContextCompat.getColor(context, R.color.OnBackgroundPrimary)
+            color = ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.textColor)
             textSize = context.spToPx(TEXT_SIZE)
             if (!isInEditMode) {
                 typeface = ResourcesCompat.getFont(context, R.font.roboto_regular)
@@ -161,12 +162,12 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
                 cursorPaint.apply {
                     color = ContextCompat.getColor(
                         context,
-                        if (blink) R.color.PrimaryInfoEnabled else R.color.OnBackgroundSecondaryOpacity10
+                        if (blink) ThemeManager.theme.ftlEditTextDefaultTheme.activeControlColor else ThemeManager.theme.ftlEditTextDefaultTheme.bgColor
                     )
                     strokeWidth = if (blink) 2f * displayDensity else 0f
                 }
                 invalidate()
-                postDelayed(this, 300)
+                postDelayed(this, 500)
             }
         }, 300)
     }
@@ -212,6 +213,27 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
         throw RuntimeException("setCustomSelectionActionModeCallback() not supported.")
     }
 
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        bgPaint.color = ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.bgColor)
+        textPaint.color = ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.textColor)
+        invalidate()
+    }
+
     private fun Canvas.drawText(startX: Float, position: Int) {
         val bottomWithPadding = (height - paddingBottom).toFloat()
         val textHeight = textPaint.fontMetrics.descent - textPaint.fontMetrics.ascent
@@ -233,15 +255,15 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
     private fun Canvas.drawUnderline(startX: Float, char: String?) {
         when {
             isErrorEnabled -> linePaint.apply {
-                color = ContextCompat.getColor(context, R.color.PrimaryDangerEnabled)
+                color = ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.errorControlColor)
                 strokeWidth = 2f * displayDensity
             }
             char.isNullOrEmpty() -> linePaint.apply {
-                color = ContextCompat.getColor(context, R.color.OnBackgroundSecondaryOpacity10)
+                color = ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.bgColor)
                 strokeWidth = 0f
             }
             else -> linePaint.apply {
-                color = ContextCompat.getColor(context, R.color.PrimaryInfoEnabled)
+                color = ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.activeControlColor)
                 strokeWidth = 2f * displayDensity
             }
         }
