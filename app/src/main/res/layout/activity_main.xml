@@ -71,6 +71,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp" />
+
+        <com.foodtechlab.ftlandroiduikit.textfield.table.FTLTableHeader
+            android:id="@+id/ftlTableHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            app:headerSubtitle="Subtitle"
+            app:headerTitle="Title"
+            app:isDividersEnabled="true"
+            app:showSubtitle="false" />
     </com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout>
 
     <ImageView

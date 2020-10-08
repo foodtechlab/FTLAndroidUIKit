@@ -422,8 +422,8 @@
         <attr name="imageType" />
         <attr name="showSubtitle" format="boolean" />
         <attr name="isDividersEnabled" format="boolean" />
-        <attr name="backgroundColorRes" />
-        <attr name="imageColorRes" />
+        <attr name="imageBackgroundColor" format="color" />
+        <attr name="imageColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="FTLTableRow">

@@ -103,7 +103,8 @@ object ThemeManager {
         val ftlFloatingActionButtonTheme: FTLFloatingActionButtonTheme,
         val ftlImageButtonTheme: FTLImageButtonTheme,
         val ftlBottomSheetTheme: FTLBottomSheetTheme,
-        val ftlRouteTextViewTheme: FTLRouteTextViewTheme
+        val ftlRouteTextViewTheme: FTLRouteTextViewTheme,
+        val ftlTableHeaderTheme: FTLTableHeaderTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -195,6 +196,12 @@ object ThemeManager {
                 R.color.IconPrimaryLight,
                 R.color.TextPrimaryLight,
                 R.color.TextPrimaryLight
+            ),
+            FTLTableHeaderTheme(
+                R.color.DividerPrimaryLight,
+                R.color.IconSecondaryLight,
+                R.color.TextPrimaryLight,
+                R.color.TextOnColorAdditionalLight
             )
         ),
         DARK(
@@ -287,6 +294,12 @@ object ThemeManager {
                 R.color.IconPrimaryDark,
                 R.color.TextPrimaryDark,
                 R.color.TextPrimaryDark
+            ),
+            FTLTableHeaderTheme(
+                R.color.DividerPrimaryDark,
+                R.color.IconSecondaryDark,
+                R.color.TextPrimaryDark,
+                R.color.TextOnColorAdditionalDark
             )
         )
     }
@@ -394,6 +407,13 @@ object ThemeManager {
         @ColorRes var routItemsColor: Int,
         @ColorRes var addressToColor: Int,
         @ColorRes var addressFromColor: Int
+    )
+
+    data class FTLTableHeaderTheme(
+        @ColorRes val dividerColor: Int,
+        @ColorRes val switchIconColor: Int,
+        @ColorRes val titleColor: Int,
+        @ColorRes val subtitleColor: Int
     )
 
     interface ThemeChangedListener {

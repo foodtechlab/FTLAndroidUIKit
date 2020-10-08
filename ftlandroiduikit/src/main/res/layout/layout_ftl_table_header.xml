@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
 
     <View
         android:id="@+id/vTopDivider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@color/OnBackgroundPrimaryOpacity8" />
+        android:background="@color/DividerPrimaryLight" />
 
     <RelativeLayout
         android:id="@+id/rlContainer"
@@ -38,7 +39,7 @@
             android:layout_toEndOf="@id/ivImageSlot"
             android:fontFamily="@font/roboto_regular"
             android:lineSpacingExtra="8sp"
-            android:textColor="@color/OnBackgroundPrimary"
+            android:textColor="@color/TextPrimaryLight"
             android:textSize="16sp"
             tools:text="New Text" />
 
@@ -53,7 +54,7 @@
             android:fontFamily="@font/roboto_regular"
             android:lineSpacingExtra="4sp"
             android:maxLines="1"
-            android:textColor="@color/OnSurfacePrimaryAdditionalDark"
+            android:textColor="@color/TextOnColorAdditionalLight"
             android:textSize="12sp"
             android:visibility="gone"
             tools:text="New Text"
@@ -75,6 +76,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_below="@id/rlContainer"
-        android:background="@color/OnBackgroundPrimaryOpacity8" />
+        android:background="@color/DividerPrimaryLight" />
 
 </merge>
