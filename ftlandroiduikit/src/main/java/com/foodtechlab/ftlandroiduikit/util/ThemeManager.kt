@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import androidx.annotation.FontRes
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import com.foodtechlab.ftlandroiduikit.R
@@ -105,7 +104,10 @@ object ThemeManager {
         val ftlImageButtonTheme: FTLImageButtonTheme,
         val ftlBottomSheetTheme: FTLBottomSheetTheme,
         val ftlEditTextDefaultTheme: FTLEditTextDefaultTheme,
-        val ftlButtonAdditionalTheme: FTLButtonAdditionalTheme
+        val ftlButtonAdditionalTheme: FTLButtonAdditionalTheme,
+        val ftlButtonPrimaryTheme: FTLButtonPrimaryTheme,
+        val ftlButtonSecondaryTheme: FTLButtonSecondaryTheme,
+        val ftlButtonCancelTheme: FTLButtonCancelTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -210,6 +212,24 @@ object ThemeManager {
                 R.color.selector_ftl_button_additional_light,
                 R.color.TextInfoPressedLightOpacity60,
                 R.color.TextInfoPressedLight
+            ),
+            FTLButtonPrimaryTheme(
+                R.color.selector_ftl_button_primary_or_secondary_text_light,
+                R.color.TextOnColorPrimaryLightOpacity60,
+                R.color.TextOnColorPrimaryLight,
+                R.drawable.selector_ftl_button_primary_light
+            ),
+            FTLButtonSecondaryTheme(
+                R.color.selector_ftl_button_primary_or_secondary_text_light,
+                R.color.TextOnColorPrimaryLightOpacity60,
+                R.color.TextOnColorPrimaryLight,
+                R.drawable.selector_ftl_button_secondary_light
+            ),
+            FTLButtonCancelTheme(
+                R.color.selector_ftl_button_cancel_text_light,
+                R.color.TextDangerEnabledLightOpacity60,
+                R.color.TextDangerEnabledLight,
+                R.drawable.selector_ftl_button_cancel_light
             )
         ),
         DARK(
@@ -315,6 +335,24 @@ object ThemeManager {
                 R.color.selector_ftl_button_additional_dark,
                 R.color.TextInfoPressedDarkOpacity60,
                 R.color.TextInfoPressedDark
+            ),
+            FTLButtonPrimaryTheme(
+                R.color.selector_ftl_button_primary_or_secondary_text_dark,
+                R.color.TextOnColorPrimaryDarkOpacity60,
+                R.color.TextOnColorPrimaryDark,
+                R.drawable.selector_ftl_button_primary_dark
+            ),
+            FTLButtonSecondaryTheme(
+                R.color.selector_ftl_button_primary_or_secondary_text_dark,
+                R.color.TextOnColorPrimaryDarkOpacity60,
+                R.color.TextOnColorPrimaryDark,
+                R.drawable.selector_ftl_button_secondary_dark
+            ),
+            FTLButtonCancelTheme(
+                R.color.selector_ftl_button_cancel_text_dark,
+                R.color.TextDangerEnabledLightOpacity60,
+                R.color.TextDangerEnabledLight,
+                R.drawable.selector_ftl_button_cancel_dark
             )
         )
     }
@@ -424,6 +462,27 @@ object ThemeManager {
         @ColorRes val defaultControlColor: Int,
         @ColorRes val errorControlColor: Int,
         @ColorRes val activeControlColor: Int
+    )
+
+    data class FTLButtonPrimaryTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val dotColor: Int,
+        @ColorRes val bounceDotColor: Int,
+        @DrawableRes val bgDrawable: Int
+    )
+
+    data class FTLButtonSecondaryTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val dotColor: Int,
+        @ColorRes val bounceDotColor: Int,
+        @DrawableRes val bgDrawable: Int
+    )
+
+    data class FTLButtonCancelTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val dotColor: Int,
+        @ColorRes val bounceDotColor: Int,
+        @DrawableRes val bgDrawable: Int
     )
 
     data class FTLButtonAdditionalTheme(

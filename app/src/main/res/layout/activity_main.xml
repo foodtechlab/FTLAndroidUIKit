@@ -36,14 +36,21 @@
             android:id="@+id/btn"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             app:ftlButton_text="I button"
             app:ftlButton_type="additional" />
+
         <com.foodtechlab.ftlandroiduikit.button.FTLButton
             android:id="@+id/btn2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
             app:ftlButton_text="I button2"
-            app:ftlButton_type="additional" />
+            app:ftlButton_type="primary" />
+
     </com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout>
 
     <ImageView

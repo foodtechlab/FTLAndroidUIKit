@@ -19,31 +19,31 @@ enum class ButtonType(
     @DrawableRes var background: Int? = null
 ) {
     PRIMARY(
-        R.color.BackgroundPrimary,
+        ThemeManager.theme.ftlButtonPrimaryTheme.textColor,
         14f,
         true,
         R.font.roboto_medium,
-        R.color.BackgroundSecondaryOpacity60,
-        R.color.BackgroundSecondary,
-        R.drawable.selector_ftl_primary_button
+        ThemeManager.theme.ftlButtonPrimaryTheme.dotColor,
+        ThemeManager.theme.ftlButtonPrimaryTheme.bounceDotColor,
+        ThemeManager.theme.ftlButtonPrimaryTheme.bgDrawable
     ),
     SECONDARY(
-        R.color.BackgroundPrimary,
+        ThemeManager.theme.ftlButtonSecondaryTheme.textColor,
         14f,
         true,
         R.font.roboto_medium,
-        R.color.BackgroundSecondaryOpacity60,
-        R.color.BackgroundSecondary,
-        R.drawable.selector_ftl_button_secondary
+        ThemeManager.theme.ftlButtonSecondaryTheme.dotColor,
+        ThemeManager.theme.ftlButtonSecondaryTheme.bounceDotColor,
+        ThemeManager.theme.ftlButtonSecondaryTheme.bgDrawable
     ),
     CANCEL(
-        R.color.selector_ftl_button_cancel,
+        ThemeManager.theme.ftlButtonCancelTheme.textColor,
         14f,
         true,
         R.font.roboto_medium,
-        R.color.PrimaryDangerEnabledOpacity60,
-        R.color.PrimaryDangerEnabled,
-        R.drawable.selector_ftl_button_cancel
+        ThemeManager.theme.ftlButtonCancelTheme.dotColor,
+        ThemeManager.theme.ftlButtonCancelTheme.bounceDotColor,
+        ThemeManager.theme.ftlButtonCancelTheme.bgDrawable
     ),
     ADDITIONAL(
         ThemeManager.theme.ftlButtonAdditionalTheme.textColor,
