@@ -23,6 +23,12 @@
             app:ftlToolbar_subtitle="Subtitle"
             app:ftlToolbar_title="Title" />
 
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:title_text="Title"
+            app:subtitle_text="Subtitle" />
+
         <TextView
             android:id="@+id/btnSwitchTheme"
             android:layout_width="match_parent"

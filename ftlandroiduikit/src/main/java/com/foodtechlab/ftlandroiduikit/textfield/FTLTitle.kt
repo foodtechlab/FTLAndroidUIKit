@@ -64,17 +64,17 @@ class FTLTitle @JvmOverloads constructor(
 
         orientation = VERTICAL
 
-        setPadding(
-            (16f * displayDensity).toInt(),
-            (8f * displayDensity).toInt(),
-            (16f * displayDensity).toInt(),
-            (8f * displayDensity).toInt()
-        )
-
         tvTitle = findViewById(R.id.tv_ftl_title)
         tvSubtitle = findViewById(R.id.tv_ftl_subtitle)
 
         context.withStyledAttributes(attrs, R.styleable.FTLTitle) {
+            val pStart = if (paddingStart == 0) (16f * displayDensity).toInt() else paddingStart
+            val pTop = if (paddingTop == 0) (8f * displayDensity).toInt() else paddingTop
+            val pEnd = if (paddingEnd == 0) (16f * displayDensity).toInt() else paddingEnd
+            val pBottom = if (paddingBottom == 0) (8f * displayDensity).toInt() else paddingBottom
+
+            setPadding(pStart, pTop, pEnd, pBottom)
+
             titleColor = getColor(
                 R.styleable.FTLTitle_title_color,
                 ContextCompat.getColor(context, R.color.OnBackgroundPrimary)
@@ -86,5 +86,17 @@ class FTLTitle @JvmOverloads constructor(
             title = getString(R.styleable.FTLTitle_title_text)
             subTitle = getString(R.styleable.FTLTitle_subtitle_text)
         }
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        paddingStart
+        paddingTop
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        paddingStart
+        paddingTop
     }
 }
