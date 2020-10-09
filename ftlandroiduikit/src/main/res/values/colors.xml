@@ -129,9 +129,9 @@
     <color name="TextPrimaryDark">#EFEFEF</color>
 
     <color name="TextOnColorPrimaryLight">#FFFFFF</color>
-    <color name="TextOnColorPrimaryLightOpacity60">#99FFFFFF</color>
+    <color name="TextOnColorPrimaryOpacity60Light">#99FFFFFF</color>
     <color name="TextOnColorPrimaryDark">#FFFFFF</color>
-    <color name="TextOnColorPrimaryDarkOpacity60">#99FFFFFF</color>
+    <color name="TextOnColorPrimaryOpacity60Dark">#99FFFFFF</color>
 
     <color name="TextOnColorSecondaryLight">#1E1E1E</color>
     <color name="TextOnColorSecondaryDark">#1E1E1E</color>
@@ -169,7 +169,9 @@
     <color name="TextSecondaryDark">#3C86BF</color>
 
     <color name="TextPlaceholderLight">#A4A4A4</color>
+    <color name="TextPlaceholderOpacity60Light">#99A4A4A4</color>
     <color name="TextPlaceholderDark">#B2B2B2</color>
+    <color name="TextPlaceholderOpacity60Dark">#99B2B2B2</color>
 
     <color name="TextPinkLight">#EA2249</color>
     <color name="TextPinkDark">#EF3F63</color>

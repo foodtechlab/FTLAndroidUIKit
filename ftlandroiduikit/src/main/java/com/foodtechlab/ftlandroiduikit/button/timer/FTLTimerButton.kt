@@ -2,6 +2,7 @@ package com.foodtechlab.ftlandroiduikit.button.timer
 
 import android.content.Context
 import android.content.res.ColorStateList
+import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.StateListDrawable
@@ -24,9 +25,10 @@ import androidx.core.view.updateLayoutParams
 import androidx.transition.Fade
 import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLToolbarDotsProgress
 import com.foodtechlab.ftlandroiduikit.common.ProgressView
+import com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLTimerDotsProgress
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.getMillis
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -40,7 +42,7 @@ class FTLTimerButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : RelativeLayout(context, attrs, defStyleAttr) {
+) : RelativeLayout(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
 
     private val radius = 8 * resources.displayMetrics.density
 
@@ -126,7 +128,7 @@ class FTLTimerButton @JvmOverloads constructor(
     private val progressView: ProgressView
     private val tvTime: TextView
     private val tvLabel: TextView
-    private val dotProgress: FTLToolbarDotsProgress
+    private val dotProgress: FTLTimerDotsProgress
 
     init {
         inflate(context, R.layout.layout_ftl_timer_button, this)
@@ -142,6 +144,9 @@ class FTLTimerButton @JvmOverloads constructor(
             isTimerRenewableInside = getBoolean(R.styleable.FTLTimerButton_isRenewableInside, true)
             accompanyingText = getString(R.styleable.FTLTimerButton_accompanyingText)
             heightButton = getFloat(R.styleable.FTLTimerButton_heightButton, 40f)
+
+            setupColors()
+
             updateViewState(
                 getColor(R.styleable.FTLTimerButton_ftlTimerButton_textColor, -1),
                 getColor(R.styleable.FTLTimerButton_ftlTimerButton_dotColor, -1),
@@ -166,11 +171,14 @@ class FTLTimerButton @JvmOverloads constructor(
         }
 
         super.setOnClickListener { if (!inProgress) clickListener?.onClick(it) }
+
+        onThemeChanged(ThemeManager.theme)
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         updateDotProgressVisibility(inProgress)
+        ThemeManager.addListener(this)
     }
 
     override fun onSaveInstanceState(): Parcelable? =
@@ -199,6 +207,41 @@ class FTLTimerButton @JvmOverloads constructor(
         } else {
             super.onRestoreInstanceState(state)
         }
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        State.NEW.textColor = theme.ftlTimerButtonTheme.textColorNew
+        State.NEW.progressColor = theme.ftlTimerButtonTheme.progressColorNew
+        State.NEW.progressBgColor = theme.ftlTimerButtonTheme.progressBgColorNew
+        State.NEW.dotColor = theme.ftlTimerButtonTheme.dotColorNew
+        State.NEW.bounceDotColor = theme.ftlTimerButtonTheme.bounceDotColorNew
+
+        State.READY_FOR_DELIVERY.textColor = theme.ftlTimerButtonTheme.textColorReadyForDelivery
+        State.READY_FOR_DELIVERY.progressColor =
+            theme.ftlTimerButtonTheme.progressColorReadyForDelivery
+        State.READY_FOR_DELIVERY.progressBgColor =
+            theme.ftlTimerButtonTheme.progressBgColorReadyForDelivery
+        State.READY_FOR_DELIVERY.dotColor = theme.ftlTimerButtonTheme.dotColorReadyForDelivery
+        State.READY_FOR_DELIVERY.bounceDotColor =
+            theme.ftlTimerButtonTheme.bounceDotColorReadyForDelivery
+
+        State.IN_DELIVERY.textColor = theme.ftlTimerButtonTheme.textColorInDelivery
+        State.IN_DELIVERY.progressColor = theme.ftlTimerButtonTheme.progressColorInDelivery
+        State.IN_DELIVERY.progressBgColor = theme.ftlTimerButtonTheme.progressBgColorInDelivery
+        State.IN_DELIVERY.dotColor = theme.ftlTimerButtonTheme.dotColorInDelivery
+        State.IN_DELIVERY.bounceDotColor = theme.ftlTimerButtonTheme.bounceDotColorInDelivery
+
+        updateViewState()
     }
 
     override fun setOnClickListener(l: OnClickListener?) {
@@ -251,7 +294,7 @@ class FTLTimerButton @JvmOverloads constructor(
 
     fun updateBounceDotColor(@ColorRes colorRes: Int) {
         bounceDotColorRes = colorRes
-        dotProgress.dotColor = ContextCompat.getColor(
+        dotProgress.bounceDotColor = ContextCompat.getColor(
             context,
             if (bounceDotColorRes != -1) bounceDotColorRes else state.bounceDotColor
         )
@@ -356,6 +399,57 @@ class FTLTimerButton @JvmOverloads constructor(
         } else {
             tvTime.setTextColor(color)
             tvLabel.setTextColor(color)
+        }
+    }
+
+    private fun TypedArray.setupColors() {
+        when (state) {
+            State.NEW -> {
+                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.textColorNew = getResourceId(
+                    R.styleable.FTLTimerButton_ftlTimerButton_textColor,
+                    ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.textColorNew
+                )
+                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.dotColorNew = getResourceId(
+                    R.styleable.FTLTimerButton_ftlTimerButton_dotColor,
+                    ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.dotColorNew
+                )
+                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.bounceDotColorNew = getResourceId(
+                    R.styleable.FTLTimerButton_ftlTimerButton_bounceDotColor,
+                    ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.bounceDotColorNew
+                )
+            }
+            State.IN_DELIVERY -> {
+                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.textColorInDelivery = getResourceId(
+                    R.styleable.FTLTimerButton_ftlTimerButton_textColor,
+                    ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.textColorInDelivery
+                )
+                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.dotColorInDelivery = getResourceId(
+                    R.styleable.FTLTimerButton_ftlTimerButton_dotColor,
+                    ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.dotColorInDelivery
+                )
+                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.bounceDotColorInDelivery =
+                    getResourceId(
+                        R.styleable.FTLTimerButton_ftlTimerButton_bounceDotColor,
+                        ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.bounceDotColorInDelivery
+                    )
+            }
+            else -> {
+                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.textColorReadyForDelivery =
+                    getResourceId(
+                        R.styleable.FTLTimerButton_ftlTimerButton_textColor,
+                        ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.textColorReadyForDelivery
+                    )
+                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.dotColorReadyForDelivery =
+                    getResourceId(
+                        R.styleable.FTLTimerButton_ftlTimerButton_dotColor,
+                        ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.dotColorReadyForDelivery
+                    )
+                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.bounceDotColorReadyForDelivery =
+                    getResourceId(
+                        R.styleable.FTLTimerButton_ftlTimerButton_bounceDotColor,
+                        ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.bounceDotColorReadyForDelivery
+                    )
+            }
         }
     }
 

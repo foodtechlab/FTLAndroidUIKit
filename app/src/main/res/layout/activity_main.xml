@@ -77,6 +77,12 @@
             app:textBottomStartSlot="Bottom start"
             app:textTopEndSlot="Top end"
             app:textTopStartSlot="Top start" />
+
+        <com.foodtechlab.ftlandroiduikit.button.timer.FTLTimerButton
+            android:id="@+id/ftlTimerButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp" />
     </com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout>
 
     <ImageView

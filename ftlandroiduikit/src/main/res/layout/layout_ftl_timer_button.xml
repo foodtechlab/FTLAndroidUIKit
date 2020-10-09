@@ -56,7 +56,7 @@
 
     </LinearLayout>
 
-    <com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLToolbarDotsProgress
+    <com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLTimerDotsProgress
         android:id="@+id/dot_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,8 +65,5 @@
         app:animation_speed="150"
         app:gap="0dp"
         tools:visibility="visible" />
-
-<!--    app:bounce_dot_color="@color/PrimaryDangerPressed"-->
-<!--    app:dot_color="@color/PrimaryDangerEnabled"-->
 
 </RelativeLayout>

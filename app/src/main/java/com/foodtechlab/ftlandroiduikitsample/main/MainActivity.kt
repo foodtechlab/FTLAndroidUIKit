@@ -2,6 +2,7 @@ package com.foodtechlab.ftlandroiduikitsample.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.foodtechlab.ftlandroiduikit.button.timer.State
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikitsample.R
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,6 +22,14 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         toolbar.showLogo()
+
+        with(ftlTimerButton) {
+            updateState(State.IN_DELIVERY)
+            timeZoneId = "Europe/Samara"
+            estimateDuration = 60 * 60L * 1000L
+            autoAnimateProgress = false
+            estimateSuccessAt = "2020-10-09T14:30:00.001"
+        }
 
         with(ftlRouteTextView) {
             textAddressFrom = "Address From"
