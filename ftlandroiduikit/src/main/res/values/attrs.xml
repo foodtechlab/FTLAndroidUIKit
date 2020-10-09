@@ -376,8 +376,6 @@
     <declare-styleable name="FTLSectionTextView" parent="FTLDefaultTextView">
         <attr name="textForSlot" />
         <attr name="imageType" />
-        <attr name="imageBackgroundColor" />
-        <attr name="imageColor" />
     </declare-styleable>
 
     <declare-styleable name="FTLToolbar">
@@ -550,8 +548,6 @@
         <attr name="isBoldStyleForEndSlot" format="boolean" />
         <attr name="isVisibleImageSlot" format="boolean" />
         <attr name="imageType" />
-        <attr name="imageBackgroundColor" />
-        <attr name="imageColor" />
     </declare-styleable>
 
     <declare-styleable name="FTLFloatingActionButton">

@@ -111,7 +111,10 @@ object ThemeManager {
         val ftlButtonSecondaryTheme: FTLButtonSecondaryTheme,
         val ftlButtonCancelTheme: FTLButtonCancelTheme,
         val ftlMultipleTextViewTheme: FTLMultipleTextViewTheme,
-        val ftlTimerButtonTheme: FTLTimerButtonTheme
+        val ftlTimerButtonTheme: FTLTimerButtonTheme,
+        val ftlSectionTextViewTheme: FTLSectionTextViewTheme,
+        val ftlDoubleTextViewTheme: FTLDoubleTextViewTheme,
+        val ftlCoordinatorLayoutTheme: FTLCoordinatorLayoutTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -264,7 +267,19 @@ object ThemeManager {
                 R.color.ButtonSuccessEnableLight,
                 R.color.TextOnColorPrimaryOpacity60Light,
                 R.color.TextOnColorPrimaryLight
-            )
+            ),
+            FTLSectionTextViewTheme(
+                R.color.TextPrimaryLight,
+                R.color.IconSecondaryLight,
+                R.color.IconBlueLight,
+                R.color.IconBackgroundDefaultLight
+            ),
+            FTLDoubleTextViewTheme(
+                R.color.TextPrimaryLight,
+                R.color.IconPrimaryLight,
+                R.color.IconBackgroundBlueLight
+            ),
+            FTLCoordinatorLayoutTheme(R.color.OnPrimary)
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
@@ -417,7 +432,19 @@ object ThemeManager {
                 R.color.ButtonSuccessEnableDark,
                 R.color.TextOnColorPrimaryOpacity60Dark,
                 R.color.TextOnColorPrimaryDark
-            )
+            ),
+            FTLSectionTextViewTheme(
+                R.color.TextPrimaryDark,
+                R.color.IconSecondaryDark,
+                R.color.IconBlueDark,
+                R.color.IconBackgroundDefaultDark
+            ),
+            FTLDoubleTextViewTheme(
+                R.color.TextPrimaryDark,
+                R.color.IconPrimaryDark,
+                R.color.IconBackgroundBlueDark
+            ),
+            FTLCoordinatorLayoutTheme(R.color.OnSurfaceSecondary)
         )
     }
 
@@ -591,6 +618,23 @@ object ThemeManager {
         @ColorRes val progressBgColorInDelivery: Int,
         @ColorRes var dotColorInDelivery: Int,
         @ColorRes var bounceDotColorInDelivery: Int
+    )
+
+    data class FTLSectionTextViewTheme(
+        @ColorRes var textColor: Int,
+        @ColorRes var arrowColor: Int,
+        @ColorRes var defaultImageColor: Int,
+        @ColorRes var defaultImageBgColor: Int
+    )
+
+    data class FTLDoubleTextViewTheme(
+        @ColorRes var textColor: Int,
+        @ColorRes var defaultImageColor: Int,
+        @ColorRes var defaultImageBgColor: Int
+    )
+
+    data class FTLCoordinatorLayoutTheme(
+        @ColorRes val bgColor: Int
     )
 
     interface ThemeChangedListener {

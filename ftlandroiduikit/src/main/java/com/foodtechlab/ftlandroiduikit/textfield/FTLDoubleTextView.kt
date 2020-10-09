@@ -7,40 +7,19 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 
 
 class FTLDoubleTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : LinearLayout(context, attrs, defStyle) {
-
-    private var tvStartSlot: TextView
-    private var tvEndSlot: TextView
-    private var ivImageSlot: ImageView
-    var textForStartSlot: String = ""
-        set(value) {
-            field = value
-            tvStartSlot.text = field
-        }
-
-    var textForEndSlot: String = ""
-        set(value) {
-            field = value
-            tvEndSlot.text = field
-        }
-
-    var imageType: ImageType = ImageType.CUSTOMER
-        set(value) {
-            field = value
-            ivImageSlot.setImageResource(field.imgRes)
-        }
+) : LinearLayout(context, attrs, defStyle), ThemeManager.ThemeChangedListener {
 
     var isBoldStyleForStartSlot: Boolean = false
         set(value) {
@@ -66,19 +45,28 @@ class FTLDoubleTextView @JvmOverloads constructor(
             ivImageSlot.visibility = if (field) View.VISIBLE else View.INVISIBLE
         }
 
-    @ColorInt
-    var backgroundColorRes = ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+    var textForStartSlot: String = ""
         set(value) {
             field = value
-            ivImageSlot.backgroundTintList = ColorStateList.valueOf(field)
+            tvStartSlot.text = field
         }
 
-    @ColorInt
-    var imageColorRes = ContextCompat.getColor(context, R.color.BackgroundPrimary)
+    var textForEndSlot: String = ""
         set(value) {
             field = value
-            ivImageSlot.setColorFilter(field)
+            tvEndSlot.text = field
         }
+
+    var imageType: ImageType = ImageType.CUSTOMER
+        set(value) {
+            field = value
+            ivImageSlot.setImageResource(field.imgRes)
+        }
+
+    private var ivImageSlot: ImageView
+
+    private var tvEndSlot: TextView
+    private var tvStartSlot: TextView
 
     init {
         inflate(context, R.layout.layout_ftl_double_text_view, this)
@@ -95,14 +83,73 @@ class FTLDoubleTextView @JvmOverloads constructor(
             isBoldStyleForEndSlot =
                 getBoolean(R.styleable.FTLDoubleTextView_isBoldStyleForEndSlot, true)
             isVisibleImageSlot = getBoolean(R.styleable.FTLDoubleTextView_isVisibleImageSlot, false)
-            backgroundColorRes = getColor(
-                R.styleable.FTLDoubleTextView_imageBackgroundColor,
-                ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+        }
+        onThemeChanged(ThemeManager.theme)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        tvStartSlot.setTextColor(
+            ContextCompat.getColor(
+                context,
+                theme.ftlDoubleTextViewTheme.textColor
             )
-            imageColorRes = getColor(
-                R.styleable.FTLDoubleTextView_imageColor,
-                ContextCompat.getColor(context, R.color.BackgroundPrimary)
+        )
+        tvEndSlot.setTextColor(
+            ContextCompat.getColor(
+                context,
+                theme.ftlDoubleTextViewTheme.textColor
+            )
+        )
+        with(ivImageSlot) {
+            backgroundTintList = ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    context,
+                    ThemeManager.theme.ftlDoubleTextViewTheme.defaultImageBgColor
+                )
+            )
+            setColorFilter(
+                ContextCompat.getColor(
+                    context,
+                    ThemeManager.theme.ftlDoubleTextViewTheme.defaultImageColor
+                )
             )
         }
+    }
+
+    fun updateImageBackgroundColors(colorForLightTheme: Int, colorForDarkTheme: Int) {
+        ThemeManager.Theme.LIGHT.ftlDoubleTextViewTheme.defaultImageBgColor = colorForLightTheme
+        ThemeManager.Theme.DARK.ftlDoubleTextViewTheme.defaultImageBgColor = colorForDarkTheme
+        ivImageSlot.backgroundTintList = ColorStateList.valueOf(
+            ContextCompat.getColor(
+                context,
+                ThemeManager.theme.ftlDoubleTextViewTheme.defaultImageBgColor
+            )
+        )
+    }
+
+    fun updateImageColors(colorForLightTheme: Int, colorForDarkTheme: Int) {
+        ThemeManager.Theme.LIGHT.ftlDoubleTextViewTheme.defaultImageColor = colorForLightTheme
+        ThemeManager.Theme.DARK.ftlDoubleTextViewTheme.defaultImageColor = colorForDarkTheme
+        ivImageSlot.setColorFilter(
+            ContextCompat.getColor(
+                context,
+                ThemeManager.theme.ftlDoubleTextViewTheme.defaultImageColor
+            )
+        )
     }
 }

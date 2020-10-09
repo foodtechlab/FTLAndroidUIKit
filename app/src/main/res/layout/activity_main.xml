@@ -32,25 +32,14 @@
             android:padding="12dp"
             android:text="Switch theme" />
 
-        <com.foodtechlab.ftlandroiduikit.button.FTLButton
-            android:id="@+id/btn"
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLDoubleTextView
+            android:id="@+id/tvTotal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
-            app:ftlButton_text="I button"
-            app:ftlButton_type="additional" />
-
-        <com.foodtechlab.ftlandroiduikit.button.FTLButton
-            android:id="@+id/btn2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:ftlButton_text="I button2"
-            app:ftlButton_type="primary" />
+            app:textForStartSlot="Итого"
+            android:layout_margin="8dp"
+            app:isVisibleImageSlot="true"
+            app:textForEndSlot="25 000 р"/>
 
         <com.foodtechlab.ftlandroiduikit.textfield.FTLRouteTextView
             android:id="@+id/ftlRouteTextView"
