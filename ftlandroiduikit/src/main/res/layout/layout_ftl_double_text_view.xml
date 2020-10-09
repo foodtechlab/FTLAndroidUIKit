@@ -28,7 +28,7 @@
             android:layout_weight="1"
             android:fontFamily="@font/roboto_regular"
             android:lineSpacingExtra="8sp"
-            android:textColor="@color/OnBackgroundPrimary"
+            android:textColor="@color/TextPrimaryLight"
             android:textSize="16sp"
             tools:text="New Text" />
 
@@ -41,7 +41,7 @@
             android:fontFamily="@font/roboto_regular"
             android:gravity="end"
             android:lineSpacingExtra="8sp"
-            android:textColor="@color/OnBackgroundPrimary"
+            android:textColor="@color/TextPrimaryLight"
             android:textSize="16sp"
             tools:text="New Text" />
 
