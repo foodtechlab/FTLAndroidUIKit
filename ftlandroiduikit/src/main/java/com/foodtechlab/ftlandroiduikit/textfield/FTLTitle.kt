@@ -87,16 +87,4 @@ class FTLTitle @JvmOverloads constructor(
             subTitle = getString(R.styleable.FTLTitle_subtitle_text)
         }
     }
-
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        paddingStart
-        paddingTop
-    }
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        paddingStart
-        paddingTop
-    }
 }
