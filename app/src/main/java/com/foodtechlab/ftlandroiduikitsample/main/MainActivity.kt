@@ -27,14 +27,6 @@ class MainActivity : AppCompatActivity() {
             textAddressTo = "Address To"
         }
 
-        btn.setOnClickListener {
-            btn.setProgressVisibility(true)
-        }
-
-        btn2.setOnClickListener {
-            btn.setProgressVisibility(false)
-        }
-
         btnSwitchTheme.setOnClickListener {
             ThemeManager.setTheme(
                 when (ThemeManager.theme) {
