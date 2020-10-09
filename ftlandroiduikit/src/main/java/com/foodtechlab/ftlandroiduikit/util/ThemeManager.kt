@@ -259,7 +259,7 @@ object ThemeManager {
                 R.color.IconPrimaryLight,
                 R.color.IconBackgroundBlueLight
             ),
-            FTLCoordinatorLayoutTheme(R.color.OnPrimary)
+            FTLCoordinatorLayoutTheme(R.color.BackgroundSecondaryLight)
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
@@ -406,7 +406,7 @@ object ThemeManager {
                 R.color.IconPrimaryDark,
                 R.color.IconBackgroundBlueDark
             ),
-            FTLCoordinatorLayoutTheme(R.color.OnSurfaceSecondary)
+            FTLCoordinatorLayoutTheme(R.color.BackgroundSecondaryDark)
         )
     }
 
