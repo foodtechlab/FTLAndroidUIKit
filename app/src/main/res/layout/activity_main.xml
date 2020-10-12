@@ -32,6 +32,12 @@
             android:padding="12dp"
             android:text="Switch theme" />
 
+        <com.foodtechlab.ftlandroiduikit.common.Divider
+            android:layout_marginEnd="25dp"
+            android:layout_marginStart="25dp"
+            android:layout_width="match_parent"
+            android:layout_height="1dp" />
+
         <com.foodtechlab.ftlandroiduikit.textfield.FTLDoubleTextView
             android:id="@+id/tvTotal"
             android:layout_width="match_parent"

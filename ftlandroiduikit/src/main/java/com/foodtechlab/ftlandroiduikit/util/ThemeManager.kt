@@ -114,7 +114,8 @@ object ThemeManager {
         val ftlTimerButtonTheme: FTLTimerButtonTheme,
         val ftlSectionTextViewTheme: FTLSectionTextViewTheme,
         val ftlDoubleTextViewTheme: FTLDoubleTextViewTheme,
-        val ftlCoordinatorLayoutTheme: FTLCoordinatorLayoutTheme
+        val ftlCoordinatorLayoutTheme: FTLCoordinatorLayoutTheme,
+        val ftlDividerTheme: FTLDividerTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -279,7 +280,8 @@ object ThemeManager {
                 R.color.IconPrimaryLight,
                 R.color.IconBackgroundBlueLight
             ),
-            FTLCoordinatorLayoutTheme(R.color.BackgroundSecondaryLight)
+            FTLCoordinatorLayoutTheme(R.color.BackgroundSecondaryLight),
+            FTLDividerTheme(R.color.DividerPrimaryLight)
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
@@ -444,7 +446,8 @@ object ThemeManager {
                 R.color.IconPrimaryDark,
                 R.color.IconBackgroundBlueDark
             ),
-            FTLCoordinatorLayoutTheme(R.color.BackgroundSecondaryDark)
+            FTLCoordinatorLayoutTheme(R.color.BackgroundSecondaryDark),
+            FTLDividerTheme(R.color.DividerPrimaryDark)
         )
     }
 
@@ -631,6 +634,10 @@ object ThemeManager {
         @ColorRes var textColor: Int,
         @ColorRes var defaultImageColor: Int,
         @ColorRes var defaultImageBgColor: Int
+    )
+
+    data class FTLDividerTheme(
+        @ColorRes var bgColor: Int
     )
 
     data class FTLCoordinatorLayoutTheme(
