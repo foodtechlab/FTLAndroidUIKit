@@ -116,7 +116,8 @@ object ThemeManager {
         val ftlDoubleTextViewTheme: FTLDoubleTextViewTheme,
         val ftlCoordinatorLayoutTheme: FTLCoordinatorLayoutTheme,
         val ftlTitleTheme: FTLTitleTheme,
-        val ftlBottomNavigationViewTheme: FTLBottomNavigationViewTheme
+        val ftlBottomNavigationViewTheme: FTLBottomNavigationViewTheme,
+        val ftlDividerTheme: FTLDividerTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -290,7 +291,8 @@ object ThemeManager {
                 R.drawable.selector_ftl_bnv_maps_light,
                 R.drawable.selector_ftl_bnv_history_light,
                 R.drawable.selector_ftl_bnv_more_light
-            )
+            ),
+            FTLDividerTheme(R.color.DividerPrimaryLight)
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
@@ -464,7 +466,8 @@ object ThemeManager {
                 R.drawable.selector_ftl_bnv_maps_dark,
                 R.drawable.selector_ftl_bnv_history_dark,
                 R.drawable.selector_ftl_bnv_more_dark
-            )
+            ),
+            FTLDividerTheme(R.color.DividerPrimaryDark)
         )
     }
 
@@ -651,6 +654,10 @@ object ThemeManager {
         @ColorRes var textColor: Int,
         @ColorRes var defaultImageColor: Int,
         @ColorRes var defaultImageBgColor: Int
+    )
+
+    data class FTLDividerTheme(
+        @ColorRes var bgColor: Int
     )
 
     data class FTLCoordinatorLayoutTheme(
