@@ -1,6 +1,7 @@
 package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.content.Context
+import android.content.res.TypedArray
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
@@ -9,14 +10,17 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.isVisible
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 
 class FTLTitle @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr) {
+) : LinearLayout(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
 
     private val displayDensity = resources.displayMetrics.density
+
+    var autoHandleColors = true
 
     var isTitleVisible: Boolean
         get() = tvTitle.isVisible
@@ -75,16 +79,63 @@ class FTLTitle @JvmOverloads constructor(
 
             setPadding(pStart, pTop, pEnd, pBottom)
 
-            titleColor = getColor(
-                R.styleable.FTLTitle_title_color,
-                ContextCompat.getColor(context, R.color.OnBackgroundPrimary)
-            )
-            subtitleColor = getColor(
-                R.styleable.FTLTitle_subtitle_color,
-                ContextCompat.getColor(context, R.color.AdditionalGreen)
-            )
+            setupTitleColor()
+
+            setupSubtitleColor()
+
             title = getString(R.styleable.FTLTitle_title_text)
             subTitle = getString(R.styleable.FTLTitle_subtitle_text)
+        }
+
+        onThemeChanged(ThemeManager.theme)
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    private fun TypedArray.setupTitleColor() {
+        ThemeManager.Theme.LIGHT.ftlTitleTheme.titleColor = getResourceId(
+            R.styleable.FTLTitle_title_color_light,
+            R.color.TextPrimaryLight
+        )
+        ThemeManager.Theme.DARK.ftlTitleTheme.titleColor = getResourceId(
+            R.styleable.FTLTitle_title_color_dark,
+            R.color.TextPrimaryDark
+        )
+        titleColor = ContextCompat.getColor(context, ThemeManager.theme.ftlTitleTheme.titleColor)
+    }
+
+    private fun TypedArray.setupSubtitleColor() {
+        ThemeManager.Theme.LIGHT.ftlTitleTheme.subtitleColor = getResourceId(
+            R.styleable.FTLTitle_subtitle_color_light,
+            R.color.TextSuccessEnabledLight
+        )
+        ThemeManager.Theme.DARK.ftlTitleTheme.subtitleColor = getResourceId(
+            R.styleable.FTLTitle_subtitle_color_dark,
+            R.color.TextSuccessEnabledDark
+        )
+        subtitleColor = ContextCompat.getColor(
+            context,
+            ThemeManager.theme.ftlTitleTheme.subtitleColor
+        )
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        if (autoHandleColors) {
+            titleColor = ContextCompat.getColor(context, theme.ftlTitleTheme.titleColor)
+            subtitleColor = ContextCompat.getColor(context, theme.ftlTitleTheme.subtitleColor)
         }
     }
 }

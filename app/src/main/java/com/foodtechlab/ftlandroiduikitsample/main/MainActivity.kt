@@ -2,6 +2,7 @@ package com.foodtechlab.ftlandroiduikitsample.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
 import com.foodtechlab.ftlandroiduikit.button.timer.State
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikitsample.R
@@ -48,5 +49,14 @@ class MainActivity : AppCompatActivity() {
                 .putInt("key_theme", ThemeManager.theme.ordinal)
                 .apply()
         }
+
+        bnvMainNavigation.addMenuItems(
+            listOf(
+                FTLBottomNavigationView.MenuItem.ORDERS,
+                FTLBottomNavigationView.MenuItem.MAPS,
+                FTLBottomNavigationView.MenuItem.HISTORY,
+                FTLBottomNavigationView.MenuItem.MORE
+            )
+        )
     }
 }

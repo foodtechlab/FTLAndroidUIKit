@@ -401,8 +401,10 @@
     <declare-styleable name="FTLTitle">
         <attr name="title_text" format="string" />
         <attr name="subtitle_text" format="string" />
-        <attr name="title_color" format="color" />
-        <attr name="subtitle_color" format="color" />
+        <attr name="title_color_light" format="color" />
+        <attr name="subtitle_color_light" format="color" />
+        <attr name="title_color_dark" format="color" />
+        <attr name="subtitle_color_dark" format="color" />
     </declare-styleable>
 
     <declare-styleable name="FTLPlaceholderImageView">
