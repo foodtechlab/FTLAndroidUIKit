@@ -98,6 +98,14 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             app:textForSlot="FTLDefaultTextView" />
+
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLExtendableTextView
+            android:id="@+id/ftlExtendableTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:ellipsizedText="..еще"
+            app:fullText="FTLExtendableTextView FTLExtendableTextView FTLExtendableTextView FTLExtendableTextViewFTLExtendableTextView FTLExtendableTextView FTLExtendableTextView FTLExtendableTextViewFTLExtendableTextView FTLExtendableTextView FTLExtendableTextView FTLExtendableTextViewFTLExtendableTextView FTLExtendableTextView FTLExtendableTextView FTLExtendableTextView" />
     </com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout>
 
     <ImageView

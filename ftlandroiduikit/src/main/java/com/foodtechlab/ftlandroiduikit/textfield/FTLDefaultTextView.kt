@@ -69,6 +69,8 @@ class FTLDefaultTextView @JvmOverloads constructor(
     init {
         inflate(context, R.layout.layout_ftl_default_text_view, this)
 
+        orientation = HORIZONTAL
+
         tvTextSlot = findViewById(R.id.tv_text_slot)
         ivImageSlot = findViewById(R.id.iv_image_slot)
 
@@ -78,15 +80,15 @@ class FTLDefaultTextView @JvmOverloads constructor(
             isBoldStyle = getBoolean(R.styleable.FTLDefaultTextView_isBoldStyle, false)
             imageBackgroundColor = getColor(
                 R.styleable.FTLDefaultTextView_imageBackgroundColor,
-                ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+                ContextCompat.getColor(context, R.color.IconBackgroundBlueLight)
             )
             imageColor = getColor(
                 R.styleable.FTLDefaultTextView_imageColor,
-                ContextCompat.getColor(context, R.color.BackgroundPrimary)
+                ContextCompat.getColor(context, R.color.IconPrimaryLight)
             )
         }
-        setWillNotDraw(false)
         onThemeChanged(ThemeManager.theme)
+        setWillNotDraw(false)
     }
 
     override fun onFinishInflate() {

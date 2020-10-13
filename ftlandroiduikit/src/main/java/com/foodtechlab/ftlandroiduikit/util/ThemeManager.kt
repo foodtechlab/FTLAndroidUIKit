@@ -118,7 +118,8 @@ object ThemeManager {
         val ftlTitleTheme: FTLTitleTheme,
         val ftlBottomNavigationViewTheme: FTLBottomNavigationViewTheme,
         val ftlDividerTheme: FTLDividerTheme,
-        val ftlDefaultTextViewTheme: FTLDefaultTextViewTheme
+        val ftlDefaultTextViewTheme: FTLDefaultTextViewTheme,
+        val ftlExtendableTextViewTheme: FTLExtendableTextViewTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -294,7 +295,8 @@ object ThemeManager {
                 R.drawable.selector_ftl_bnv_more_light
             ),
             FTLDividerTheme(R.color.DividerPrimaryLight),
-            FTLDefaultTextViewTheme(R.color.TextPrimaryLight)
+            FTLDefaultTextViewTheme(R.color.TextPrimaryLight),
+            FTLExtendableTextViewTheme(R.color.TextPrimaryLight, R.color.TextOnColorAdditionalLight)
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
@@ -470,7 +472,8 @@ object ThemeManager {
                 R.drawable.selector_ftl_bnv_more_dark
             ),
             FTLDividerTheme(R.color.DividerPrimaryDark),
-            FTLDefaultTextViewTheme(R.color.TextPrimaryDark)
+            FTLDefaultTextViewTheme(R.color.TextPrimaryDark),
+            FTLExtendableTextViewTheme(R.color.TextPrimaryDark, R.color.ErrorDangerDark)
         )
     }
 
@@ -683,6 +686,11 @@ object ThemeManager {
 
     data class FTLDefaultTextViewTheme(
         @ColorRes val textColor: Int
+    )
+
+    data class FTLExtendableTextViewTheme(
+        @ColorRes val fullTextColor: Int,
+        @ColorRes val ellipsizedTextColor: Int
     )
 
     interface ThemeChangedListener {
