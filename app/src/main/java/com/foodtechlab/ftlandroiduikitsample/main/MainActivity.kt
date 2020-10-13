@@ -4,6 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
 import com.foodtechlab.ftlandroiduikit.button.timer.State
+import com.foodtechlab.ftlandroiduikit.sheet.DialogState
+import com.foodtechlab.ftlandroiduikit.sheet.FTLBottomSheet
+import com.foodtechlab.ftlandroiduikit.sheet.Type
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikitsample.R
 import kotlinx.android.synthetic.main.activity_main.*
@@ -36,6 +39,8 @@ class MainActivity : AppCompatActivity() {
             textAddressFrom = "Address From"
             textAddressTo = "Address To"
         }
+
+        FTLBottomSheet.newInstance(DialogState("title", "title", Type.CAMERA, listOf())).show(supportFragmentManager, FTLBottomSheet.TAG)
 
         btnSwitchTheme.setOnClickListener {
             ThemeManager.setTheme(

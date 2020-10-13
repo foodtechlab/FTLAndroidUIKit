@@ -44,5 +44,6 @@ enum class Type(@DrawableRes val imgRes: Int) {
     ISSUE(R.drawable.ic_issue),
     SAD(R.drawable.ic_sad_smile),
     WARNING(R.drawable.ic_warning),
-    SUCCESS(R.drawable.ic_success)
+    SUCCESS(R.drawable.ic_success),
+    CAMERA(R.drawable.ic_camera)
 }
