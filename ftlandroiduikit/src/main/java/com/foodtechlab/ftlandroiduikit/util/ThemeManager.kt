@@ -117,7 +117,8 @@ object ThemeManager {
         val ftlCoordinatorLayoutTheme: FTLCoordinatorLayoutTheme,
         val ftlTitleTheme: FTLTitleTheme,
         val ftlBottomNavigationViewTheme: FTLBottomNavigationViewTheme,
-        val ftlDividerTheme: FTLDividerTheme
+        val ftlDividerTheme: FTLDividerTheme,
+        val ftlDefaultTextViewTheme: FTLDefaultTextViewTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -292,7 +293,8 @@ object ThemeManager {
                 R.drawable.selector_ftl_bnv_history_light,
                 R.drawable.selector_ftl_bnv_more_light
             ),
-            FTLDividerTheme(R.color.DividerPrimaryLight)
+            FTLDividerTheme(R.color.DividerPrimaryLight),
+            FTLDefaultTextViewTheme(R.color.TextPrimaryLight)
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
@@ -467,7 +469,8 @@ object ThemeManager {
                 R.drawable.selector_ftl_bnv_history_dark,
                 R.drawable.selector_ftl_bnv_more_dark
             ),
-            FTLDividerTheme(R.color.DividerPrimaryDark)
+            FTLDividerTheme(R.color.DividerPrimaryDark),
+            FTLDefaultTextViewTheme(R.color.TextPrimaryDark)
         )
     }
 
@@ -676,6 +679,10 @@ object ThemeManager {
         @DrawableRes val itemMapsIcon: Int,
         @DrawableRes val itemHistoryIcon: Int,
         @DrawableRes val itemMoreIcon: Int
+    )
+
+    data class FTLDefaultTextViewTheme(
+        @ColorRes val textColor: Int
     )
 
     interface ThemeChangedListener {

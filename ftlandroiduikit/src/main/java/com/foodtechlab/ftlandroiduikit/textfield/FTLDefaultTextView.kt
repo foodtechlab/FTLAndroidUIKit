@@ -1,7 +1,6 @@
 package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.Canvas
 import android.util.AttributeSet
 import android.view.View
@@ -18,41 +17,20 @@ import androidx.core.view.marginStart
 import androidx.core.view.updateMargins
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.changeColor
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
-
 
 class FTLDefaultTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : LinearLayout(context, attrs, defStyle) {
+) : LinearLayout(context, attrs, defStyle), ThemeManager.ThemeChangedListener {
 
-    private var tvTextSlot: TextView
-    private var ivImageSlot: ImageView
     var textForSlot: String = ""
         set(value) {
             field = value
             tvTextSlot.text = field
-        }
-
-    var imageType: ImageType = ImageType.CUSTOMER
-        set(value) {
-            field = value
-            ivImageSlot.setImageResource(field.imgRes)
-        }
-
-    @ColorInt
-    var imageBackgroundColor = ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
-        set(value) {
-            field = value
-            ivImageSlot.backgroundTintList = ColorStateList.valueOf(field)
-        }
-
-    @ColorInt
-    var imageColor = ContextCompat.getColor(context, R.color.BackgroundPrimary)
-        set(value) {
-            field = value
-            ivImageSlot.setColorFilter(field)
         }
 
     var isBoldStyle: Boolean = false
@@ -64,8 +42,33 @@ class FTLDefaultTextView @JvmOverloads constructor(
             ) else ResourcesCompat.getFont(context, R.font.roboto_regular)
         }
 
+    var imageType: ImageType = ImageType.CUSTOMER
+        set(value) {
+            field = value
+            ivImageSlot.setImageResource(field.imgRes)
+        }
+
+    @ColorInt
+    var imageBackgroundColor = ContextCompat.getColor(context, R.color.IconBackgroundBlueLight)
+        set(value) {
+            field = value
+            ivImageSlot.background?.changeColor(value)
+        }
+
+    @ColorInt
+    var imageColor = ContextCompat.getColor(context, R.color.IconPrimaryLight)
+        set(value) {
+            field = value
+            ivImageSlot.setColorFilter(field)
+        }
+
+    private var tvTextSlot: TextView
+
+    private var ivImageSlot: ImageView
+
     init {
         inflate(context, R.layout.layout_ftl_default_text_view, this)
+
         tvTextSlot = findViewById(R.id.tv_text_slot)
         ivImageSlot = findViewById(R.id.iv_image_slot)
 
@@ -83,6 +86,32 @@ class FTLDefaultTextView @JvmOverloads constructor(
             )
         }
         setWillNotDraw(false)
+        onThemeChanged(ThemeManager.theme)
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        tvTextSlot.setTextColor(
+            ContextCompat.getColor(context, theme.ftlDefaultTextViewTheme.textColor)
+        )
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        tvTextSlot.updateMargins(tvTextSlot.lineCount == 1)
     }
 
     private fun View.updateMargins(setMargin: Boolean) {
@@ -95,9 +124,5 @@ class FTLDefaultTextView @JvmOverloads constructor(
             marginBottom
         )
         layoutParams = lParams
-    }
-
-    override fun onDraw(canvas: Canvas) {
-        tvTextSlot.updateMargins(tvTextSlot.lineCount == 1)
     }
 }

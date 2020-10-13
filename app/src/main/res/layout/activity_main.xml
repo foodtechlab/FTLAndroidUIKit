@@ -41,10 +41,10 @@
             android:text="Switch theme" />
 
         <com.foodtechlab.ftlandroiduikit.common.FTLDivider
-            android:layout_marginEnd="25dp"
-            android:layout_marginStart="25dp"
             android:layout_width="match_parent"
-            android:layout_height="1dp" />
+            android:layout_height="1dp"
+            android:layout_marginStart="25dp"
+            android:layout_marginEnd="25dp" />
 
         <com.foodtechlab.ftlandroiduikit.textfield.FTLDoubleTextView
             android:id="@+id/tvTotal"
@@ -91,6 +91,13 @@
             android:id="@+id/bnvMainNavigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLDefaultTextView
+            android:id="@+id/ftlDefaultTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:textForSlot="FTLDefaultTextView" />
     </com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout>
 
     <ImageView
