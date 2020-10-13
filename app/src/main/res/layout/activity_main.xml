@@ -92,6 +92,15 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
+        <com.foodtechlab.ftlandroiduikit.textfield.table.FTLTableRow
+            android:id="@+id/ftlTableRow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            app:textForCenterColumn="Center"
+            app:textForEndColumn="End"
+            app:textForStartColumn="Start" />
+
         <com.foodtechlab.ftlandroiduikit.textfield.FTLDefaultTextView
             android:id="@+id/ftlDefaultTextView"
             android:layout_width="wrap_content"

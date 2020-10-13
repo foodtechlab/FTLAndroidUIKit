@@ -119,7 +119,8 @@ object ThemeManager {
         val ftlBottomNavigationViewTheme: FTLBottomNavigationViewTheme,
         val ftlDividerTheme: FTLDividerTheme,
         val ftlDefaultTextViewTheme: FTLDefaultTextViewTheme,
-        val ftlExtendableTextViewTheme: FTLExtendableTextViewTheme
+        val ftlExtendableTextViewTheme: FTLExtendableTextViewTheme,
+        val ftlTableRowTheme: FTLTableRowTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -296,7 +297,15 @@ object ThemeManager {
             ),
             FTLDividerTheme(R.color.DividerPrimaryLight),
             FTLDefaultTextViewTheme(R.color.TextPrimaryLight),
-            FTLExtendableTextViewTheme(R.color.TextPrimaryLight, R.color.TextOnColorAdditionalLight)
+            FTLExtendableTextViewTheme(
+                R.color.TextPrimaryLight,
+                R.color.TextOnColorAdditionalLight
+            ),
+            FTLTableRowTheme(
+                R.color.TextPrimaryLight,
+                R.color.TextOnColorAdditionalLight,
+                R.color.TextPrimaryLight
+            )
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
@@ -473,7 +482,12 @@ object ThemeManager {
             ),
             FTLDividerTheme(R.color.DividerPrimaryDark),
             FTLDefaultTextViewTheme(R.color.TextPrimaryDark),
-            FTLExtendableTextViewTheme(R.color.TextPrimaryDark, R.color.ErrorDangerDark)
+            FTLExtendableTextViewTheme(R.color.TextPrimaryDark, R.color.ErrorDangerDark),
+            FTLTableRowTheme(
+                R.color.TextPrimaryDark,
+                R.color.TextOnColorAdditionalDark,
+                R.color.TextPrimaryDark
+            )
         )
     }
 
@@ -691,6 +705,12 @@ object ThemeManager {
     data class FTLExtendableTextViewTheme(
         @ColorRes val fullTextColor: Int,
         @ColorRes val ellipsizedTextColor: Int
+    )
+
+    data class FTLTableRowTheme(
+        @ColorRes val startTextColor: Int,
+        @ColorRes val centerTextColor: Int,
+        @ColorRes val endTextColor: Int
     )
 
     interface ThemeChangedListener {
