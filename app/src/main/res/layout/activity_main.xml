@@ -12,7 +12,9 @@
         android:id="@+id/llContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="226dp">
 
         <com.foodtechlab.ftlandroiduikit.bar.toolbar.FTLToolbar
             android:id="@+id/toolbar"
@@ -22,6 +24,12 @@
             app:ftlToolbar_start_icon="@drawable/ic_back"
             app:ftlToolbar_subtitle="Subtitle"
             app:ftlToolbar_title="Title" />
+
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:subtitle_text="Subtitle"
+            app:title_text="Title" />
 
         <TextView
             android:id="@+id/btnSwitchTheme"
@@ -36,10 +44,10 @@
             android:id="@+id/tvTotal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:textForStartSlot="Итого"
             android:layout_margin="8dp"
             app:isVisibleImageSlot="true"
-            app:textForEndSlot="25 000 р"/>
+            app:textForEndSlot="25 000 р"
+            app:textForStartSlot="Итого" />
 
         <com.foodtechlab.ftlandroiduikit.textfield.FTLRouteTextView
             android:id="@+id/ftlRouteTextView"
@@ -72,6 +80,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp" />
+
+        <com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
+            android:id="@+id/bnvMainNavigation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
     </com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout>
 
     <ImageView
@@ -79,4 +92,5 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

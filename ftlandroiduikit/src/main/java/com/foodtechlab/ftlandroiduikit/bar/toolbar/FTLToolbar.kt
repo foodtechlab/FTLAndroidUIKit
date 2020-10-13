@@ -154,6 +154,8 @@ class FTLToolbar @JvmOverloads constructor(
         tvConnectivity = findViewById(R.id.tv_ftl_toolbar_connectivity)
         tvTime = findViewById(R.id.tv_ftl_toolbar_time)
 
+        ftlTitle.autoHandleColors = false
+
         ibStart.setOnClickListener { onToolbarClickListener?.onToolbarClick(it) }
 
         ibEnd.setOnClickListener { onToolbarClickListener?.onToolbarClick(it) }

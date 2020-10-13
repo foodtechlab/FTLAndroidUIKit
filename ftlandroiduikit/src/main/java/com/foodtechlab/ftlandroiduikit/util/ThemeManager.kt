@@ -115,6 +115,8 @@ object ThemeManager {
         val ftlSectionTextViewTheme: FTLSectionTextViewTheme,
         val ftlDoubleTextViewTheme: FTLDoubleTextViewTheme,
         val ftlCoordinatorLayoutTheme: FTLCoordinatorLayoutTheme,
+        val ftlTitleTheme: FTLTitleTheme,
+        val ftlBottomNavigationViewTheme: FTLBottomNavigationViewTheme,
         val ftlDividerTheme: FTLDividerTheme
     ) {
         LIGHT(
@@ -281,6 +283,15 @@ object ThemeManager {
                 R.color.IconBackgroundBlueLight
             ),
             FTLCoordinatorLayoutTheme(R.color.BackgroundSecondaryLight),
+            FTLTitleTheme(R.color.TextPrimaryLight, R.color.TextSuccessEnabledLight),
+            FTLBottomNavigationViewTheme(
+                R.color.SurfaceSecondLight,
+                R.color.selector_ftl_bnv_item_text_color_light,
+                R.drawable.selector_ftl_bnv_orders_light,
+                R.drawable.selector_ftl_bnv_maps_light,
+                R.drawable.selector_ftl_bnv_history_light,
+                R.drawable.selector_ftl_bnv_more_light
+            ),
             FTLDividerTheme(R.color.DividerPrimaryLight)
         ),
         DARK(
@@ -447,6 +458,15 @@ object ThemeManager {
                 R.color.IconBackgroundBlueDark
             ),
             FTLCoordinatorLayoutTheme(R.color.BackgroundSecondaryDark),
+            FTLTitleTheme(R.color.TextPrimaryDark, R.color.TextSuccessEnabledDark),
+            FTLBottomNavigationViewTheme(
+                R.color.SurfaceSecondDark,
+                R.color.selector_ftl_bnv_item_text_color_dark,
+                R.drawable.selector_ftl_bnv_orders_dark,
+                R.drawable.selector_ftl_bnv_maps_dark,
+                R.drawable.selector_ftl_bnv_history_dark,
+                R.drawable.selector_ftl_bnv_more_dark
+            ),
             FTLDividerTheme(R.color.DividerPrimaryDark)
         )
     }
@@ -642,6 +662,20 @@ object ThemeManager {
 
     data class FTLCoordinatorLayoutTheme(
         @ColorRes val bgColor: Int
+    )
+
+    data class FTLTitleTheme(
+        @ColorRes var titleColor: Int,
+        @ColorRes var subtitleColor: Int
+    )
+
+    data class FTLBottomNavigationViewTheme(
+        @ColorRes val bgColor: Int,
+        @ColorRes val itemTextColor: Int,
+        @DrawableRes val itemOrdersIcon: Int,
+        @DrawableRes val itemMapsIcon: Int,
+        @DrawableRes val itemHistoryIcon: Int,
+        @DrawableRes val itemMoreIcon: Int
     )
 
     interface ThemeChangedListener {

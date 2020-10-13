@@ -3,6 +3,6 @@
 
     <item android:drawable="@drawable/ic_more_checked_24" android:state_checked="true" />
 
-    <item android:drawable="@drawable/ic_more_24" />
+    <item android:drawable="@drawable/ic_more_dark_24" />
 
 </selector>
