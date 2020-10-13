@@ -120,7 +120,8 @@ object ThemeManager {
         val ftlDividerTheme: FTLDividerTheme,
         val ftlDefaultTextViewTheme: FTLDefaultTextViewTheme,
         val ftlExtendableTextViewTheme: FTLExtendableTextViewTheme,
-        val ftlTableRowTheme: FTLTableRowTheme
+        val ftlTableRowTheme: FTLTableRowTheme,
+        val ftlRestaurantMarkerTheme: FTLRestaurantMarkerTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -305,6 +306,10 @@ object ThemeManager {
                 R.color.TextPrimaryLight,
                 R.color.TextOnColorAdditionalLight,
                 R.color.TextPrimaryLight
+            ),
+            FTLRestaurantMarkerTheme(
+                R.drawable.shape_ftl_restaurant_marker_light,
+                R.color.TextPrimaryLight
             )
         ),
         DARK(
@@ -482,10 +487,14 @@ object ThemeManager {
             ),
             FTLDividerTheme(R.color.DividerPrimaryDark),
             FTLDefaultTextViewTheme(R.color.TextPrimaryDark),
-            FTLExtendableTextViewTheme(R.color.TextPrimaryDark, R.color.ErrorDangerDark),
+            FTLExtendableTextViewTheme(R.color.TextPrimaryDark, R.color.TextOnColorAdditionalLight),
             FTLTableRowTheme(
                 R.color.TextPrimaryDark,
                 R.color.TextOnColorAdditionalDark,
+                R.color.TextPrimaryDark
+            ),
+            FTLRestaurantMarkerTheme(
+                R.drawable.shape_ftl_restaurant_marker_dark,
                 R.color.TextPrimaryDark
             )
         )
@@ -711,6 +720,11 @@ object ThemeManager {
         @ColorRes val startTextColor: Int,
         @ColorRes val centerTextColor: Int,
         @ColorRes val endTextColor: Int
+    )
+
+    data class FTLRestaurantMarkerTheme(
+        @DrawableRes val background: Int,
+        @ColorRes val textColor: Int
     )
 
     interface ThemeChangedListener {

@@ -2,8 +2,6 @@ package com.foodtechlab.ftlandroiduikitsample.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
-import com.foodtechlab.ftlandroiduikit.button.timer.State
 import com.foodtechlab.ftlandroiduikit.sheet.DialogState
 import com.foodtechlab.ftlandroiduikit.sheet.FTLBottomSheet
 import com.foodtechlab.ftlandroiduikit.sheet.Type
@@ -27,20 +25,8 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.showLogo()
 
-        with(ftlTimerButton) {
-            updateState(State.IN_DELIVERY)
-            timeZoneId = "Europe/Samara"
-            estimateDuration = 60 * 60L * 1000L
-            autoAnimateProgress = false
-            estimateSuccessAt = "2020-10-09T14:30:00.001"
-        }
-
-        with(ftlRouteTextView) {
-            textAddressFrom = "Address From"
-            textAddressTo = "Address To"
-        }
-
-        FTLBottomSheet.newInstance(DialogState("title", "title", Type.CAMERA, listOf())).show(supportFragmentManager, FTLBottomSheet.TAG)
+        FTLBottomSheet.newInstance(DialogState("title", "title", Type.CAMERA, listOf()))
+            .show(supportFragmentManager, FTLBottomSheet.TAG)
 
         btnSwitchTheme.setOnClickListener {
             ThemeManager.setTheme(
@@ -54,14 +40,5 @@ class MainActivity : AppCompatActivity() {
                 .putInt("key_theme", ThemeManager.theme.ordinal)
                 .apply()
         }
-
-        bnvMainNavigation.addMenuItems(
-            listOf(
-                FTLBottomNavigationView.MenuItem.ORDERS,
-                FTLBottomNavigationView.MenuItem.MAPS,
-                FTLBottomNavigationView.MenuItem.HISTORY,
-                FTLBottomNavigationView.MenuItem.MORE
-            )
-        )
     }
 }

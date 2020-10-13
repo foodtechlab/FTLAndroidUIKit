@@ -21,7 +21,7 @@
                     <solid android:color="#161616" />
                 </shape>
             </item>
-            <item android:bottom="8dp" android:drawable="@drawable/ic_info_24" android:gravity="center" android:left="8dp" android:right="8dp" android:top="8dp" />
+            <item android:bottom="8dp" android:drawable="@drawable/ic_info_dark_24" android:gravity="center" android:left="8dp" android:right="8dp" android:top="8dp" />
         </layer-list>
     </item>
 
@@ -33,7 +33,7 @@
                     <solid android:color="#212121" />
                 </shape>
             </item>
-            <item android:bottom="8dp" android:drawable="@drawable/ic_info_24" android:gravity="center" android:left="8dp" android:right="8dp" android:top="8dp" />
+            <item android:bottom="8dp" android:drawable="@drawable/ic_info_dark_24" android:gravity="center" android:left="8dp" android:right="8dp" android:top="8dp" />
         </layer-list>
     </item>
 
