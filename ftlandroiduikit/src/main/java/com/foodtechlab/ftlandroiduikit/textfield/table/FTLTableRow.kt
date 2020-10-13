@@ -60,6 +60,8 @@ class FTLTableRow @JvmOverloads constructor(
             textForEndColumn = getString(R.styleable.FTLTableRow_textForEndColumn) ?: ""
             isLastRow = getBoolean(R.styleable.FTLTableRow_isLastRow, false)
         }
+
+        onThemeChanged(ThemeManager.theme)
     }
 
     override fun onFinishInflate() {
