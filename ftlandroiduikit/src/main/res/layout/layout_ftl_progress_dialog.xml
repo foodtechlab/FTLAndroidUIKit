@@ -8,10 +8,11 @@
     android:padding="23.5dp">
 
     <ProgressBar
+        android:id="@+id/pb_ftl_progress_dialog_progress"
         android:layout_width="25dp"
         android:layout_height="25dp"
         android:indeterminate="true"
-        android:indeterminateTint="@color/PrimaryInfoEnabled"
+        android:indeterminateTint="@color/ProgressPrimaryLight"
         android:indeterminateTintMode="src_atop" />
 
     <TextView

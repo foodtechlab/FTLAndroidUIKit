@@ -11,6 +11,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import com.foodtechlab.ftlandroiduikit.util.findSuitableParent
 import com.google.android.material.snackbar.BaseTransientBottomBar
@@ -21,7 +22,7 @@ import com.google.android.material.snackbar.BaseTransientBottomBar
 class FTLSnackbar(
     @NonNull parent: ViewGroup,
     @NonNull customView: SnackbarView
-) : BaseTransientBottomBar<FTLSnackbar>(parent, customView, customView) {
+) : BaseTransientBottomBar<FTLSnackbar>(parent, customView, customView), ThemeManager.ThemeChangedListener {
 
     init {
         animationMode = ANIMATION_MODE_FADE
@@ -31,7 +32,7 @@ class FTLSnackbar(
             is CoordinatorLayout.LayoutParams -> lParams.gravity = Gravity.TOP
         }
 
-        view.background = ContextCompat.getDrawable(context, R.drawable.layer_list_snackbar)
+        onThemeChanged(ThemeManager.theme)
 
         ViewCompat.setElevation(view, context.dpToPx(ELEVATION))
     }
@@ -63,5 +64,9 @@ class FTLSnackbar(
                 null
             }
         }
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        view.background = ContextCompat.getDrawable(context, theme.ftlSnackbarTheme.background)
     }
 }
