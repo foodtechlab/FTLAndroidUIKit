@@ -5,31 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <LinearLayout
+    <ImageView
+        android:id="@+id/iv_image_slot"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:background="@drawable/shape_oval_solid_white"
+        app:srcCompat="@drawable/ic_person"
+        tools:ignore="ContentDescription" />
+
+    <TextView
+        android:id="@+id/tv_text_slot"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        tools:ignore="UseCompoundDrawables">
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/roboto_regular"
+        android:lineSpacingExtra="8sp"
+        android:textColor="@color/TextPrimaryLight"
+        android:textSize="16sp"
+        tools:text="New Text" />
 
-        <ImageView
-            android:id="@+id/iv_image_slot"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            app:srcCompat="@drawable/ic_person"
-            android:background="@drawable/shape_oval_solid_white"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/tv_text_slot"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="4dp"
-            android:fontFamily="@font/roboto_regular"
-            android:lineSpacingExtra="8sp"
-            android:textColor="@color/OnBackgroundPrimary"
-            android:textSize="16sp"
-            tools:text="New Text" />
-
-    </LinearLayout>
 </merge>

@@ -20,13 +20,6 @@ class FTLMultipleTextView @JvmOverloads constructor(
     defStyle: Int = 0
 ) : LinearLayout(context, attrs, defStyle), ThemeManager.ThemeChangedListener {
 
-    private var tvTopEndSlot: TextView
-    private var tvTopStartSlot: TextView
-    private var tvBottomEndSlot: TextView
-    private var tvBottomStartSlot: TextView
-
-    private var ivImageSlot: ImageView
-
     var imageType: ImageType = ImageType.CASH
         set(value) {
             field = value
@@ -87,11 +80,18 @@ class FTLMultipleTextView @JvmOverloads constructor(
         }
 
     @ColorInt
-    var imageColorRes = ContextCompat.getColor(context, R.color.BackgroundPrimary)
+    var imageColor = ContextCompat.getColor(context, R.color.IconPrimaryLight)
         set(value) {
             field = value
             ivImageSlot.setColorFilter(field)
         }
+
+    private var ivImageSlot: ImageView
+
+    private var tvTopEndSlot: TextView
+    private var tvTopStartSlot: TextView
+    private var tvBottomEndSlot: TextView
+    private var tvBottomStartSlot: TextView
 
     init {
         inflate(context, R.layout.layout_ftl_multiple_text_view, this)
@@ -123,7 +123,7 @@ class FTLMultipleTextView @JvmOverloads constructor(
                 R.styleable.FTLMultipleTextView_imageBackgroundColor,
                 ContextCompat.getColor(context, R.color.IconBackgroundBlueLight)
             )
-            imageColorRes = getColor(
+            imageColor = getColor(
                 R.styleable.FTLMultipleTextView_imageColor,
                 ContextCompat.getColor(context, R.color.IconPrimaryLight)
             )

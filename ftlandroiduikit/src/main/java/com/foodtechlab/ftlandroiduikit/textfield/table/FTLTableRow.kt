@@ -5,19 +5,22 @@ import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 
 class FTLTableRow @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : LinearLayout(context, attrs, defStyle) {
+) : LinearLayout(context, attrs, defStyle), ThemeManager.ThemeChangedListener {
 
-    private var tvStartColumn: TextView
-    private var tvCenterColumn: TextView
-    private var tvEndColumn: TextView
-    private var vDivider: View
+    var isLastRow = false
+        set(value) {
+            field = value
+            vDivider.visibility = if (value) View.GONE else View.VISIBLE
+        }
 
     var textForStartColumn: String = ""
         set(value) {
@@ -37,14 +40,15 @@ class FTLTableRow @JvmOverloads constructor(
             tvEndColumn.text = field
         }
 
-    var isLastRow = false
-        set(value) {
-            field = value
-            vDivider.visibility = if (value) View.GONE else View.VISIBLE
-        }
+    private var vDivider: View
+
+    private var tvEndColumn: TextView
+    private var tvStartColumn: TextView
+    private var tvCenterColumn: TextView
 
     init {
         inflate(context, R.layout.layout_ftl_table_row, this)
+
         tvStartColumn = findViewById(R.id.tv_start_column)
         tvCenterColumn = findViewById(R.id.tv_center_column)
         tvEndColumn = findViewById(R.id.tv_end_column)
@@ -56,5 +60,34 @@ class FTLTableRow @JvmOverloads constructor(
             textForEndColumn = getString(R.styleable.FTLTableRow_textForEndColumn) ?: ""
             isLastRow = getBoolean(R.styleable.FTLTableRow_isLastRow, false)
         }
+
+        onThemeChanged(ThemeManager.theme)
+    }
+
+    override fun onFinishInflate() {
+        super.onFinishInflate()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        tvStartColumn.setTextColor(
+            ContextCompat.getColor(context, theme.ftlTableRowTheme.startTextColor)
+        )
+        tvCenterColumn.setTextColor(
+            ContextCompat.getColor(context, theme.ftlTableRowTheme.centerTextColor)
+        )
+        tvEndColumn.setTextColor(
+            ContextCompat.getColor(context, theme.ftlTableRowTheme.endTextColor)
+        )
     }
 }

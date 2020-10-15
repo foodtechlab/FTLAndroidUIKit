@@ -25,12 +25,6 @@
             app:ftlToolbar_subtitle="Subtitle"
             app:ftlToolbar_title="Title" />
 
-        <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:subtitle_text="Subtitle"
-            app:title_text="Title" />
-
         <TextView
             android:id="@+id/btnSwitchTheme"
             android:layout_width="match_parent"
@@ -40,51 +34,35 @@
             android:padding="12dp"
             android:text="Switch theme" />
 
-        <com.foodtechlab.ftlandroiduikit.textfield.FTLDoubleTextView
-            android:id="@+id/tvTotal"
-            android:layout_width="match_parent"
+        <com.foodtechlab.ftlandroiduikit.textfield.table.FTLTableRow
+            android:id="@+id/ftlTableRow"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:isVisibleImageSlot="true"
-            app:textForEndSlot="25 000 р"
-            app:textForStartSlot="Итого" />
+            android:layout_margin="16dp"
+            app:textForCenterColumn="Center"
+            app:textForEndColumn="End"
+            app:textForStartColumn="Start" />
 
-        <com.foodtechlab.ftlandroiduikit.textfield.FTLRouteTextView
-            android:id="@+id/ftlRouteTextView"
-            android:layout_width="match_parent"
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLDefaultTextView
+            android:id="@+id/ftlDefaultTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp" />
+            android:layout_margin="16dp"
+            app:textForSlot="FTLDefaultTextView" />
 
-        <com.foodtechlab.ftlandroiduikit.textfield.table.FTLTableHeader
-            android:id="@+id/ftlTableHeader"
-            android:layout_width="match_parent"
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLExtendableTextView
+            android:id="@+id/ftlExtendableTextView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:headerSubtitle="Subtitle"
-            app:headerTitle="Title"
-            app:isDividersEnabled="true"
-            app:showSubtitle="false" />
+            android:layout_margin="16dp"
+            app:ellipsizedText="..еще"
+            app:fullText="FTLExtendableTextView FTLExtendableTextView FTLExtendableTextView FTLExtendableTextViewFTLExtendableTextView FTLExtendableTextView FTLExtendableTextView FTLExtendableTextViewFTLExtendableTextView FTLExtendableTextView FTLExtendableTextView FTLExtendableTextViewFTLExtendableTextView FTLExtendableTextView FTLExtendableTextView FTLExtendableTextView" />
 
-        <com.foodtechlab.ftlandroiduikit.textfield.FTLMultipleTextView
-            android:id="@+id/ftlMultipleTextView"
-            android:layout_width="match_parent"
+        <com.foodtechlab.ftlandroiduikit.map.FTLRestaurantMarker
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:textBottomEndSlot="Bottom end"
-            app:textBottomStartSlot="Bottom start"
-            app:textTopEndSlot="Top end"
-            app:textTopStartSlot="Top start" />
-
-        <com.foodtechlab.ftlandroiduikit.button.timer.FTLTimerButton
-            android:id="@+id/ftlTimerButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp" />
-
-        <com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
-            android:id="@+id/bnvMainNavigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_margin="16dp"
+            app:textOrdersCount="12" />
     </com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout>
 
     <ImageView

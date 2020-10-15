@@ -117,7 +117,11 @@ object ThemeManager {
         val ftlCoordinatorLayoutTheme: FTLCoordinatorLayoutTheme,
         val ftlTitleTheme: FTLTitleTheme,
         val ftlBottomNavigationViewTheme: FTLBottomNavigationViewTheme,
-        val ftlDividerTheme: FTLDividerTheme
+        val ftlDividerTheme: FTLDividerTheme,
+        val ftlDefaultTextViewTheme: FTLDefaultTextViewTheme,
+        val ftlExtendableTextViewTheme: FTLExtendableTextViewTheme,
+        val ftlTableRowTheme: FTLTableRowTheme,
+        val ftlRestaurantMarkerTheme: FTLRestaurantMarkerTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -292,7 +296,21 @@ object ThemeManager {
                 R.drawable.selector_ftl_bnv_history_light,
                 R.drawable.selector_ftl_bnv_more_light
             ),
-            FTLDividerTheme(R.color.DividerPrimaryLight)
+            FTLDividerTheme(R.color.DividerPrimaryLight),
+            FTLDefaultTextViewTheme(R.color.TextPrimaryLight),
+            FTLExtendableTextViewTheme(
+                R.color.TextPrimaryLight,
+                R.color.TextOnColorAdditionalLight
+            ),
+            FTLTableRowTheme(
+                R.color.TextPrimaryLight,
+                R.color.TextOnColorAdditionalLight,
+                R.color.TextPrimaryLight
+            ),
+            FTLRestaurantMarkerTheme(
+                R.drawable.shape_ftl_restaurant_marker_light,
+                R.color.TextPrimaryLight
+            )
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
@@ -467,7 +485,18 @@ object ThemeManager {
                 R.drawable.selector_ftl_bnv_history_dark,
                 R.drawable.selector_ftl_bnv_more_dark
             ),
-            FTLDividerTheme(R.color.DividerPrimaryDark)
+            FTLDividerTheme(R.color.DividerPrimaryDark),
+            FTLDefaultTextViewTheme(R.color.TextPrimaryDark),
+            FTLExtendableTextViewTheme(R.color.TextPrimaryDark, R.color.TextOnColorAdditionalLight),
+            FTLTableRowTheme(
+                R.color.TextPrimaryDark,
+                R.color.TextOnColorAdditionalDark,
+                R.color.TextPrimaryDark
+            ),
+            FTLRestaurantMarkerTheme(
+                R.drawable.shape_ftl_restaurant_marker_dark,
+                R.color.TextPrimaryDark
+            )
         )
     }
 
@@ -676,6 +705,26 @@ object ThemeManager {
         @DrawableRes val itemMapsIcon: Int,
         @DrawableRes val itemHistoryIcon: Int,
         @DrawableRes val itemMoreIcon: Int
+    )
+
+    data class FTLDefaultTextViewTheme(
+        @ColorRes val textColor: Int
+    )
+
+    data class FTLExtendableTextViewTheme(
+        @ColorRes val fullTextColor: Int,
+        @ColorRes val ellipsizedTextColor: Int
+    )
+
+    data class FTLTableRowTheme(
+        @ColorRes val startTextColor: Int,
+        @ColorRes val centerTextColor: Int,
+        @ColorRes val endTextColor: Int
+    )
+
+    data class FTLRestaurantMarkerTheme(
+        @DrawableRes val background: Int,
+        @ColorRes val textColor: Int
     )
 
     interface ThemeChangedListener {
