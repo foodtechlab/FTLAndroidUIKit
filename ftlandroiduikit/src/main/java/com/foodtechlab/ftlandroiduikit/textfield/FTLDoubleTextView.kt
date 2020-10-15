@@ -1,18 +1,19 @@
 package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.changeColor
 
 
 class FTLDoubleTextView @JvmOverloads constructor(
@@ -61,6 +62,20 @@ class FTLDoubleTextView @JvmOverloads constructor(
         set(value) {
             field = value
             ivImageSlot.setImageResource(field.imgRes)
+        }
+
+    @ColorInt
+    var imageBackgroundColor = ContextCompat.getColor(context, R.color.IconBackgroundBlueLight)
+        set(value) {
+            field = value
+            ivImageSlot.background?.changeColor(value)
+        }
+
+    @ColorInt
+    var imageColor = ContextCompat.getColor(context, R.color.IconPrimaryLight)
+        set(value) {
+            field = value
+            ivImageSlot.setColorFilter(field)
         }
 
     private var ivImageSlot: ImageView
@@ -113,42 +128,6 @@ class FTLDoubleTextView @JvmOverloads constructor(
             ContextCompat.getColor(
                 context,
                 theme.ftlDoubleTextViewTheme.textColor
-            )
-        )
-        with(ivImageSlot) {
-            backgroundTintList = ColorStateList.valueOf(
-                ContextCompat.getColor(
-                    context,
-                    ThemeManager.theme.ftlDoubleTextViewTheme.defaultImageBgColor
-                )
-            )
-            setColorFilter(
-                ContextCompat.getColor(
-                    context,
-                    ThemeManager.theme.ftlDoubleTextViewTheme.defaultImageColor
-                )
-            )
-        }
-    }
-
-    fun updateImageBackgroundColors(colorForLightTheme: Int, colorForDarkTheme: Int) {
-        ThemeManager.Theme.LIGHT.ftlDoubleTextViewTheme.defaultImageBgColor = colorForLightTheme
-        ThemeManager.Theme.DARK.ftlDoubleTextViewTheme.defaultImageBgColor = colorForDarkTheme
-        ivImageSlot.backgroundTintList = ColorStateList.valueOf(
-            ContextCompat.getColor(
-                context,
-                ThemeManager.theme.ftlDoubleTextViewTheme.defaultImageBgColor
-            )
-        )
-    }
-
-    fun updateImageColors(colorForLightTheme: Int, colorForDarkTheme: Int) {
-        ThemeManager.Theme.LIGHT.ftlDoubleTextViewTheme.defaultImageColor = colorForLightTheme
-        ThemeManager.Theme.DARK.ftlDoubleTextViewTheme.defaultImageColor = colorForDarkTheme
-        ivImageSlot.setColorFilter(
-            ContextCompat.getColor(
-                context,
-                ThemeManager.theme.ftlDoubleTextViewTheme.defaultImageColor
             )
         )
     }

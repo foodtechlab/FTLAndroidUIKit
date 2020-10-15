@@ -37,7 +37,8 @@ class FTLButton @JvmOverloads constructor(
     @ColorRes
     private var textColorRes = -1
 
-    private var backgroundDrawableRes: Drawable? = null
+    private var backgroundDrawableLightRes: Drawable? = null
+    private var backgroundDrawableDarkRes: Drawable? = null
 
     @ColorRes
     private var dotColorRes = -1
@@ -139,7 +140,7 @@ class FTLButton @JvmOverloads constructor(
         }
 
         updateTextColor(textColorRes)
-        updateBackgroundDrawable(backgroundDrawableRes)
+        updateBackgroundDrawable(backgroundDrawableLightRes, backgroundDrawableDarkRes)
 
         theme.ftlButtonDotsProgressTheme.dotColor =
             if (dotColorRes != -1) dotColorRes else dotThemeColor
@@ -264,8 +265,13 @@ class FTLButton @JvmOverloads constructor(
         )
     }
 
-    fun updateBackgroundDrawable(drawable: Drawable?) {
-        backgroundDrawableRes = drawable
+    fun updateBackgroundDrawable(drawableForLight: Drawable?, drawableForDark: Drawable?) {
+        backgroundDrawableLightRes = drawableForLight
+        backgroundDrawableDarkRes = drawableForDark
+        val backgroundDrawableRes = when (ThemeManager.theme) {
+            ThemeManager.Theme.LIGHT -> backgroundDrawableLightRes
+            ThemeManager.Theme.DARK -> backgroundDrawableDarkRes
+        }
         background = backgroundDrawableRes ?: buttonType.background?.let {
             ContextCompat.getDrawable(
                 context,

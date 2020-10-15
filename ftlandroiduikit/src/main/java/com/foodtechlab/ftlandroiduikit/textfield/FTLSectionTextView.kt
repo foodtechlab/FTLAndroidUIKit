@@ -6,6 +6,7 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.isVisible
@@ -32,6 +33,18 @@ class FTLSectionTextView @JvmOverloads constructor(
             ivImageSlot.isVisible = imageType != ImageType.NONE
             if (value != ImageType.NONE) ivImageSlot.setImageResource(field.imgRes)
         }
+
+    @ColorRes
+    private var imageBackgroundLightColor = R.color.IconBackgroundDefaultLight
+
+    @ColorRes
+    private var imageBackgroundDarkColor = R.color.IconBackgroundDefaultDark
+
+    @ColorRes
+    private var imageLightColor = R.color.IconBlueLight
+
+    @ColorRes
+    private var imageDarkColor = R.color.IconBlueDark
 
     private var tvTextSlot: TextView
     private var ivImageSlot: ImageView
@@ -90,37 +103,36 @@ class FTLSectionTextView @JvmOverloads constructor(
             backgroundTintList = ColorStateList.valueOf(
                 ContextCompat.getColor(
                     context,
-                    ThemeManager.theme.ftlSectionTextViewTheme.defaultImageBgColor
+                    when (theme) {
+                        ThemeManager.Theme.LIGHT -> imageBackgroundLightColor
+                        ThemeManager.Theme.DARK -> imageBackgroundDarkColor
+                    }
                 )
             )
-            setColorFilter(
+            drawable.changeColor(
                 ContextCompat.getColor(
                     context,
-                    ThemeManager.theme.ftlSectionTextViewTheme.defaultImageColor
+                    when (theme) {
+                        ThemeManager.Theme.LIGHT -> imageLightColor
+                        ThemeManager.Theme.DARK -> imageDarkColor
+                    }
                 )
             )
         }
     }
 
-    fun updateImageBackgroundColors(colorForLightTheme: Int, colorForDarkTheme: Int) {
-        ThemeManager.Theme.LIGHT.ftlSectionTextViewTheme.defaultImageBgColor = colorForLightTheme
-        ThemeManager.Theme.DARK.ftlSectionTextViewTheme.defaultImageBgColor = colorForDarkTheme
-        ivImageSlot.backgroundTintList = ColorStateList.valueOf(
-            ContextCompat.getColor(
-                context,
-                ThemeManager.theme.ftlSectionTextViewTheme.defaultImageBgColor
-            )
-        )
+    fun updateImageBackgroundColors(
+        @ColorRes colorForLightTheme: Int,
+        @ColorRes colorForDarkTheme: Int
+    ) {
+        imageBackgroundLightColor = colorForLightTheme
+        imageBackgroundDarkColor = colorForDarkTheme
+        onThemeChanged(ThemeManager.theme)
     }
 
-    fun updateImageColors(colorForLightTheme: Int, colorForDarkTheme: Int) {
-        ThemeManager.Theme.LIGHT.ftlSectionTextViewTheme.defaultImageColor = colorForLightTheme
-        ThemeManager.Theme.DARK.ftlSectionTextViewTheme.defaultImageColor = colorForDarkTheme
-        ivImageSlot.setColorFilter(
-            ContextCompat.getColor(
-                context,
-                ThemeManager.theme.ftlSectionTextViewTheme.defaultImageColor
-            )
-        )
+    fun updateImageColors(@ColorRes colorForLightTheme: Int, @ColorRes colorForDarkTheme: Int) {
+        imageLightColor = colorForLightTheme
+        imageDarkColor = colorForDarkTheme
+        onThemeChanged(ThemeManager.theme)
     }
 }

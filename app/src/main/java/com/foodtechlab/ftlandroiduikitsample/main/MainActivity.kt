@@ -2,11 +2,11 @@ package com.foodtechlab.ftlandroiduikitsample.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.foodtechlab.ftlandroiduikit.sheet.DialogState
-import com.foodtechlab.ftlandroiduikit.sheet.FTLBottomSheet
-import com.foodtechlab.ftlandroiduikit.sheet.Type
+import androidx.core.content.ContextCompat
+import com.foodtechlab.ftlandroiduikit.snackbar.top.FTLSnackbar
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikitsample.R
+import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 
@@ -25,9 +25,6 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.showLogo()
 
-        FTLBottomSheet.newInstance(DialogState("title", "title", Type.CAMERA, listOf()))
-            .show(supportFragmentManager, FTLBottomSheet.TAG)
-
         btnSwitchTheme.setOnClickListener {
             ThemeManager.setTheme(
                 when (ThemeManager.theme) {
@@ -39,6 +36,25 @@ class MainActivity : AppCompatActivity() {
             prefs.edit()
                 .putInt("key_theme", ThemeManager.theme.ordinal)
                 .apply()
+        }
+        with(btnAction) {
+            updateBackgroundDrawable(
+                ContextCompat.getDrawable(
+                    context,
+                    R.drawable.selector_ftl_button_green_light,
+                ),
+                ContextCompat.getDrawable(
+                    context,
+                    R.drawable.selector_ftl_button_green_dark
+                )
+            )
+            setOnClickListener {
+                FTLSnackbar.make(
+                    root,
+                    "Пожалуйста, измените номер телефона и повторите попытку",
+                    Snackbar.LENGTH_LONG
+                )?.show()
+            }
         }
     }
 }
