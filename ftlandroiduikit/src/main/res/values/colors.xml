@@ -61,9 +61,9 @@
 
     <!--  Background  -->
     <color name="BackgroundDefaultLight">#FFFFFF</color>
-    <color name="BackgroundDefaultDark">#121212</color>
+    <color name="BackgroundDefaultDark">#0E0E0E</color>
     <color name="BackgroundSecondaryLight">#F5F5F5</color>
-    <color name="BackgroundSecondaryDark">#121212</color>
+    <color name="BackgroundSecondaryDark">#0E0E0E</color>
 
     <!--  Surface  -->
     <color name="SurfaceFirstLight">#FFFFFF</color>
@@ -100,9 +100,8 @@
     <color name="ButtonSecondaryPressedLight">#DBDBDB</color>
     <color name="ButtonSecondaryPressedDark">#161616</color>
 
-    <color name="ButtonDisableLight">#F6F6F6</color>
-    <color name="ButtonDisableDark">#212121</color>
-
+    <color name="ButtonDisableLight">#E6E6E6</color>
+    <color name="ButtonDisableDark">#2A2A2A</color>
 
     <!--  Timer & Time  -->
     <color name="TimeDefaultLight">#DBF1DA</color>
@@ -127,6 +126,9 @@
     <!--  Text  -->
     <color name="TextPrimaryLight">#121212</color>
     <color name="TextPrimaryDark">#EFEFEF</color>
+
+    <color name="TextDisableLight">#A4A4A4</color>
+    <color name="TextDisableDark">#626262</color>
 
     <color name="TextOnColorPrimaryLight">#FFFFFF</color>
     <color name="TextOnColorPrimaryOpacity60Light">#99FFFFFF</color>
@@ -229,6 +231,9 @@
     <color name="DividerPrimaryLight">#F6F6F6</color>
     <color name="DividerPrimaryDark">#1A1A1A</color>
 
+    <!--  Snackbar  -->
+    <color name="SnackbarBackgroundLight">#323232</color>
+    <color name="SnackbarBackgroundDark">#4E4E4E</color>
 
     <!--  Icon & Icon Backgrounds  -->
     <color name="IconPrimaryLight">#FFFFFF</color>

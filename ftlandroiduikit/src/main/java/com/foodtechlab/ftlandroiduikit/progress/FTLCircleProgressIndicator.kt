@@ -29,7 +29,7 @@ class FTLCircleProgressIndicator @JvmOverloads constructor(
         }
 
     @ColorInt
-    var progressColor = ContextCompat.getColor(context, R.color.PrimaryInfoEnabled)
+    var progressColor = ContextCompat.getColor(context, R.color.ProgressPrimaryLight)
         set(value) {
             field = value
             pbProgress.indeterminateDrawable.setTint(field)
@@ -50,7 +50,7 @@ class FTLCircleProgressIndicator @JvmOverloads constructor(
         context.withStyledAttributes(attrs, R.styleable.FTLCircleProgressIndicator) {
             progressColor = getColor(
                 R.styleable.FTLCircleProgressIndicator_progressColor,
-                ContextCompat.getColor(context, R.color.PrimaryInfoEnabled)
+                ContextCompat.getColor(context, R.color.ProgressPrimaryLight)
             )
             hideBackground =
                 getBoolean(R.styleable.FTLCircleProgressIndicator_hideBackground, false)

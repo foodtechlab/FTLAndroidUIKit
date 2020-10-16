@@ -121,7 +121,8 @@ object ThemeManager {
         val ftlDefaultTextViewTheme: FTLDefaultTextViewTheme,
         val ftlExtendableTextViewTheme: FTLExtendableTextViewTheme,
         val ftlTableRowTheme: FTLTableRowTheme,
-        val ftlRestaurantMarkerTheme: FTLRestaurantMarkerTheme
+        val ftlRestaurantMarkerTheme: FTLRestaurantMarkerTheme,
+        val ftlSnackbarTheme: FTLSnackbarTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.OnPrimary),
@@ -186,7 +187,11 @@ object ThemeManager {
                 R.color.TimerNegativeLight
             ), // in progress late
             FTLCircleProgressIndicatorTheme(R.color.SurfaceFourthLight),
-            FTLProgressDialogTheme(R.color.TextOnColorAdditionalLight, R.color.SurfaceFourthLight),
+            FTLProgressDialogTheme(
+                R.color.TextOnColorAdditionalLight,
+                R.color.SurfaceFourthLight,
+                R.color.ProgressPrimaryLight
+            ),
             FTLRadioButtonTheme(R.color.TextPrimaryLight, R.color.ButtonSecondaryEnableLight),
             FTLSwitchTheme(
                 R.color.TextPrimaryLight,
@@ -275,17 +280,8 @@ object ThemeManager {
                 R.color.TextOnColorPrimaryOpacity60Light,
                 R.color.TextOnColorPrimaryLight
             ),
-            FTLSectionTextViewTheme(
-                R.color.TextPrimaryLight,
-                R.color.IconSecondaryLight,
-                R.color.IconBlueLight,
-                R.color.IconBackgroundDefaultLight
-            ),
-            FTLDoubleTextViewTheme(
-                R.color.TextPrimaryLight,
-                R.color.IconPrimaryLight,
-                R.color.IconBackgroundBlueLight
-            ),
+            FTLSectionTextViewTheme(R.color.TextPrimaryLight, R.color.IconSecondaryLight),
+            FTLDoubleTextViewTheme(R.color.TextPrimaryLight),
             FTLCoordinatorLayoutTheme(R.color.BackgroundSecondaryLight),
             FTLTitleTheme(R.color.TextPrimaryLight, R.color.TextSuccessEnabledLight),
             FTLBottomNavigationViewTheme(
@@ -310,7 +306,8 @@ object ThemeManager {
             FTLRestaurantMarkerTheme(
                 R.drawable.shape_ftl_restaurant_marker_light,
                 R.color.TextPrimaryLight
-            )
+            ),
+            FTLSnackbarTheme(R.drawable.layer_list_snackbar_light)
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
@@ -375,7 +372,11 @@ object ThemeManager {
                 R.color.TimerNegativeDark
             ), // in progress late
             FTLCircleProgressIndicatorTheme(R.color.SurfaceFourthDark),
-            FTLProgressDialogTheme(R.color.TextOnColorAdditionalDark, R.color.SurfaceFourthDark),
+            FTLProgressDialogTheme(
+                R.color.TextOnColorAdditionalDark,
+                R.color.SurfaceFourthDark,
+                R.color.ProgressPrimaryDark
+            ),
             FTLRadioButtonTheme(R.color.TextPrimaryDark, R.color.ButtonSecondaryEnableDark),
             FTLSwitchTheme(
                 R.color.TextPrimaryDark,
@@ -464,17 +465,8 @@ object ThemeManager {
                 R.color.TextOnColorPrimaryOpacity60Dark,
                 R.color.TextOnColorPrimaryDark
             ),
-            FTLSectionTextViewTheme(
-                R.color.TextPrimaryDark,
-                R.color.IconSecondaryDark,
-                R.color.IconBlueDark,
-                R.color.IconBackgroundDefaultDark
-            ),
-            FTLDoubleTextViewTheme(
-                R.color.TextPrimaryDark,
-                R.color.IconPrimaryDark,
-                R.color.IconBackgroundBlueDark
-            ),
+            FTLSectionTextViewTheme(R.color.TextPrimaryDark, R.color.IconSecondaryDark),
+            FTLDoubleTextViewTheme(R.color.TextPrimaryDark),
             FTLCoordinatorLayoutTheme(R.color.BackgroundSecondaryDark),
             FTLTitleTheme(R.color.TextPrimaryDark, R.color.TextSuccessEnabledDark),
             FTLBottomNavigationViewTheme(
@@ -496,7 +488,8 @@ object ThemeManager {
             FTLRestaurantMarkerTheme(
                 R.drawable.shape_ftl_restaurant_marker_dark,
                 R.color.TextPrimaryDark
-            )
+            ),
+            FTLSnackbarTheme(R.drawable.layer_list_snackbar_dark)
         )
     }
 
@@ -539,7 +532,8 @@ object ThemeManager {
 
     data class FTLProgressDialogTheme(
         @ColorRes val textColor: Int,
-        @ColorRes val bgColor: Int
+        @ColorRes val bgColor: Int,
+        @ColorRes val accentColor: Int
     )
 
     data class FTLRadioButtonTheme(
@@ -674,15 +668,11 @@ object ThemeManager {
 
     data class FTLSectionTextViewTheme(
         @ColorRes var textColor: Int,
-        @ColorRes var arrowColor: Int,
-        @ColorRes var defaultImageColor: Int,
-        @ColorRes var defaultImageBgColor: Int
+        @ColorRes var arrowColor: Int
     )
 
     data class FTLDoubleTextViewTheme(
-        @ColorRes var textColor: Int,
-        @ColorRes var defaultImageColor: Int,
-        @ColorRes var defaultImageBgColor: Int
+        @ColorRes var textColor: Int
     )
 
     data class FTLDividerTheme(
@@ -725,6 +715,10 @@ object ThemeManager {
     data class FTLRestaurantMarkerTheme(
         @DrawableRes val background: Int,
         @ColorRes val textColor: Int
+    )
+
+    data class FTLSnackbarTheme(
+        @DrawableRes val background: Int
     )
 
     interface ThemeChangedListener {
