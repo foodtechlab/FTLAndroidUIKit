@@ -2,6 +2,8 @@ package com.foodtechlab.ftlandroiduikitsample.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import com.foodtechlab.ftlandroiduikit.sheet.DialogState
 import com.foodtechlab.ftlandroiduikit.sheet.FTLBottomSheet
 import com.foodtechlab.ftlandroiduikit.sheet.Type
@@ -23,6 +25,7 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
 
+        toolbar.startDrawable = ContextCompat.getDrawable(this, R.drawable.ic_close_24)
         toolbar.showLogo()
 
         FTLBottomSheet.newInstance(DialogState("title", "title", Type.CAMERA, listOf()))

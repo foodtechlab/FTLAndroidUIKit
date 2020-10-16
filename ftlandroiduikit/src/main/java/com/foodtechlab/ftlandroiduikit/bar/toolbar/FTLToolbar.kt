@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.view.View
 import android.widget.*
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.isGone
@@ -79,6 +80,9 @@ class FTLToolbar @JvmOverloads constructor(
     var startDrawable: Drawable?
         get() = ibStart.drawable
         set(value) {
+            value?.changeColor(
+                ContextCompat.getColor(context, ThemeManager.theme.ftlToolbarTheme.startIconColor)
+            )
             ibStart.setImageDrawable(value)
             ibStart.isVisible = value != null
         }
@@ -86,6 +90,9 @@ class FTLToolbar @JvmOverloads constructor(
     var endDrawable: Drawable?
         get() = ibEnd.drawable
         set(value) {
+            value?.changeColor(
+                ContextCompat.getColor(context, ThemeManager.theme.ftlToolbarTheme.endIconColor)
+            )
             ibEnd.setImageDrawable(value)
         }
 
@@ -329,6 +336,17 @@ class FTLToolbar @JvmOverloads constructor(
             flEndContainer.getChildAt(i).isGone = true
         }
         onUpdateEndContent?.onUpdate(true)
+    }
+
+    fun updateBackgroundColor(@ColorRes lightColor: Int, @ColorRes darkColor: Int) {
+        ThemeManager.Theme.LIGHT.ftlToolbarTheme.bgColor = lightColor
+        ThemeManager.Theme.DARK.ftlToolbarTheme.bgColor = darkColor
+        rlContainer.setBackgroundColor(
+            ContextCompat.getColor(
+                context,
+                ThemeManager.theme.ftlToolbarTheme.bgColor
+            )
+        )
     }
 
     private fun TypedArray.setupLogoIcon() {

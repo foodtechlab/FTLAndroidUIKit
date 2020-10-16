@@ -501,7 +501,7 @@ object ThemeManager {
     }
 
     data class FTLToolbarTheme(
-        @ColorRes val bgColor: Int,
+        @ColorRes var bgColor: Int,
         @ColorRes var titleColor: Int,
         @ColorRes var subtitleColor: Int,
         @ColorRes var actionColor: Int,
