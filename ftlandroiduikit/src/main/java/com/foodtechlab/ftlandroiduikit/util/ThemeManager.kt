@@ -680,7 +680,7 @@ object ThemeManager {
     )
 
     data class FTLCoordinatorLayoutTheme(
-        @ColorRes val bgColor: Int
+        @ColorRes var bgColor: Int
     )
 
     data class FTLTitleTheme(

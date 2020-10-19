@@ -2,6 +2,7 @@ package com.foodtechlab.ftlandroiduikit.container
 
 import android.content.Context
 import android.util.AttributeSet
+import androidx.annotation.ColorRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
@@ -37,6 +38,17 @@ class FTLCoordinatorLayout @JvmOverloads constructor(
             ContextCompat.getColor(
                 context,
                 theme.ftlCoordinatorLayoutTheme.bgColor
+            )
+        )
+    }
+
+    fun updateBackgroundColor(@ColorRes lightColor: Int, @ColorRes darkColor: Int) {
+        ThemeManager.Theme.LIGHT.ftlCoordinatorLayoutTheme.bgColor = lightColor
+        ThemeManager.Theme.DARK.ftlCoordinatorLayoutTheme.bgColor = darkColor
+        setBackgroundColor(
+            ContextCompat.getColor(
+                context,
+                ThemeManager.theme.ftlCoordinatorLayoutTheme.bgColor
             )
         )
     }

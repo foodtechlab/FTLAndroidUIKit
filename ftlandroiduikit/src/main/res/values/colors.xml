@@ -61,9 +61,9 @@
 
     <!--  Background  -->
     <color name="BackgroundDefaultLight">#FFFFFF</color>
-    <color name="BackgroundDefaultDark">#0E0E0E</color>
+    <color name="BackgroundDefaultDark">#000000</color>
     <color name="BackgroundSecondaryLight">#F5F5F5</color>
-    <color name="BackgroundSecondaryDark">#0E0E0E</color>
+    <color name="BackgroundSecondaryDark">#000000</color>
 
     <!--  Surface  -->
     <color name="SurfaceFirstLight">#FFFFFF</color>
