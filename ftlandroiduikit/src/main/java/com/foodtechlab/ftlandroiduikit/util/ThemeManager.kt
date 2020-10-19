@@ -125,7 +125,7 @@ object ThemeManager {
         val ftlSnackbarTheme: FTLSnackbarTheme
     ) {
         LIGHT(
-            FTLLinearLayoutTheme(R.color.OnPrimary),
+            FTLLinearLayoutTheme(R.color.BackgroundDefaultLight),
             FTLToolbarTheme(
                 R.color.SurfaceSecondLight,
                 R.color.TextPrimaryLight,
@@ -310,7 +310,7 @@ object ThemeManager {
             FTLSnackbarTheme(R.drawable.layer_list_snackbar_light)
         ),
         DARK(
-            FTLLinearLayoutTheme(R.color.OnSurfaceSecondary),
+            FTLLinearLayoutTheme(R.color.BackgroundDefaultDark),
             FTLToolbarTheme(
                 R.color.SurfaceSecondDark,
                 R.color.TextPrimaryDark,
