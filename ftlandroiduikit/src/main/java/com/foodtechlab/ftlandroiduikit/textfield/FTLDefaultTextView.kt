@@ -3,7 +3,6 @@ package com.foodtechlab.ftlandroiduikit.textfield
 import android.content.Context
 import android.graphics.Canvas
 import android.util.AttributeSet
-import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -11,15 +10,12 @@ import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
-import androidx.core.view.marginBottom
-import androidx.core.view.marginLeft
-import androidx.core.view.marginStart
-import androidx.core.view.updateMargins
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikit.util.changeColor
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
+import kotlin.math.roundToInt
 
 class FTLDefaultTextView @JvmOverloads constructor(
     context: Context,
@@ -113,18 +109,10 @@ class FTLDefaultTextView @JvmOverloads constructor(
     }
 
     override fun onDraw(canvas: Canvas) {
-        tvTextSlot.updateMargins(tvTextSlot.lineCount == 1)
-    }
-
-    private fun View.updateMargins(setMargin: Boolean) {
-        val lParams = layoutParams as LayoutParams
-        val marginTop = context.dpToPx(if (setMargin) 4f else 0f).toInt()
-        lParams.updateMargins(
-            marginStart,
-            marginTop,
-            marginLeft,
-            marginBottom
-        )
-        layoutParams = lParams
+        super.onDraw(canvas)
+        if (tvTextSlot.lineCount == 1) {
+            val paddingTop = context.dpToPx(4f).roundToInt()
+            tvTextSlot.setPadding(0, paddingTop, 0, 0)
+        }
     }
 }

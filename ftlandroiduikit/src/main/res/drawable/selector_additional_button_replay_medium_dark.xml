@@ -6,7 +6,7 @@
             <item>
                 <shape android:shape="rectangle">
                     <corners android:radius="8dp" />
-                    <solid android:color="#212121" />
+                    <solid android:color="@color/ButtonDisableDark" />
                 </shape>
             </item>
             <item android:bottom="8dp" android:drawable="@drawable/ic_replay_selected_dark_24" android:gravity="center" android:left="8dp" android:right="8dp" android:top="8dp" />
@@ -18,7 +18,7 @@
             <item>
                 <shape android:shape="rectangle">
                     <corners android:radius="8dp" />
-                    <solid android:color="#161616" />
+                    <solid android:color="@color/ButtonSecondaryPressedDark" />
                 </shape>
             </item>
             <item android:bottom="8dp" android:drawable="@drawable/ic_replay_24" android:gravity="center" android:left="8dp" android:right="8dp" android:top="8dp" />
@@ -30,7 +30,7 @@
             <item>
                 <shape android:shape="rectangle">
                     <corners android:radius="8dp" />
-                    <solid android:color="#212121" />
+                    <solid android:color="@color/ButtonSecondaryEnableDark" />
                 </shape>
             </item>
             <item android:bottom="8dp" android:drawable="@drawable/ic_replay_24" android:gravity="center" android:left="8dp" android:right="8dp" android:top="8dp" />
