@@ -15,6 +15,7 @@ import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikit.util.changeColor
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
+import kotlin.math.roundToInt
 
 class FTLDefaultTextView @JvmOverloads constructor(
     context: Context,
@@ -110,7 +111,7 @@ class FTLDefaultTextView @JvmOverloads constructor(
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
         if (tvTextSlot.lineCount == 1) {
-            val paddingTop = context.dpToPx(4f).toInt()
+            val paddingTop = context.dpToPx(4f).roundToInt()
             tvTextSlot.setPadding(0, paddingTop, 0, 0)
         }
     }
