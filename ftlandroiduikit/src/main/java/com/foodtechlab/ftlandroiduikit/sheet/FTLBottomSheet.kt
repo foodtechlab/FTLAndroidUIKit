@@ -155,6 +155,18 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
         setupUI()
     }
 
+    override fun onDestroyView() {
+        val count = llContent.childCount
+        for (i in 0 until count) {
+            val view = llContent.getChildAt(i)
+            if (view is FTLButton) {
+                view.setOnClickListener(null)
+            }
+        }
+        onClickListener = null
+        super.onDestroyView()
+    }
+
     private fun View.setMarginTop() {
         val lParams = layoutParams as LinearLayout.LayoutParams
         lParams.updateMargins(
