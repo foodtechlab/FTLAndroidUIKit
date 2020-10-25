@@ -30,9 +30,9 @@ import com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLTimerDotsProgress
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.getMillis
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
+import java.lang.ref.WeakReference
 import java.util.*
 import java.util.concurrent.TimeUnit
-import kotlin.concurrent.timer
 import kotlin.math.abs
 
 /**
@@ -129,6 +129,33 @@ class FTLTimerButton @JvmOverloads constructor(
     private val tvTime: TextView
     private val tvLabel: TextView
     private val dotProgress: FTLTimerDotsProgress
+
+    internal class RemainedDurationTask(button: FTLTimerButton) : TimerTask() {
+        private var btnReference: WeakReference<FTLTimerButton>? = null
+
+        init {
+            btnReference = WeakReference(button)
+        }
+
+        override fun run() {
+            btnReference?.get()?.let {
+                val timerHandler = Handler(Looper.getMainLooper())
+                val timerRunnable = TimerTaskRunnable(it)
+                timerHandler.post(timerRunnable)
+            }
+        }
+    }
+
+    internal class TimerTaskRunnable(val button: FTLTimerButton) : Runnable {
+
+        override fun run() {
+            button.remainedDuration -= 1000L
+            if (button.estimateDuration != 0L) {
+                button.progressView.progress =
+                    button.remainedDuration * 100f / button.estimateDuration
+            }
+        }
+    }
 
     init {
         inflate(context, R.layout.layout_ftl_timer_button, this)
@@ -251,14 +278,8 @@ class FTLTimerButton @JvmOverloads constructor(
     private fun launchTimerTask(value: Long) {
         remainedDuration = value
         timer?.cancel()
-        timer = timer("Timer", false, 0L, 1000L) {
-            Handler(Looper.getMainLooper()).post {
-                remainedDuration -= 1000L
-                if (estimateDuration != 0L) {
-                    progressView.progress = remainedDuration * 100f / estimateDuration
-                }
-            }
-        }
+        timer = Timer()
+        timer?.schedule(RemainedDurationTask(this), 0L, 1000L)
     }
 
     fun updateRemainedDuration(remDuration: Long) {
@@ -382,6 +403,10 @@ class FTLTimerButton @JvmOverloads constructor(
         clearCustomColors()
         this.state = state
         updateViewState()
+    }
+
+    fun clearTimer() {
+        timer?.cancel()
     }
 
     private fun clearCustomColors() {
