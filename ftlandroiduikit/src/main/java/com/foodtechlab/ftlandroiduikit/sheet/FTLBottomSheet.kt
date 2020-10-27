@@ -163,6 +163,7 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
                 view.setOnClickListener(null)
             }
         }
+        llContent.removeAllViews()
         onClickListener = null
         super.onDestroyView()
     }
