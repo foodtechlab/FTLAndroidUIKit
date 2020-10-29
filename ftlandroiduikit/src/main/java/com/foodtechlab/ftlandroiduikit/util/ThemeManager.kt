@@ -275,8 +275,8 @@ object ThemeManager {
                 R.color.TextOnColorPrimaryOpacity60Light,
                 R.color.TextOnColorPrimaryLight,
                 R.color.TextOnColorPrimaryLight,
-                R.color.ButtonSuccessEnableLight,
                 R.color.ButtonSuccessPressedLight,
+                R.color.ButtonSuccessEnableLight,
                 R.color.TextOnColorPrimaryOpacity60Light,
                 R.color.TextOnColorPrimaryLight
             ),
@@ -460,8 +460,8 @@ object ThemeManager {
                 R.color.TextOnColorPrimaryOpacity60Dark,
                 R.color.TextOnColorPrimaryDark,
                 R.color.TextOnColorPrimaryDark,
-                R.color.ButtonSuccessEnableDark,
                 R.color.ButtonSuccessPressedDark,
+                R.color.ButtonSuccessEnableDark,
                 R.color.TextOnColorPrimaryOpacity60Dark,
                 R.color.TextOnColorPrimaryDark
             ),
