@@ -91,9 +91,9 @@
     <color name="ButtonInfoPressedDark">#4AC1F7</color>
 
     <color name="ButtonSuccessEnableLight">#4CB944</color>
-    <color name="ButtonSuccessEnableDark">#4CB944</color>
+    <color name="ButtonSuccessEnableDark">#69C462</color>
     <color name="ButtonSuccessPressedLight">#299421</color>
-    <color name="ButtonSuccessPressedDark">#69C462</color>
+    <color name="ButtonSuccessPressedDark">#4CB944</color>
 
     <color name="ButtonSecondaryEnableLight">#F2F2F2</color>
     <color name="ButtonSecondaryEnableDark">#3A3A3A</color>
