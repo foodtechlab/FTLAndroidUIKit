@@ -48,6 +48,8 @@ class FTLTimerButton @JvmOverloads constructor(
 
     private var isTimerRenewableInside = true
 
+    private var onGlobalLayoutListener: ViewTreeObserver.OnGlobalLayoutListener? = null
+
     var inProgress = false
         private set
 
@@ -155,6 +157,7 @@ class FTLTimerButton @JvmOverloads constructor(
                     button.remainedDuration * 100f / button.estimateDuration
             }
         }
+
     }
 
     init {
@@ -182,21 +185,6 @@ class FTLTimerButton @JvmOverloads constructor(
             )
         }
 
-        rlRoot.apply {
-            viewTreeObserver.addOnGlobalLayoutListener(object :
-                ViewTreeObserver.OnGlobalLayoutListener {
-                override fun onGlobalLayout() {
-                    if (measuredWidth > 0) {
-                        progressView.updateLayoutParams {
-                            width = measuredWidth
-                            height = measuredHeight
-                        }
-                        viewTreeObserver.removeOnGlobalLayoutListener(this)
-                    }
-                }
-            })
-        }
-
         super.setOnClickListener { if (!inProgress) clickListener?.onClick(it) }
 
         onThemeChanged(ThemeManager.theme)
@@ -204,6 +192,21 @@ class FTLTimerButton @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
+        rlRoot.apply {
+            onGlobalLayoutListener?.let {
+                viewTreeObserver.removeOnGlobalLayoutListener(it)
+            }
+            onGlobalLayoutListener = ViewTreeObserver.OnGlobalLayoutListener {
+                if (measuredWidth > 0) {
+                    progressView.updateLayoutParams {
+                        width = measuredWidth
+                        height = measuredHeight
+                    }
+                    viewTreeObserver.removeOnGlobalLayoutListener(onGlobalLayoutListener)
+                }
+            }
+            viewTreeObserver.addOnGlobalLayoutListener(onGlobalLayoutListener)
+        }
         updateDotProgressVisibility(inProgress)
         ThemeManager.addListener(this)
     }
@@ -244,6 +247,8 @@ class FTLTimerButton @JvmOverloads constructor(
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         ThemeManager.removeListener(this)
+        rlRoot.viewTreeObserver.removeOnGlobalLayoutListener(onGlobalLayoutListener)
+        onGlobalLayoutListener = null
     }
 
     override fun onThemeChanged(theme: ThemeManager.Theme) {

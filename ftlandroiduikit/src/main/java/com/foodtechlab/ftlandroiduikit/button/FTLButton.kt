@@ -232,6 +232,7 @@ class FTLButton @JvmOverloads constructor(
     fun setButtonType(type: ButtonType) {
         clearCustomColors()
         buttonType = type
+        onThemeChanged(ThemeManager.theme)
         updateViewState()
     }
 
