@@ -32,7 +32,7 @@ class FTLRadioButton : AppCompatRadioButton, ThemeManager.ThemeChangedListener {
     }
 
     @ColorInt
-    private var colorForStateChecked = ContextCompat.getColor(context, R.color.PrimaryDangerEnabled)
+    private var colorForStateChecked = ContextCompat.getColor(context, R.color.ButtonDangerEnableLight)
 
     @ColorInt
     private var colorForStateUnchecked =
@@ -47,7 +47,7 @@ class FTLRadioButton : AppCompatRadioButton, ThemeManager.ThemeChangedListener {
         context.withStyledAttributes(attrs, R.styleable.FTLRadioButton) {
             colorForStateChecked = getColor(
                 R.styleable.FTLRadioButton_colorForStateChecked,
-                ContextCompat.getColor(context, R.color.PrimaryDangerEnabled)
+                ContextCompat.getColor(context, R.color.ButtonDangerEnableLight)
             )
         }
         onThemeChanged(ThemeManager.theme)
