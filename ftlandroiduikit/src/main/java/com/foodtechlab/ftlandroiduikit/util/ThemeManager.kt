@@ -115,6 +115,7 @@ object ThemeManager {
         val ftlSectionTextViewTheme: FTLSectionTextViewTheme,
         val ftlDoubleTextViewTheme: FTLDoubleTextViewTheme,
         val ftlCoordinatorLayoutTheme: FTLCoordinatorLayoutTheme,
+        val ftlConstraintLayoutTheme: FTLConstraintLayoutTheme,
         val ftlTitleTheme: FTLTitleTheme,
         val ftlBottomNavigationViewTheme: FTLBottomNavigationViewTheme,
         val ftlDividerTheme: FTLDividerTheme,
@@ -283,6 +284,7 @@ object ThemeManager {
             FTLSectionTextViewTheme(R.color.TextPrimaryLight, R.color.IconSecondaryLight),
             FTLDoubleTextViewTheme(R.color.TextPrimaryLight),
             FTLCoordinatorLayoutTheme(R.color.BackgroundSecondaryLight),
+            FTLConstraintLayoutTheme(R.color.BackgroundDefaultLight),
             FTLTitleTheme(R.color.TextPrimaryLight, R.color.TextSuccessEnabledLight),
             FTLBottomNavigationViewTheme(
                 R.color.SurfaceSecondLight,
@@ -468,6 +470,7 @@ object ThemeManager {
             FTLSectionTextViewTheme(R.color.TextPrimaryDark, R.color.IconSecondaryDark),
             FTLDoubleTextViewTheme(R.color.TextPrimaryDark),
             FTLCoordinatorLayoutTheme(R.color.BackgroundSecondaryDark),
+            FTLConstraintLayoutTheme(R.color.BackgroundDefaultDark),
             FTLTitleTheme(R.color.TextPrimaryDark, R.color.TextSuccessEnabledDark),
             FTLBottomNavigationViewTheme(
                 R.color.SurfaceSecondDark,
@@ -680,6 +683,10 @@ object ThemeManager {
     )
 
     data class FTLCoordinatorLayoutTheme(
+        @ColorRes var bgColor: Int
+    )
+
+    data class FTLConstraintLayoutTheme(
         @ColorRes var bgColor: Int
     )
 

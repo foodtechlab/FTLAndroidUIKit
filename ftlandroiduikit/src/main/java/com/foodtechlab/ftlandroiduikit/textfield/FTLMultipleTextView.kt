@@ -52,7 +52,7 @@ class FTLMultipleTextView @JvmOverloads constructor(
 
     @ColorInt
     var colorBottomEndSlot: Int =
-        ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
+        ContextCompat.getColor(context, R.color.TextOnColorAdditionalLight)
         set(value) {
             field = value
             tvBottomEndSlot.setTextColor(field)
@@ -60,7 +60,7 @@ class FTLMultipleTextView @JvmOverloads constructor(
 
     @ColorInt
     var colorBottomStartSlot: Int =
-        ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
+        ContextCompat.getColor(context, R.color.TextOnColorAdditionalLight)
         set(value) {
             field = value
             tvBottomStartSlot.setTextColor(field)
