@@ -110,11 +110,6 @@ class FTLSwitch : SwitchCompat, ThemeManager.ThemeChangedListener {
         background = rippleDrawable
     }
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        ThemeManager.addListener(this)
-    }
-
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         ThemeManager.addListener(this)

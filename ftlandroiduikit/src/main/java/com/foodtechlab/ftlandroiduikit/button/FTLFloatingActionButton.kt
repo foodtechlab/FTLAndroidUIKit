@@ -30,11 +30,6 @@ class FTLFloatingActionButton @JvmOverloads constructor(
         onThemeChanged(ThemeManager.theme)
     }
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        ThemeManager.addListener(this)
-    }
-
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         ThemeManager.addListener(this)

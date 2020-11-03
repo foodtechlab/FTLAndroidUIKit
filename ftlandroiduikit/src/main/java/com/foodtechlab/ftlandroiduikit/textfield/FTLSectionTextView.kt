@@ -75,11 +75,6 @@ class FTLSectionTextView @JvmOverloads constructor(
         ThemeManager.addListener(this)
     }
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        ThemeManager.addListener(this)
-    }
-
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         ThemeManager.removeListener(this)
