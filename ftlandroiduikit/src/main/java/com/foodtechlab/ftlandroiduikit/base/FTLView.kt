@@ -14,11 +14,6 @@ abstract class FTLView @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : View(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        ThemeManager.addListener(this)
-    }
-
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         ThemeManager.addListener(this)

@@ -92,11 +92,6 @@ class FTLButton @JvmOverloads constructor(
         setProgressVisibility(inProgress)
     }
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        ThemeManager.addListener(this)
-    }
-
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         ThemeManager.removeListener(this)

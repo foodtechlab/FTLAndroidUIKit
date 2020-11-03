@@ -239,11 +239,6 @@ class FTLTimerButton @JvmOverloads constructor(
         }
     }
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        ThemeManager.addListener(this)
-    }
-
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         ThemeManager.removeListener(this)

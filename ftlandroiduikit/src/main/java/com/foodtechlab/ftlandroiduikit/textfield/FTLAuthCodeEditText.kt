@@ -213,11 +213,6 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
         throw RuntimeException("setCustomSelectionActionModeCallback() not supported.")
     }
 
-    override fun onFinishInflate() {
-        super.onFinishInflate()
-        ThemeManager.addListener(this)
-    }
-
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
         ThemeManager.addListener(this)

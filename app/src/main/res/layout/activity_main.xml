@@ -42,6 +42,12 @@
             app:ftlButton_text="Show Snackbar"
             app:ftlButton_type="primary" />
 
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLRouteTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:textAddressFrom="dsfsdf"
+            app:textAddressTo="sdfsdfsd"/>
+
     </com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout>
 
     <ImageView
