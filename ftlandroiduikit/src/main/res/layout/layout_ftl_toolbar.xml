@@ -19,11 +19,9 @@
             android:layout_height="24dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="16dp"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:visibility="gone"
+            tools:visibility="gone"
             tools:src="@drawable/ic_back" />
 
         <FrameLayout
@@ -33,9 +31,7 @@
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginEnd="12dp"
-            android:layout_marginBottom="12dp">
+            android:layout_marginEnd="16dp">
 
             <TextView
                 android:id="@+id/tv_ftl_toolbar_action"
@@ -65,15 +61,15 @@
 
             <com.foodtechlab.ftlandroiduikit.imageview.FTLPlaceholderImageView
                 android:id="@+id/iv_ftl_toolbar_logo"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginEnd="4dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
                 android:visibility="gone" />
 
             <FrameLayout
                 android:id="@+id/fl_ftl_toolbar_indicator"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_vertical|end"
                 android:background="?attr/selectableItemBackgroundBorderless"
                 android:visibility="gone">
 
@@ -99,6 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
             android:layout_toStartOf="@id/fl_ftl_toolbar_end_container"
             android:visibility="gone"
             app:size="small" />

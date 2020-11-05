@@ -152,18 +152,12 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
                 theme.ftlBottomSheetTheme.messageColor
             )
         )
+        removeListenersAndButtons()
         setupUI()
     }
 
     override fun onDestroyView() {
-        val count = llContent.childCount
-        for (i in 0 until count) {
-            val view = llContent.getChildAt(i)
-            if (view is FTLButton) {
-                view.setOnClickListener(null)
-            }
-        }
-        llContent.removeAllViews()
+        removeListenersAndButtons()
         onClickListener = null
         super.onDestroyView()
     }
@@ -176,6 +170,17 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
             marginEnd,
             marginBottom
         )
+    }
+
+    private fun removeListenersAndButtons() {
+        val count = llContent.childCount
+        for (i in 0 until count) {
+            val view = llContent.getChildAt(i)
+            if (view is FTLButton) {
+                view.setOnClickListener(null)
+            }
+        }
+        llContent.removeAllViews()
     }
 
     companion object {
