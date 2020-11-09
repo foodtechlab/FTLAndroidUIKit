@@ -34,19 +34,43 @@
             android:padding="12dp"
             android:text="Switch theme" />
 
-        <com.foodtechlab.ftlandroiduikit.button.FTLButton
-            android:id="@+id/btnAction"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:ftlButton_text="Show Snackbar"
-            app:ftlButton_type="primary" />
-
-        <com.foodtechlab.ftlandroiduikit.textfield.FTLRouteTextView
+        <RadioGroup
+            android:id="@+id/rg"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:textAddressFrom="dsfsdf"
-            app:textAddressTo="sdfsdfsd"/>
+            android:layout_height="wrap_content">
+
+            <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp" />
+
+            <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
+                android:id="@+id/rb"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Radio Button" />
+
+            <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp" />
+
+            <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
+                android:id="@+id/rb1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:text="Radio Button 2" />
+
+            <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp" />
+        </RadioGroup>
 
     </com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout>
 

@@ -3,10 +3,8 @@ package com.foodtechlab.ftlandroiduikitsample.main
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.foodtechlab.ftlandroiduikit.snackbar.top.FTLSnackbar
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikitsample.R
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.ObsoleteCoroutinesApi
 
@@ -38,24 +36,7 @@ class MainActivity : AppCompatActivity() {
                 .putInt("key_theme", ThemeManager.theme.ordinal)
                 .apply()
         }
-        with(btnAction) {
-            updateBackgroundDrawable(
-                ContextCompat.getDrawable(
-                    context,
-                    R.drawable.selector_ftl_button_green_light,
-                ),
-                ContextCompat.getDrawable(
-                    context,
-                    R.drawable.selector_ftl_button_green_dark
-                )
-            )
-            setOnClickListener {
-                FTLSnackbar.make(
-                    root,
-                    "Пожалуйста, измените номер телефона и повторите попытку",
-                    Snackbar.LENGTH_LONG
-                )?.show()
-            }
-        }
+
+        rg.check(R.id.rb)
     }
 }
