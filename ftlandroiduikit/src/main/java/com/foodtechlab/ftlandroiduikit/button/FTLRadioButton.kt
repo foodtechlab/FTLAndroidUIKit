@@ -4,12 +4,12 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.util.TypedValue
+import android.view.View
 import androidx.annotation.ColorInt
 import androidx.appcompat.widget.AppCompatRadioButton
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
-import androidx.core.view.updatePadding
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
@@ -32,7 +32,8 @@ class FTLRadioButton : AppCompatRadioButton, ThemeManager.ThemeChangedListener {
     }
 
     @ColorInt
-    private var colorForStateChecked = ContextCompat.getColor(context, R.color.ButtonDangerEnableLight)
+    private var colorForStateChecked =
+        ContextCompat.getColor(context, R.color.ButtonDangerEnableLight)
 
     @ColorInt
     private var colorForStateUnchecked =
@@ -56,13 +57,13 @@ class FTLRadioButton : AppCompatRadioButton, ThemeManager.ThemeChangedListener {
         setLineSpacing(context.dpToPx(5f), 1.0f)
         typeface = ResourcesCompat.getFont(context, R.font.roboto_regular)
 
-        buttonDrawable = null
+        textAlignment = View.TEXT_ALIGNMENT_TEXT_START
+        layoutDirection = View.LAYOUT_DIRECTION_RTL
+
         val typedValue = TypedValue()
         context.theme
-            .resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true)
+            .resolveAttribute(android.R.attr.selectableItemBackgroundBorderless, typedValue, true)
         setBackgroundResource(typedValue.resourceId)
-
-        updatePaddingForComponent()
     }
 
     override fun onAttachedToWindow() {
@@ -84,35 +85,6 @@ class FTLRadioButton : AppCompatRadioButton, ThemeManager.ThemeChangedListener {
 
     fun updateColorStyle(@ColorInt checkedStateColor: Int) {
         val rbColors = intArrayOf(colorForStateUnchecked, checkedStateColor)
-        val typedValue = TypedValue()
-        context.theme.resolveAttribute(
-            android.R.attr.listChoiceIndicatorSingle,
-            typedValue,
-            true
-        )
-        val drawable = ContextCompat.getDrawable(context, typedValue.resourceId)
-        drawable?.setTintList(ColorStateList(states, rbColors))
-
-        setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, drawable, null)
-    }
-
-    fun updatePaddingForComponent(
-        start: Float = PADDING_START_DEFAULT,
-        top: Float = PADDING_TOP_BOTTOM_DEFAULT,
-        end: Float = PADDING_END_DEFAULT,
-        bottom: Float = PADDING_TOP_BOTTOM_DEFAULT
-    ) {
-        updatePadding(
-            context.dpToPx(start).toInt(),
-            context.dpToPx(top).toInt(),
-            context.dpToPx(end).toInt(),
-            context.dpToPx(bottom).toInt()
-        )
-    }
-
-    companion object {
-        const val PADDING_TOP_BOTTOM_DEFAULT = 8f
-        const val PADDING_START_DEFAULT = 16f
-        const val PADDING_END_DEFAULT = 14f
+        buttonTintList = ColorStateList(states, rbColors)
     }
 }
