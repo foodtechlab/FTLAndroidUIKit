@@ -23,12 +23,16 @@ class MainActivity : AppCompatActivity() {
 
         toolbar.startDrawable = ContextCompat.getDrawable(this, R.drawable.ic_close_24)
         toolbar.showLogo()
+        rg.check(when (ThemeManager.theme) {
+            ThemeManager.Theme.DARK -> R.id.rbDarkTheme
+            else -> R.id.rbLightTheme
+        })
 
-        btnSwitchTheme.setOnClickListener {
+        rg.setOnCheckedChangeListener { _, i ->
             ThemeManager.setTheme(
-                when (ThemeManager.theme) {
-                    ThemeManager.Theme.LIGHT -> ThemeManager.Theme.DARK
-                    ThemeManager.Theme.DARK -> ThemeManager.Theme.LIGHT
+                when (i) {
+                    R.id.rbDarkTheme -> ThemeManager.Theme.DARK
+                    else -> ThemeManager.Theme.LIGHT
                 },
                 screenImageView, llContainer, centerX = 100, centerY = 100, animate = true
             )
@@ -36,7 +40,5 @@ class MainActivity : AppCompatActivity() {
                 .putInt("key_theme", ThemeManager.theme.ordinal)
                 .apply()
         }
-
-        rg.check(R.id.rb)
     }
 }

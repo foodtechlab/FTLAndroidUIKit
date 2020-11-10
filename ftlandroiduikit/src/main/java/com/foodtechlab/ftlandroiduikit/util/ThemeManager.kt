@@ -1,5 +1,6 @@
 package com.foodtechlab.ftlandroiduikit.util
 
+import android.animation.Animator
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.view.ViewAnimationUtils
@@ -7,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.core.animation.doOnCancel
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import com.foodtechlab.ftlandroiduikit.R
@@ -24,6 +26,8 @@ object ThemeManager {
         }
 
     private val listeners = mutableListOf<ThemeChangedListener>()
+
+    private var animator: Animator? = null
 
     fun addListener(listener: ThemeChangedListener) {
         listeners.add(listener)
@@ -48,6 +52,8 @@ object ThemeManager {
         if (!animate) {
             this.theme = theme
             return
+        } else {
+            animator?.cancel()
         }
 
         if (screenImageView.isVisible) return
@@ -61,18 +67,23 @@ object ThemeManager {
         screenImageView.setImageBitmap(bitmap)
         screenImageView.isVisible = true
 
-        val finalRadius = hypot(w.toFloat(), h.toFloat())
-
         this.theme = theme
+
+        val finalRadius = hypot(w.toFloat(), h.toFloat())
 
         val cX = centerX ?: w / 2
         val cY = centerY ?: h / 2
 
-        ViewAnimationUtils.createCircularReveal(screenImageView, cX, cY, finalRadius, 0f).apply {
+        animator = ViewAnimationUtils.createCircularReveal(screenImageView, cX, cY, finalRadius, 0f).apply {
             duration = 400L
+            doOnCancel {
+                screenImageView.setImageDrawable(null)
+                screenImageView.isVisible = false
+            }
             doOnEnd {
                 screenImageView.setImageDrawable(null)
                 screenImageView.isVisible = false
+                animator = null
             }
             start()
         }
