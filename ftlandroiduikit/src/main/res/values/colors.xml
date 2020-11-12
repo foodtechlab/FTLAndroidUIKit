@@ -179,8 +179,11 @@
     <color name="TextPinkDark">#EF3F63</color>
 
     <!--  Switch  -->
-    <color name="SwitchTrackEnableLight">#4DF2F2F2</color>
-    <color name="SwitchTrackEnableDark">#4D212121</color>
+    <color name="SwitchTrackEnableLight">#66E6E6E6</color>
+    <color name="SwitchTrackEnableDark">#663A3A3A</color>
+
+    <color name="SwitchTrackProgressLight">#66DE2222</color>
+    <color name="SwitchTrackProgressDark">#66DE2222</color>
 
     <!--  Link  -->
     <color name="LinkPrimaryLight">#039BE5</color>
@@ -289,12 +292,12 @@
 
     <!--  Shimmer  -->
     <color name="ShimmerBackgroundLight">#F6F6F6</color>
-    <color name="ShimmerBackgroundDark">#484848</color>
+    <color name="ShimmerBackgroundDark">#2D2D2D</color>
 
     <color name="ShimmerBaseLight">#F6F6F6</color>
-    <color name="ShimmerBaseDark">#484848</color>
+    <color name="ShimmerBaseDark">#2D2D2D</color>
 
     <color name="ShimmerHighlightingLight">#E5E5E5</color>
-    <color name="ShimmerHighlightingDark">#E5E5E5</color>
+    <color name="ShimmerHighlightingDark">#363636</color>
 
 </resources>

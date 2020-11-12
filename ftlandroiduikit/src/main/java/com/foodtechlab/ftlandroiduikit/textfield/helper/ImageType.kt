@@ -26,5 +26,7 @@ enum class ImageType(@DrawableRes val imgRes: Int) {
     MORE_DETAILS(R.drawable.ic_more_details),
     DOCS(R.drawable.ic_docs),
     NONE(-1),
-    PURSE(R.drawable.ic_purse)
+    PURSE(R.drawable.ic_purse),
+    KEY(R.drawable.ic_key),
+    LOCATION(R.drawable.ic_location_marker)
 }
