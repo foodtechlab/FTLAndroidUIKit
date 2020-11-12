@@ -368,6 +368,8 @@
             <enum name="DOCS" value="20" />
             <enum name="NONE" value="21" />
             <enum name="PURSE" value="22" />
+            <enum name="KEY" value="23" />
+            <enum name="LOCATION" value="24" />
         </attr>
         <attr name="imageBackgroundColor" format="color" />
         <attr name="imageColor" format="color" />

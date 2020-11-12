@@ -33,14 +33,14 @@ class FTLSwitch : SwitchCompat, ThemeManager.ThemeChangedListener {
     }
 
     @ColorInt
-    private var thumbOnColor = ContextCompat.getColor(context, R.color.PrimaryDangerEnabled)
+    private var thumbOnColor = ContextCompat.getColor(context, R.color.ButtonDangerEnableLight)
 
     @ColorInt
     private var thumbOffColor = ContextCompat.getColor(context, R.color.ButtonSecondaryEnableLight)
 
     @ColorInt
     private var trackOnColor =
-        ContextCompat.getColor(context, R.color.PrimaryDangerEnabledOpacity30)
+        ContextCompat.getColor(context, R.color.SwitchTrackProgressLight)
 
     @ColorInt
     private var trackOffColor =
@@ -48,7 +48,7 @@ class FTLSwitch : SwitchCompat, ThemeManager.ThemeChangedListener {
 
     @ColorInt
     private var highlightOnColor =
-        ContextCompat.getColor(context, R.color.PrimaryDangerEnabledOpacity30)
+        ContextCompat.getColor(context, R.color.SwitchTrackProgressLight)
 
     @ColorInt
     private var highlightOffColor =
@@ -63,17 +63,17 @@ class FTLSwitch : SwitchCompat, ThemeManager.ThemeChangedListener {
         context.withStyledAttributes(attrs, R.styleable.FTLSwitch) {
             thumbOnColor = getColor(
                 R.styleable.FTLSwitch_thumbAccentColor,
-                ContextCompat.getColor(context, R.color.PrimaryDangerEnabled)
+                ContextCompat.getColor(context, R.color.ButtonDangerEnableLight)
             )
 
             trackOnColor = getColor(
                 R.styleable.FTLSwitch_trackAccentColor,
-                ContextCompat.getColor(context, R.color.PrimaryDangerEnabledOpacity30)
+                ContextCompat.getColor(context, R.color.SwitchTrackProgressLight)
             )
 
             highlightOnColor = getColor(
                 R.styleable.FTLSwitch_highlightAccentColor,
-                ContextCompat.getColor(context, R.color.PrimaryDangerEnabledOpacity30)
+                ContextCompat.getColor(context, R.color.SwitchTrackProgressLight)
             )
         }
 
