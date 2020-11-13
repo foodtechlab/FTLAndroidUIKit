@@ -4,10 +4,12 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TableRow
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.common.FTLDivider
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 
 class FTLTableRow @JvmOverloads constructor(
@@ -40,7 +42,7 @@ class FTLTableRow @JvmOverloads constructor(
             tvEndColumn.text = field
         }
 
-    private var vDivider: View
+    private var vDivider: FTLDivider
 
     private var tvEndColumn: TextView
     private var tvStartColumn: TextView
@@ -74,6 +76,10 @@ class FTLTableRow @JvmOverloads constructor(
         ThemeManager.removeListener(this)
     }
 
+    /**
+     * Метод для обновления цветовой гаммы в соответствии с темой
+     * @param theme - тип темы приложения
+     */
     override fun onThemeChanged(theme: ThemeManager.Theme) {
         tvStartColumn.setTextColor(
             ContextCompat.getColor(context, theme.ftlTableRowTheme.startTextColor)
@@ -84,5 +90,23 @@ class FTLTableRow @JvmOverloads constructor(
         tvEndColumn.setTextColor(
             ContextCompat.getColor(context, theme.ftlTableRowTheme.endTextColor)
         )
+    }
+
+    /**
+     * Метод для конкатенации (объединения) столбцов в строке
+     * @param type - тип соединения строк
+     * START_AND_CENTER_COLUMNS - используется для объединения первого и второго столбца
+     * END_AND_CENTER_COLUMNS - используется для объединения третьего и второго столбца
+     * При объединении необходимо вносить данные в крайние столбцы.
+     */
+    fun concatenateColumns(type: ConcatenationType) {
+        tvCenterColumn.layoutParams =
+            TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0f)
+        when (type) {
+            ConcatenationType.START_AND_CENTER_COLUMNS -> tvStartColumn.layoutParams =
+                TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 3f)
+            else -> tvEndColumn.layoutParams =
+                TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 2f)
+        }
     }
 }

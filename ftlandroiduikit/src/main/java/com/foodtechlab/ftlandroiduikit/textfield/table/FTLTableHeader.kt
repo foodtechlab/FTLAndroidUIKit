@@ -12,6 +12,7 @@ import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.common.FTLDivider
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikit.util.changeColor
@@ -28,8 +29,8 @@ class FTLTableHeader @JvmOverloads constructor(
     private var tvSubtitle: TextView
     private var ivImageSlot: ImageView
     private var ivSwitch: ImageView
-    private var vTopDivider: View
-    private var vBottomDivider: View
+    private var vTopDivider: FTLDivider
+    private var vBottomDivider: FTLDivider
     private var rlContainer: RelativeLayout
 
     var headerTitle: String = ""

@@ -42,6 +42,8 @@ class FTLShimmerFrameLayout @JvmOverloads constructor(
                         theme.ftlShimmerFrameLayoutTheme.highlightingColor
                     )
                 )
+                .setBaseAlpha(1f)
+                .setHighlightAlpha(1f)
                 .build()
         )
     }
