@@ -6,11 +6,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <View
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
         android:id="@+id/vTopDivider"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/DividerPrimaryLight" />
+        android:layout_height="1dp" />
 
     <RelativeLayout
         android:id="@+id/rlContainer"
@@ -71,11 +70,10 @@
 
     </RelativeLayout>
 
-    <View
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
         android:id="@+id/vBottomDivider"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:layout_below="@id/rlContainer"
-        android:background="@color/DividerPrimaryLight" />
+        android:layout_below="@id/rlContainer" />
 
 </merge>
