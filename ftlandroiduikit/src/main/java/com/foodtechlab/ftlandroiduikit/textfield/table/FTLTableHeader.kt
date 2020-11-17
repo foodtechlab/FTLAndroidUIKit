@@ -46,10 +46,28 @@ class FTLTableHeader @JvmOverloads constructor(
         }
 
     var showSubtitle = false
+        set(value) {
+            if (field != value) {
+                field = value
+                initStateHeader()
+            }
+        }
 
     var isUnwrapped = false
+        set(value) {
+            if (field != value) {
+                field = value
+                changeStateHeader()
+            }
+        }
 
     var isDividersEnabled = false
+        set(value) {
+            if (field != value) {
+                field = value
+                initStateHeader()
+            }
+        }
 
     var imageType: ImageType = ImageType.CUSTOMER
         set(value) {
@@ -87,7 +105,7 @@ class FTLTableHeader @JvmOverloads constructor(
         rlContainer = findViewById(R.id.rlContainer)
 
         super.setOnClickListener {
-            changeStateHeader()
+            isUnwrapped = !isUnwrapped
             tableHeaderClickListener?.onSwitchClick(isUnwrapped)
         }
 
@@ -203,12 +221,9 @@ class FTLTableHeader @JvmOverloads constructor(
     }
 
     private fun changeStateHeader() {
-        ivSwitch.animate().rotation(if (isUnwrapped) 0f else 180f).start()
-        vBottomDivider.visibility
+        ivSwitch.animate().rotation(if (!isUnwrapped) 0f else 180f).start()
         if (!showSubtitle && isDividersEnabled) {
-            vBottomDivider.visibility = if (isUnwrapped) View.VISIBLE else View.INVISIBLE
+            vBottomDivider.visibility = if (!isUnwrapped) View.VISIBLE else View.INVISIBLE
         }
-
-        isUnwrapped = !isUnwrapped
     }
 }
