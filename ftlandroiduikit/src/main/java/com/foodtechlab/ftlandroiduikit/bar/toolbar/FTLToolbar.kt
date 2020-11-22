@@ -48,7 +48,7 @@ class FTLToolbar @JvmOverloads constructor(
         get() = tvAction.currentTextColor
         set(value) {
             tvAction.setTextColor(value)
-            actionDrawable?.changeColor(value)
+            actionDrawable?.mutate()?.changeColor(value)
         }
 
     var subtitleColor: Int
@@ -80,7 +80,7 @@ class FTLToolbar @JvmOverloads constructor(
     var startDrawable: Drawable?
         get() = ibStart.drawable
         set(value) {
-            value?.changeColor(
+            value?.mutate()?.changeColor(
                 ContextCompat.getColor(context, ThemeManager.theme.ftlToolbarTheme.startIconColor)
             )
             ibStart.setImageDrawable(value)
@@ -90,7 +90,7 @@ class FTLToolbar @JvmOverloads constructor(
     var endDrawable: Drawable?
         get() = ibEnd.drawable
         set(value) {
-            value?.changeColor(
+            value?.mutate()?.changeColor(
                 ContextCompat.getColor(context, ThemeManager.theme.ftlToolbarTheme.endIconColor)
             )
             ibEnd.setImageDrawable(value)
@@ -220,13 +220,13 @@ class FTLToolbar @JvmOverloads constructor(
                 theme.ftlToolbarTheme.bgColor
             )
         )
-        endDrawable?.changeColor(
+        endDrawable?.mutate()?.changeColor(
             ContextCompat.getColor(
                 context,
                 theme.ftlToolbarTheme.endIconColor
             )
         )
-        startDrawable?.changeColor(
+        startDrawable?.mutate()?.changeColor(
             ContextCompat.getColor(
                 context,
                 theme.ftlToolbarTheme.startIconColor
