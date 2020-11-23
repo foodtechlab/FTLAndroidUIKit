@@ -141,7 +141,7 @@ class FTLTableHeader @JvmOverloads constructor(
     }
 
     override fun onThemeChanged(theme: ThemeManager.Theme) {
-        ivSwitch.drawable?.changeColor(
+        ivSwitch.drawable?.mutate()?.changeColor(
             ContextCompat.getColor(
                 context,
                 theme.ftlTableHeaderTheme.switchIconColor
