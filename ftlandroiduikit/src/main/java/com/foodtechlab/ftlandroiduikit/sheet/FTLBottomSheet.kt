@@ -134,24 +134,27 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
     }
 
     override fun onThemeChanged(theme: ThemeManager.Theme) {
-        llContainer.backgroundTintList = ColorStateList.valueOf(
-            ContextCompat.getColor(
-                requireContext(),
-                theme.ftlBottomSheetTheme.bgColor
+        context?.let { ctx ->
+            llContainer.backgroundTintList = ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    ctx,
+                    theme.ftlBottomSheetTheme.bgColor
+                )
             )
-        )
-        vTop.backgroundTintList = ColorStateList.valueOf(
-            ContextCompat.getColor(
-                requireContext(),
-                theme.ftlBottomSheetTheme.bgColor
+            vTop.backgroundTintList = ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    ctx,
+                    theme.ftlBottomSheetTheme.bgColor
+                )
             )
-        )
-        tvMessage.setTextColor(
-            ContextCompat.getColor(
-                requireContext(),
-                theme.ftlBottomSheetTheme.messageColor
+            tvMessage.setTextColor(
+                ContextCompat.getColor(
+                    ctx,
+                    theme.ftlBottomSheetTheme.messageColor
+                )
             )
-        )
+        }
+
         removeListenersAndButtonsIfNeed()
         setupUI()
     }
