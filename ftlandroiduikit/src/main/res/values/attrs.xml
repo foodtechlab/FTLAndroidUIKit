@@ -370,6 +370,9 @@
             <enum name="PURSE" value="22" />
             <enum name="KEY" value="23" />
             <enum name="LOCATION" value="24" />
+            <enum name="PHONE" value="25" />
+            <enum name="MAP_PIN" value="26" />
+            <enum name="PIN_CODE" value="27" />
         </attr>
         <attr name="imageBackgroundColor" format="color" />
         <attr name="imageColor" format="color" />
