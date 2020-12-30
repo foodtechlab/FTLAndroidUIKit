@@ -373,6 +373,7 @@
             <enum name="PHONE" value="25" />
             <enum name="MAP_PIN" value="26" />
             <enum name="PIN_CODE" value="27" />
+            <enum name="RESTAURANT" value="28" />
         </attr>
         <attr name="imageBackgroundColor" format="color" />
         <attr name="imageColor" format="color" />
