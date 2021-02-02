@@ -3,4 +3,5 @@
     <color name="colorPrimary">#FFFFFF</color>
     <color name="colorPrimaryDark">#FFFFFF</color>
     <color name="colorAccent">#039BE5</color>
+    <color name="BackgroundStatusBar">#33000000</color>
 </resources>

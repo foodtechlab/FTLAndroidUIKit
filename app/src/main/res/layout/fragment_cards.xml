@@ -6,14 +6,10 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <TextView
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="@string/cardviews_description_ftl_cardview"
-        android:textColor="@color/OnBackgroundPrimary"
-        android:textSize="16sp" />
+        app:title_text="@string/cardviews_description_ftl_cardview" />
 
     <com.foodtechlab.ftlandroiduikit.card.FTLCardView
         android:id="@+id/cvContainer"
@@ -50,19 +46,13 @@
                 android:layout_alignParentStart="true"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <TextView
+            <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
                 android:id="@+id/tvNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_toStartOf="@id/tvTimeDelivery"
                 android:layout_toEndOf="@id/ivBrand"
-                android:fontFamily="@font/roboto_bold"
-                android:gravity="center_vertical"
-                android:minHeight="32dp"
-                android:text="@string/cardviews_name_test_order"
-                android:textColor="@color/OnBackgroundPrimary"
-                android:textSize="16sp" />
+                app:title_text="@string/cardviews_name_test_order" />
 
             <com.foodtechlab.ftlandroiduikit.textfield.FTLRouteTextView
                 android:id="@+id/tvRoute"

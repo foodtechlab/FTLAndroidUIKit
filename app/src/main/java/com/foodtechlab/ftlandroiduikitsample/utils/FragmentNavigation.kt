@@ -67,7 +67,6 @@ fun FragmentManager.attachFragment(
         }
 
         fragmentTransaction
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
             .setPrimaryNavigationFragment(fragment)
             .commit()
     }

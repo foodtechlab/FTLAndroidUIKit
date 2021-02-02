@@ -448,7 +448,6 @@
             <enum name="canceled" value="4" />
             <enum name="in_progress" value="5" />
             <enum name="in_progress_late" value="6" />
-            <enum name="actual_time" value="7" />
         </attr>
         <attr name="size" format="enum">
             <enum name="small" value="0" />
