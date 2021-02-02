@@ -6,9 +6,10 @@
     android:layout_height="wrap_content">
 
     <LinearLayout
+        android:id="@+id/ll_ftl_restaurant_marker_root"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/shape_ftl_restaurant_marker"
+        android:background="@drawable/shape_ftl_restaurant_marker_light"
         android:gravity="center"
         android:orientation="horizontal">
 
@@ -34,8 +35,8 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:layout_marginTop="3dp"
-                android:visibility="gone"
                 android:background="@drawable/shadow_marker_radial"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -50,6 +51,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
+                app:placeholder_dark="@drawable/ic_marker_restaurant_placeholder_dark"
                 tools:ignore="ContentDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

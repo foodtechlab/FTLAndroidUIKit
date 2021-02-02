@@ -8,6 +8,7 @@
     tools:background="@android:color/black">
 
     <View
+        android:id="@+id/v_top"
         android:layout_width="36dp"
         android:layout_height="5.71dp"
         android:layout_marginTop="9.81dp"
@@ -15,6 +16,7 @@
         android:background="@drawable/shape_rect_solid_white_round_2dp" />
 
     <LinearLayout
+        android:id="@+id/ll_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@drawable/shape_rect_solid_white_round_top_16dp"
@@ -69,6 +71,7 @@
                     android:textSize="16sp"
                     tools:text="К сожалению, сегодня вы запросили максимальное количество кодов доступа, ждем вас завтра. и тут еще очень много много много текста, должно быть, ниже сдублирую часть текста. К сожалению, сегодня вы запросили максимальное количество кодов доступа, ждем вас завтра" />
             </LinearLayout>
+
         </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>

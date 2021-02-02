@@ -1,7 +1,6 @@
 package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import android.widget.ImageView
@@ -12,18 +11,14 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.changeColor
 
 class FTLMultipleTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : LinearLayout(context, attrs, defStyle) {
-
-    private var tvTopStartSlot: TextView
-    private var tvTopEndSlot: TextView
-    private var tvBottomStartSlot: TextView
-    private var tvBottomEndSlot: TextView
-    private var ivImageSlot: ImageView
+) : LinearLayout(context, attrs, defStyle), ThemeManager.ThemeChangedListener {
 
     var imageType: ImageType = ImageType.CASH
         set(value) {
@@ -57,7 +52,7 @@ class FTLMultipleTextView @JvmOverloads constructor(
 
     @ColorInt
     var colorBottomEndSlot: Int =
-        ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
+        ContextCompat.getColor(context, R.color.TextOnColorAdditionalLight)
         set(value) {
             field = value
             tvBottomEndSlot.setTextColor(field)
@@ -65,7 +60,7 @@ class FTLMultipleTextView @JvmOverloads constructor(
 
     @ColorInt
     var colorBottomStartSlot: Int =
-        ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
+        ContextCompat.getColor(context, R.color.TextOnColorAdditionalLight)
         set(value) {
             field = value
             tvBottomStartSlot.setTextColor(field)
@@ -78,18 +73,25 @@ class FTLMultipleTextView @JvmOverloads constructor(
         }
 
     @ColorInt
-    var backgroundColorRes = ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+    var imageBackgroundColor = ContextCompat.getColor(context, R.color.IconBackgroundBlueLight)
         set(value) {
             field = value
-            ivImageSlot.backgroundTintList = ColorStateList.valueOf(field)
+            ivImageSlot.background?.changeColor(value)
         }
 
     @ColorInt
-    var imageColorRes = ContextCompat.getColor(context, R.color.BackgroundPrimary)
+    var imageColor = ContextCompat.getColor(context, R.color.IconPrimaryLight)
         set(value) {
             field = value
             ivImageSlot.setColorFilter(field)
         }
+
+    private var ivImageSlot: ImageView
+
+    private var tvTopEndSlot: TextView
+    private var tvTopStartSlot: TextView
+    private var tvBottomEndSlot: TextView
+    private var tvBottomStartSlot: TextView
 
     init {
         inflate(context, R.layout.layout_ftl_multiple_text_view, this)
@@ -111,21 +113,48 @@ class FTLMultipleTextView @JvmOverloads constructor(
             textBottomEndSlot = getString(R.styleable.FTLMultipleTextView_textBottomEndSlot) ?: ""
             colorBottomStartSlot = getColor(
                 R.styleable.FTLMultipleTextView_colorBottomStartSlot,
-                ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
+                ContextCompat.getColor(context, R.color.TextOnColorAdditionalLight)
             )
             colorBottomEndSlot = getColor(
                 R.styleable.FTLMultipleTextView_colorBottomEndSlot,
-                ContextCompat.getColor(context, R.color.OnSurfacePrimaryAdditionalDark)
+                ContextCompat.getColor(context, R.color.TextOnColorAdditionalLight)
             )
-            backgroundColorRes = getColor(
-                R.styleable.FTLMultipleTextView_backgroundColorRes,
-                ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+            imageBackgroundColor = getColor(
+                R.styleable.FTLMultipleTextView_imageBackgroundColor,
+                ContextCompat.getColor(context, R.color.IconBackgroundBlueLight)
             )
-            imageColorRes = getColor(
-                R.styleable.FTLMultipleTextView_imageColorRes,
-                ContextCompat.getColor(context, R.color.BackgroundPrimary)
+            imageColor = getColor(
+                R.styleable.FTLMultipleTextView_imageColor,
+                ContextCompat.getColor(context, R.color.IconPrimaryLight)
             )
         }
+
+        onThemeChanged(ThemeManager.theme)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        tvTopEndSlot.setTextColor(
+            ContextCompat.getColor(
+                context,
+                theme.ftlMultipleTextViewTheme.topSlotsColor
+            )
+        )
+        tvTopStartSlot.setTextColor(
+            ContextCompat.getColor(
+                context,
+                theme.ftlMultipleTextViewTheme.topSlotsColor
+            )
+        )
     }
 }
 

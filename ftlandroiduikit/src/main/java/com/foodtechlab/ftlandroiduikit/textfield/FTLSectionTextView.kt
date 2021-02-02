@@ -6,18 +6,20 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.isVisible
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.changeColor
 
 class FTLSectionTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : LinearLayout(context, attrs, defStyle) {
+) : LinearLayout(context, attrs, defStyle), ThemeManager.ThemeChangedListener {
 
     var textForSlot: String = ""
         set(value) {
@@ -32,29 +34,30 @@ class FTLSectionTextView @JvmOverloads constructor(
             if (value != ImageType.NONE) ivImageSlot.setImageResource(field.imgRes)
         }
 
-    @ColorInt
-    var backgroundColorRes = ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
-        set(value) {
-            field = value
-            ivImageSlot.backgroundTintList = ColorStateList.valueOf(field)
-        }
+    @ColorRes
+    private var imageBackgroundLightColor = R.color.IconBackgroundDefaultLight
 
-    @ColorInt
-    var imageColorRes = ContextCompat.getColor(context, R.color.BackgroundPrimary)
-        set(value) {
-            field = value
-            ivImageSlot.setColorFilter(field)
-        }
+    @ColorRes
+    private var imageBackgroundDarkColor = R.color.IconBackgroundDefaultDark
+
+    @ColorRes
+    private var imageLightColor = R.color.IconBlueLight
+
+    @ColorRes
+    private var imageDarkColor = R.color.IconBlueDark
 
     private var tvTextSlot: TextView
     private var ivImageSlot: ImageView
+    private var ivRightArrow: ImageView
 
     init {
         inflate(context, R.layout.layout_ftl_section_text_view, this)
 
         orientation = HORIZONTAL
+
         tvTextSlot = findViewById(R.id.tv_text_slot)
         ivImageSlot = findViewById(R.id.iv_image_slot)
+        ivRightArrow = findViewById(R.id.iv_right_arrow)
 
         context.withStyledAttributes(attrs, R.styleable.FTLDefaultTextView) {
             imageType = ImageType.values()[getInt(
@@ -62,16 +65,69 @@ class FTLSectionTextView @JvmOverloads constructor(
                 imageType.ordinal
             )]
             textForSlot = getString(R.styleable.FTLDefaultTextView_textForSlot) ?: ""
-            backgroundColorRes = getColor(
-                R.styleable.FTLDefaultTextView_backgroundColorRes,
-                ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+        }
+        onThemeChanged(ThemeManager.theme)
+        setWillNotDraw(false)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        tvTextSlot.setTextColor(
+            ContextCompat.getColor(
+                context,
+                theme.ftlSectionTextViewTheme.textColor
             )
-            imageColorRes = getColor(
-                R.styleable.FTLDefaultTextView_imageColorRes,
-                ContextCompat.getColor(context, R.color.BackgroundPrimary)
+        )
+        ivRightArrow.drawable.changeColor(
+            ContextCompat.getColor(
+                context,
+                theme.ftlSectionTextViewTheme.arrowColor
+            )
+        )
+
+        with(ivImageSlot) {
+            backgroundTintList = ColorStateList.valueOf(
+                ContextCompat.getColor(
+                    context,
+                    when (theme) {
+                        ThemeManager.Theme.LIGHT -> imageBackgroundLightColor
+                        ThemeManager.Theme.DARK -> imageBackgroundDarkColor
+                    }
+                )
+            )
+            drawable.changeColor(
+                ContextCompat.getColor(
+                    context,
+                    when (theme) {
+                        ThemeManager.Theme.LIGHT -> imageLightColor
+                        ThemeManager.Theme.DARK -> imageDarkColor
+                    }
+                )
             )
         }
+    }
 
-        setWillNotDraw(false)
+    fun updateImageBackgroundColors(
+        @ColorRes colorForLightTheme: Int,
+        @ColorRes colorForDarkTheme: Int
+    ) {
+        imageBackgroundLightColor = colorForLightTheme
+        imageBackgroundDarkColor = colorForDarkTheme
+        onThemeChanged(ThemeManager.theme)
+    }
+
+    fun updateImageColors(@ColorRes colorForLightTheme: Int, @ColorRes colorForDarkTheme: Int) {
+        imageLightColor = colorForLightTheme
+        imageDarkColor = colorForDarkTheme
+        onThemeChanged(ThemeManager.theme)
     }
 }
