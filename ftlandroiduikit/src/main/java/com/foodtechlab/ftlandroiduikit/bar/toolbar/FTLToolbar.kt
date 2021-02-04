@@ -115,6 +115,19 @@ class FTLToolbar @JvmOverloads constructor(
         }
 
     var networkState = NetworkConnectivityState.CONNECTED
+        set(value) {
+            field = value
+            tvConnectivity.apply {
+                setBackgroundColor(ContextCompat.getColor(context, value.color))
+                setText(value.message)
+                isVisible = true
+            }
+            if (value == NetworkConnectivityState.CONNECTED) {
+                postDelayed(hideNetworkConnectivityBar, 2500L)
+            } else {
+                removeCallbacks(hideNetworkConnectivityBar)
+            }
+        }
 
     private val hideNetworkConnectivityBar = Runnable { tvConnectivity.isGone = true }
 
@@ -285,22 +298,6 @@ class FTLToolbar @JvmOverloads constructor(
 
     fun showActionText() {
         showOnlyOneChildInEndContainer(tvAction.id)
-    }
-
-    fun setNetworkConnectivityState(state: NetworkConnectivityState) {
-        networkState = state
-
-        tvConnectivity.apply {
-            setBackgroundColor(ContextCompat.getColor(context, state.color))
-            setText(state.message)
-            isVisible = true
-        }
-
-        if (state == NetworkConnectivityState.CONNECTED) {
-            postDelayed(hideNetworkConnectivityBar, 2500L)
-        } else {
-            removeCallbacks(hideNetworkConnectivityBar)
-        }
     }
 
     private fun showOnlyOneChildInEndContainer(id: Int) {
