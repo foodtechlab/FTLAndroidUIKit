@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+<com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llShowRoomRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <com.foodtechlab.ftlandroiduikit.bar.toolbar.FTLToolbar
+        android:id="@+id/tbShowroom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ftlToolbar_start_icon="@drawable/ic_back"
+        app:ftlToolbar_title="@string/common_showroom" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tblShowroomCategories"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:tabIndicatorFullWidth="false"
-        android:background="@color/BackgroundPrimary"
         app:tabMode="scrollable"
         app:tabPaddingEnd="16dp"
         app:tabPaddingStart="16dp" />
@@ -18,7 +25,6 @@
     <androidx.viewpager.widget.ViewPager
         android:id="@+id/vpShowroomContent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/BackgroundSecondary"/>
+        android:layout_height="wrap_content" />
 
-</androidx.appcompat.widget.LinearLayoutCompat>
+</com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout>

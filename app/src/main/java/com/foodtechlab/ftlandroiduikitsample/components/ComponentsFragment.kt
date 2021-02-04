@@ -4,14 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
 import androidx.annotation.IntDef
 import androidx.fragment.app.Fragment
 import com.foodtechlab.ftlandroiduikit.button.timer.State
 import com.foodtechlab.ftlandroiduikit.sheet.*
 import com.foodtechlab.ftlandroiduikit.textfield.table.OnTableHeaderClickListener
 import com.foodtechlab.ftlandroiduikitsample.R
+import com.foodtechlab.ftlandroiduikitsample.utils.Utils.getColorForTheme
 import com.foodtechlab.ftlandroiduikitsample.utils.argument
 import kotlinx.android.synthetic.main.fragment_bottomsheet.*
 import kotlinx.android.synthetic.main.fragment_buttons.*
@@ -19,7 +18,9 @@ import kotlinx.android.synthetic.main.fragment_cards.*
 import kotlinx.android.synthetic.main.fragment_cards.tvRoute
 import kotlinx.android.synthetic.main.fragment_component.*
 import kotlinx.android.synthetic.main.fragment_edit_fields.*
+import kotlinx.android.synthetic.main.fragment_other.*
 import kotlinx.android.synthetic.main.fragment_table_fields.*
+import kotlinx.android.synthetic.main.fragment_text_fields.*
 import kotlinx.android.synthetic.main.fragment_times.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -45,7 +46,7 @@ class ComponentsFragment : Fragment() {
             EDIT_FIELDS -> initEditTexts()
             TABLE_FIELDS -> initTableComponents()
             CARDS -> initCards()
-            BOTTOMSHEETS -> initBottomsheets()
+            BOTTOMSHEETS -> initBottomSheets()
             OTHER -> initOther()
             else -> initTimesComponents()
         }
@@ -56,6 +57,24 @@ class ComponentsFragment : Fragment() {
             layoutResource = R.layout.fragment_other
             inflate()
         }
+        llOtherContainer.setBackgroundColor(
+            getColorForTheme(
+                R.color.SurfaceThirdDark,
+                R.color.SurfaceThirdLight
+            )
+        )
+        vOtherDivider1.setBackgroundColor(
+            getColorForTheme(
+                R.color.BackgroundSecondaryDark,
+                R.color.BackgroundSecondaryLight
+            )
+        )
+        vOtherDivider2.setBackgroundColor(
+            getColorForTheme(
+                R.color.BackgroundSecondaryDark,
+                R.color.BackgroundSecondaryLight
+            )
+        )
     }
 
     private fun initButtons() {
@@ -63,6 +82,36 @@ class ComponentsFragment : Fragment() {
             layoutResource = R.layout.fragment_buttons
             inflate()
         }
+        llButtonsContainer.setBackgroundColor(
+            getColorForTheme(
+                R.color.SurfaceThirdDark,
+                R.color.SurfaceThirdLight
+            )
+        )
+        vButtonsDivider1.setBackgroundColor(
+            getColorForTheme(
+                R.color.BackgroundSecondaryDark,
+                R.color.BackgroundSecondaryLight
+            )
+        )
+        vButtonsDivider2.setBackgroundColor(
+            getColorForTheme(
+                R.color.BackgroundSecondaryDark,
+                R.color.BackgroundSecondaryLight
+            )
+        )
+        vButtonsDivider3.setBackgroundColor(
+            getColorForTheme(
+                R.color.BackgroundSecondaryDark,
+                R.color.BackgroundSecondaryLight
+            )
+        )
+        vButtonsDivider4.setBackgroundColor(
+            getColorForTheme(
+                R.color.BackgroundSecondaryDark,
+                R.color.BackgroundSecondaryLight
+            )
+        )
 
         with(btnNew) {
             updateState(State.NEW)
@@ -95,6 +144,60 @@ class ComponentsFragment : Fragment() {
             layoutResource = R.layout.fragment_text_fields
             inflate()
         }
+        llTextFieldsContainer.setBackgroundColor(
+            getColorForTheme(
+                R.color.SurfaceThirdDark,
+                R.color.SurfaceThirdLight
+            )
+        )
+        vTextFieldsDivider1.setBackgroundColor(
+            getColorForTheme(
+                R.color.BackgroundSecondaryDark,
+                R.color.BackgroundSecondaryLight
+            )
+        )
+        vTextFieldsDivider2.setBackgroundColor(
+            getColorForTheme(
+                R.color.BackgroundSecondaryDark,
+                R.color.BackgroundSecondaryLight
+            )
+        )
+        vTextFieldsDivider3.setBackgroundColor(
+            getColorForTheme(
+                R.color.BackgroundSecondaryDark,
+                R.color.BackgroundSecondaryLight
+            )
+        )
+        vTextFieldsDivider4.setBackgroundColor(
+            getColorForTheme(
+                R.color.BackgroundSecondaryDark,
+                R.color.BackgroundSecondaryLight
+            )
+        )
+        vTextFieldsDivider5.setBackgroundColor(
+            getColorForTheme(
+                R.color.BackgroundSecondaryDark,
+                R.color.BackgroundSecondaryLight
+            )
+        )
+        with(tvMultiple) {
+            colorBottomStartSlot = getColorForTheme(
+                R.color.TextSuccessEnabledDark,
+                R.color.TextSuccessEnabledLight
+            )
+            imageBackgroundColor = getColorForTheme(
+                R.color.IconBackgroundOrangeDark,
+                R.color.IconBackgroundOrangeLight
+            )
+        }
+        tvExtendable.imageBackgroundColor = getColorForTheme(
+            R.color.IconBackgroundVioletDark,
+            R.color.IconBackgroundVioletLight
+        )
+        tvDoubleText.imageBackgroundColor = getColorForTheme(
+            R.color.IconBackgroundCyanDark,
+            R.color.IconBackgroundCyanLight
+        )
     }
 
     private fun initEditTexts() {
@@ -102,11 +205,21 @@ class ComponentsFragment : Fragment() {
             layoutResource = R.layout.fragment_edit_fields
             inflate()
         }
-
+        llEditFieldsContainer.setBackgroundColor(
+            getColorForTheme(
+                R.color.SurfaceThirdDark,
+                R.color.SurfaceThirdLight
+            )
+        )
+        vEditFieldsDivider.setBackgroundColor(
+            getColorForTheme(
+                R.color.BackgroundSecondaryDark,
+                R.color.BackgroundSecondaryLight
+            )
+        )
         scErrorOnCode.setOnCheckedChangeListener { _, isChecked ->
             etCode.isErrorEnabled = isChecked
         }
-
         scErrorOnDefault.setOnCheckedChangeListener { _, isChecked ->
             etDefault.isErrorEnabled = isChecked
         }
@@ -117,25 +230,35 @@ class ComponentsFragment : Fragment() {
             layoutResource = R.layout.fragment_table_fields
             inflate()
         }
+        llTableFieldsContainer.setBackgroundColor(
+            getColorForTheme(
+                R.color.SurfaceThirdDark,
+                R.color.SurfaceThirdLight
+            )
+        )
+        vTableFieldsDivider.setBackgroundColor(
+            getColorForTheme(
+                R.color.BackgroundSecondaryDark,
+                R.color.BackgroundSecondaryLight
+            )
+        )
         val positionAdapter = PositionItemRVAdapter()
         rvPositions.adapter = positionAdapter
         positionAdapter.update(
             arrayListOf(
-                ItemPosition("Товар 1", 10, 100.0),
-                ItemPosition("Товар 2", 5, 50.0),
-                ItemPosition("Товар 3", 15, 150.0)
+                ItemPosition(getString(R.string.common_positions_name), 10, 100.0),
+                ItemPosition(getString(R.string.common_positions_name), 5, 50.0),
+                ItemPosition(getString(R.string.common_positions_name), 15, 150.0)
             )
         )
-
         val paymentAdapter = PaymentItemRVAdapter()
         rvPaymentTypes.adapter = paymentAdapter
         paymentAdapter.update(
             arrayListOf(
-                ItemPayment(PaymentType.MONEY, "Оплата наличными", 100.0),
-                ItemPayment(PaymentType.ONLINE, "Оплата картой", 50.0)
+                ItemPayment(PaymentType.MONEY, getString(R.string.common_cash_payment), 100.0),
+                ItemPayment(PaymentType.ONLINE, getString(R.string.common_payment_online), 50.0)
             )
         )
-
         with(thPositions) {
             setRippleBackground(forButton = true)
             tableHeaderClickListener = object : OnTableHeaderClickListener {
@@ -144,7 +267,6 @@ class ComponentsFragment : Fragment() {
                 }
             }
         }
-
         with(thPaymentTypes) {
             setRippleBackground(forButton = false)
             tableHeaderClickListener = object : OnTableHeaderClickListener {
@@ -152,8 +274,8 @@ class ComponentsFragment : Fragment() {
                     hideTableRows(!thPaymentTypes.isUnwrapped, false)
                 }
             }
+            imageBackgroundColor = getColorForTheme(R.color.IconPinkDark, R.color.IconPinkLight)
         }
-
         hideTableRows(!thPositions.isUnwrapped, true)
         hideTableRows(!thPaymentTypes.isUnwrapped, false)
     }
@@ -164,50 +286,27 @@ class ComponentsFragment : Fragment() {
             inflate()
         }
         with(tvRoute) {
-            textAddressTo = "Волгоград, ул. им Рокоссовского д.62 кв./оф. 102 под.1 эт 24"
-            textAddressFrom = "Волгоград, ул. им Маршала Чуйкова д.37"
+            textAddressTo = getString(R.string.common_first_address)
+            textAddressFrom = getString(R.string.common_second_address)
             isBoldStyleAddressTo = false
         }
         tvTimeDelivery.deliveryTime = getHoursAndMinutesString(Calendar.getInstance().time)
     }
 
-    private fun initBottomsheets() {
+    private fun initBottomSheets() {
         with(vsComponentContainer) {
             layoutResource = R.layout.fragment_bottomsheet
             inflate()
         }
-        val bottomsheetTypes = arrayListOf(
-            "NONE",
-            Type.ISSUE.name,
-            Type.GEOLOCATION.name,
-            Type.SAD.name,
-            Type.WARNING.name,
-            Type.SUCCESS.name
-        )
-        val arrayAdapter = ArrayAdapter<String>(
-            requireContext(),
-            android.R.layout.simple_spinner_item,
-            bottomsheetTypes
-        )
-        with(snr) {
-            adapter = arrayAdapter
-            onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-                override fun onItemSelected(
-                    parent: AdapterView<*>?,
-                    view: View?,
-                    position: Int,
-                    id: Long
-                ) {
-                    when (position) {
-                        1 -> showBottomSheetDialog(Type.ISSUE)
-                        2 -> showBottomSheetDialog(Type.GEOLOCATION)
-                        3 -> showBottomSheetDialog(Type.SAD)
-                        4 -> showBottomSheetDialog(Type.WARNING)
-                        5 -> showBottomSheetDialog(Type.SUCCESS)
-                    }
-                }
-
-                override fun onNothingSelected(parent: AdapterView<*>?) {}
+        rgBottomSheetType.check(R.id.rbBottomSheetNone)
+        rgBottomSheetType.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.rbBottomSheetIssue -> showBottomSheetDialog(Type.ISSUE)
+                R.id.rbBottomSheetGeolocation -> showBottomSheetDialog(Type.GEOLOCATION)
+                R.id.rbBottomSheetSad -> showBottomSheetDialog(Type.SAD)
+                R.id.rbBottomSheetWarning -> showBottomSheetDialog(Type.WARNING)
+                R.id.rbBottomSheetSuccess -> showBottomSheetDialog(Type.SUCCESS)
+                else -> hideBottomSheetDialog()
             }
         }
     }
@@ -232,16 +331,26 @@ class ComponentsFragment : Fragment() {
         bottomSheetDialog?.show(childFragmentManager, FTLBottomSheet.TAG)
     }
 
+    private fun hideBottomSheetDialog() {
+        if (bottomSheetDialog?.isAdded == true) bottomSheetDialog?.dismiss()
+    }
+
 
     private fun initTimesComponents() {
         with(vsComponentContainer) {
             layoutResource = R.layout.fragment_times
             inflate()
         }
+        vTimesDivider.setBackgroundColor(
+            getColorForTheme(
+                R.color.BackgroundSecondaryDark,
+                R.color.BackgroundSecondaryLight
+            )
+        )
+
         val time = Calendar.getInstance().time
         dtvLargeUsual.deliveryTime = getHoursAndMinutesString(time)
         dtvLargeUrgent.deliveryTime = getHoursAndMinutesString(time)
-        dtvSmallActualTime.deliveryTime = getHoursAndMinutesString(time)
         dtvSmallCanceled.deliveryTime = getHoursAndMinutesString(time)
         dtvSmallDelivered.deliveryTime = getHoursAndMinutesString(time)
         dtvSmallDeliveredLate.deliveryTime = getHoursAndMinutesString(time)

@@ -313,8 +313,10 @@
         <attr name="textAddressTo" format="string" />
         <attr name="isBoldStyleAddressFrom" format="boolean" />
         <attr name="isBoldStyleAddressTo" format="boolean" />
-        <attr name="backgroundColorRes" />
-        <attr name="imageColorRes" />
+        <attr name="routeBackgroundColorLight" format="color" />
+        <attr name="routeItemsColorLight" format="color" />
+        <attr name="routeBackgroundColorDark" format="color" />
+        <attr name="routeItemsColorDark" format="color" />
     </declare-styleable>
 
     <declare-styleable name="FTLMultipleTextView" parent="FTLDefaultTextView">
@@ -325,8 +327,8 @@
         <attr name="textBottomEndSlot" format="string" />
         <attr name="colorBottomEndSlot" format="color" />
         <attr name="colorBottomStartSlot" format="color" />
-        <attr name="backgroundColorRes" />
-        <attr name="imageColorRes" />
+        <attr name="imageColor" />
+        <attr name="imageBackgroundColor" />
     </declare-styleable>
 
     <declare-styleable name="FTLExtendableTextView" parent="FTLDefaultTextView">
@@ -335,8 +337,8 @@
         <attr name="fullText" format="string" />
         <attr name="ellipsizedText" format="string" />
         <attr name="imageType" />
-        <attr name="backgroundColorRes" />
-        <attr name="imageColorRes" />
+        <attr name="imageBackgroundColor" />
+        <attr name="imageColor" />
     </declare-styleable>
 
     <declare-styleable name="FTLDefaultTextView">
@@ -355,54 +357,65 @@
             <enum name="FILE" value="9" />
             <enum name="SHIELD" value="10" />
             <enum name="INFO" value="11" />
-            <enum name="USER_PLACEHOLDER" value="12" />
-            <enum name="PLANE" value="13" />
-            <enum name="SETTINGS" value="14" />
-            <enum name="NOTIFICATIONS" value="15" />
-            <enum name="NAVIGATOR" value="16" />
-            <enum name="THEME" value="17" />
-            <enum name="ALL_PAID" value="18" />
-            <enum name="NOT_ALL_PAID" value="19" />
-            <enum name="MORE_DETAILS" value="20" />
-            <enum name="DOCS" value="21" />
-            <enum name="NONE" value="22" />
-            <enum name="PURSE" value="23" />
+            <enum name="PLANE" value="12" />
+            <enum name="SETTINGS" value="13" />
+            <enum name="NOTIFICATIONS" value="14" />
+            <enum name="NAVIGATOR" value="15" />
+            <enum name="THEME" value="16" />
+            <enum name="ALL_PAID" value="17" />
+            <enum name="NOT_ALL_PAID" value="18" />
+            <enum name="MORE_DETAILS" value="19" />
+            <enum name="DOCS" value="20" />
+            <enum name="NONE" value="21" />
+            <enum name="PURSE" value="22" />
+            <enum name="KEY" value="23" />
+            <enum name="LOCATION" value="24" />
+            <enum name="PHONE" value="25" />
+            <enum name="MAP_PIN" value="26" />
+            <enum name="PIN_CODE" value="27" />
+            <enum name="RESTAURANT" value="28" />
         </attr>
-        <attr name="backgroundColorRes" format="color" />
-        <attr name="imageColorRes" format="color" />
+        <attr name="imageBackgroundColor" format="color" />
+        <attr name="imageColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="FTLSectionTextView" parent="FTLDefaultTextView">
         <attr name="textForSlot" />
         <attr name="imageType" />
-        <attr name="backgroundColorRes" />
-        <attr name="imageColorRes" />
     </declare-styleable>
 
     <declare-styleable name="FTLToolbar">
         <attr name="ftlToolbar_title" format="string" />
         <attr name="ftlToolbar_subtitle" format="string" />
-        <attr name="ftlToolbar_title_color" format="color" />
-        <attr name="ftlToolbar_subtitle_color" format="color" />
+        <attr name="ftlToolbar_title_color_light" format="color" />
+        <attr name="ftlToolbar_title_color_dark" format="color" />
+        <attr name="ftlToolbar_subtitle_color_light" format="color" />
+        <attr name="ftlToolbar_subtitle_color_dark" format="color" />
         <attr name="ftlToolbar_shadow_visible" format="boolean" />
         <attr name="ftlToolbar_end_icon" format="reference" />
-        <attr name="ftlToolbar_logo_icon" format="reference" />
+        <attr name="ftlToolbar_logo_icon_light" format="reference" />
+        <attr name="ftlToolbar_logo_icon_dark" format="reference" />
         <attr name="ftlToolbar_start_icon" format="reference" />
-        <attr name="ftlToolbar_logo_placeholder" format="reference" />
+        <attr name="ftlToolbar_start_icon_color_light" format="color" />
+        <attr name="ftlToolbar_start_icon_color_dark" format="color" />
         <attr name="ftlToolbar_action_text" format="string" />
-        <attr name="ftlToolbar_action_color" format="color" />
+        <attr name="ftlToolbar_action_color_light" format="color" />
+        <attr name="ftlToolbar_action_color_dark" format="color" />
         <attr name="ftlToolbar_action_drawable" format="reference" />
     </declare-styleable>
 
     <declare-styleable name="FTLTitle">
         <attr name="title_text" format="string" />
         <attr name="subtitle_text" format="string" />
-        <attr name="title_color" format="color" />
-        <attr name="subtitle_color" format="color" />
+        <attr name="title_color_light" format="color" />
+        <attr name="subtitle_color_light" format="color" />
+        <attr name="title_color_dark" format="color" />
+        <attr name="subtitle_color_dark" format="color" />
     </declare-styleable>
 
     <declare-styleable name="FTLPlaceholderImageView">
-        <attr name="placeholder" format="reference" />
+        <attr name="placeholder_light" format="reference" />
+        <attr name="placeholder_dark" format="reference" />
         <attr name="border_width" format="dimension" />
         <attr name="border_color" format="color" />
         <attr name="border_overlay" format="boolean" />
@@ -415,8 +428,8 @@
         <attr name="imageType" />
         <attr name="showSubtitle" format="boolean" />
         <attr name="isDividersEnabled" format="boolean" />
-        <attr name="backgroundColorRes" />
-        <attr name="imageColorRes" />
+        <attr name="imageColor" />
+        <attr name="imageBackgroundColor" />
     </declare-styleable>
 
     <declare-styleable name="FTLTableRow">
@@ -435,7 +448,6 @@
             <enum name="canceled" value="4" />
             <enum name="in_progress" value="5" />
             <enum name="in_progress_late" value="6" />
-            <enum name="actual_time" value="7" />
         </attr>
         <attr name="size" format="enum">
             <enum name="small" value="0" />
@@ -482,8 +494,10 @@
     <declare-styleable name="FTLDotsProgress">
         <attr name="gap" format="dimension" />
         <attr name="dots_count" format="integer" />
-        <attr name="dot_color" format="color" />
-        <attr name="bounce_dot_color" format="color" />
+        <attr name="dot_color_dark" format="color" />
+        <attr name="dot_color_light" format="color" />
+        <attr name="bounce_dot_color_dark" format="color" />
+        <attr name="bounce_dot_color_light" format="color" />
         <attr name="dot_radius" format="dimension" />
         <attr name="dot_bounce_radius" format="dimension" />
         <attr name="animation_speed" format="integer" />
@@ -520,16 +534,12 @@
 
     <declare-styleable name="FTLRadioButton">
         <attr name="colorForStateChecked" format="color" />
-        <attr name="colorForStateUnchecked" format="color" />
     </declare-styleable>
 
     <declare-styleable name="FTLSwitch">
-        <attr name="thumbOnColor" format="color" />
-        <attr name="thumbOffColor" format="color" />
-        <attr name="trackOnColor" format="color" />
-        <attr name="trackOffColor" format="color" />
-        <attr name="highlightOnColor" format="color" />
-        <attr name="highlightOffColor" format="color" />
+        <attr name="thumbAccentColor" format="color" />
+        <attr name="trackAccentColor" format="color" />
+        <attr name="highlightAccentColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="FTLCircleProgressIndicator">
@@ -545,12 +555,9 @@
         <attr name="isBoldStyleForEndSlot" format="boolean" />
         <attr name="isVisibleImageSlot" format="boolean" />
         <attr name="imageType" />
-        <attr name="backgroundColorRes" />
-        <attr name="imageColorRes" />
     </declare-styleable>
 
     <declare-styleable name="FTLFloatingActionButton">
         <attr name="fabImageResource" format="reference" />
-        <attr name="fabBackgroundTintList" format="reference" />
     </declare-styleable>
 </resources>

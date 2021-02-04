@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:state_selected="true">
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <size android:width="40dp" android:height="40dp" />
+                    <corners android:radius="8dp" />
+                    <solid android:color="@color/ButtonDisableLight" />
+                </shape>
+            </item>
+            <item android:bottom="8dp" android:drawable="@drawable/ic_my_location_selected_light_24" android:gravity="center" android:left="8dp" android:right="8dp" android:top="8dp" />
+        </layer-list>
+    </item>
+
+    <item android:state_pressed="true">
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <size android:width="40dp" android:height="40dp" />
+                    <corners android:radius="8dp" />
+                    <solid android:color="@color/ButtonSecondaryPressedLight" />
+                </shape>
+            </item>
+            <item android:bottom="8dp" android:drawable="@drawable/ic_my_location_24" android:gravity="center" android:left="8dp" android:right="8dp" android:top="8dp" />
+        </layer-list>
+    </item>
+
+    <item>
+        <layer-list>
+            <item>
+                <shape android:shape="rectangle">
+                    <size android:width="40dp" android:height="40dp" />
+                    <corners android:radius="8dp" />
+                    <solid android:color="@color/ButtonSecondaryEnableLight" />
+                </shape>
+            </item>
+            <item android:bottom="8dp" android:drawable="@drawable/ic_my_location_24" android:gravity="center" android:left="8dp" android:right="8dp" android:top="8dp" />
+        </layer-list>
+    </item>
+
+</selector>

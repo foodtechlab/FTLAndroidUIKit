@@ -1,26 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llEditFieldsContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/BackgroundPrimary"
     android:orientation="vertical">
 
-    <TextView
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="@string/edit_fields_description_ftl_edit_text_default"
-        android:textColor="@color/OnBackgroundPrimary"
-        android:textSize="16sp" />
+        app:title_text="@string/edit_fields_description_ftl_edit_text_default" />
 
     <com.foodtechlab.ftlandroiduikit.textfield.FTLEditTextDefault
         android:id="@+id/etDefault"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:hint="Введите текст" />
+        app:hint="@string/edit_fields_enter_text" />
 
     <com.foodtechlab.ftlandroiduikit.switch.FTLSwitch
         android:id="@+id/scErrorOnDefault"
@@ -30,18 +26,15 @@
         android:text="@string/edit_fields_show_error" />
 
     <View
+        android:id="@+id/vEditFieldsDivider"
         android:layout_width="match_parent"
         android:layout_height="8dp"
         android:background="@color/OnSurfacePrimaryEnabled" />
 
-    <TextView
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="@string/edit_fields_description_ftl_auth_code_edit_text"
-        android:textColor="@color/OnBackgroundPrimary"
-        android:textSize="16sp" />
+        app:title_text="@string/edit_fields_description_ftl_auth_code_edit_text" />
 
     <com.foodtechlab.ftlandroiduikit.textfield.FTLAuthCodeEditText
         android:id="@+id/etCode"

@@ -2,10 +2,8 @@
     <string name="app_name">FTLAndroidUIKitSample</string>
 
     <string name="common_click">Click</string>
-
-    <string name="activity_main_input_email">Введите E-mail</string>
-    <string name="activity_main_input_phone">Введите номер</string>
-
+    <string name="common_showroom">Showroom</string>
+    <string name="common_playground">Playground</string>
     <string name="common_buttons">Buttons</string>
     <string name="common_text_fields">Text Fields</string>
     <string name="common_edit_fields">Edit Fields</string>
@@ -17,6 +15,11 @@
     <string name="common_ok">Ок</string>
     <string name="common_first_address">Волгоград, ул. им Рокоссовского д.62 кв./оф. 102 под.1 эт 24</string>
     <string name="common_second_address">Волгоград, ул. им Маршала Чуйкова д.37</string>
+    <string name="common_cash_payment">Оплата наличными</string>
+    <string name="common_payment_online">Оплата картой</string>
+    <string name="common_positions_name">Имя товара</string>
+
+    <string name="menu_theme">Установить темную тему</string>
 
     <string name="other_description_ftl_circle_progress">FTLCircleProgressIndicator различного типа</string>
     <string name="other_description_ftl_placeholder">FTLPlaceholderImageView</string>
@@ -36,11 +39,18 @@
     <string name="edit_fields_show_error">Отобразить состояние при ошибке</string>
     <string name="edit_fields_description_ftl_edit_text_default">FTLEditTextDefault</string>
     <string name="edit_fields_description_ftl_auth_code_edit_text">FTLAuthCodeEditText</string>
+    <string name="edit_fields_enter_text">Введите текст</string>
 
     <string name="table_fields_description_ftl_table_header">FTLTableHeader без Subtitle</string>
     <string name="table_fields_description_ftl_table_header_with_subtitle">FTLTableHeader с Subtitle</string>
 
     <string name="bottomsheets_description_ftl_bottomsheet">FTLDeliveryTimeView различного типа</string>
+    <string name="bottomsheets_type_none">NONE</string>
+    <string name="bottomsheets_type_issue">ISSUE</string>
+    <string name="bottomsheets_type_geolocation">GEOLOCATION</string>
+    <string name="bottomsheets_type_sad">SAD</string>
+    <string name="bottomsheets_type_warning">WARNING</string>
+    <string name="bottomsheets_type_success">SUCCESS</string>
 
     <string name="times_description_ftl_delivery_time_view">FTLDeliveryTimeView различного типа</string>
     <string name="times_description_ftl_delivery_timer_view">FTLDeliveryTimerView</string>

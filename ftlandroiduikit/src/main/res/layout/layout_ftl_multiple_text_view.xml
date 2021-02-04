@@ -3,15 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
 
     <ImageView
         android:id="@+id/iv_image_slot"
         android:layout_width="32dp"
         android:layout_height="32dp"
+        android:background="@drawable/shape_oval_solid_white"
         android:scaleType="centerCrop"
         app:srcCompat="@drawable/ic_money"
-        android:background="@drawable/shape_oval_solid_white"
         tools:ignore="ContentDescription" />
 
     <LinearLayout
@@ -33,7 +34,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto_regular"
                 android:lineSpacingExtra="8sp"
-                android:textColor="@color/OnSurfaceSecondary"
+                android:textColor="@color/TextPrimaryLight"
                 android:textSize="16sp"
                 tools:text="Наличными" />
 
@@ -44,7 +45,7 @@
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="end"
                 android:lineSpacingExtra="8sp"
-                android:textColor="@color/OnSurfaceSecondary"
+                android:textColor="@color/TextPrimaryLight"
                 android:textSize="16sp"
                 tools:text="1 000 Р" />
 
@@ -63,7 +64,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/roboto_regular"
                 android:lineSpacingExtra="2sp"
-                android:textColor="@color/OnSurfacePrimaryAdditionalDark"
+                android:textColor="@color/TextOnColorAdditionalLight"
                 android:textSize="12sp"
                 tools:text="Без сдачи" />
 
@@ -74,7 +75,7 @@
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="end"
                 android:lineSpacingExtra="2sp"
-                android:textColor="@color/OnSurfacePrimaryAdditionalDark"
+                android:textColor="@color/TextOnColorAdditionalLight"
                 android:textSize="12sp"
                 tools:text="Сумма: 1 000 Р" />
         </LinearLayout>

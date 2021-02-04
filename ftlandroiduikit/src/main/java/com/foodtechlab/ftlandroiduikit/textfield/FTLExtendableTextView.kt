@@ -1,46 +1,43 @@
 package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.Canvas
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.util.AttributeSet
-import android.view.View
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
-import androidx.core.view.marginBottom
-import androidx.core.view.marginLeft
-import androidx.core.view.marginStart
-import androidx.core.view.updateMargins
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.changeColor
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
+import kotlin.math.roundToInt
 
 
 class FTLExtendableTextView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : LinearLayout(context, attrs, defStyle) {
+) : LinearLayout(context, attrs, defStyle), ThemeManager.ThemeChangedListener {
 
-    private var tvTextSlot: TextView
-    private var ivImageSlot: ImageView
+    var isExpandText = false
+
     var collapseLines: Int = 3
+
     var ellipsizedText: String = ""
+
     var fullText: String = ""
         set(value) {
             field = value
             tvTextSlot.text = fullText
 
         }
-    var isExpandText = false
-
     var imageType: ImageType = ImageType.CASH
         set(value) {
             field = value
@@ -48,21 +45,27 @@ class FTLExtendableTextView @JvmOverloads constructor(
         }
 
     @ColorInt
-    var backgroundColorRes = ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+    var imageBackgroundColor = ContextCompat.getColor(context, R.color.IconBackgroundBlueLight)
         set(value) {
             field = value
-            ivImageSlot.backgroundTintList = ColorStateList.valueOf(field)
+            ivImageSlot.background?.changeColor(value)
         }
 
     @ColorInt
-    var imageColorRes = ContextCompat.getColor(context, R.color.BackgroundPrimary)
+    var imageColor = ContextCompat.getColor(context, R.color.IconPrimaryLight)
         set(value) {
             field = value
             ivImageSlot.setColorFilter(field)
         }
 
+    private var tvTextSlot: TextView
+    private var ivImageSlot: ImageView
+
     init {
         inflate(context, R.layout.layout_ftl_extendable_text_view, this)
+
+        orientation = HORIZONTAL
+
         tvTextSlot = findViewById(R.id.tv_text_slot)
         ivImageSlot = findViewById(R.id.iv_image_slot)
 
@@ -73,16 +76,51 @@ class FTLExtendableTextView @JvmOverloads constructor(
             collapseLines = getInt(R.styleable.FTLExtendableTextView_collapseLines, 3)
             ellipsizedText = getString(R.styleable.FTLExtendableTextView_ellipsizedText) ?: ""
             isExpandText = getBoolean(R.styleable.FTLExtendableTextView_isExpand, false)
-            backgroundColorRes = getColor(
-                R.styleable.FTLExtendableTextView_backgroundColorRes,
-                ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+            imageBackgroundColor = getColor(
+                R.styleable.FTLExtendableTextView_imageBackgroundColor,
+                imageBackgroundColor
             )
-            imageColorRes = getColor(
-                R.styleable.FTLExtendableTextView_imageColorRes,
-                ContextCompat.getColor(context, R.color.BackgroundPrimary)
+            imageColor = getColor(
+                R.styleable.FTLExtendableTextView_imageColor,
+                imageColor
             )
         }
+        onThemeChanged(ThemeManager.theme)
         setWillNotDraw(false)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        tvTextSlot.setTextColor(
+            ContextCompat.getColor(context, theme.ftlExtendableTextViewTheme.fullTextColor)
+        )
+        if (!isExpandText && tvTextSlot.lineCount >= collapseLines) {
+            val charsCount = tvTextSlot.layout.getLineStart(collapseLines)
+            setEllipsizedTextColor(charsCount)
+        }
+    }
+
+    override fun performClick(): Boolean {
+        setExpand(!isExpandText)
+        return super.performClick()
+    }
+
+    override fun onDraw(canvas: Canvas) {
+        super.onDraw(canvas)
+        if (tvTextSlot.lineCount == 1) {
+            val paddingTop = context.dpToPx(4f).roundToInt()
+            tvTextSlot.setPadding(0, paddingTop, 0, 0)
+        }
+        setExpand(isExpandText)
     }
 
     private fun setExpand(expand: Boolean) {
@@ -95,45 +133,27 @@ class FTLExtendableTextView @JvmOverloads constructor(
             if (tvTextSlot.lineCount >= collapseLines) {
                 val charsCount = tvTextSlot.layout.getLineStart(collapseLines)
                 if (charsCount > 0 && tvTextSlot.text.length > charsCount) {
-                    val endIndex = charsCount - ellipsizedText.length
-                    val shortText = fullText.subSequence(0, endIndex).toString()
-                    tvTextSlot.text = SpannableString(shortText.plus(ellipsizedText)).apply {
-                        setSpan(
-                            ForegroundColorSpan(
-                                ContextCompat.getColor(
-                                    context,
-                                    R.color.OnBackgroundSecondary
-                                )
-                            ),
-                            endIndex,
-                            endIndex + ellipsizedText.length,
-                            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-                        )
-                    }
+                    setEllipsizedTextColor(charsCount)
                 }
             }
         }
     }
 
-    private fun View.updateMargins(setMargin: Boolean) {
-        val lParams = layoutParams as LayoutParams
-        val marginTop = context.dpToPx(if (setMargin) 4f else 0f).toInt()
-        lParams.updateMargins(
-            marginStart,
-            marginTop,
-            marginLeft,
-            marginBottom
-        )
-        layoutParams = lParams
-    }
-
-    override fun performClick(): Boolean {
-        setExpand(!isExpandText)
-        return super.performClick()
-    }
-
-    override fun onDraw(canvas: Canvas) {
-        tvTextSlot.updateMargins(tvTextSlot.lineCount == 1)
-        setExpand(isExpandText)
+    private fun setEllipsizedTextColor(charsCount: Int) {
+        val endIndex = charsCount - ellipsizedText.length
+        val shortText = fullText.subSequence(0, endIndex).toString()
+        tvTextSlot.text = SpannableString(shortText.plus(ellipsizedText)).apply {
+            setSpan(
+                ForegroundColorSpan(
+                    ContextCompat.getColor(
+                        context,
+                        ThemeManager.theme.ftlExtendableTextViewTheme.ellipsizedTextColor
+                    )
+                ),
+                endIndex,
+                endIndex + ellipsizedText.length,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            )
+        }
     }
 }

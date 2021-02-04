@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llTableFieldsContainer"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/BackgroundPrimary"
     android:orientation="vertical">
 
-    <TextView
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="@string/table_fields_description_ftl_table_header"
-        android:textColor="@color/OnBackgroundPrimary"
-        android:textSize="16sp" />
+        app:title_text="@string/table_fields_description_ftl_table_header" />
 
     <com.foodtechlab.ftlandroiduikit.textfield.table.FTLTableHeader
         android:id="@+id/thPositions"
@@ -28,25 +24,20 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
     <View
+        android:id="@+id/vTableFieldsDivider"
         android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:background="@color/OnSurfacePrimaryEnabled" />
+        android:layout_height="8dp" />
 
-    <TextView
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:fontFamily="@font/roboto_medium"
-        android:text="@string/table_fields_description_ftl_table_header_with_subtitle"
-        android:textColor="@color/OnBackgroundPrimary"
-        android:textSize="16sp" />
+        app:title_text="@string/table_fields_description_ftl_table_header_with_subtitle" />
 
     <com.foodtechlab.ftlandroiduikit.textfield.table.FTLTableHeader
         android:id="@+id/thPaymentTypes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:headerSubtitle="Детализация"
-        app:backgroundColorRes="@color/AdditionalPink"
         app:headerTitle="Типы оплаты"
         app:imageType="NOT_ALL_PAID"
         app:showSubtitle="true" />

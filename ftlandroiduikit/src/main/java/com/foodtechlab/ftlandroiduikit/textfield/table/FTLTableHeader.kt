@@ -1,7 +1,6 @@
 package com.foodtechlab.ftlandroiduikit.textfield.table
 
 import android.content.Context
-import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.util.TypedValue
 import android.view.View
@@ -13,7 +12,10 @@ import androidx.annotation.ColorInt
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.common.FTLDivider
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.changeColor
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 
 
@@ -21,14 +23,14 @@ class FTLTableHeader @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : LinearLayout(context, attrs, defStyle) {
+) : LinearLayout(context, attrs, defStyle), ThemeManager.ThemeChangedListener {
 
     private var tvTitle: TextView
     private var tvSubtitle: TextView
     private var ivImageSlot: ImageView
     private var ivSwitch: ImageView
-    private var vTopDivider: View
-    private var vBottomDivider: View
+    private var vTopDivider: FTLDivider
+    private var vBottomDivider: FTLDivider
     private var rlContainer: RelativeLayout
 
     var headerTitle: String = ""
@@ -44,10 +46,28 @@ class FTLTableHeader @JvmOverloads constructor(
         }
 
     var showSubtitle = false
+        set(value) {
+            if (field != value) {
+                field = value
+                initStateHeader()
+            }
+        }
 
     var isUnwrapped = false
+        set(value) {
+            if (field != value) {
+                field = value
+                changeStateHeader()
+            }
+        }
 
     var isDividersEnabled = false
+        set(value) {
+            if (field != value) {
+                field = value
+                initStateHeader()
+            }
+        }
 
     var imageType: ImageType = ImageType.CUSTOMER
         set(value) {
@@ -58,14 +78,14 @@ class FTLTableHeader @JvmOverloads constructor(
     var tableHeaderClickListener: OnTableHeaderClickListener? = null
 
     @ColorInt
-    var backgroundColorRes = ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+    var imageBackgroundColor = ContextCompat.getColor(context, R.color.IconBackgroundBlueLight)
         set(value) {
             field = value
-            ivImageSlot.backgroundTintList = ColorStateList.valueOf(field)
+            ivImageSlot.background?.changeColor(value)
         }
 
     @ColorInt
-    var imageColorRes = ContextCompat.getColor(context, R.color.BackgroundPrimary)
+    var imageColor = ContextCompat.getColor(context, R.color.IconPrimaryLight)
         set(value) {
             field = value
             ivImageSlot.setColorFilter(field)
@@ -85,7 +105,7 @@ class FTLTableHeader @JvmOverloads constructor(
         rlContainer = findViewById(R.id.rlContainer)
 
         super.setOnClickListener {
-            changeStateHeader()
+            isUnwrapped = !isUnwrapped
             tableHeaderClickListener?.onSwitchClick(isUnwrapped)
         }
 
@@ -96,16 +116,56 @@ class FTLTableHeader @JvmOverloads constructor(
             isUnwrapped = getBoolean(R.styleable.FTLTableHeader_isUnwrapped, false)
             showSubtitle = getBoolean(R.styleable.FTLTableHeader_showSubtitle, false)
             isDividersEnabled = getBoolean(R.styleable.FTLTableHeader_isDividersEnabled, false)
-            backgroundColorRes = getColor(
-                R.styleable.FTLTableHeader_backgroundColorRes,
-                ContextCompat.getColor(context, R.color.AdditionalDarkBlue)
+            imageBackgroundColor = getColor(
+                R.styleable.FTLTableHeader_imageBackgroundColor,
+                ContextCompat.getColor(context, R.color.IconBackgroundBlueLight)
             )
-            imageColorRes = getColor(
-                R.styleable.FTLTableHeader_imageColorRes,
-                ContextCompat.getColor(context, R.color.BackgroundPrimary)
+            imageColor = getColor(
+                R.styleable.FTLTableHeader_imageColor,
+                ContextCompat.getColor(context, R.color.IconPrimaryLight)
             )
             initStateHeader()
         }
+
+        onThemeChanged(ThemeManager.theme)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        ivSwitch.drawable?.mutate()?.changeColor(
+            ContextCompat.getColor(
+                context,
+                theme.ftlTableHeaderTheme.switchIconColor
+            )
+        )
+        vTopDivider.setBackgroundColor(
+            ContextCompat.getColor(
+                context,
+                theme.ftlTableHeaderTheme.dividerColor
+            )
+        )
+        vBottomDivider.setBackgroundColor(
+            ContextCompat.getColor(
+                context,
+                theme.ftlTableHeaderTheme.dividerColor
+            )
+        )
+        tvTitle.setTextColor(ContextCompat.getColor(context, theme.ftlTableHeaderTheme.titleColor))
+        tvSubtitle.setTextColor(
+            ContextCompat.getColor(
+                context,
+                theme.ftlTableHeaderTheme.subtitleColor
+            )
+        )
     }
 
     private fun initStateHeader() {
@@ -161,12 +221,9 @@ class FTLTableHeader @JvmOverloads constructor(
     }
 
     private fun changeStateHeader() {
-        ivSwitch.animate().rotation(if (isUnwrapped) 0f else 180f).start()
-        vBottomDivider.visibility
+        ivSwitch.animate().rotation(if (!isUnwrapped) 0f else 180f).start()
         if (!showSubtitle && isDividersEnabled) {
-            vBottomDivider.visibility = if (isUnwrapped) View.VISIBLE else View.INVISIBLE
+            vBottomDivider.visibility = if (!isUnwrapped) View.VISIBLE else View.INVISIBLE
         }
-
-        isUnwrapped = !isUnwrapped
     }
 }
