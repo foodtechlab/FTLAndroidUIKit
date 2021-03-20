@@ -2,7 +2,6 @@ package com.foodtechlab.ftlandroiduikit.textfield
 
 import android.animation.ValueAnimator
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.Canvas
 import android.graphics.Paint
 import android.text.Editable
@@ -23,10 +22,7 @@ import androidx.core.view.marginBottom
 import androidx.core.view.marginTop
 import androidx.core.view.updateMargins
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.util.ThemeManager
-import com.foodtechlab.ftlandroiduikit.util.dpToPx
-import com.foodtechlab.ftlandroiduikit.util.openKeyboard
-import com.foodtechlab.ftlandroiduikit.util.spToPx
+import com.foodtechlab.ftlandroiduikit.util.*
 
 /**
  * Created by Umalt on 12.05.2020
@@ -43,21 +39,6 @@ class FTLEditTextDefault @JvmOverloads constructor(
             etInput.gravity = value
         }
 
-    private var scale = SCALE_MAX
-
-    private val isHintOnTop: Boolean
-        get() = etInput.hasFocus() || !etInput.text.isNullOrEmpty()
-
-    private val controlsColor: Int
-        get() = ContextCompat.getColor(
-            context, when {
-                isErrorEnabled -> ThemeManager.theme.ftlEditTextDefaultTheme.errorControlColor
-                !etInput.hasFocus() && !etInput.text.isNullOrEmpty() -> ThemeManager.theme.ftlEditTextDefaultTheme.defaultControlColor
-                isHintOnTop -> ThemeManager.theme.ftlEditTextDefaultTheme.activeControlColor
-                else -> ThemeManager.theme.ftlEditTextDefaultTheme.defaultControlColor
-            }
-        )
-
     var inputType: Int
         get() = etInput.inputType
         set(value) {
@@ -68,22 +49,6 @@ class FTLEditTextDefault @JvmOverloads constructor(
         get() = etInput.imeOptions
         set(value) {
             etInput.imeOptions = value
-        }
-
-    private var maxLength: Int
-        get() = (etInput.filters[0] as? InputFilter.LengthFilter)?.max ?: -1
-        set(value) {
-            etInput.filters = if (value >= 0) {
-                arrayOf(InputFilter.LengthFilter(value))
-            } else {
-                arrayOfNulls(0)
-            }
-        }
-
-    private var maxLines: Int
-        get() = etInput.maxLines
-        set(value) {
-            etInput.maxLines = value
         }
 
     var isErrorEnabled = false
@@ -102,6 +67,45 @@ class FTLEditTextDefault @JvmOverloads constructor(
         get() = etInput.text?.toString() ?: ""
         set(value) {
             etInput.setText(value)
+        }
+
+    var editorActionListener: TextView.OnEditorActionListener? = null
+        set(value) {
+            etInput.setOnEditorActionListener(value)
+            field = value
+        }
+
+    lateinit var etInput: AppCompatEditText
+
+    private var scale = SCALE_MAX
+
+    private val isHintOnTop: Boolean
+        get() = etInput.hasFocus() || !etInput.text.isNullOrEmpty()
+
+    private val controlsColor: Int
+        get() = ContextCompat.getColor(
+            context, when {
+                isErrorEnabled -> ThemeManager.theme.ftlEditTextDefaultTheme.errorControlColor
+                !etInput.hasFocus() && !etInput.text.isNullOrEmpty() -> ThemeManager.theme.ftlEditTextDefaultTheme.defaultControlColor
+                isHintOnTop -> ThemeManager.theme.ftlEditTextDefaultTheme.activeControlColor
+                else -> ThemeManager.theme.ftlEditTextDefaultTheme.defaultControlColor
+            }
+        )
+
+    private var maxLength: Int
+        get() = (etInput.filters[0] as? InputFilter.LengthFilter)?.max ?: -1
+        set(value) {
+            etInput.filters = if (value >= 0) {
+                arrayOf(InputFilter.LengthFilter(value))
+            } else {
+                arrayOfNulls(0)
+            }
+        }
+
+    private var maxLines: Int
+        get() = etInput.maxLines
+        set(value) {
+            etInput.maxLines = value
         }
 
     private val initialHintTextSize by lazy { context.spToPx(INITIAL_HINT_TEXT_SIZE) }
@@ -127,12 +131,6 @@ class FTLEditTextDefault @JvmOverloads constructor(
             field = value
         }
 
-    var editorActionListener: TextView.OnEditorActionListener? = null
-        set(value) {
-            etInput.setOnEditorActionListener(value)
-            field = value
-        }
-
     private var textWatcher: TextWatcher? = null
 
     private var focusChangeListener: OnFocusChangeListener? = null
@@ -140,7 +138,6 @@ class FTLEditTextDefault @JvmOverloads constructor(
     private var clickListener: OnClickListener? = null
 
     private val vUnderline: View
-    val etInput: AppCompatEditText
 
     init {
         inflate(context, R.layout.layout_ftl_edit_text_default, this)
@@ -192,6 +189,11 @@ class FTLEditTextDefault @JvmOverloads constructor(
         }
     }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
 
@@ -206,22 +208,17 @@ class FTLEditTextDefault @JvmOverloads constructor(
         vUnderline.y = (height - vUnderline.height).toFloat()
     }
 
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
     override fun setOnClickListener(l: OnClickListener?) {
         clickListener = l
     }
 
     override fun setOnFocusChangeListener(l: OnFocusChangeListener?) {
         focusChangeListener = l
-    }
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        ThemeManager.addListener(this)
-    }
-
-    override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
-        ThemeManager.removeListener(this)
     }
 
     override fun onThemeChanged(theme: ThemeManager.Theme) {
@@ -234,12 +231,20 @@ class FTLEditTextDefault @JvmOverloads constructor(
                 )
             )
         }
-        backgroundTintList = ColorStateList.valueOf(
+        background.changeColor(
             ContextCompat.getColor(
                 context,
                 theme.ftlEditTextDefaultTheme.bgColor
             )
         )
+    }
+
+    fun addTextChangedListener(watcher: TextWatcher) {
+        etInput.addTextChangedListener(watcher)
+    }
+
+    fun removeTextChangedListener(watcher: TextWatcher) {
+        etInput.removeTextChangedListener(watcher)
     }
 
     private fun Canvas.drawHint() {
@@ -314,17 +319,8 @@ class FTLEditTextDefault @JvmOverloads constructor(
         etInput.filters = filters
     }
 
-    fun addTextChangedListener(watcher: TextWatcher) {
-        etInput.addTextChangedListener(watcher)
-    }
-
-    fun removeTextChangedListener(watcher: TextWatcher) {
-        etInput.removeTextChangedListener(watcher)
-    }
-
     companion object {
         private const val ANIMATION_DURATION = 200L
-
         private const val SCALE_MAX = 1f
         private const val SCALE_MIN = .7f
         private const val MARGIN_HORIZONTAL = 16f
