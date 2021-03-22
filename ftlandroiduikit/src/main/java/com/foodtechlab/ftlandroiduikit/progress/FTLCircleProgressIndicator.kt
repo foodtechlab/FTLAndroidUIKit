@@ -10,7 +10,7 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
-
+import com.foodtechlab.ftlandroiduikit.util.changeColor
 
 class FTLCircleProgressIndicator @JvmOverloads constructor(
     context: Context,
@@ -18,14 +18,11 @@ class FTLCircleProgressIndicator @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : ConstraintLayout(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
 
-    private var vBackground: View
-    private var pbProgress: ProgressBar
-
     @ColorInt
     var progressBackgroundColor = ContextCompat.getColor(context, R.color.SurfaceFourthLight)
         private set(value) {
             field = value
-            vBackground.background.setTint(field)
+            vBackground.background.changeColor(field)
         }
 
     @ColorInt
@@ -41,6 +38,9 @@ class FTLCircleProgressIndicator @JvmOverloads constructor(
             vBackground.visibility = if (hideBackground) View.GONE else View.VISIBLE
         }
 
+    private var vBackground: View
+    private var pbProgress: ProgressBar
+
     init {
         inflate(context, R.layout.layout_ftl_progress, this)
 
@@ -52,8 +52,10 @@ class FTLCircleProgressIndicator @JvmOverloads constructor(
                 R.styleable.FTLCircleProgressIndicator_progressColor,
                 ContextCompat.getColor(context, R.color.ProgressPrimaryLight)
             )
-            hideBackground =
-                getBoolean(R.styleable.FTLCircleProgressIndicator_hideBackground, false)
+            hideBackground = getBoolean(
+                R.styleable.FTLCircleProgressIndicator_hideBackground,
+                false
+            )
         }
         onThemeChanged(ThemeManager.theme)
     }

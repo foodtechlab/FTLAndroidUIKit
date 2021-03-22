@@ -51,7 +51,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:placeholder_dark="@drawable/ic_marker_restaurant_placeholder_dark"
+                app:placeholder_dark="@drawable/ic_restaurant_placeholder_dark"
+                app:placeholder_light="@drawable/ic_restaurant_placeholder_light"
                 tools:ignore="ContentDescription" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </LinearLayout>

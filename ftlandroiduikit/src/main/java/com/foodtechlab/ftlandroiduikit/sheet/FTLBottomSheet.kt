@@ -2,7 +2,6 @@ package com.foodtechlab.ftlandroiduikit.sheet
 
 import android.app.Dialog
 import android.content.Context
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -18,6 +17,7 @@ import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.button.ButtonType
 import com.foodtechlab.ftlandroiduikit.button.FTLButton
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.changeColor
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
@@ -29,6 +29,8 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
     ThemeManager.ThemeChangedListener {
 
+    var behavior: BottomSheetBehavior<*>? = null
+
     private val dialogState by lazy {
         arguments?.getParcelable(KEY_DIALOG_STATE) ?: DialogState(
             title = "undefined",
@@ -37,18 +39,11 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
             buttons = emptyList()
         )
     }
-
     private var onClickListener: View.OnClickListener? = null
-
-    var behavior: BottomSheetBehavior<*>? = null
-
     private lateinit var ivImage: ImageView
-
     private lateinit var llContent: LinearLayout
     private lateinit var llContainer: LinearLayout
-
     private lateinit var vTop: View
-
     private lateinit var tvTitle: TextView
     private lateinit var tvMessage: TextView
 
@@ -103,16 +98,46 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
         return view
     }
 
+    override fun onDestroyView() {
+        removeListenersAndButtonsIfNeed()
+        onClickListener = null
+        super.onDestroyView()
+    }
+
     override fun onClick(v: View) {
         onClickListener?.onClick(v)
     }
 
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        context?.let { ctx ->
+            llContainer.background.changeColor(
+                ContextCompat.getColor(
+                    ctx,
+                    theme.ftlBottomSheetTheme.bgColor
+                )
+            )
+            vTop.background.changeColor(
+                ContextCompat.getColor(
+                    ctx,
+                    theme.ftlBottomSheetTheme.bgColor
+                )
+            )
+            tvMessage.setTextColor(
+                ContextCompat.getColor(
+                    ctx,
+                    theme.ftlBottomSheetTheme.messageColor
+                )
+            )
+        }
+
+        removeListenersAndButtonsIfNeed()
+        setupUI()
+    }
+
     private fun setupUI() {
         ivImage.setImageResource(dialogState.type.imgRes)
-
         tvTitle.text = dialogState.title
         tvMessage.text = dialogState.message
-
         context?.let { ctx ->
             dialogState.buttons.forEach {
                 val v = FTLButton(ctx).apply {
@@ -131,38 +156,6 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
                 v.setMarginTop()
             }
         }
-    }
-
-    override fun onThemeChanged(theme: ThemeManager.Theme) {
-        context?.let { ctx ->
-            llContainer.backgroundTintList = ColorStateList.valueOf(
-                ContextCompat.getColor(
-                    ctx,
-                    theme.ftlBottomSheetTheme.bgColor
-                )
-            )
-            vTop.backgroundTintList = ColorStateList.valueOf(
-                ContextCompat.getColor(
-                    ctx,
-                    theme.ftlBottomSheetTheme.bgColor
-                )
-            )
-            tvMessage.setTextColor(
-                ContextCompat.getColor(
-                    ctx,
-                    theme.ftlBottomSheetTheme.messageColor
-                )
-            )
-        }
-
-        removeListenersAndButtonsIfNeed()
-        setupUI()
-    }
-
-    override fun onDestroyView() {
-        removeListenersAndButtonsIfNeed()
-        onClickListener = null
-        super.onDestroyView()
     }
 
     private fun View.setMarginTop() {
@@ -187,8 +180,8 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
 
     companion object {
         const val TAG = "FTLBottomSheet"
-        private const val KEY_DIALOG_STATE = "key_dialog_state"
 
+        private const val KEY_DIALOG_STATE = "key_dialog_state"
         private const val BUTTON_MARGIN_TOP = 16f
 
         fun newInstance(dialogState: DialogState) = FTLBottomSheet().apply {
