@@ -4,20 +4,25 @@ import android.content.Context
 import android.util.AttributeSet
 import android.view.View
 import android.widget.LinearLayout
+import android.widget.TableRow
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.common.FTLDivider
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 
 class FTLTableRow @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : LinearLayout(context, attrs, defStyle) {
+) : LinearLayout(context, attrs, defStyle), ThemeManager.ThemeChangedListener {
 
-    private var tvStartColumn: TextView
-    private var tvCenterColumn: TextView
-    private var tvEndColumn: TextView
-    private var vDivider: View
+    var isLastRow = false
+        set(value) {
+            field = value
+            vDivider.visibility = if (value) View.GONE else View.VISIBLE
+        }
 
     var textForStartColumn: String = ""
         set(value) {
@@ -37,14 +42,15 @@ class FTLTableRow @JvmOverloads constructor(
             tvEndColumn.text = field
         }
 
-    var isLastRow = false
-        set(value) {
-            field = value
-            vDivider.visibility = if (value) View.GONE else View.VISIBLE
-        }
+    private var vDivider: FTLDivider
+
+    private var tvEndColumn: TextView
+    private var tvStartColumn: TextView
+    private var tvCenterColumn: TextView
 
     init {
         inflate(context, R.layout.layout_ftl_table_row, this)
+
         tvStartColumn = findViewById(R.id.tv_start_column)
         tvCenterColumn = findViewById(R.id.tv_center_column)
         tvEndColumn = findViewById(R.id.tv_end_column)
@@ -55,6 +61,52 @@ class FTLTableRow @JvmOverloads constructor(
             textForCenterColumn = getString(R.styleable.FTLTableRow_textForCenterColumn) ?: ""
             textForEndColumn = getString(R.styleable.FTLTableRow_textForEndColumn) ?: ""
             isLastRow = getBoolean(R.styleable.FTLTableRow_isLastRow, false)
+        }
+
+        onThemeChanged(ThemeManager.theme)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    /**
+     * Метод для обновления цветовой гаммы в соответствии с темой
+     * @param theme - тип темы приложения
+     */
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        tvStartColumn.setTextColor(
+            ContextCompat.getColor(context, theme.ftlTableRowTheme.startTextColor)
+        )
+        tvCenterColumn.setTextColor(
+            ContextCompat.getColor(context, theme.ftlTableRowTheme.centerTextColor)
+        )
+        tvEndColumn.setTextColor(
+            ContextCompat.getColor(context, theme.ftlTableRowTheme.endTextColor)
+        )
+    }
+
+    /**
+     * Метод для конкатенации (объединения) столбцов в строке
+     * @param type - тип соединения строк
+     * START_AND_CENTER_COLUMNS - используется для объединения первого и второго столбца
+     * END_AND_CENTER_COLUMNS - используется для объединения третьего и второго столбца
+     * При объединении необходимо вносить данные в крайние столбцы.
+     */
+    fun concatenateColumns(type: ConcatenationType) {
+        tvCenterColumn.layoutParams =
+            TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 0f)
+        when (type) {
+            ConcatenationType.START_AND_CENTER_COLUMNS -> tvStartColumn.layoutParams =
+                TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 3f)
+            else -> tvEndColumn.layoutParams =
+                TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT, 2f)
         }
     }
 }

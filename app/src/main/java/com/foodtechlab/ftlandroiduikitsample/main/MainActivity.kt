@@ -1,90 +1,55 @@
 package com.foodtechlab.ftlandroiduikitsample.main
 
+import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
-import com.foodtechlab.ftlandroiduikit.textfield.time.helper.DeliveryStatus
-import com.foodtechlab.ftlandroiduikit.textfield.time.helper.getMillis
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentTransaction
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikitsample.R
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.coroutines.*
-import kotlinx.coroutines.channels.ReceiveChannel
-import kotlinx.coroutines.channels.ticker
-import kotlin.coroutines.CoroutineContext
+import com.foodtechlab.ftlandroiduikitsample.menu.MenuFragment
+import com.foodtechlab.ftlandroiduikitsample.utils.Utils.updateBarColors
+import com.foodtechlab.ftlandroiduikitsample.utils.attachFragment
+import com.foodtechlab.ftlandroiduikitsample.utils.replaceFragment
 
-class MainActivity : AppCompatActivity(), CoroutineScope {
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + parentJob
+class MainActivity : AppCompatActivity(), OnNavigateListener {
 
-    private val parentJob = Job()
+    private val prefs: SharedPreferences by lazy {
+        getSharedPreferences(
+            "app_settings",
+            MODE_PRIVATE
+        )
+    }
 
-    private var timerJob: Job? = null
-
-    private var tickerChannel: ReceiveChannel<Unit>? = null
-
-    private val rvAdapter by lazy { TimersRVAdapter() }
-
-    private val list = arrayListOf<TimerItem>()
-
-    @ObsoleteCoroutinesApi
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        if (savedInstanceState == null) onNavigateExclusive(MenuFragment(), MenuFragment.TAG)
 
-        with(tv) {
-            backgroundColorRes = ContextCompat.getColor(context, R.color.AdditionalDarkGreen)
-        }
-
-        for (i in 0..40) {
-            list.add(
-                TimerItem(
-                    i,
-                    getMillis(
-                        "2020-08-26T16:00:00.001",
-                        "Europe/Samara"
-                    ) - System.currentTimeMillis()
-                )
-            )
-        }
-
-        rvAdapter.update(list)
-
-        initTimer()
+        ThemeManager.theme =
+            ThemeManager.Theme.values()[prefs.getInt("key_theme", ThemeManager.Theme.LIGHT.ordinal)]
+        window.updateBarColors()
     }
 
-    override fun onDestroy() {
-        parentJob.cancel()
-        tickerChannel?.cancel()
-        super.onDestroy()
+    /**
+     * Метод для навигации по фрагментам без чистки popBackStack,
+     * в случае если фрагмент будет найден по тегу к нему применится [FragmentTransaction.attach],
+     * в противном случае применится [FragmentTransaction.add]
+     */
+    override fun onNavigate(fragmentInstance: Fragment, tag: String?, isAddToBackStack: Boolean) {
+        supportFragmentManager.attachFragment(
+            R.id.flMainContainer,
+            fragmentInstance,
+            tag,
+            isAddToBackStack
+        )
     }
 
-    @ObsoleteCoroutinesApi
-    private fun initTimer() {
-        tickerChannel?.cancel()
-        tickerChannel =
-            ticker(delayMillis = 1000, initialDelayMillis = 0, context = coroutineContext)
-
-        timerJob?.let {
-            if (!it.isCancelled) {
-                it.cancel()
-            }
-        }
-
-        tickerChannel?.let { channel ->
-            timerJob = launch {
-                for (event in channel) {
-                    for (i in 0 until list.size) {
-                        list[i] = list[i].copy(
-                            remainedDuration = getMillis(
-                                "2020-08-26T16:00:00.001",
-                                "Europe/Samara"
-                            ) - System.currentTimeMillis()
-                        )
-                    }
-                    rvAdapter.update(list)
-                }
-            }
-        }
+    /**
+     * Метод для навигации по фрагментам с чисткой popBackStack
+     * и удалением предыдущих экземпляров фрагментов
+     */
+    override fun onNavigateExclusive(fragmentInstance: Fragment, tag: String?) {
+        supportFragmentManager.replaceFragment(R.id.flMainContainer, fragmentInstance, tag)
     }
 }

@@ -2,6 +2,7 @@ package com.foodtechlab.ftlandroiduikit.imageview
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.TypedArray
 import android.graphics.*
 import android.graphics.drawable.BitmapDrawable
 import android.graphics.drawable.ColorDrawable
@@ -19,6 +20,7 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import kotlin.math.min
 import kotlin.math.pow
 
@@ -26,15 +28,13 @@ class FTLPlaceholderImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : AppCompatImageView(context, attrs, defStyleAttr) {
+) : AppCompatImageView(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
 
-    private var drawableRadius = 0f
     private var borderRadius = 0f
+    private var drawableRadius = 0f
 
     private var initialized = false
-
     private var rebuildShader = false
-
     private var drawableDirty = false
 
     private var borderOverlay = false
@@ -103,7 +103,7 @@ class FTLPlaceholderImageView @JvmOverloads constructor(
         isDither = true
         isFilterBitmap = true
         alpha = imgAlpha
-        colorFilter = colorFilter
+        colorFilter = this@FTLPlaceholderImageView.colorFilter
     }
 
     private val placeholderBitmapPaint = Paint().apply {
@@ -111,7 +111,7 @@ class FTLPlaceholderImageView @JvmOverloads constructor(
         isDither = true
         isFilterBitmap = true
         alpha = imgAlpha
-        colorFilter = colorFilter
+        colorFilter = this@FTLPlaceholderImageView.colorFilter
     }
 
     private val borderPaint = Paint().apply {
@@ -135,17 +135,8 @@ class FTLPlaceholderImageView @JvmOverloads constructor(
 
     init {
         context.withStyledAttributes(attrs, R.styleable.FTLPlaceholderImageView) {
-            placeholder = when {
-                hasValue(R.styleable.FTLPlaceholderImageView_placeholder) ->
-                    ContextCompat.getDrawable(
-                        context,
-                        getResourceId(
-                            R.styleable.FTLPlaceholderImageView_placeholder,
-                            R.drawable.ic_restaurant_placeholder
-                        )
-                    )
-                else -> ContextCompat.getDrawable(context, R.drawable.ic_restaurant_placeholder)
-            }
+
+            setupPlaceholder()
 
             borderWidth = getDimensionPixelSize(
                 R.styleable.FTLPlaceholderImageView_border_width,
@@ -168,6 +159,41 @@ class FTLPlaceholderImageView @JvmOverloads constructor(
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             outlineProvider = OutlineProvider()
         }
+
+        onThemeChanged(ThemeManager.theme)
+    }
+
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
+    override fun onThemeChanged(theme: ThemeManager.Theme) {
+        bitmapPlaceholder = null
+        placeholder = ContextCompat.getDrawable(
+            context,
+            ThemeManager.theme.ftlPlaceholderImageViewTheme.placeholder
+        )
+    }
+
+    private fun TypedArray.setupPlaceholder() {
+        ThemeManager.Theme.LIGHT.ftlPlaceholderImageViewTheme.placeholder = getResourceId(
+            R.styleable.FTLPlaceholderImageView_placeholder_light,
+            ThemeManager.Theme.LIGHT.ftlPlaceholderImageViewTheme.placeholder
+        )
+        ThemeManager.Theme.DARK.ftlPlaceholderImageViewTheme.placeholder = getResourceId(
+            R.styleable.FTLPlaceholderImageView_placeholder_dark,
+            ThemeManager.Theme.DARK.ftlPlaceholderImageViewTheme.placeholder
+        )
+        placeholder = ContextCompat.getDrawable(
+            context,
+            ThemeManager.theme.ftlPlaceholderImageViewTheme.placeholder
+        )
     }
 
     override fun setScaleType(scaleType: ScaleType) {
@@ -294,9 +320,8 @@ class FTLPlaceholderImageView @JvmOverloads constructor(
     }
 
     override fun setColorFilter(cf: ColorFilter) {
-        if (cf === colorFilter) {
-            return
-        }
+        if (cf === colorFilter) return
+
         colorFilter = cf
 
         // This might be called during ImageView construction before
@@ -375,7 +400,6 @@ class FTLPlaceholderImageView @JvmOverloads constructor(
         }
         drawableRadius = min(drawableRect.height() / 2.0f, drawableRect.width() / 2.0f)
         updateShaderMatrix(bitmap ?: bitmapPlaceholder)
-//        updatePlaceholderShaderMatrix()
     }
 
     private fun calculateBounds(): RectF {

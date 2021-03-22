@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:title_text="@string/bottomsheets_description_ftl_bottomsheet" />
+
+    <RadioGroup
+        android:id="@+id/rgBottomSheetType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
+            android:id="@+id/rbBottomSheetNone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bottomsheets_type_none" />
+
+        <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
+            android:id="@+id/rbBottomSheetIssue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bottomsheets_type_issue" />
+
+        <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
+            android:id="@+id/rbBottomSheetGeolocation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bottomsheets_type_geolocation" />
+
+        <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
+            android:id="@+id/rbBottomSheetSad"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bottomsheets_type_sad" />
+
+        <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
+            android:id="@+id/rbBottomSheetWarning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bottomsheets_type_warning" />
+
+        <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
+            android:id="@+id/rbBottomSheetSuccess"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bottomsheets_type_success" />
+    </RadioGroup>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

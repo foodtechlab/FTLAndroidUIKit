@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llButtonsContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/buttons_description_ftl_button" />
+
+    <com.foodtechlab.ftlandroiduikit.button.FTLButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:ftlButton_text="primary"
+        app:ftlButton_type="primary" />
+
+    <com.foodtechlab.ftlandroiduikit.button.FTLButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:ftlButton_text="secondary"
+        app:ftlButton_type="secondary" />
+
+    <com.foodtechlab.ftlandroiduikit.button.FTLButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:ftlButton_text="cancel"
+        app:ftlButton_type="cancel" />
+
+    <com.foodtechlab.ftlandroiduikit.button.FTLButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:ftlButton_text="additional"
+        app:ftlButton_type="additional" />
+
+    <View
+        android:id="@+id/vButtonsDivider1"
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/buttons_description_ftl_fab" />
+
+    <com.foodtechlab.ftlandroiduikit.button.FTLFloatingActionButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:rippleColor="@null" />
+
+    <View
+        android:id="@+id/vButtonsDivider2"
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/buttons_description_ftl_image_button" />
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:type="replay_small" />
+
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:type="replay_medium" />
+
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:type="replay_large" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:type="location_small" />
+
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:type="location_medium" />
+
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:type="location_large" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:type="info_small" />
+
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:type="info_medium" />
+
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:type="info_large" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:type="navigator_small" />
+
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:type="navigator_medium" />
+
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:type="navigator_large" />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+    <View
+        android:id="@+id/vButtonsDivider3"
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/buttons_description_ftl_timer_button" />
+
+    <com.foodtechlab.ftlandroiduikit.button.timer.FTLTimerButton
+        android:id="@+id/btnNew"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:accompanyingText="NEW"
+        app:heightButton="48.0" />
+
+    <com.foodtechlab.ftlandroiduikit.button.timer.FTLTimerButton
+        android:id="@+id/btnReadyForDelivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:accompanyingText="READY_FOR_DELIVERY"
+        app:heightButton="48.0" />
+
+    <com.foodtechlab.ftlandroiduikit.button.timer.FTLTimerButton
+        android:id="@+id/btnInDelivery"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:accompanyingText="IN_DELIVERY"
+        app:heightButton="48.0" />
+
+    <View
+        android:id="@+id/vButtonsDivider4"
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/buttons_description_ftl_switchers" />
+
+    <com.foodtechlab.ftlandroiduikit.switch.FTLSwitch
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:text="@string/buttons_name_ftl_switch" />
+
+    <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/buttons_name_ftl_radio_button" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llEditFieldsContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/edit_fields_description_ftl_edit_text_default" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLEditTextDefault
+        android:id="@+id/etDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:hint="@string/edit_fields_enter_text" />
+
+    <com.foodtechlab.ftlandroiduikit.switch.FTLSwitch
+        android:id="@+id/scErrorOnDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/edit_fields_show_error" />
+
+    <View
+        android:id="@+id/vEditFieldsDivider"
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@color/OnSurfacePrimaryEnabled" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/edit_fields_description_ftl_auth_code_edit_text" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLAuthCodeEditText
+        android:id="@+id/etCode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="8dp"
+        android:digits="1234567890"
+        android:inputType="phone" />
+
+    <com.foodtechlab.ftlandroiduikit.switch.FTLSwitch
+        android:id="@+id/scErrorOnCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/edit_fields_show_error" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

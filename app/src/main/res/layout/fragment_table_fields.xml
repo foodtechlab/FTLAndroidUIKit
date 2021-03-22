@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llTableFieldsContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/table_fields_description_ftl_table_header" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.table.FTLTableHeader
+        android:id="@+id/thPositions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:headerTitle="Позиции заказа" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPositions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+    <View
+        android:id="@+id/vTableFieldsDivider"
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/table_fields_description_ftl_table_header_with_subtitle" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.table.FTLTableHeader
+        android:id="@+id/thPaymentTypes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:headerSubtitle="Детализация"
+        app:headerTitle="Типы оплаты"
+        app:imageType="NOT_ALL_PAID"
+        app:showSubtitle="true" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPaymentTypes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

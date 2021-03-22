@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llTextFieldsContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/text_fields_description_ftl_route_text_view" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLRouteTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:textAddressFrom="@string/common_first_address"
+        app:textAddressTo="@string/common_second_address" />
+
+    <View
+        android:id="@+id/vTextFieldsDivider1"
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/text_fields_description_ftl_default_text_view" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLDefaultTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:imageType="CUSTOMER"
+        app:textForSlot="@string/text_fields_user_bio" />
+
+    <View
+        android:id="@+id/vTextFieldsDivider2"
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/text_fields_description_ftl_section_text_view" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLSectionTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:imageType="INFO"
+        app:textForSlot="@string/text_fields_about_app" />
+
+    <View
+        android:id="@+id/vTextFieldsDivider3"
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/text_fields_description_ftl_multiple_text_view" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLMultipleTextView
+        android:id="@+id/tvMultiple"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:imageType="CASH"
+        app:textBottomEndSlot="@string/text_fields_amount"
+        app:textBottomStartSlot="@string/text_fields_not_changed"
+        app:textTopEndSlot="@string/text_fields_test_amount"
+        app:textTopStartSlot="@string/text_fields_cash" />
+
+    <View
+        android:id="@+id/vTextFieldsDivider4"
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/text_fields_description_ftl_extendable_text_view" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLExtendableTextView
+        android:id="@+id/tvExtendable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:collapseLines="4"
+        app:ellipsizedText="@string/text_fields_description_ftl_extendable_ellipsized_text"
+        app:fullText="@string/text_fields_description_ftl_extendable_full_text"
+        app:imageType="COMMENT" />
+
+    <View
+        android:id="@+id/vTextFieldsDivider5"
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/text_fields_description_ftl_double_text_view" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLDoubleTextView
+        android:id="@+id/tvDoubleText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:imageType="CARD_ONLINE"
+        app:isVisibleImageSlot="true"
+        app:textForEndSlot="@string/text_fields_test_amount"
+        app:textForStartSlot="@string/text_fields_total" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLDoubleTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:textForEndSlot="@string/text_fields_test_amount"
+        app:textForStartSlot="@string/text_fields_total" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

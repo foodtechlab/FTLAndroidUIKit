@@ -10,6 +10,7 @@ import android.util.TypedValue
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.annotation.ColorInt
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 
 /**
@@ -33,7 +34,7 @@ fun Context.spToPx(sp: Float): Float {
 }
 
 @Suppress("DEPRECATION")
-fun Drawable.changeColor(color: Int) {
+fun Drawable.changeColor(@ColorInt color: Int) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
         colorFilter = BlendModeColorFilter(color, BlendMode.SRC_IN)
     } else {

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/cardviews_description_ftl_cardview" />
+
+    <com.foodtechlab.ftlandroiduikit.card.FTLCardView
+        android:id="@+id/cvContainer"
+        style="@style/FTLCardViewStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:orientation="vertical">
+
+            <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+                android:id="@+id/btnDetails"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                app:type="info_small" />
+
+            <com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
+                android:id="@+id/tvTimeDelivery"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:layout_toStartOf="@id/btnDetails"
+                app:size="small" />
+
+            <com.foodtechlab.ftlandroiduikit.imageview.FTLPlaceholderImageView
+                android:id="@+id/ivBrand"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentStart="true"
+                tools:srcCompat="@tools:sample/avatars" />
+
+            <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+                android:id="@+id/tvNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toStartOf="@id/tvTimeDelivery"
+                android:layout_toEndOf="@id/ivBrand"
+                app:title_text="@string/cardviews_name_test_order" />
+
+            <com.foodtechlab.ftlandroiduikit.textfield.FTLRouteTextView
+                android:id="@+id/tvRoute"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvNum"
+                android:layout_marginTop="8dp" />
+
+        </RelativeLayout>
+
+    </com.foodtechlab.ftlandroiduikit.card.FTLCardView>
+
+</androidx.appcompat.widget.LinearLayoutCompat>

@@ -16,7 +16,6 @@ enum class ImageType(@DrawableRes val imgRes: Int) {
     FILE(R.drawable.ic_file),
     SHIELD(R.drawable.ic_shield),
     INFO(R.drawable.ic_data),
-    USER_PLACEHOLDER(R.drawable.ic_user_placeholder),
     PLANE(R.drawable.ic_plane),
     SETTINGS(R.drawable.ic_settings),
     NOTIFICATIONS(R.drawable.ic_notification),
@@ -27,5 +26,11 @@ enum class ImageType(@DrawableRes val imgRes: Int) {
     MORE_DETAILS(R.drawable.ic_more_details),
     DOCS(R.drawable.ic_docs),
     NONE(-1),
-    PURSE(R.drawable.ic_purse)
+    PURSE(R.drawable.ic_purse),
+    KEY(R.drawable.ic_key),
+    LOCATION(R.drawable.ic_location_marker),
+    PHONE(R.drawable.ic_telephone),
+    MAP_PIN(R.drawable.ic_map_pin),
+    PIN_CODE(R.drawable.ic_pin_code),
+    RESTAURANT(R.drawable.ic_restaurant)
 }

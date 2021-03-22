@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llOtherContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/other_description_ftl_marker" />
+
+    <com.foodtechlab.ftlandroiduikit.map.FTLRestaurantMarker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:isMultiBrandMarker="true"
+        app:textOrdersCount="999" />
+
+    <com.foodtechlab.ftlandroiduikit.map.FTLRestaurantMarker
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:textOrdersCount="1" />
+
+    <View
+        android:id="@+id/vOtherDivider1"
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/other_description_ftl_circle_progress" />
+
+    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:hideBackground="true"
+        app:progressColor="@color/AdditionalViolet" />
+
+    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp" />
+
+    <View
+        android:id="@+id/vOtherDivider2"
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/other_description_ftl_placeholder" />
+
+    <com.foodtechlab.ftlandroiduikit.imageview.FTLPlaceholderImageView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="8dp"
+        app:placeholder_dark="@drawable/ic_restaurant_placeholder_dark"
+        app:placeholder_light="@drawable/ic_restaurant_placeholder_light" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>
