@@ -43,7 +43,6 @@ class FTLTableRow @JvmOverloads constructor(
         }
 
     private var vDivider: FTLDivider
-
     private var tvEndColumn: TextView
     private var tvStartColumn: TextView
     private var tvCenterColumn: TextView
@@ -78,7 +77,7 @@ class FTLTableRow @JvmOverloads constructor(
 
     /**
      * Метод для обновления цветовой гаммы в соответствии с темой
-     * @param theme - тип темы приложения
+     * @param theme Тип темы приложения
      */
     override fun onThemeChanged(theme: ThemeManager.Theme) {
         tvStartColumn.setTextColor(
@@ -90,11 +89,12 @@ class FTLTableRow @JvmOverloads constructor(
         tvEndColumn.setTextColor(
             ContextCompat.getColor(context, theme.ftlTableRowTheme.endTextColor)
         )
+        vDivider.onThemeChanged(theme)
     }
 
     /**
      * Метод для конкатенации (объединения) столбцов в строке
-     * @param type - тип соединения строк
+     * @param type Тип соединения строк
      * START_AND_CENTER_COLUMNS - используется для объединения первого и второго столбца
      * END_AND_CENTER_COLUMNS - используется для объединения третьего и второго столбца
      * При объединении необходимо вносить данные в крайние столбцы.
