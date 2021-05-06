@@ -146,8 +146,8 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
                     val type = when (it.buttonType) {
                         PRIMARY_BUTTON -> ButtonType.PRIMARY
                         SECONDARY_BUTTON -> ButtonType.SECONDARY
-                        ADDITIONAL_BUTTON -> ButtonType.ADDITIONAL
-                        else -> ButtonType.CANCEL
+                        CANCEL_BUTTON -> ButtonType.CANCEL
+                        else -> ButtonType.ADDITIONAL
                     }
                     setButtonType(type)
                     setOnClickListener(this@FTLBottomSheet)

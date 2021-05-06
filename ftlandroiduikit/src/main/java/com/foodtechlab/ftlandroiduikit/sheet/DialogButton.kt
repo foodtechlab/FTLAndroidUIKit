@@ -36,7 +36,7 @@ class DialogState(
 class DialogButton(
     val id: Int,
     val title: String,
-    @ButtonType val buttonType: Int
+    @ButtonType val buttonType: Int = ADDITIONAL_BUTTON
 ) : Parcelable
 
 enum class Type(@DrawableRes val imgRes: Int) {
