@@ -1,11 +1,11 @@
 package com.foodtechlab.ftlandroiduikitsample.playground
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.foodtechlab.ftlandroiduikit.button.ButtonType
 import com.foodtechlab.ftlandroiduikit.button.FTLButton
 import com.foodtechlab.ftlandroiduikitsample.R
 import kotlinx.coroutines.CoroutineScope
@@ -20,6 +20,7 @@ class PlaygroundFragment : Fragment(), View.OnClickListener, CoroutineScope {
         get() = Dispatchers.Main
 
     lateinit var bSettings: FTLButton
+    lateinit var bNonSettings: FTLButton
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -32,7 +33,13 @@ class PlaygroundFragment : Fragment(), View.OnClickListener, CoroutineScope {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bSettings = view.findViewById(R.id.btn_settings)
-        bSettings.setOnClickListener(this)
+        bNonSettings = view.findViewById(R.id.btn_non_settings)
+        with(bSettings) {
+            setButtonType(ButtonType.ADDITIONAL)
+            isWrapContentOnHeight = true
+            setOnClickListener(this@PlaygroundFragment)
+        }
+        bNonSettings.setOnClickListener(this@PlaygroundFragment)
     }
 
     override fun onClick(v: View) {
@@ -42,6 +49,13 @@ class PlaygroundFragment : Fragment(), View.OnClickListener, CoroutineScope {
                     bSettings.setProgressVisibility(true)
                     delay(5000)
                     bSettings.setProgressVisibility(false)
+                }
+            }
+            R.id.btn_non_settings -> {
+                launch {
+                    bNonSettings.setProgressVisibility(true)
+                    delay(5000)
+                    bNonSettings.setProgressVisibility(false)
                 }
             }
         }
