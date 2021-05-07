@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import android.os.Parcel
 import android.os.Parcelable
 import android.util.AttributeSet
+import android.view.ViewTreeObserver
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
@@ -14,12 +15,12 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.isVisible
+import androidx.core.view.updateLayoutParams
 import androidx.transition.Fade
 import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLButtonDotsProgress
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
-
 
 /**
  * Created by Umalt on 23.06.2020
@@ -30,34 +31,29 @@ class FTLButton @JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : RelativeLayout(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
 
-    private val displayDensity = resources.displayMetrics.density
-
     var inProgress = false
-
-    @ColorRes
-    private var textColorRes = -1
-
-    private var backgroundDrawableLightRes: Drawable? = null
-    private var backgroundDrawableDarkRes: Drawable? = null
-
-    @ColorRes
-    private var dotColorRes = -1
-
-    @ColorRes
-    private var bounceDotColorRes = -1
-
+    var isWrapContentOnHeight = false
     var text: CharSequence?
         get() = tvText.text
         set(value) {
             tvText.text = value?.toString()
         }
 
+    @ColorRes
+    private var textColorRes = -1
+
+    @ColorRes
+    private var dotColorRes = -1
+
+    @ColorRes
+    private var bounceDotColorRes = -1
     private var buttonType = ButtonType.PRIMARY
-
-    private val fadeTransition = Fade().apply { duration = 200 }
-
+    private val displayDensity = resources.displayMetrics.density
+    private var backgroundDrawableLightRes: Drawable? = null
+    private var backgroundDrawableDarkRes: Drawable? = null
     private var clickListener: OnClickListener? = null
-
+    private var onPreDrawListener: ViewTreeObserver.OnPreDrawListener? = null
+    private val fadeTransition = Fade().apply { duration = 200 }
     private val tvText: TextView
     private val dotProgress: FTLButtonDotsProgress
 
@@ -90,11 +86,30 @@ class FTLButton @JvmOverloads constructor(
         super.onAttachedToWindow()
         ThemeManager.addListener(this)
         setProgressVisibility(inProgress)
+        onPreDrawListener?.let {
+            tvText.viewTreeObserver.removeOnPreDrawListener(it)
+        }
+        onPreDrawListener = ViewTreeObserver.OnPreDrawListener {
+            if (tvText.width > 0) {
+                dotProgress.updateLayoutParams {
+                    width = tvText.width
+                    height = tvText.height
+                }
+                if (isWrapContentOnHeight) {
+                    minimumHeight = tvText.height
+                }
+                tvText.viewTreeObserver.removeOnPreDrawListener(onPreDrawListener)
+            }
+            true
+        }
+        tvText.viewTreeObserver.addOnPreDrawListener(onPreDrawListener)
     }
 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         ThemeManager.removeListener(this)
+        tvText.viewTreeObserver.removeOnPreDrawListener(onPreDrawListener)
+        onPreDrawListener = null
     }
 
     override fun onThemeChanged(theme: ThemeManager.Theme) {
@@ -143,7 +158,7 @@ class FTLButton @JvmOverloads constructor(
             if (bounceDotColorRes != -1) bounceDotColorRes else bounceDotThemeColor
     }
 
-    override fun onSaveInstanceState(): Parcelable? =
+    override fun onSaveInstanceState(): Parcelable =
         SavedState(super.onSaveInstanceState()).apply {
             inProgress = this@FTLButton.inProgress
             textColorRes = this@FTLButton.textColorRes
@@ -165,51 +180,6 @@ class FTLButton @JvmOverloads constructor(
 
     override fun setOnClickListener(l: OnClickListener?) {
         clickListener = l
-    }
-
-    private fun updateViewState(
-        @ColorInt textColor: Int = -1,
-        @ColorInt dotColor: Int = -1,
-        @ColorInt bounceDotColor: Int = -1,
-        texColorStateList: ColorStateList? = null,
-        backgroundDrawableRes: Drawable? = null
-    ) {
-        background = backgroundDrawableRes ?: buttonType.background?.let {
-            ContextCompat.getDrawable(
-                context,
-                it
-            )
-        }
-
-        with(dotProgress) {
-            this.dotColor = if (dotColor != -1) {
-                dotColor
-            } else {
-                ContextCompat.getColor(context, buttonType.dotColor)
-            }
-
-            this.bounceDotColor = if (bounceDotColor != -1) {
-                bounceDotColor
-            } else {
-                ContextCompat.getColor(context, buttonType.bounceDotColor)
-            }
-        }
-
-        with(tvText) {
-            isAllCaps = buttonType.isAllCaps
-
-            textSize = buttonType.textSize
-
-            when {
-                texColorStateList != null -> setTextColor(texColorStateList)
-                textColor != -1 -> setTextColor(textColor)
-                else -> setTextColorFromType()
-            }
-
-            if (!isInEditMode) {
-                typeface = ResourcesCompat.getFont(context, buttonType.font)
-            }
-        }
     }
 
     fun setProgressVisibility(isVisible: Boolean) {
@@ -273,6 +243,51 @@ class FTLButton @JvmOverloads constructor(
                 context,
                 it
             )
+        }
+    }
+
+    private fun updateViewState(
+        @ColorInt textColor: Int = -1,
+        @ColorInt dotColor: Int = -1,
+        @ColorInt bounceDotColor: Int = -1,
+        texColorStateList: ColorStateList? = null,
+        backgroundDrawableRes: Drawable? = null
+    ) {
+        background = backgroundDrawableRes ?: buttonType.background?.let {
+            ContextCompat.getDrawable(
+                context,
+                it
+            )
+        }
+
+        with(dotProgress) {
+            this.dotColor = if (dotColor != -1) {
+                dotColor
+            } else {
+                ContextCompat.getColor(context, buttonType.dotColor)
+            }
+
+            this.bounceDotColor = if (bounceDotColor != -1) {
+                bounceDotColor
+            } else {
+                ContextCompat.getColor(context, buttonType.bounceDotColor)
+            }
+        }
+
+        with(tvText) {
+            isAllCaps = buttonType.isAllCaps
+
+            textSize = buttonType.textSize
+
+            when {
+                texColorStateList != null -> setTextColor(texColorStateList)
+                textColor != -1 -> setTextColor(textColor)
+                else -> setTextColorFromType()
+            }
+
+            if (!isInEditMode) {
+                typeface = ResourcesCompat.getFont(context, buttonType.font)
+            }
         }
     }
 
