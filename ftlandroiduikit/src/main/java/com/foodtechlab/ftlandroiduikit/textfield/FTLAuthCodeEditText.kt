@@ -29,22 +29,17 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
     defStyleAttr: Int = androidx.appcompat.R.attr.editTextStyle
 ) : AppCompatEditText(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
 
-    private val displayDensity = resources.displayMetrics.density
-
-    private val gap = DEFAULT_GAP * displayDensity
-
-    private var blink = false
-
-    private var charWidth = 0f
-
-    private var cursorStartX = paddingLeft.toFloat()
-
     var isErrorEnabled = false
         set(value) {
             field = value
             invalidate()
         }
 
+    private var blink = false
+    private val displayDensity = resources.displayMetrics.density
+    private val gap = DEFAULT_GAP * displayDensity
+    private var charWidth = 0f
+    private var cursorStartX = paddingLeft.toFloat()
     private var maxLength: Int
         get() = (filters[0] as? InputFilter.LengthFilter)?.max ?: -1
         set(value) {
@@ -63,24 +58,18 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
     )
 
     private val bgPath = Path()
-
     private val bgRect = RectF()
-
     private var charWidths: FloatArray
-
-    private val bgPaint by lazy {
-        Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.bgColor)
-        }
-    }
-
+    private var onClickListener: OnClickListener? = null
+    private var textWatcher: TextWatcher? = null
     private val linePaint = Paint(Paint.ANTI_ALIAS_FLAG)
-
     private val cursorPaint = Paint(Paint.ANTI_ALIAS_FLAG)
-
     private val textPaint by lazy {
         Paint(Paint.ANTI_ALIAS_FLAG).apply {
-            color = ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.textColor)
+            color = ContextCompat.getColor(
+                context,
+                ThemeManager.theme.ftlEditTextDefaultTheme.textColor
+            )
             textSize = context.spToPx(TEXT_SIZE)
             if (!isInEditMode) {
                 typeface = ResourcesCompat.getFont(context, R.font.roboto_regular)
@@ -88,9 +77,12 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
         }
     }
 
-    private var onClickListener: OnClickListener? = null
-
-    private var textWatcher: TextWatcher? = null
+    private val bgPaint by lazy {
+        Paint(Paint.ANTI_ALIAS_FLAG).apply {
+            color =
+                ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.bgColor)
+        }
+    }
 
     init {
         setBackgroundResource(0)
@@ -172,6 +164,16 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
         }, 300)
     }
 
+    override fun onAttachedToWindow() {
+        super.onAttachedToWindow()
+        ThemeManager.addListener(this)
+    }
+
+    override fun onDetachedFromWindow() {
+        super.onDetachedFromWindow()
+        ThemeManager.removeListener(this)
+    }
+
     override fun onDraw(canvas: Canvas) {
         val availableWidth = width - paddingStart - paddingEnd
 
@@ -205,28 +207,20 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
         onClickListener = l
     }
 
-    override fun addTextChangedListener(watcher: TextWatcher) {
-        textWatcher = watcher
-    }
-
     override fun setCustomSelectionActionModeCallback(actionModeCallback: ActionMode.Callback?) {
         throw RuntimeException("setCustomSelectionActionModeCallback() not supported.")
     }
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        ThemeManager.addListener(this)
-    }
-
-    override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
-        ThemeManager.removeListener(this)
-    }
-
     override fun onThemeChanged(theme: ThemeManager.Theme) {
-        bgPaint.color = ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.bgColor)
-        textPaint.color = ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.textColor)
+        bgPaint.color =
+            ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.bgColor)
+        textPaint.color =
+            ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.textColor)
         invalidate()
+    }
+
+    fun setTextWatcher(watcher: TextWatcher?) {
+        textWatcher = watcher
     }
 
     private fun Canvas.drawText(startX: Float, position: Int) {
@@ -250,15 +244,24 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
     private fun Canvas.drawUnderline(startX: Float, char: String?) {
         when {
             isErrorEnabled -> linePaint.apply {
-                color = ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.errorControlColor)
+                color = ContextCompat.getColor(
+                    context,
+                    ThemeManager.theme.ftlEditTextDefaultTheme.errorControlColor
+                )
                 strokeWidth = 2f * displayDensity
             }
             char.isNullOrEmpty() -> linePaint.apply {
-                color = ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.bgColor)
+                color = ContextCompat.getColor(
+                    context,
+                    ThemeManager.theme.ftlEditTextDefaultTheme.bgColor
+                )
                 strokeWidth = 0f
             }
             else -> linePaint.apply {
-                color = ContextCompat.getColor(context, ThemeManager.theme.ftlEditTextDefaultTheme.activeControlColor)
+                color = ContextCompat.getColor(
+                    context,
+                    ThemeManager.theme.ftlEditTextDefaultTheme.activeControlColor
+                )
                 strokeWidth = 2f * displayDensity
             }
         }
