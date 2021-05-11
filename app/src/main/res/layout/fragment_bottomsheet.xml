@@ -54,6 +54,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/bottomsheets_type_success" />
+
+        <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
+            android:id="@+id/rbBottomSheetCamera"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/bottomsheets_type_camera" />
     </RadioGroup>
 
 </androidx.appcompat.widget.LinearLayoutCompat>

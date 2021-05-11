@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="OnPrimary" >#FFFFFF</color>
+    <color name="OnPrimary">#FFFFFF</color>
     <color name="OnPrimaryLight">#99FFFFFF</color>
 
     <color name="Surface">#FFFFFF</color>
@@ -289,6 +289,9 @@
     <color name="IconBackgroundOrangeLight">#F57C00</color>
     <color name="IconBackgroundOrangeDark">#F57C00</color>
 
+    <!--  FTLBanner  -->
+    <color name="BannerBackgroundDefaultLight">#F5F5F5</color>
+    <color name="BannerBackgroundDefaultDark">#1E1E1E</color>
 
     <!--  Shimmer  -->
     <color name="ShimmerBackgroundLight">#F6F6F6</color>

@@ -12,6 +12,7 @@
     <string name="common_times">Times</string>
     <string name="common_bottomsheets">Bottomsheets</string>
     <string name="common_other">Other</string>
+    <string name="common_banner">Banner</string>
     <string name="common_ok">Ок</string>
     <string name="common_first_address">Волгоград, ул. им Рокоссовского д.62 кв./оф. 102 под.1 эт 24</string>
     <string name="common_second_address">Волгоград, ул. им Маршала Чуйкова д.37</string>
@@ -51,6 +52,7 @@
     <string name="bottomsheets_type_sad">SAD</string>
     <string name="bottomsheets_type_warning">WARNING</string>
     <string name="bottomsheets_type_success">SUCCESS</string>
+    <string name="bottomsheets_type_camera">CAMERA</string>
 
     <string name="times_description_ftl_delivery_time_view">FTLDeliveryTimeView различного типа</string>
     <string name="times_description_ftl_delivery_timer_view">FTLDeliveryTimerView</string>
@@ -76,4 +78,9 @@
 
     <string name="dialog_sad_title">Достигнут лимит по смс</string>
     <string name="dialog_sad_message">К сожалению, сегодня вы запросили максимальное количество кодов доступа, ждем вас завтра. и тут еще очень много текста, должно быть, ниже сдублирую часть текста. К сожалению, сегодня вы запросили максимальное количество кодов доступа, ждем вас завтра</string>
+
+    <string name="text_banner_full_title">FTLBanner c title и кнопками</string>
+    <string name="text_banner_full_description">Для изменения звука оповещения либо при наличии проблем с уведомлениями перейдите в настройки устройства</string>
+    <string name="text_banner_without_title_description">FTLBanner можно использовать без title</string>
+    <string name="text_banner_without_title_and_buttons_description">Можно также не указывать кнопки, в таком случае FTLBanner будет состоять только из description</string>
 </resources>

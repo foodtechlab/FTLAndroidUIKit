@@ -560,4 +560,9 @@
     <declare-styleable name="FTLFloatingActionButton">
         <attr name="fabImageResource" format="reference" />
     </declare-styleable>
+
+    <declare-styleable name="FTLBanner">
+        <attr name="title" format="string" />
+        <attr name="description" format="string" />
+    </declare-styleable>
 </resources>

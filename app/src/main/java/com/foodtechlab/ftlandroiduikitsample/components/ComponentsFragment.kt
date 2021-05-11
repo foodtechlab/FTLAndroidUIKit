@@ -6,12 +6,20 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IntDef
 import androidx.fragment.app.Fragment
+import com.foodtechlab.ftlandroiduikit.button.FTLButton
 import com.foodtechlab.ftlandroiduikit.button.timer.State
+import com.foodtechlab.ftlandroiduikit.common.DialogButton
+import com.foodtechlab.ftlandroiduikit.common.DialogState
+import com.foodtechlab.ftlandroiduikit.common.SECONDARY_BUTTON
+import com.foodtechlab.ftlandroiduikit.common.Type
 import com.foodtechlab.ftlandroiduikit.sheet.*
+import com.foodtechlab.ftlandroiduikit.snackbar.top.FTLSnackbar
 import com.foodtechlab.ftlandroiduikit.textfield.table.OnTableHeaderClickListener
 import com.foodtechlab.ftlandroiduikitsample.R
 import com.foodtechlab.ftlandroiduikitsample.utils.Utils.getColorForTheme
 import com.foodtechlab.ftlandroiduikitsample.utils.argument
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.android.synthetic.main.fragment_banner.*
 import kotlinx.android.synthetic.main.fragment_bottomsheet.*
 import kotlinx.android.synthetic.main.fragment_buttons.*
 import kotlinx.android.synthetic.main.fragment_cards.*
@@ -19,6 +27,7 @@ import kotlinx.android.synthetic.main.fragment_cards.tvRoute
 import kotlinx.android.synthetic.main.fragment_component.*
 import kotlinx.android.synthetic.main.fragment_edit_fields.*
 import kotlinx.android.synthetic.main.fragment_other.*
+import kotlinx.android.synthetic.main.fragment_other.llOtherContainer
 import kotlinx.android.synthetic.main.fragment_table_fields.*
 import kotlinx.android.synthetic.main.fragment_text_fields.*
 import kotlinx.android.synthetic.main.fragment_times.*
@@ -48,9 +57,62 @@ class ComponentsFragment : Fragment() {
             CARDS -> initCards()
             BOTTOMSHEETS -> initBottomSheets()
             OTHER -> initOther()
+            BANNER -> initBanner()
             else -> initTimesComponents()
         }
     }
+
+    private fun initBanner() {
+        with(vsComponentContainer) {
+            layoutResource = R.layout.fragment_banner
+            inflate()
+        }
+        with(bnrFirst) {
+            setOnClickBannerListener { v ->
+                if (v is FTLButton) {
+                    FTLSnackbar.make(clBannerContainer, v.text.toString(), Snackbar.LENGTH_LONG)
+                        ?.show()
+                }
+            }
+            addButtons(
+                listOf(
+                    DialogButton(
+                        3333,
+                        "Кнопка 1"
+                    ),
+                    DialogButton(
+                        3334,
+                        "Кнопка 2"
+                    ),
+                    DialogButton(
+                        3335,
+                        "Кнопка 3"
+                    )
+                )
+            )
+        }
+        with(bnrSecond) {
+            setOnClickBannerListener { v ->
+                if (v is FTLButton) {
+                    FTLSnackbar.make(clBannerContainer, v.text.toString(), Snackbar.LENGTH_LONG)
+                        ?.show()
+                }
+            }
+            addButtons(
+                listOf(
+                    DialogButton(
+                        3336,
+                        "Кнопка 4"
+                    ),
+                    DialogButton(
+                        3337,
+                        "Кнопка 5"
+                    )
+                )
+            )
+        }
+    }
+
 
     private fun initOther() {
         with(vsComponentContainer) {
@@ -306,6 +368,7 @@ class ComponentsFragment : Fragment() {
                 R.id.rbBottomSheetSad -> showBottomSheetDialog(Type.SAD)
                 R.id.rbBottomSheetWarning -> showBottomSheetDialog(Type.WARNING)
                 R.id.rbBottomSheetSuccess -> showBottomSheetDialog(Type.SUCCESS)
+                R.id.rbBottomSheetCamera -> showBottomSheetDialog(Type.CAMERA)
                 else -> hideBottomSheetDialog()
             }
         }
@@ -405,6 +468,7 @@ class ComponentsFragment : Fragment() {
         const val TIMES = 5
         const val BOTTOMSHEETS = 6
         const val OTHER = 7
+        const val BANNER = 8
         const val TYPE_ID = "TYPE_ID"
 
         @IntDef(BUTTONS, TEXT_FIELDS, EDIT_FIELDS, TABLE_FIELDS, CARDS, TIMES, BOTTOMSHEETS, OTHER)
