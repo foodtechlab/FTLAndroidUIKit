@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 apply from: 'install.gradle'
 apply from: 'bintray.gradle'
+apply from: 'nexus.gradle'
 
 android {
     compileSdkVersion 30
