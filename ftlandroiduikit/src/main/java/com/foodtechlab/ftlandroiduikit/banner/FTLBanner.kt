@@ -2,15 +2,17 @@ package com.foodtechlab.ftlandroiduikit.banner
 
 import android.content.Context
 import android.util.AttributeSet
+import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
+import androidx.core.view.*
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.button.ButtonType
 import com.foodtechlab.ftlandroiduikit.button.FTLButton
-import com.foodtechlab.ftlandroiduikit.sheet.DialogButton
+import com.foodtechlab.ftlandroiduikit.common.DialogButton
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import com.google.android.material.card.MaterialCardView
@@ -29,11 +31,9 @@ class FTLBanner @JvmOverloads constructor(
     var title: String? = null
         set(value) {
             field = value
-            field?.let {
-                with(tvTitle) {
-                    text = field
-                    visibility = View.VISIBLE
-                }
+            with(tvTitle) {
+                field?.let { text = it }
+                visibility = if (field == null) View.GONE else View.VISIBLE
             }
         }
 
@@ -57,11 +57,11 @@ class FTLBanner @JvmOverloads constructor(
         tvTitle = findViewById(R.id.tv_ftl_banner_title)
         tvDescription = findViewById(R.id.tv_ftl_banner_description)
         llContainer = findViewById(R.id.ll_ftl_banner_container)
+        radius = context.dpToPx(CARD_RADIUS_DEFAULT)
+        cardElevation = context.dpToPx(CARD_ELEVATION_DEFAULT)
         context.withStyledAttributes(attrs, R.styleable.FTLBanner) {
             title = getString(R.styleable.FTLBanner_title)
             description = getString(R.styleable.FTLBanner_description) ?: ""
-            radius = context.dpToPx(CARD_RADIUS_DEFAULT)
-            cardElevation = context.dpToPx(CARD_ELEVATION_DEFAULT)
         }
         onThemeChanged(ThemeManager.theme)
     }
@@ -94,15 +94,22 @@ class FTLBanner @JvmOverloads constructor(
      * В данном компоненте используется только один тип кнопок [ButtonType.ADDITIONAL].
      */
     fun addButtons(buttons: List<DialogButton>) {
-        buttons.forEach {
+        buttons.forEachIndexed { index, btn ->
             val v = FTLButton(context).apply {
-                id = it.id
-                text = it.title
+                id = btn.id
+                text = btn.title
+                isWrapContentOnHeight = true
                 setButtonType(ButtonType.ADDITIONAL)
                 setOnClickListener(this@FTLBanner)
             }
-            llContainer.addView(v)
-            //  v.setMarginTop()
+            val params = LinearLayout.LayoutParams(
+                LayoutParams.WRAP_CONTENT,
+                LayoutParams.WRAP_CONTENT
+            ).apply {
+                gravity = Gravity.END
+            }
+            llContainer.addView(v, params)
+            if (index != 0) v.setMarginTop()
         }
     }
 
@@ -115,8 +122,19 @@ class FTLBanner @JvmOverloads constructor(
         onClickBannerListener = clickListener
     }
 
+    private fun View.setMarginTop() {
+        val lParams = layoutParams as LinearLayout.LayoutParams
+        lParams.updateMargins(
+            marginLeft,
+            context?.dpToPx(BUTTON_MARGIN_TOP)?.toInt() ?: marginTop,
+            marginEnd,
+            marginBottom
+        )
+    }
+
     companion object {
         private const val CARD_RADIUS_DEFAULT = 8f
         private const val CARD_ELEVATION_DEFAULT = 0F
+        private const val BUTTON_MARGIN_TOP = 4f
     }
 }
