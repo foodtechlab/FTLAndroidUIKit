@@ -33,6 +33,11 @@ class FTLButton @JvmOverloads constructor(
 
     var inProgress = false
     var isWrapContentOnHeight = false
+        set(value) {
+            field = value
+            val minHeight = if (field) MIN_HEIGHT_WRAP_CONTENT else MIN_HEIGHT
+            minimumHeight = (minHeight * displayDensity).toInt()
+        }
     var text: CharSequence?
         get() = tvText.text
         set(value) {
@@ -94,9 +99,6 @@ class FTLButton @JvmOverloads constructor(
                 dotProgress.updateLayoutParams {
                     width = tvText.width
                     height = tvText.height
-                }
-                if (isWrapContentOnHeight) {
-                    minimumHeight = tvText.height
                 }
                 tvText.viewTreeObserver.removeOnPreDrawListener(onPreDrawListener)
             }
@@ -352,5 +354,6 @@ class FTLButton @JvmOverloads constructor(
 
     companion object {
         private const val MIN_HEIGHT = 48
+        private const val MIN_HEIGHT_WRAP_CONTENT = 24
     }
 }

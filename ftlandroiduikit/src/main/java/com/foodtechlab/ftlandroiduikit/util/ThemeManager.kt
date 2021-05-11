@@ -134,7 +134,8 @@ object ThemeManager {
         val ftlExtendableTextViewTheme: FTLExtendableTextViewTheme,
         val ftlTableRowTheme: FTLTableRowTheme,
         val ftlRestaurantMarkerTheme: FTLRestaurantMarkerTheme,
-        val ftlSnackbarTheme: FTLSnackbarTheme
+        val ftlSnackbarTheme: FTLSnackbarTheme,
+        val ftlBannerTheme: FTLBannerTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultLight),
@@ -320,7 +321,12 @@ object ThemeManager {
                 R.drawable.shape_ftl_restaurant_marker_light,
                 R.color.TextPrimaryLight
             ),
-            FTLSnackbarTheme(R.drawable.layer_list_snackbar_light)
+            FTLSnackbarTheme(R.drawable.layer_list_snackbar_light),
+            FTLBannerTheme(
+                R.color.TextPrimaryLight,
+                R.color.TextOnColorAdditionalLight,
+                R.color.BannerBackgroundDefaultLight
+            )
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultDark),
@@ -503,7 +509,12 @@ object ThemeManager {
                 R.drawable.shape_ftl_restaurant_marker_dark,
                 R.color.TextPrimaryDark
             ),
-            FTLSnackbarTheme(R.drawable.layer_list_snackbar_dark)
+            FTLSnackbarTheme(R.drawable.layer_list_snackbar_dark),
+            FTLBannerTheme(
+                R.color.TextPrimaryDark,
+                R.color.TextOnColorAdditionalDark,
+                R.color.BannerBackgroundDefaultDark
+            )
         )
     }
 
@@ -737,6 +748,12 @@ object ThemeManager {
 
     data class FTLSnackbarTheme(
         @DrawableRes val background: Int
+    )
+
+    data class FTLBannerTheme(
+        @ColorRes val titleColor: Int,
+        @ColorRes val descriptionColor: Int,
+        @ColorRes val bgColor: Int
     )
 
     interface ThemeChangedListener {

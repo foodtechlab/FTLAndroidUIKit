@@ -4,6 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 apply from: 'install.gradle'
 apply from: 'bintray.gradle'
+apply from: 'nexus.gradle'
 
 android {
     compileSdkVersion 30
@@ -13,7 +14,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
-        versionName "0.23.21"
+        versionName "0.22.24"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles 'consumer-rules.pro'
     }
