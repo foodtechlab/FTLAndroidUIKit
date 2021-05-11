@@ -17,7 +17,7 @@ class FTLCardView @JvmOverloads constructor(
 ) : CardView(context, attrs, defStyle), ThemeManager.ThemeChangedListener {
 
     init {
-        context.withStyledAttributes(attrs, R.styleable.CardView, R.style.FTLCardViewStyle) {
+        context.withStyledAttributes(attrs, R.styleable.CardView, defStyleRes = R.style.FTLCardViewStyle) {
             radius = context.dpToPx(CARD_RADIUS_DEFAULT)
             cardElevation = context.dpToPx(CARD_ELEVATION_DEFAULT)
         }

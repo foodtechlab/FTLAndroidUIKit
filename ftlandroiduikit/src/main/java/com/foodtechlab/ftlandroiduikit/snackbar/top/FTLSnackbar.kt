@@ -1,5 +1,6 @@
 package com.foodtechlab.ftlandroiduikit.snackbar.top
 
+import android.annotation.SuppressLint
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -66,6 +67,7 @@ class FTLSnackbar(
         }
     }
 
+    @SuppressLint("RestrictedApi")
     override fun onThemeChanged(theme: ThemeManager.Theme) {
         view.background = ContextCompat.getDrawable(context, theme.ftlSnackbarTheme.background)
     }
