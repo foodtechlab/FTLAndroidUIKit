@@ -6,7 +6,6 @@ import android.view.Menu
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
-import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.android.material.bottomnavigation.LabelVisibilityMode
@@ -27,7 +26,7 @@ class FTLBottomNavigationView @JvmOverloads constructor(
         onThemeChanged(ThemeManager.theme)
     }
 
-    fun addMenuItems(menuItems: List<MenuItem>) {
+    fun addMenuItems(menuItems: List<FTLMenuItem>) {
         menu.clear()
         menuItems.forEach {
             menu.add(Menu.NONE, it.itemId, Menu.NONE, it.titleRes)
@@ -46,59 +45,22 @@ class FTLBottomNavigationView @JvmOverloads constructor(
     }
 
     override fun onThemeChanged(theme: ThemeManager.Theme) {
-        MenuItem.ORDERS.iconRes = theme.ftlBottomNavigationViewTheme.itemOrdersIcon
-        MenuItem.MAPS.iconRes = theme.ftlBottomNavigationViewTheme.itemMapsIcon
-        MenuItem.HISTORY.iconRes = theme.ftlBottomNavigationViewTheme.itemHistoryIcon
-        MenuItem.MORE.iconRes = theme.ftlBottomNavigationViewTheme.itemMoreIcon
-
-        for (i in 0 until menu.size()) {
-            val item = menu.getItem(i)
-            if (item.itemId == MenuItem.values()[i].itemId) {
-                item.setIcon(MenuItem.values()[i].iconRes)
-            }
-        }
-
         setBackgroundColor(
             ContextCompat.getColor(context, theme.ftlBottomNavigationViewTheme.bgColor)
         )
-
+        itemIconTintList = ContextCompat.getColorStateList(
+            context,
+            theme.ftlBottomNavigationViewTheme.itemColor
+        )
         itemTextColor = ContextCompat.getColorStateList(
             context,
-            theme.ftlBottomNavigationViewTheme.itemTextColor
+            theme.ftlBottomNavigationViewTheme.itemColor
         )
-    }
-
-    enum class MenuItem(
-        val itemId: Int,
-        @StringRes val titleRes: Int,
-        @DrawableRes var iconRes: Int
-    ) {
-        ORDERS(
-            ID_ORDERS,
-            R.string.ftl_bnv_orders,
-            ThemeManager.theme.ftlBottomNavigationViewTheme.itemOrdersIcon
-        ),
-        MAPS(
-            ID_MAPS,
-            R.string.ftl_bnv_maps,
-            ThemeManager.theme.ftlBottomNavigationViewTheme.itemMapsIcon
-        ),
-        HISTORY(
-            ID_HISTORY,
-            R.string.ftl_bnv_history,
-            ThemeManager.theme.ftlBottomNavigationViewTheme.itemHistoryIcon
-        ),
-        MORE(
-            ID_MORE,
-            R.string.ftl_bnv_more,
-            ThemeManager.theme.ftlBottomNavigationViewTheme.itemMoreIcon
-        )
-    }
-
-    companion object {
-        const val ID_ORDERS = 2314
-        const val ID_MAPS = 5634
-        const val ID_HISTORY = 2378
-        const val ID_MORE = 2745
     }
 }
+
+class FTLMenuItem(
+    val itemId: Int,
+    @StringRes val titleRes: Int,
+    @DrawableRes var iconRes: Int
+)
