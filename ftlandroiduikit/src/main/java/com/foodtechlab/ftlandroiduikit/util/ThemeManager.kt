@@ -74,19 +74,20 @@ object ThemeManager {
         val cX = centerX ?: w / 2
         val cY = centerY ?: h / 2
 
-        animator = ViewAnimationUtils.createCircularReveal(screenImageView, cX, cY, finalRadius, 0f).apply {
-            duration = 400L
-            doOnCancel {
-                screenImageView.setImageDrawable(null)
-                screenImageView.isVisible = false
+        animator = ViewAnimationUtils.createCircularReveal(screenImageView, cX, cY, finalRadius, 0f)
+            .apply {
+                duration = 400L
+                doOnCancel {
+                    screenImageView.setImageDrawable(null)
+                    screenImageView.isVisible = false
+                }
+                doOnEnd {
+                    screenImageView.setImageDrawable(null)
+                    screenImageView.isVisible = false
+                    animator = null
+                }
+                start()
             }
-            doOnEnd {
-                screenImageView.setImageDrawable(null)
-                screenImageView.isVisible = false
-                animator = null
-            }
-            start()
-        }
     }
 
     enum class Theme(
@@ -300,11 +301,7 @@ object ThemeManager {
             FTLTitleTheme(R.color.TextPrimaryLight, R.color.TextSuccessEnabledLight),
             FTLBottomNavigationViewTheme(
                 R.color.SurfaceSecondLight,
-                R.color.selector_ftl_bnv_item_text_color_light,
-                R.drawable.selector_ftl_bnv_orders_light,
-                R.drawable.selector_ftl_bnv_maps_light,
-                R.drawable.selector_ftl_bnv_history_light,
-                R.drawable.selector_ftl_bnv_more_light
+                R.color.selector_ftl_bnv_item_color_light
             ),
             FTLDividerTheme(R.color.DividerPrimaryLight),
             FTLDefaultTextViewTheme(R.color.TextPrimaryLight),
@@ -491,11 +488,7 @@ object ThemeManager {
             FTLTitleTheme(R.color.TextPrimaryDark, R.color.TextSuccessEnabledDark),
             FTLBottomNavigationViewTheme(
                 R.color.SurfaceSecondDark,
-                R.color.selector_ftl_bnv_item_text_color_dark,
-                R.drawable.selector_ftl_bnv_orders_dark,
-                R.drawable.selector_ftl_bnv_maps_dark,
-                R.drawable.selector_ftl_bnv_history_dark,
-                R.drawable.selector_ftl_bnv_more_dark
+                R.color.selector_ftl_bnv_item_color_dark
             ),
             FTLDividerTheme(R.color.DividerPrimaryDark),
             FTLDefaultTextViewTheme(R.color.TextPrimaryDark),
@@ -719,11 +712,7 @@ object ThemeManager {
 
     data class FTLBottomNavigationViewTheme(
         @ColorRes val bgColor: Int,
-        @ColorRes val itemTextColor: Int,
-        @DrawableRes val itemOrdersIcon: Int,
-        @DrawableRes val itemMapsIcon: Int,
-        @DrawableRes val itemHistoryIcon: Int,
-        @DrawableRes val itemMoreIcon: Int
+        @ColorRes val itemColor: Int
     )
 
     data class FTLDefaultTextViewTheme(

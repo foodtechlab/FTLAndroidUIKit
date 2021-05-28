@@ -1,6 +1,6 @@
 apply plugin: 'maven-publish'
 
-version = '0.24.0'
+version = '0.25.0'
 
 Properties properties = new Properties()
 properties.load(new FileInputStream("local.properties"))

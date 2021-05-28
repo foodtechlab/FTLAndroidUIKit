@@ -83,4 +83,9 @@
     <string name="text_banner_full_description">Для изменения звука оповещения либо при наличии проблем с уведомлениями перейдите в настройки устройства</string>
     <string name="text_banner_without_title_description">FTLBanner можно использовать без title</string>
     <string name="text_banner_without_title_and_buttons_description">Можно также не указывать кнопки, в таком случае FTLBanner будет состоять только из description</string>
+
+    <string name="ftl_bnv_schedule">Расписание</string>
+    <string name="ftl_bnv_departments">Объекты</string>
+    <string name="ftl_bnv_history">История</string>
+    <string name="ftl_bnv_additional">Еще</string>
 </resources>
