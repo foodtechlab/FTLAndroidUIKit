@@ -88,4 +88,7 @@
     <string name="ftl_bnv_departments">Объекты</string>
     <string name="ftl_bnv_history">История</string>
     <string name="ftl_bnv_additional">Еще</string>
+
+    <string name="fragment_auth_phone_prefix">+7 (</string>
+    <string name="fragment_auth_phone_hint">Номер телефона</string>
 </resources>
