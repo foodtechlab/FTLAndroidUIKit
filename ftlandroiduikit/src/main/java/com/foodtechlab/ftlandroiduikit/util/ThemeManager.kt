@@ -137,8 +137,7 @@ object ThemeManager {
         val ftlRestaurantMarkerTheme: FTLRestaurantMarkerTheme,
         val ftlSnackbarTheme: FTLSnackbarTheme,
         val ftlBannerTheme: FTLBannerTheme,
-        val ftlCompleteEditTextTheme: FTLCompleteEditTextTheme,
-        val ftlCompleteEditTextDropDownItemTheme: FTLCompleteEditTextDropDownItemTheme
+        val ftlCompleteEditTextTheme: FTLCompleteEditTextTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultLight),
@@ -335,8 +334,7 @@ object ThemeManager {
                 R.color.TextViewDividerFocusedLight,
                 R.color.IconGreyLight,
                 R.drawable.shape_ftl_autocomplete_edit_text_drop_down_background_light
-            ),
-            FTLCompleteEditTextDropDownItemTheme(R.color.TextPrimaryLight)
+            )
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultDark),
@@ -530,8 +528,7 @@ object ThemeManager {
                 R.color.TextViewDividerFocusedDark,
                 R.color.IconGreyDark,
                 R.drawable.shape_ftl_autocomplete_edit_text_drop_down_background_dark
-            ),
-            FTLCompleteEditTextDropDownItemTheme(R.color.TextPrimaryDark)
+            )
         )
     }
 
@@ -779,8 +776,6 @@ object ThemeManager {
         @ColorRes val clearIconTintColor: Int,
         @DrawableRes val dropDownBackgroundDrawable: Int
     )
-
-    data class FTLCompleteEditTextDropDownItemTheme(@ColorRes val textColor: Int)
 
     interface ThemeChangedListener {
         fun onThemeChanged(theme: Theme)
