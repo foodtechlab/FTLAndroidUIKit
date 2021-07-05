@@ -20,8 +20,6 @@
         android:lineSpacingExtra="5sp"
         android:importantForAutofill="noExcludeDescendants"
         android:textColor="@color/OnBackgroundPrimary"
-        style="@style/AlwaysEnableScrollBar"
-        android:popupTheme="@style/FTLAutocompleteDropDownStyle"
         android:textSize="16sp" />
 
     <ImageView

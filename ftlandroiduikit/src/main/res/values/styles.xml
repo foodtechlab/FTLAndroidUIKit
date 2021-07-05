@@ -20,17 +20,4 @@
         <item name="android:layout_marginStart">8dp</item>
         <item name="android:layout_marginBottom">8dp</item>
     </style>
-
-    <style name="FTLAutocompleteEditTextStyle">
-        <item name="android:textColor">@color/TextPrimaryLight</item>
-    </style>
-
-    <style name="FTLAutocompleteDropDownStyle" parent="Widget.AppCompat.ListView.DropDown">
-        <item name="android:scrollbarAlwaysDrawVerticalTrack">true</item>
-        <item name="android:fadeScrollbars">false</item>
-    </style>
-
-    <style name="AlwaysEnableScrollBar" parent="Widget.AppCompat.ListView.DropDown">
-        <item name="android:scrollbarFadeDuration">10000000</item>
-    </style>
 </resources>
