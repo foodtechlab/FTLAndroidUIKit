@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
+import androidx.annotation.StyleRes
 import androidx.core.animation.doOnCancel
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
@@ -18,7 +19,6 @@ import kotlin.math.hypot
  * Created by Umalt on 25.09.2020
  */
 object ThemeManager {
-
     var theme = Theme.LIGHT
         set(value) {
             field = value
@@ -136,7 +136,9 @@ object ThemeManager {
         val ftlTableRowTheme: FTLTableRowTheme,
         val ftlRestaurantMarkerTheme: FTLRestaurantMarkerTheme,
         val ftlSnackbarTheme: FTLSnackbarTheme,
-        val ftlBannerTheme: FTLBannerTheme
+        val ftlBannerTheme: FTLBannerTheme,
+        val ftlCompleteEditTextTheme: FTLCompleteEditTextTheme,
+        val ftlCompleteEditTextDropDownItemTheme: FTLCompleteEditTextDropDownItemTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultLight),
@@ -323,7 +325,18 @@ object ThemeManager {
                 R.color.TextPrimaryLight,
                 R.color.TextOnColorAdditionalLight,
                 R.color.BannerBackgroundDefaultLight
-            )
+            ),
+            FTLCompleteEditTextTheme(
+                R.color.TextPrimaryLight,
+                R.color.TextPlaceholderLight,
+                R.color.TextViewPrimaryLight,
+                R.color.TextViewDividerEnabledLight,
+                R.color.TextViewDividerErrorLight,
+                R.color.TextViewDividerFocusedLight,
+                R.color.IconGreyLight,
+                R.drawable.shape_ftl_autocomplete_edit_text_drop_down_background_light
+            ),
+            FTLCompleteEditTextDropDownItemTheme(R.color.TextPrimaryLight)
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultDark),
@@ -507,7 +520,18 @@ object ThemeManager {
                 R.color.TextPrimaryDark,
                 R.color.TextOnColorAdditionalDark,
                 R.color.BannerBackgroundDefaultDark
-            )
+            ),
+            FTLCompleteEditTextTheme(
+                R.color.TextPrimaryDark,
+                R.color.TextPlaceholderDark,
+                R.color.TextViewPrimaryDark,
+                R.color.TextViewDividerEnabledDark,
+                R.color.TextViewDividerErrorDark,
+                R.color.TextViewDividerFocusedDark,
+                R.color.IconGreyDark,
+                R.drawable.shape_ftl_autocomplete_edit_text_drop_down_background_dark
+            ),
+            FTLCompleteEditTextDropDownItemTheme(R.color.TextPrimaryDark)
         )
     }
 
@@ -744,6 +768,19 @@ object ThemeManager {
         @ColorRes val descriptionColor: Int,
         @ColorRes val bgColor: Int
     )
+
+    data class FTLCompleteEditTextTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val hintColor: Int,
+        @ColorRes val bgColor: Int,
+        @ColorRes val defaultControlColor: Int,
+        @ColorRes val errorControlColor: Int,
+        @ColorRes val activeControlColor: Int,
+        @ColorRes val clearIconTintColor: Int,
+        @DrawableRes val dropDownBackgroundDrawable: Int
+    )
+
+    data class FTLCompleteEditTextDropDownItemTheme(@ColorRes val textColor: Int)
 
     interface ThemeChangedListener {
         fun onThemeChanged(theme: Theme)

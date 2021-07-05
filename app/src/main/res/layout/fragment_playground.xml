@@ -3,17 +3,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cl_playground_root"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
     <com.foodtechlab.ftlandroiduikit.textfield.FTLAutocompleteEditText
-        android:id="@+id/etPhoneEnter"
+        android:id="@+id/et_test_autocomplete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        app:hint="@string/fragment_auth_phone_hint"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintStart_toStartOf="parent"
+        app:hint="@string/fragment_cat_name_hint" />
 
 </com.foodtechlab.ftlandroiduikit.container.FTLConstraintLayout>
