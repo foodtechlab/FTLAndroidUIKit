@@ -4,13 +4,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.foodtechlab.ftlandroiduikit.textfield.helper.TextWatcher
+import com.foodtechlab.ftlandroiduikit.textfield.helper.FTLDropDownAdapter
+import com.foodtechlab.ftlandroiduikit.util.dpToPxInt
 import com.foodtechlab.ftlandroiduikitsample.R
 import kotlinx.android.synthetic.main.fragment_playground.*
 
-class PlaygroundFragment : Fragment() {
+class PlaygroundFragment : Fragment(), FTLDropDownAdapter.FTLMenuCellsChangesListener {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -22,13 +23,15 @@ class PlaygroundFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val cats = arrayOf("Мурзик", "Рыжик", "Барсик", "Борис", "Мурзилка", "Мурка")
+        val cats = arrayListOf("Мурзик", "Рыжик", "Барсик", "Борис Бритва", "Мурзилка", "Мурка")
 
-        val adapter = ArrayAdapter(
+        val adapter = FTLDropDownAdapter(
             requireContext(),
-            R.layout.layout_ftl_autocomplete_drop_down_item_light,
+            R.layout.layout_ftl_autocomplete_drop_down_item,
             cats
-        )
+        ).apply {
+            menuCellsChangesListener = this@PlaygroundFragment
+        }
 
         et_test_autocomplete.setHintsAdapter(adapter)
 
@@ -39,10 +42,10 @@ class PlaygroundFragment : Fragment() {
                     et_test_autocomplete.showHints()
                 }
             }
-            addTextChangedListener(object: TextWatcher() {
+            addTextChangedListener(object : TextWatcher() {
                 override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if(s?.length?: 0 >=6) {
-                        et_test_autocomplete.etInput.dismissDropDown()
+                    if (s?.length ?: 0 >= 6) {
+                        et_test_autocomplete.hideHints()
                     }
                     super.onTextChanged(s, start, before, count)
                 }
@@ -50,8 +53,15 @@ class PlaygroundFragment : Fragment() {
         }
     }
 
-    companion object {
+    override fun onQuantityChanges(size: Int) {
+        et_test_autocomplete.etInput.dropDownHeight = if (size < 2) {
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        } else {
+            requireContext().dpToPxInt(88f)
+        }
+    }
 
+    companion object {
         const val TAG = "PlaygroundFragment"
     }
 }

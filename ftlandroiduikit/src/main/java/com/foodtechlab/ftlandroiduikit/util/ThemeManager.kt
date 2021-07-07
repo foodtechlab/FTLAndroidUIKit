@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
-import androidx.annotation.StyleRes
 import androidx.core.animation.doOnCancel
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
@@ -137,7 +136,8 @@ object ThemeManager {
         val ftlRestaurantMarkerTheme: FTLRestaurantMarkerTheme,
         val ftlSnackbarTheme: FTLSnackbarTheme,
         val ftlBannerTheme: FTLBannerTheme,
-        val ftlCompleteEditTextTheme: FTLCompleteEditTextTheme
+        val ftlCompleteEditTextTheme: FTLCompleteEditTextTheme,
+        val ftlCellMenuTheme: FTLCellMenu
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultLight),
@@ -333,8 +333,9 @@ object ThemeManager {
                 R.color.TextViewDividerErrorLight,
                 R.color.TextViewDividerFocusedLight,
                 R.color.IconGreyLight,
-                R.drawable.shape_ftl_autocomplete_edit_text_drop_down_background_light
-            )
+                R.drawable.shape_ftl_drop_down_background_light
+            ),
+            FTLCellMenu(R.color.TextPrimaryLight, R.color.CellPressedLight)
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultDark),
@@ -527,8 +528,9 @@ object ThemeManager {
                 R.color.TextViewDividerErrorDark,
                 R.color.TextViewDividerFocusedDark,
                 R.color.IconGreyDark,
-                R.drawable.shape_ftl_autocomplete_edit_text_drop_down_background_dark
-            )
+                R.drawable.shape_ftl_drop_down_background_dark
+            ),
+            FTLCellMenu(R.color.TextPrimaryDark, R.color.CellPressedDark)
         )
     }
 
@@ -775,6 +777,11 @@ object ThemeManager {
         @ColorRes val activeControlColor: Int,
         @ColorRes val clearIconTintColor: Int,
         @DrawableRes val dropDownBackgroundDrawable: Int
+    )
+
+    data class FTLCellMenu(
+        @ColorRes val textColor: Int,
+        @ColorRes val highlightColor: Int
     )
 
     interface ThemeChangedListener {
