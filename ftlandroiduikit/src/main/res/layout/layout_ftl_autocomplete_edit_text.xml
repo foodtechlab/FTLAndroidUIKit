@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:layout_margin="16dp">
+
+    <AutoCompleteTextView
+        android:id="@+id/et_input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="16dp"
+        android:background="@null"
+        android:dropDownAnchor="@+id/v_underline"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="center_vertical"
+        android:includeFontPadding="false"
+        android:letterSpacing=".05"
+        android:lineSpacingExtra="5sp"
+        android:importantForAutofill="noExcludeDescendants"
+        android:textColor="@color/OnBackgroundPrimary"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/iv_clear"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/selectableItemBackground"
+        android:src="@drawable/ic_circle_cancel_24" />
+
+    <View
+        android:id="@+id/v_underline"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:layout_below="@id/et_input"
+        android:background="@color/OnBackgroundSecondary"
+        android:visibility="invisible" />
+
+</merge>

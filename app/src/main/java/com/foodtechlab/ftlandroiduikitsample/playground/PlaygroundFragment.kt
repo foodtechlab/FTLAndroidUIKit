@@ -5,11 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.foodtechlab.ftlandroiduikit.bar.FTLBottomNavigationView
-import com.foodtechlab.ftlandroiduikit.bar.FTLMenuItem
+import com.foodtechlab.ftlandroiduikit.textfield.helper.TextWatcher
+import com.foodtechlab.ftlandroiduikit.textfield.helper.FTLDropDownAdapter
+import com.foodtechlab.ftlandroiduikit.util.dpToPxInt
 import com.foodtechlab.ftlandroiduikitsample.R
+import kotlinx.android.synthetic.main.fragment_playground.*
 
-class PlaygroundFragment : Fragment() {
+class PlaygroundFragment : Fragment(), FTLDropDownAdapter.FTLMenuCellsChangesListener {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -21,41 +23,45 @@ class PlaygroundFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val bnv = view.findViewById<FTLBottomNavigationView>(R.id.bnv_playground)
-        with(bnv) {
-            addMenuItems(
-                listOf(
-                    FTLMenuItem(
-                        ID_ORDERS,
-                        R.string.ftl_bnv_schedule,
-                        R.drawable.ic_clock_24
-                    ),
-                    FTLMenuItem(
-                        ID_MAPS,
-                        R.string.ftl_bnv_departments,
-                        R.drawable.ic_shop_16
-                    ),
-                    FTLMenuItem(
-                        ID_HISTORY,
-                        R.string.ftl_bnv_history,
-                        R.drawable.ic_history_light_24
-                    ),
-                    FTLMenuItem(
-                        ID_MORE,
-                        R.string.ftl_bnv_additional,
-                        R.drawable.ic_more_light_24
-                    )
-                )
-            )
+        val cats = arrayListOf("Мурзик", "Рыжик", "Барсик", "Борис Бритва", "Мурзилка", "Мурка")
+
+        val adapter = FTLDropDownAdapter(
+            requireContext(),
+            R.layout.layout_ftl_autocomplete_drop_down_item,
+            cats
+        ).apply {
+            menuCellsChangesListener = this@PlaygroundFragment
+        }
+
+        et_test_autocomplete.setHintsAdapter(adapter)
+
+        with(et_test_autocomplete) {
+            setOnFocusChangeListener { _, hasFocus ->
+                if (hasFocus) {
+                    // Выводим выпадающий список
+                    et_test_autocomplete.showHints()
+                }
+            }
+            addTextChangedListener(object : TextWatcher() {
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    if (s?.length ?: 0 >= 6) {
+                        et_test_autocomplete.hideHints()
+                    }
+                    super.onTextChanged(s, start, before, count)
+                }
+            })
+        }
+    }
+
+    override fun onQuantityChanges(size: Int) {
+        et_test_autocomplete.etInput.dropDownHeight = if (size < 2) {
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        } else {
+            requireContext().dpToPxInt(88f)
         }
     }
 
     companion object {
-        const val ID_ORDERS = 2314
-        const val ID_MAPS = 5634
-        const val ID_HISTORY = 2378
-        const val ID_MORE = 2745
-
         const val TAG = "PlaygroundFragment"
     }
 }

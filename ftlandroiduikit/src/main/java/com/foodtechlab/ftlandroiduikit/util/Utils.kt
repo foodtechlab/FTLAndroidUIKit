@@ -25,6 +25,17 @@ fun Context.dpToPx(dp: Float): Float {
     )
 }
 
+/**
+ * Метод превращает dp в px и возвращает целочисленное значение
+ */
+fun Context.dpToPxInt(dp: Float): Int {
+    return TypedValue.applyDimension(
+        TypedValue.COMPLEX_UNIT_DIP,
+        dp,
+        this.resources.displayMetrics
+    ).toInt()
+}
+
 fun Context.spToPx(sp: Float): Float {
     return TypedValue.applyDimension(
         TypedValue.COMPLEX_UNIT_SP,
