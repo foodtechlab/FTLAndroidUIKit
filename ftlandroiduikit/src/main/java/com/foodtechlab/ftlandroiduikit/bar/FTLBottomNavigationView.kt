@@ -8,7 +8,7 @@ import androidx.annotation.StringRes
 import androidx.core.content.ContextCompat
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.google.android.material.bottomnavigation.LabelVisibilityMode
+import com.google.android.material.navigation.NavigationBarView
 
 /**
  * Created by Umalt on 22.05.2020
@@ -21,7 +21,7 @@ class FTLBottomNavigationView @JvmOverloads constructor(
 
     init {
         itemIconTintList = null
-        labelVisibilityMode = LabelVisibilityMode.LABEL_VISIBILITY_LABELED
+        labelVisibilityMode = NavigationBarView.LABEL_VISIBILITY_LABELED
 
         onThemeChanged(ThemeManager.theme)
     }
