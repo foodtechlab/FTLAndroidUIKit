@@ -565,4 +565,14 @@
         <attr name="title" format="string" />
         <attr name="description" format="string" />
     </declare-styleable>
+
+    <declare-styleable name="FTLAutocompleteEditText" parent="FTLEditTextDefault">
+        <attr name="hint" />
+        <attr name="inputType" />
+        <attr name="imeOptions" />
+        <attr name="filters" />
+        <attr name="maxLength" />
+        <attr name="maxLineCount" />
+        <attr name="text" />
+    </declare-styleable>
 </resources>

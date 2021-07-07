@@ -303,4 +303,7 @@
     <color name="ShimmerHighlightingLight">#E5E5E5</color>
     <color name="ShimmerHighlightingDark">#363636</color>
 
+    <!--  FTLCellMenu  -->
+    <color name="CellPressedLight">#F5F5F5</color>
+    <color name="CellPressedDark">#3A3A3A</color>
 </resources>
