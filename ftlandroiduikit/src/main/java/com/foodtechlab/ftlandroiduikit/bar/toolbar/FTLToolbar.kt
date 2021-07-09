@@ -15,6 +15,7 @@ import androidx.core.view.isVisible
 import androidx.transition.Fade
 import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.common.NetworkConnectivityState
 import com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLToolbarDotsProgress
 import com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
 import com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView

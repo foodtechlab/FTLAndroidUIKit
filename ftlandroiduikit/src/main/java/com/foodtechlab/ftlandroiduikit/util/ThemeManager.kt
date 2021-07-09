@@ -12,6 +12,7 @@ import androidx.core.animation.doOnCancel
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.tab.FTLTabLayout
 import kotlin.math.hypot
 
 /**
@@ -137,7 +138,8 @@ object ThemeManager {
         val ftlSnackbarTheme: FTLSnackbarTheme,
         val ftlBannerTheme: FTLBannerTheme,
         val ftlCompleteEditTextTheme: FTLCompleteEditTextTheme,
-        val ftlCellMenuTheme: FTLCellMenu
+        val ftlCellMenuTheme: FTLCellMenuTheme,
+        val ftlTabLayoutTheme: FTLTabLayoutTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultLight),
@@ -335,7 +337,13 @@ object ThemeManager {
                 R.color.IconGreyLight,
                 R.drawable.shape_ftl_drop_down_background_light
             ),
-            FTLCellMenu(R.color.TextPrimaryLight, R.color.CellPressedLight)
+            FTLCellMenuTheme(R.color.TextPrimaryLight, R.color.CellPressedLight),
+            FTLTabLayoutTheme(
+                R.color.SurfaceFourthLight,
+                R.color.IconInfoLight,
+                R.color.TextPrimaryLight,
+                R.color.ButtonInfoPressedLight
+            )
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultDark),
@@ -530,7 +538,13 @@ object ThemeManager {
                 R.color.IconGreyDark,
                 R.drawable.shape_ftl_drop_down_background_dark
             ),
-            FTLCellMenu(R.color.TextPrimaryDark, R.color.CellPressedDark)
+            FTLCellMenuTheme(R.color.TextPrimaryDark, R.color.CellPressedDark),
+            FTLTabLayoutTheme(
+                R.color.SurfaceFourthDark,
+                R.color.IconInfoDark,
+                R.color.TextPrimaryDark,
+                R.color.ButtonInfoPressedDark
+            )
         )
     }
 
@@ -779,9 +793,16 @@ object ThemeManager {
         @DrawableRes val dropDownBackgroundDrawable: Int
     )
 
-    data class FTLCellMenu(
+    data class FTLCellMenuTheme(
         @ColorRes val textColor: Int,
         @ColorRes val highlightColor: Int
+    )
+
+    data class FTLTabLayoutTheme(
+        @ColorRes val backgroundColor: Int,
+        @ColorRes val selectedTabIndicatorColor: Int,
+        @ColorRes val tabTextNormalColor: Int,
+        @ColorRes val tabTextSelectedColor: Int
     )
 
     interface ThemeChangedListener {

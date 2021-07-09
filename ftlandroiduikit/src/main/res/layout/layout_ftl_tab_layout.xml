@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:animateLayoutChanges="true"
+    android:orientation="vertical">
+
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tbl_ftl_tab_layout_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:tabIndicatorFullWidth="true"
+        app:tabMaxWidth="0dp"
+        app:tabPaddingEnd="16dp"
+        app:tabPaddingStart="16dp"
+        app:tabGravity="center"
+        app:tabTextAppearance="@style/TabLayoutTextAppearanceTheme" />
+
+    <TextView
+        android:id="@+id/tv_ftl_tab_layout_connectivity"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/roboto_regular"
+        android:gravity="center_horizontal"
+        android:paddingStart="16dp"
+        android:paddingTop="4dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="4dp"
+        android:textColor="@color/OnPrimary"
+        android:textSize="14sp"
+        android:visibility="gone"
+        tools:background="@color/AdditionalPink"
+        tools:text="@string/connectivity_state_connected"
+        tools:visibility="visible" />
+
+    <View
+        android:id="@+id/v_ftl_tab_layout_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="6dp"
+        android:background="@drawable/shadow_top_to_bottom"
+        android:visibility="gone" />
+
+</merge>
