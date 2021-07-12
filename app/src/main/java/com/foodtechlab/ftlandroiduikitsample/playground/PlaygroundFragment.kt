@@ -1,17 +1,18 @@
 package com.foodtechlab.ftlandroiduikitsample.playground
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.foodtechlab.ftlandroiduikit.textfield.helper.TextWatcher
-import com.foodtechlab.ftlandroiduikit.textfield.helper.FTLDropDownAdapter
 import com.foodtechlab.ftlandroiduikit.util.dpToPxInt
 import com.foodtechlab.ftlandroiduikitsample.R
 import kotlinx.android.synthetic.main.fragment_playground.*
 
-class PlaygroundFragment : Fragment(), FTLDropDownAdapter.FTLMenuCellsChangesListener {
+class PlaygroundFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -25,17 +26,16 @@ class PlaygroundFragment : Fragment(), FTLDropDownAdapter.FTLMenuCellsChangesLis
         super.onViewCreated(view, savedInstanceState)
         val cats = arrayListOf("Мурзик", "Рыжик", "Барсик", "Борис Бритва", "Мурзилка", "Мурка")
 
-        val adapter = FTLDropDownAdapter(
+        val adapter = ArrayAdapter(
             requireContext(),
             R.layout.layout_ftl_autocomplete_drop_down_item,
             cats
-        ).apply {
-            menuCellsChangesListener = this@PlaygroundFragment
-        }
+        )
 
         et_test_autocomplete.setHintsAdapter(adapter)
 
         with(et_test_autocomplete) {
+            maxDropDownHeightForFolding =  requireContext().dpToPxInt(100f)
             setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {
                     // Выводим выпадающий список
@@ -49,15 +49,12 @@ class PlaygroundFragment : Fragment(), FTLDropDownAdapter.FTLMenuCellsChangesLis
                     }
                     super.onTextChanged(s, start, before, count)
                 }
-            })
-        }
-    }
 
-    override fun onQuantityChanges(size: Int) {
-        et_test_autocomplete.etInput.dropDownHeight = if (size < 2) {
-            ViewGroup.LayoutParams.WRAP_CONTENT
-        } else {
-            requireContext().dpToPxInt(88f)
+                override fun afterTextChanged(s: Editable?) {
+                    super.afterTextChanged(s)
+                    foldingDropDown(cats, s, 2)
+                }
+            })
         }
     }
 
