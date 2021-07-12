@@ -52,7 +52,7 @@ class PlaygroundFragment : Fragment() {
 
                 override fun afterTextChanged(s: Editable?) {
                     super.afterTextChanged(s)
-                    foldingDropDown(cats, s, 2)
+                    foldingDropDownDialog(cats, s, 2)
                 }
             })
         }
