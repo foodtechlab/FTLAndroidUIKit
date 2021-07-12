@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
 import com.foodtechlab.ftlandroiduikit.textfield.helper.TextWatcher
-import com.foodtechlab.ftlandroiduikit.util.dpToPxInt
 import com.foodtechlab.ftlandroiduikitsample.R
 import kotlinx.android.synthetic.main.fragment_playground.*
 
@@ -35,7 +34,6 @@ class PlaygroundFragment : Fragment() {
         et_test_autocomplete.setHintsAdapter(adapter)
 
         with(et_test_autocomplete) {
-            maxDropDownHeightForFolding =  requireContext().dpToPxInt(100f)
             setOnFocusChangeListener { _, hasFocus ->
                 if (hasFocus) {
                     // Выводим выпадающий список

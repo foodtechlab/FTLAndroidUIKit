@@ -304,15 +304,19 @@ class FTLAutocompleteEditText @JvmOverloads constructor(
      * @param charSequence Введеное значение в поле ввода
      * @param maxItemCountForFolding Максимальное количество элементов для регулирования высоты
      */
-    fun foldingDropDownDialog(hintsList: ArrayList<String>, charSequence: CharSequence?, maxItemCountForFolding: Int) {
+    fun foldingDropDownDialog(
+        hintsList: ArrayList<String>,
+        charSequence: CharSequence?,
+        maxItemCountForFolding: Int
+    ) {
         val queryString = charSequence?.toString()?.lowercase()
         val filterResults = arrayListOf<String>()
-        when {
-            queryString.isNullOrEmpty() -> filterResults.addAll(hintsList)
+        filterResults.addAll(when {
+            queryString.isNullOrEmpty() -> hintsList
             else -> hintsList.filter {
                 it.lowercase().contains(queryString)
             }
-        }
+        })
 
         etInput.dropDownHeight = if (filterResults.size < maxItemCountForFolding) {
             ViewGroup.LayoutParams.WRAP_CONTENT
