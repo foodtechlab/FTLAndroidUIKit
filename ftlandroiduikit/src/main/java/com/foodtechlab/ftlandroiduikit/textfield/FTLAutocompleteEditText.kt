@@ -48,11 +48,13 @@ class FTLAutocompleteEditText @JvmOverloads constructor(
             etInput.imeOptions = value
         }
 
-    var minCharsCount: Int = 2
+    var minCharsCount: Int = 0
         set(value) {
             field = value
             etInput.threshold = field
         }
+
+    var maxDropDownHeightForFolding: Int = context.dpToPxInt(MAX_DROP_DOWN_HEIGHT)
 
     var hint: String = ""
         set(value) {
@@ -294,6 +296,31 @@ class FTLAutocompleteEditText @JvmOverloads constructor(
         }
     }
 
+    /**
+     * Метод изменяет высоту popup до значения maxDropDownHeightForFolding в случае если размер
+     * фильтрованного списка меньше чем значение maxItemCountForFolding, в противном случае высота
+     * popup будет WRAP_CONTENT, что не всегда удачное решение на android 5.0
+     * @param hintsList Список подсказок (нефильтрованный)
+     * @param charSequence Введеное значение в поле ввода
+     * @param maxItemCountForFolding Максимальное количество элементов для регулирования высоты
+     */
+    fun foldingDropDownDialog(hintsList: ArrayList<String>, charSequence: CharSequence?, maxItemCountForFolding: Int) {
+        val queryString = charSequence?.toString()?.lowercase()
+        val filterResults = arrayListOf<String>()
+        when {
+            queryString.isNullOrEmpty() -> filterResults.addAll(hintsList)
+            else -> hintsList.filter {
+                it.lowercase().contains(queryString)
+            }
+        }
+
+        etInput.dropDownHeight = if (filterResults.size < maxItemCountForFolding) {
+            ViewGroup.LayoutParams.WRAP_CONTENT
+        } else {
+            maxDropDownHeightForFolding
+        }
+    }
+
     private fun Canvas.drawHint() {
         val hintHeight = hintPaint.fontMetrics.descent - hintPaint.fontMetrics.ascent
         val hintY = (initialHeight / 2 + hintHeight / 2 - hintPaint.fontMetrics.bottom) * scale
@@ -373,5 +400,6 @@ class FTLAutocompleteEditText @JvmOverloads constructor(
         private const val MARGIN_HORIZONTAL = 16f
         private const val INITIAL_HINT_TEXT_SIZE = 16f
         private const val MIN_HEIGHT = 56f
+        private const val MAX_DROP_DOWN_HEIGHT = 88f
     }
 }
