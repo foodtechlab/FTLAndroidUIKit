@@ -9,7 +9,6 @@ import androidx.viewpager2.widget.ViewPager2
 import com.foodtechlab.ftlandroiduikit.common.NetworkConnectivityState
 import com.foodtechlab.ftlandroiduikit.tab.FTLTabLayout
 import com.foodtechlab.ftlandroiduikitsample.R
-import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -41,11 +40,11 @@ class PlaygroundFragment : Fragment(), CoroutineScope {
             tab.text = vpAdapter.getPageTitle(position)
         }.attach()
 
-       /* tblContainer.networkState = NetworkConnectivityState.DISCONNECTED
+        tblContainer.networkState = NetworkConnectivityState.DISCONNECTED
         launch {
             delay(5000)
             tblContainer.networkState = NetworkConnectivityState.CONNECTED
-        }*/
+        }
     }
 
     companion object {
