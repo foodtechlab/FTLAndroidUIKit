@@ -578,17 +578,29 @@
 
     <declare-styleable name="FTLTabLayout">
         <attr name="displayMode">
-            <enum name="scrollable" value="0"/>
-            <enum name="fixed" value="1"/>
-            <enum name="auto" value="2"/>
+            <enum name="scrollable" value="0" />
+            <enum name="fixed" value="1" />
+            <enum name="auto" value="2" />
         </attr>
         <attr name="gravityMode">
-            <enum name="fill" value="0"/>
-            <enum name="center" value="1"/>
-            <enum name="start" value="2"/>
-            <enum name="end" value="3"/>
+            <enum name="fill" value="0" />
+            <enum name="center" value="1" />
+            <enum name="start" value="2" />
+            <enum name="end" value="3" />
         </attr>
         <attr name="shouldShadowVisible" format="boolean" />
         <attr name="shouldDrawIndicatorFullWidth" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="FTLRecordButton">
+        <attr name="isEnabledState" format="boolean" />
+        <attr name="recordState">
+            <enum name="STOP" value="0" />
+            <enum name="RECORDING" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="FTLTagView" parent="Chip">
+        <attr name="android:text" />
     </declare-styleable>
 </resources>

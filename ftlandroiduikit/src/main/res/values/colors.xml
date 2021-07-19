@@ -306,4 +306,11 @@
     <!--  FTLCellMenu  -->
     <color name="CellPressedLight">#F5F5F5</color>
     <color name="CellPressedDark">#3A3A3A</color>
+
+    <!--  FTLTagView  -->
+    <color name="TagBackgroundLight">#F6F6F6</color>
+    <color name="TagBackgroundDark">#2C2C2C</color>
+
+    <color name="TagBorderLight">#A4A4A4</color>
+    <color name="TagBorderDark">#B2B2B2</color>
 </resources>

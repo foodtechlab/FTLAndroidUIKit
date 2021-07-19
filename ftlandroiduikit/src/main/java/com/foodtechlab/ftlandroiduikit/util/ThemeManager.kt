@@ -12,7 +12,6 @@ import androidx.core.animation.doOnCancel
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.tab.FTLTabLayout
 import kotlin.math.hypot
 
 /**
@@ -139,7 +138,9 @@ object ThemeManager {
         val ftlBannerTheme: FTLBannerTheme,
         val ftlCompleteEditTextTheme: FTLCompleteEditTextTheme,
         val ftlCellMenuTheme: FTLCellMenuTheme,
-        val ftlTabLayoutTheme: FTLTabLayoutTheme
+        val ftlTabLayoutTheme: FTLTabLayoutTheme,
+        val ftlRecordButtonTheme: FTLRecordButtonTheme,
+        val ftlTagViewTheme: FTLTagViewTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultLight),
@@ -343,6 +344,12 @@ object ThemeManager {
                 R.color.IconInfoLight,
                 R.color.TextPrimaryLight,
                 R.color.ButtonInfoPressedLight
+            ),
+            FTLRecordButtonTheme(R.color.selector_ftl_record_button_light),
+            FTLTagViewTheme(
+                R.color.TextOnColorAdditionalLight,
+                R.color.TagBackgroundLight,
+                R.color.TagBorderLight
             )
         ),
         DARK(
@@ -544,6 +551,12 @@ object ThemeManager {
                 R.color.IconInfoDark,
                 R.color.TextPrimaryDark,
                 R.color.ButtonInfoPressedDark
+            ),
+            FTLRecordButtonTheme(R.color.selector_ftl_record_button_dark),
+            FTLTagViewTheme(
+                R.color.TextOnColorAdditionalDark,
+                R.color.TagBackgroundDark,
+                R.color.TagBorderDark
             )
         )
     }
@@ -803,6 +816,16 @@ object ThemeManager {
         @ColorRes val selectedTabIndicatorColor: Int,
         @ColorRes val tabTextNormalColor: Int,
         @ColorRes val tabTextSelectedColor: Int
+    )
+
+    data class FTLRecordButtonTheme(
+        @ColorRes val foregroundColor: Int
+    )
+
+    data class FTLTagViewTheme(
+        @ColorRes val textColor: Int,
+        @ColorRes val backgroundColor: Int,
+        @ColorRes val borderColor: Int
     )
 
     interface ThemeChangedListener {

@@ -1,47 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.foodtechlab.ftlandroiduikit.container.FTLCoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.foodtechlab.ftlandroiduikit.container.FTLConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cl_playground"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:clipChildren="false">
-
-        <com.foodtechlab.ftlandroiduikit.bar.toolbar.FTLToolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
+        <com.foodtechlab.ftlandroiduikit.textfield.FTLTagView
+            android:id="@+id/tg_test"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:ftlToolbar_title="Playground"
+            android:text="texttextte"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <com.foodtechlab.ftlandroiduikit.tab.FTLTabLayout
-            android:id="@+id/tbl_playground"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:displayMode="scrollable"
-            app:gravityMode="center"
-            app:shouldDrawIndicatorFullWidth="true"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/toolbar" />
-
-        <androidx.viewpager2.widget.ViewPager2
-            android:id="@+id/vp_playground"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:clipToPadding="false"
-            android:paddingTop="8dp"
-            android:translationY="-6dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tbl_playground" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</com.foodtechlab.ftlandroiduikit.container.FTLCoordinatorLayout>
+</com.foodtechlab.ftlandroiduikit.container.FTLConstraintLayout>
