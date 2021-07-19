@@ -140,7 +140,8 @@ object ThemeManager {
         val ftlCellMenuTheme: FTLCellMenuTheme,
         val ftlTabLayoutTheme: FTLTabLayoutTheme,
         val ftlRecordButtonTheme: FTLRecordButtonTheme,
-        val ftlTagViewTheme: FTLTagViewTheme
+        val ftlTagViewTheme: FTLTagViewTheme,
+        val ftlCircleScaleViewTheme: FTLCircleScaleViewTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultLight),
@@ -350,7 +351,8 @@ object ThemeManager {
                 R.color.TextOnColorAdditionalLight,
                 R.color.TagBackgroundLight,
                 R.color.TagBorderLight
-            )
+            ),
+            FTLCircleScaleViewTheme(R.color.TimerBackgroundLight, R.color.TimerPositiveLight, R.color.IconSecondaryLight)
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultDark),
@@ -557,7 +559,8 @@ object ThemeManager {
                 R.color.TextOnColorAdditionalDark,
                 R.color.TagBackgroundDark,
                 R.color.TagBorderDark
-            )
+            ),
+            FTLCircleScaleViewTheme(R.color.TimerBackgroundDark, R.color.TimerPositiveDark, R.color.IconSecondaryDark)
         )
     }
 
@@ -826,6 +829,12 @@ object ThemeManager {
         @ColorRes val textColor: Int,
         @ColorRes val backgroundColor: Int,
         @ColorRes val borderColor: Int
+    )
+
+    data class FTLCircleScaleViewTheme(
+        @ColorRes val backgroundTrackColor: Int,
+        @ColorRes var trackColor: Int,
+        @ColorRes val imageColor: Int
     )
 
     interface ThemeChangedListener {

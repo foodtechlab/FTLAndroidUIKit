@@ -5,14 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-        <com.foodtechlab.ftlandroiduikit.textfield.FTLTagView
-            android:id="@+id/tg_test"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="texttextte"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleScaleView
+        android:id="@+id/tg_test"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
+        app:currentProgress="40"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:maxProgress="100"
+        app:sizeProgress="48dp" />
+
+    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleScaleView
+        android:id="@+id/tg_test2"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="40dp"
+        app:currentProgress="40"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tg_test"
+        app:maxProgress="100"
+        app:sizeProgress="48dp" />
 
 </com.foodtechlab.ftlandroiduikit.container.FTLConstraintLayout>

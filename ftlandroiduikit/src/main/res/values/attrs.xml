@@ -603,4 +603,11 @@
     <declare-styleable name="FTLTagView" parent="Chip">
         <attr name="android:text" />
     </declare-styleable>
+
+    <declare-styleable name="FTLCircleScaleView" parent="FTLDefaultTextView">
+        <attr name="currentProgress" format="integer" />
+        <attr name="maxProgress" format="integer" />
+        <attr name="sizeProgress" format="dimension" />
+        <attr name="imageType" />
+    </declare-styleable>
 </resources>

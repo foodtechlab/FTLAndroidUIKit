@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager2.widget.ViewPager2
 import com.foodtechlab.ftlandroiduikit.common.NetworkConnectivityState
 import com.foodtechlab.ftlandroiduikit.tab.FTLTabLayout
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikitsample.R
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.fragment_playground.*
@@ -32,9 +33,13 @@ class PlaygroundFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        /*tg_test.tex = "VLG.0.1VLG.0.1"*/
-       // tg_test.mText = "VLG.0.1VLG.0.1"
-        tg_test.tagBorderColor =  ContextCompat.getColorStateList(tg_test.context, android.R.color.transparent)
+
+        tg_test2.updateTrackColorTheme(
+            when(ThemeManager.theme) {
+                ThemeManager.Theme.LIGHT -> R.color.TimerNegativeLight
+                else -> R.color.TimerNegativeDark
+            }
+        )
     }
 
     companion object {
