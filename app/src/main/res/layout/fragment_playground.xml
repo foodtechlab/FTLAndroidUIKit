@@ -5,28 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleScaleView
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTagView
         android:id="@+id/tg_test"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        app:currentProgress="40"
+        android:text="VLG.0.1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:maxProgress="100"
-        app:sizeProgress="48dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleScaleView
-        android:id="@+id/tg_test2"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="40dp"
-        app:currentProgress="40"
+    <com.foodtechlab.ftlandroiduikit.button.FTLButton
+        android:id="@+id/btn_border"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:ftlButton_text="Обводка"
+        android:layout_margin="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tg_test"
-        app:maxProgress="100"
-        app:sizeProgress="48dp" />
+        app:layout_constraintTop_toBottomOf="@id/tg_test" />
+
+    <com.foodtechlab.ftlandroiduikit.button.FTLButton
+        android:id="@+id/btn_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:ftlButton_text="Фон"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_border" />
 
 </com.foodtechlab.ftlandroiduikit.container.FTLConstraintLayout>
