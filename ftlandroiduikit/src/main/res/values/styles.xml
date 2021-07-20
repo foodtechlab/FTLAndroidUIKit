@@ -24,8 +24,6 @@
     <style name="TabLayoutTextAppearanceTheme" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">14sp</item>
         <item name="fontFamily">@font/roboto_regular</item>
-        <item name="android:textAllCaps">false</item>
-        <item name="textAllCaps">false</item>
     </style>
 
 </resources>

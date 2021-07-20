@@ -5,34 +5,36 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTagView
-        android:id="@+id/tg_test"
-        android:layout_width="wrap_content"
+    <com.foodtechlab.ftlandroiduikit.bar.toolbar.FTLToolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="40dp"
-        android:text="VLG.0.1"
+        app:ftlToolbar_title="Playground"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.foodtechlab.ftlandroiduikit.button.FTLButton
-        android:id="@+id/btn_border"
+    <com.foodtechlab.ftlandroiduikit.tab.FTLTabLayout
+        android:id="@+id/tbl_playground"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:ftlButton_text="Обводка"
-        android:layout_margin="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:displayMode="scrollable"
+        app:gravityMode="center"
+        app:shouldDrawIndicatorFullWidth="true"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tg_test" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar" />
 
-    <com.foodtechlab.ftlandroiduikit.button.FTLButton
-        android:id="@+id/btn_background"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:ftlButton_text="Фон"
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/vp_playground"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:translationY="-6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_border" />
+        app:layout_constraintTop_toBottomOf="@id/tbl_playground" />
 
 </com.foodtechlab.ftlandroiduikit.container.FTLConstraintLayout>

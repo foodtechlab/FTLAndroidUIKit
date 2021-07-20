@@ -5,13 +5,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.viewpager2.widget.ViewPager2
+import com.foodtechlab.ftlandroiduikit.tab.FTLTabLayout
 import com.foodtechlab.ftlandroiduikitsample.R
-import kotlinx.android.synthetic.main.fragment_playground.*
+import com.google.android.material.tabs.TabLayoutMediator
 
 class PlaygroundFragment : Fragment() {
-    var isVisibleBorder = false
-    var isVisibleBackground = true
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -22,16 +21,17 @@ class PlaygroundFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val tblContainer = view.findViewById<FTLTabLayout>(R.id.tbl_playground)
+        val vpChecklists = view.findViewById<ViewPager2>(R.id.vp_playground)
 
-        btn_border.setOnClickListener {
-            isVisibleBorder = !isVisibleBorder
-            tg_test.shouldVisibleBorder = isVisibleBorder
-        }
+        val vpAdapter = VPAdapter(childFragmentManager, lifecycle)
+        vpChecklists.adapter = vpAdapter
 
-        btn_background.setOnClickListener {
-            isVisibleBackground = !isVisibleBackground
-            tg_test.shouldVisibleBackground = isVisibleBackground
-        }
+        TabLayoutMediator(tblContainer.tabs, vpChecklists) { tab, position ->
+            tab.text = vpAdapter.getPageTitle(position)
+        }.attach()
+
+        tblContainer.changeCaseForItems(false)
     }
 
     companion object {

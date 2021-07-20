@@ -7,14 +7,17 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.annotation.IntDef
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
+import androidx.core.view.children
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.common.NetworkConnectivityState
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.google.android.material.tabs.TabLayout
+
 
 class FTLTabLayout @JvmOverloads constructor(
     context: Context,
@@ -131,6 +134,18 @@ class FTLTabLayout @JvmOverloads constructor(
             )
         }
         tvConnectivity.setBackgroundColor(ContextCompat.getColor(context, networkState.color))
+    }
+
+    fun changeCaseForItems(isAllCaps: Boolean) {
+        for (i in 0 until tabs.tabCount) {
+            tabs.getTabAt(i)?.let { tab ->
+                tab.view.children.forEach {
+                    if (it is AppCompatTextView) {
+                        it.isAllCaps = isAllCaps
+                    }
+                }
+            }
+        }
     }
 
     companion object {
