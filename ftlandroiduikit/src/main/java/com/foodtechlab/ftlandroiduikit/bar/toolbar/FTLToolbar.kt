@@ -17,7 +17,9 @@ import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.common.NetworkConnectivityState
 import com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLToolbarDotsProgress
+import com.foodtechlab.ftlandroiduikit.progress.FTLCircleScaleView
 import com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
 import com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.DeliveryStatus
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
@@ -56,6 +58,18 @@ class FTLToolbar @JvmOverloads constructor(
         get() = ftlTitle.subtitleColor
         set(value) {
             ftlTitle.subtitleColor = value
+        }
+
+    var currentProgress: Int = 0
+        set(value) {
+            field = value
+            cpiProgress.currentProgress = field
+        }
+
+    var maxProgress: Int = 100
+        set(value) {
+            field = value
+            cpiProgress.maxProgress = field
         }
 
     var title: String?
@@ -146,6 +160,7 @@ class FTLToolbar @JvmOverloads constructor(
     private val ivLogo: ImageView
     private val vIndicator: View
     private val flIndicator: View
+    private val cpiProgress: FTLCircleScaleView
     private val ftlTitle: FTLTitle
     private val tvConnectivity: TextView
     private val tvTime: FTLDeliveryTimeView
@@ -169,6 +184,7 @@ class FTLToolbar @JvmOverloads constructor(
         ivLogo = findViewById(R.id.iv_ftl_toolbar_logo)
         vIndicator = findViewById(R.id.v_ftl_toolbar_indicator)
         flIndicator = findViewById(R.id.fl_ftl_toolbar_indicator)
+        cpiProgress = findViewById(R.id.cpi_ftl_toolbar_progress)
         flEndContainer = findViewById(R.id.fl_ftl_toolbar_end_container)
         vShadow = findViewById(R.id.v_ftl_toolbar_shadow)
         rlContainer = findViewById(R.id.rl_ftl_toolbar_container)
@@ -278,6 +294,21 @@ class FTLToolbar @JvmOverloads constructor(
 
     fun showConnectionIndicator() {
         showOnlyOneChildInEndContainer(flIndicator.id)
+    }
+
+    fun showCircleProgressIndicator(
+        imageType: ImageType = ImageType.CHECKLIST,
+        @ColorRes trackColorRes: Int = -1,
+        @ColorRes backgroundTrackColorRes: Int = -1,
+        @ColorRes imageColorRes: Int = -1
+    ) {
+        with(cpiProgress) {
+            this.imageType = imageType
+            updateTrackColorTheme(trackColorRes)
+            updateBackgroundTrackColorTheme(backgroundTrackColorRes)
+            updateImageColorTheme(imageColorRes)
+        }
+        showOnlyOneChildInEndContainer(cpiProgress.id)
     }
 
     fun showTime(timeZone: String?, deliveryTime: Long, status: DeliveryStatus) {
