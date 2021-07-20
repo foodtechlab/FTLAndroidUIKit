@@ -33,5 +33,7 @@ enum class ImageType(@DrawableRes val imgRes: Int) {
     MAP_PIN(R.drawable.ic_map_pin),
     PIN_CODE(R.drawable.ic_pin_code),
     RESTAURANT(R.drawable.ic_restaurant),
-    CHECKLIST(R.drawable.ic_checklist)
+    CHECKLIST(R.drawable.ic_checklist),
+    CROSS(R.drawable.ic_cross),
+    QUESTION(R.drawable.ic_question)
 }

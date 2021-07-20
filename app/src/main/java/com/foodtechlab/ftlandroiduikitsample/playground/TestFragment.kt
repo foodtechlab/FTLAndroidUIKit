@@ -4,10 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
+import com.foodtechlab.ftlandroiduikit.util.changeColor
 import com.foodtechlab.ftlandroiduikitsample.R
 import com.foodtechlab.ftlandroiduikitsample.utils.argument
+import kotlinx.android.synthetic.main.fragment_test.*
 
 class TestFragment() : Fragment() {
     private var pos: Int by argument(KEY_POSITION)
@@ -28,9 +31,38 @@ class TestFragment() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val tvContent = view.findViewById<TextView>(R.id.tv_test_content)
-        tvContent.text =
-            "Параметры: \ndisplayMode=scrollable, \ngravityMode=center, \nshouldDrawIndicatorFullWidth=true"
+        tv_progress_section.currentProgress = 85
+        val gallery = ContextCompat.getDrawable(tv_text_with_icons.context, R.drawable.ic_media_content_gallery).apply {
+            this?.mutate()?.changeColor(
+                ContextCompat.getColor(tv_progress_section.context, R.color.IconGreyLight)
+            )
+        }
+        val message = ContextCompat.getDrawable(tv_text_with_icons.context, R.drawable.ic_media_content_message).apply {
+            this?.mutate()?.changeColor(
+                ContextCompat.getColor(tv_progress_section.context, R.color.IconGreyLight)
+            )
+        }
+        val camera = ContextCompat.getDrawable(tv_text_with_icons.context, R.drawable.ic_media_content_camera).apply {
+            this?.mutate()?.changeColor(
+                ContextCompat.getColor(tv_progress_section.context, R.color.IconBlueLight)
+            )
+        }
+        val video = ContextCompat.getDrawable(tv_text_with_icons.context, R.drawable.ic_media_content_video).apply {
+            this?.mutate()?.changeColor(
+                ContextCompat.getColor(tv_progress_section.context, R.color.IconBlueLight)
+            )
+        }
+        val voice = ContextCompat.getDrawable(tv_text_with_icons.context, R.drawable.ic_media_content_voice).apply {
+            this?.mutate()?.changeColor(
+                ContextCompat.getColor(tv_progress_section.context, R.color.IconDangerLight)
+            )
+        }
+        with(tv_text_with_icons) {
+            addIconsForBottomSlot(listOf(gallery, message, camera, video, voice))
+            imageType = ImageType.CROSS
+            updateImageColors(R.color.IconPrimaryLight, R.color.IconPrimaryDark)
+            updateImageBackgroundColors(R.color.IconDangerLight, R.color.IconDangerDark)
+        }
     }
 
     companion object {

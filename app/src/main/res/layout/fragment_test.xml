@@ -5,13 +5,57 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv_test_content"
-        android:layout_width="wrap_content"
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLSectionTextView
+        android:id="@+id/tv_progress_section"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_margin="8dp"
+        app:leftSlotType="PROGRESS"
+        app:textForTopSlot="Something progress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLSectionTextView
+        android:id="@+id/tv_only_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:leftSlotType="NONE"
+        app:textForTopSlot="Hello world"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_progress_section" />
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLSectionTextView
+        android:id="@+id/tv_with_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:leftSlotType="ICON"
+        app:textForTopSlot="Text with Icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_only_text" />
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLSectionTextView
+        android:id="@+id/tv_two_texts_slot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:bottomSlotType="TEXT"
+        app:textForTopSlot="First Text"
+        app:textForBottomSlot="Second Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_with_icon" />
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLSectionTextView
+        android:id="@+id/tv_text_with_icons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:bottomSlotType="ICONS"
+        app:textForTopSlot="First Text"
+        app:textForBottomSlot="Second Text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_two_texts_slot" />
 </androidx.constraintlayout.widget.ConstraintLayout>
