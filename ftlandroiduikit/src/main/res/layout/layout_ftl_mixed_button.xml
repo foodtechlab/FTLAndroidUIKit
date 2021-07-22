@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    tools:parentTag="android.widget.RelativeLayout">
+
+    <FrameLayout
+        android:id="@+id/fl_mixed_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="4dp"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:id="@+id/iv_mixed_button_image_slot"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/shape_oval_solid_white"
+            android:visibility="gone"
+            app:srcCompat="@drawable/ic_file"
+            tools:ignore="ContentDescription"
+            tools:visibility="visible" />
+
+        <com.foodtechlab.ftlandroiduikit.progress.FTLCircleScaleView
+            android:id="@+id/cpi_mixed_button_progress_slot"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:visibility="gone"
+            app:sizeProgress="32dp" />
+    </FrameLayout>
+
+    <TextView
+        android:id="@+id/tv_mixed_button_text_slot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="false"
+        android:layout_centerInParent="true"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="12dp"
+        android:layout_toEndOf="@id/fl_mixed_button"
+        android:ellipsize="end"
+        android:fontFamily="@font/roboto_regular"
+        android:lineSpacingExtra="8sp"
+        android:maxLines="1"
+        android:textColor="@color/TextPrimaryLight"
+        android:textSize="12sp"
+        tools:text="New Text New" />
+</merge>

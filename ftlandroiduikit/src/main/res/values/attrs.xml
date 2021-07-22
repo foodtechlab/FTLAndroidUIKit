@@ -624,4 +624,15 @@
         <attr name="sizeProgress" format="dimension" />
         <attr name="imageType" />
     </declare-styleable>
+    <declare-styleable name="FTLMixedButton" parent="FTLDefaultTextView">
+        <attr name="mixedButton_currentProgress" format="integer" />
+        <attr name="mixedButton_maxProgress" format="integer" />
+        <attr name="textForSlot" />
+        <attr name="imageType" />
+        <attr name="mixedButton_leftSlotType" format="enum">
+            <enum name="NONE" value="0" />
+            <enum name="ICON" value="1" />
+            <enum name="PROGRESS" value="2" />
+        </attr>
+    </declare-styleable>
 </resources>

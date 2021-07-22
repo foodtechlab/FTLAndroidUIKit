@@ -1,6 +1,7 @@
 package com.foodtechlab.ftlandroiduikit.util
 
 import android.animation.Animator
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.view.ViewAnimationUtils
@@ -141,7 +142,8 @@ object ThemeManager {
         val ftlTabLayoutTheme: FTLTabLayoutTheme,
         val ftlRecordButtonTheme: FTLRecordButtonTheme,
         val ftlTagViewTheme: FTLTagViewTheme,
-        val ftlCircleScaleViewTheme: FTLCircleScaleViewTheme
+        val ftlCircleScaleViewTheme: FTLCircleScaleViewTheme,
+        val ftlMixedButtonTheme: FTLMixedButtonTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultLight),
@@ -352,7 +354,17 @@ object ThemeManager {
                 R.color.TagBackgroundLight,
                 R.color.TagBorderLight
             ),
-            FTLCircleScaleViewTheme(R.color.TimerBackgroundLight, R.color.TimerPositiveLight, R.color.IconSecondaryLight)
+            FTLCircleScaleViewTheme(
+                R.color.TimerBackgroundLight,
+                R.color.TimerPositiveLight,
+                R.color.IconSecondaryLight
+            ),
+            FTLMixedButtonTheme(
+                R.color.TextPrimaryLight,
+                R.color.IconPrimaryLight,
+                R.color.IconBackgroundGreenLight,
+                R.color.selector_ftl_mixed_button_light
+            )
         ),
         DARK(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultDark),
@@ -560,7 +572,17 @@ object ThemeManager {
                 R.color.TagBackgroundDark,
                 R.color.TagBorderDark
             ),
-            FTLCircleScaleViewTheme(R.color.TimerBackgroundDark, R.color.TimerPositiveDark, R.color.IconSecondaryDark)
+            FTLCircleScaleViewTheme(
+                R.color.TimerBackgroundDark,
+                R.color.TimerPositiveDark,
+                R.color.IconSecondaryDark
+            ),
+            FTLMixedButtonTheme(
+                R.color.TextPrimaryDark,
+                R.color.IconPrimaryDark,
+                R.color.IconBackgroundGreenDark,
+                R.color.selector_ftl_mixed_button_dark
+            )
         )
     }
 
@@ -835,6 +857,13 @@ object ThemeManager {
         @ColorRes val backgroundTrackColor: Int,
         @ColorRes var trackColor: Int,
         @ColorRes val imageColor: Int
+    )
+
+    data class FTLMixedButtonTheme(
+        @ColorRes val buttonTextColor: Int,
+        @ColorRes val imageColor: Int,
+        @ColorRes val imageBackgroundColor: Int,
+        @ColorRes val buttonBackgroundColor: Int
     )
 
     interface ThemeChangedListener {

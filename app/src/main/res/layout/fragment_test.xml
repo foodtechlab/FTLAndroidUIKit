@@ -58,4 +58,87 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_two_texts_slot" />
+
+    <com.foodtechlab.ftlandroiduikit.button.mixed.FTLMixedButton
+        android:id="@+id/btn_mixed_full"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:textForSlot="осталось: 10"
+        app:mixedButton_leftSlotType="PROGRESS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_text_with_icons"/>
+
+    <com.foodtechlab.ftlandroiduikit.button.mixed.FTLMixedButton
+        android:id="@+id/btn_mixed1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:mixedButton_leftSlotType="PROGRESS"
+        android:layout_margin="8dp"
+        app:textForSlot="осталось: 10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintEnd_toStartOf="@id/btn_mixed2"
+        app:layout_constraintTop_toBottomOf="@id/btn_mixed_full"/>
+
+    <com.foodtechlab.ftlandroiduikit.button.mixed.FTLMixedButton
+        android:id="@+id/btn_mixed2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:mixedButton_leftSlotType="PROGRESS"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="8dp"
+        app:textForSlot="осталось: 10"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/btn_mixed1"
+        app:layout_constraintTop_toBottomOf="@id/btn_mixed_full"/>
+
+    <com.foodtechlab.ftlandroiduikit.button.mixed.FTLMixedButton
+        android:id="@+id/btn_mixed3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:mixedButton_leftSlotType="ICON"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="8dp"
+        app:textForSlot="осталось: 10"
+        app:imageType="ALL_PAID"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintEnd_toStartOf="@id/btn_mixed4"
+        app:layout_constraintTop_toBottomOf="@id/btn_mixed1"/>
+    <com.foodtechlab.ftlandroiduikit.button.mixed.FTLMixedButton
+        android:id="@+id/btn_mixed4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:mixedButton_leftSlotType="ICON"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="8dp"
+        app:textForSlot="осталось: 10"
+        app:imageType="CROSS"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/btn_mixed3"
+        app:layout_constraintTop_toBottomOf="@id/btn_mixed1"/>
+
+    <com.foodtechlab.ftlandroiduikit.button.mixed.FTLMixedButton
+        android:id="@+id/btn_mixed5"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:mixedButton_leftSlotType="NONE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="8dp"
+        app:textForSlot="FTLMixedButton Full Size"
+        app:layout_constraintTop_toBottomOf="@id/btn_mixed4"/>
+
+    <com.foodtechlab.ftlandroiduikit.button.mixed.FTLMixedButton
+        android:id="@+id/btn_mixed6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:mixedButton_leftSlotType="NONE"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_margin="8dp"
+        app:textForSlot="FTLMixedButton wrap content"
+        app:layout_constraintTop_toBottomOf="@id/btn_mixed5"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

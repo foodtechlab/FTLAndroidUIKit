@@ -32,13 +32,13 @@ class FTLSectionTextView @JvmOverloads constructor(
     var currentProgress: Int = 0
         set(value) {
             field = value
-            cpiProgress.currentProgress = field
+            cpiProgressSlot.currentProgress = field
         }
 
     var maxProgress: Int = 100
         set(value) {
             field = value
-            cpiProgress.maxProgress = field
+            cpiProgressSlot.maxProgress = field
         }
 
     var textForTopSlot: String = ""
@@ -59,17 +59,17 @@ class FTLSectionTextView @JvmOverloads constructor(
             when (field) {
                 SectionLeftSlotType.ICON -> {
                     changeStartPaddingForMiddleColumn(true)
-                    cpiProgress.isVisible = false
+                    cpiProgressSlot.isVisible = false
                     ivImageSlot.isVisible = true
                 }
                 SectionLeftSlotType.PROGRESS -> {
                     changeStartPaddingForMiddleColumn(true)
-                    cpiProgress.isVisible = true
+                    cpiProgressSlot.isVisible = true
                     ivImageSlot.isVisible = false
                 }
                 else -> {
                     changeStartPaddingForMiddleColumn(false)
-                    cpiProgress.isVisible = false
+                    cpiProgressSlot.isVisible = false
                     ivImageSlot.isVisible = false
                 }
             }
@@ -103,6 +103,12 @@ class FTLSectionTextView @JvmOverloads constructor(
             if (value != ImageType.NONE) ivImageSlot.setImageResource(field.imgRes)
         }
 
+    var imageTypeForProgress: ImageType = ImageType.CHECKLIST
+        set(value) {
+            field = value
+            cpiProgressSlot.imageType = field
+        }
+
     @ColorRes
     private var imageBackgroundLightColor = R.color.IconBackgroundDefaultLight
 
@@ -119,7 +125,7 @@ class FTLSectionTextView @JvmOverloads constructor(
     private var tvBottomTextSlot: TextView
     private var ivImageSlot: ImageView
     private var ivRightArrow: ImageView
-    private var cpiProgress: FTLCircleScaleView
+    private var cpiProgressSlot: FTLCircleScaleView
     private var clContainer: ConstraintLayout
     private var llIconsContainer: LinearLayout
 
@@ -130,7 +136,7 @@ class FTLSectionTextView @JvmOverloads constructor(
         tvBottomTextSlot = findViewById(R.id.tv_section_text_view_bottom_slot)
         ivImageSlot = findViewById(R.id.iv_section_text_view_image_slot)
         ivRightArrow = findViewById(R.id.iv_section_text_view_right_arrow)
-        cpiProgress = findViewById(R.id.cpi_section_text_view_progress_slot)
+        cpiProgressSlot = findViewById(R.id.cpi_section_text_view_progress_slot)
         clContainer = findViewById(R.id.cl_section_text_view_container)
         llIconsContainer = findViewById(R.id.ll_section_text_view_bottom_slot)
 
@@ -160,8 +166,8 @@ class FTLSectionTextView @JvmOverloads constructor(
     }
 
     override fun onDetachedFromWindow() {
-        super.onDetachedFromWindow()
         ThemeManager.removeListener(this)
+        super.onDetachedFromWindow()
     }
 
     override fun onThemeChanged(theme: ThemeManager.Theme) {
@@ -201,15 +207,15 @@ class FTLSectionTextView @JvmOverloads constructor(
     }
 
     fun updateProgressTrackColor(@ColorRes colorRes: Int) {
-        cpiProgress.updateTrackColorTheme(colorRes)
+        cpiProgressSlot.updateTrackColorTheme(colorRes)
     }
 
     fun updateProgressBackgroundTrackColor(@ColorRes colorRes: Int) {
-        cpiProgress.updateBackgroundTrackColorTheme(colorRes)
+        cpiProgressSlot.updateBackgroundTrackColorTheme(colorRes)
     }
 
     fun updateProgressImageColor(@ColorRes colorRes: Int) {
-        cpiProgress.updateImageColorTheme(colorRes)
+        cpiProgressSlot.updateImageColorTheme(colorRes)
     }
 
     fun updateImageBackgroundColors(
