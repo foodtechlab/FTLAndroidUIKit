@@ -93,12 +93,6 @@ class TestFragment() : Fragment() {
                 else -> R.color.TimerNegativeDark
             }
         )
-        btn_mixed4.updateImageBackgroundColorTheme(
-            when (ThemeManager.theme) {
-                ThemeManager.Theme.LIGHT -> R.color.IconBackgroundOrangeLight
-                else -> R.color.IconBackgroundOrangeDark
-            }
-        )
     }
 
     companion object {

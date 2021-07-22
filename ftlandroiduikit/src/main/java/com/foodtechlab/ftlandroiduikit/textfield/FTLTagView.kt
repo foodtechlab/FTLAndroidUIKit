@@ -63,6 +63,8 @@ class FTLTagView @JvmOverloads constructor(
     init {
         context.withStyledAttributes(attrs, R.styleable.FTLTagView) {
             tag = getString(R.styleable.FTLTagView_android_text)
+            shouldVisibleBackground = getBoolean(R.styleable.FTLTagView_shouldVisibleBackground, true)
+            shouldVisibleBorder = getBoolean(R.styleable.FTLTagView_shouldVisibleBorder, false)
         }
         ellipsize = TextUtils.TruncateAt.END
         isSingleLine = true
@@ -78,7 +80,7 @@ class FTLTagView @JvmOverloads constructor(
             verticalPaddings
         )
 
-        onThemeChanged(ThemeManager.theme)
+        updateTextColorTheme(tagTextColor)
     }
 
     override fun onAttachedToWindow() {
