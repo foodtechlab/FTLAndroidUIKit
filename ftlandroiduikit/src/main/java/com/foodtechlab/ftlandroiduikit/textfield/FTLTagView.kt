@@ -67,7 +67,6 @@ class FTLTagView @JvmOverloads constructor(
         ellipsize = TextUtils.TruncateAt.END
         isSingleLine = true
         setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE)
-        lineHeight = context.dpToPxInt(20f)
         typeface = ResourcesCompat.getFont(context, R.font.roboto_regular)
 
         val verticalPaddings = context.dpToPxInt(VERTICAL_PADDING)
@@ -151,7 +150,7 @@ class FTLTagView @JvmOverloads constructor(
     companion object {
         private const val TEXT_SIZE = 14F
         private const val HORIZONTAL_PADDING = 8F
-        private const val VERTICAL_PADDING = 2F
+        private const val VERTICAL_PADDING = 6F
         private const val CORNERS = 16F
         private const val STROKE_WIDTH = 1F
     }

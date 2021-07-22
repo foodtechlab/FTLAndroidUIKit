@@ -76,7 +76,6 @@
         android:layout_height="wrap_content"
         app:mixedButton_leftSlotType="PROGRESS"
         android:layout_margin="8dp"
-        app:textForSlot="осталось: 10"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintEnd_toStartOf="@id/btn_mixed2"

@@ -1,6 +1,7 @@
 package com.foodtechlab.ftlandroiduikitsample.playground
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -81,7 +82,11 @@ class TestFragment() : Fragment() {
 
         btn_mixed_full.currentProgress = 90
         btn_mixed1.currentProgress = 90
+        btn_mixed1.textForSlot = "Hello world"
         btn_mixed2.currentProgress = 10
+        btn_mixed2.setOnClickListener {
+            Log.i("MY TAG", "click btn_mixed2")
+        }
         btn_mixed2.updateProgressTrackColor(
             when (ThemeManager.theme) {
                 ThemeManager.Theme.LIGHT -> R.color.TimerNegativeLight

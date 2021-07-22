@@ -34,10 +34,10 @@ class FTLMixedButton @JvmOverloads constructor(
             cpiProgressSlot.maxProgress = field
         }
 
-    var textForSlot: CharSequence
+    var textForSlot: CharSequence?
         get() = tvTextSlot.text
         set(value) {
-            tvTextSlot.text = value.toString()
+            tvTextSlot.text = value
         }
 
     var leftSlotType: MixedLeftSlotType = MixedLeftSlotType.ICON
@@ -175,15 +175,12 @@ class FTLMixedButton @JvmOverloads constructor(
 
     fun updateBackgroundColorTheme(@ColorRes colorRes: Int) {
         buttonBackgroundColor = colorRes
-        backgroundTintList = ColorStateList.valueOf(
-            ContextCompat.getColor(
-                context,
-                if (buttonBackgroundColor != -1)
-                    buttonBackgroundColor
-                else
-                    ThemeManager.theme.ftlMixedButtonTheme.buttonBackgroundColor
-
-            )
+        backgroundTintList = ContextCompat.getColorStateList(
+            context,
+            if (buttonBackgroundColor != -1)
+                buttonBackgroundColor
+            else
+                ThemeManager.theme.ftlMixedButtonTheme.buttonBackgroundColor
         )
     }
 
