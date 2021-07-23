@@ -39,10 +39,10 @@ class FTLTagView @JvmOverloads constructor(
         }
 
     var tag: String? = null
-    set(value) {
-        field = value
-        text = field
-    }
+        set(value) {
+            field = value
+            text = field
+        }
 
     @ColorRes
     private var tagBackgroundColor = -1
@@ -63,7 +63,8 @@ class FTLTagView @JvmOverloads constructor(
     init {
         context.withStyledAttributes(attrs, R.styleable.FTLTagView) {
             tag = getString(R.styleable.FTLTagView_android_text)
-            shouldVisibleBackground = getBoolean(R.styleable.FTLTagView_shouldVisibleBackground, true)
+            shouldVisibleBackground =
+                getBoolean(R.styleable.FTLTagView_shouldVisibleBackground, true)
             shouldVisibleBorder = getBoolean(R.styleable.FTLTagView_shouldVisibleBorder, false)
         }
         ellipsize = TextUtils.TruncateAt.END
@@ -105,10 +106,8 @@ class FTLTagView @JvmOverloads constructor(
         setTextColor(
             ContextCompat.getColorStateList(
                 context,
-                if (tagBorderColor != -1)
-                    tagTextColor
-                else
-                    ThemeManager.theme.ftlTagViewTheme.textColor
+                if (tagBorderColor != -1) tagTextColor
+                else ThemeManager.theme.ftlTagViewTheme.textColor
             )
         )
     }
@@ -118,10 +117,8 @@ class FTLTagView @JvmOverloads constructor(
         if (shouldVisibleBackground) {
             shapeDrawable.fillColor = ContextCompat.getColorStateList(
                 context,
-                if (tagBackgroundColor != -1)
-                    tagBackgroundColor
-                else
-                    ThemeManager.theme.ftlTagViewTheme.backgroundColor
+                if (tagBackgroundColor != -1) tagBackgroundColor
+                else ThemeManager.theme.ftlTagViewTheme.backgroundColor
             )
         } else {
             shapeDrawable.fillColor = ContextCompat.getColorStateList(
@@ -138,10 +135,8 @@ class FTLTagView @JvmOverloads constructor(
                 context.dpToPx(STROKE_WIDTH),
                 ContextCompat.getColor(
                     context,
-                    if (tagBorderColor != -1)
-                        tagBorderColor
-                    else
-                        ThemeManager.theme.ftlTagViewTheme.borderColor
+                    if (tagBorderColor != -1) tagBorderColor
+                    else ThemeManager.theme.ftlTagViewTheme.borderColor
                 )
             )
         } else {

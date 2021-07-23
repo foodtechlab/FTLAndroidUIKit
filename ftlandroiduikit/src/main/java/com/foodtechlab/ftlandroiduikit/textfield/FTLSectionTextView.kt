@@ -242,7 +242,6 @@ class FTLSectionTextView @JvmOverloads constructor(
             val layoutParams = LinearLayout.LayoutParams(sizeIcon, sizeIcon).apply {
                 marginEnd = context.dpToPxInt(TINY_ICON_HORIZONTAL_MARGIN)
             }
-
             icon.layoutParams = layoutParams
             icon.setImageDrawable(it)
             llIconsContainer.addView(icon)

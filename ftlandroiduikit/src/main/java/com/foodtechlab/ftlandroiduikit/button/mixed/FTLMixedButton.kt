@@ -151,10 +151,8 @@ class FTLMixedButton @JvmOverloads constructor(
         ivImageSlot.setColorFilter(
             ContextCompat.getColor(
                 context,
-                if (imageColor != -1)
-                    imageColor
-                else
-                    ThemeManager.theme.ftlMixedButtonTheme.imageColor
+                if (imageColor != -1) imageColor
+                else ThemeManager.theme.ftlMixedButtonTheme.imageColor
             )
         )
     }
@@ -164,11 +162,8 @@ class FTLMixedButton @JvmOverloads constructor(
         ivImageSlot.backgroundTintList = ColorStateList.valueOf(
             ContextCompat.getColor(
                 context,
-                if (imageBackgroundColor != -1)
-                    imageBackgroundColor
-                else
-                    ThemeManager.theme.ftlMixedButtonTheme.imageBackgroundColor
-
+                if (imageBackgroundColor != -1) imageBackgroundColor
+                else ThemeManager.theme.ftlMixedButtonTheme.imageBackgroundColor
             )
         )
     }
@@ -177,10 +172,8 @@ class FTLMixedButton @JvmOverloads constructor(
         buttonBackgroundColor = colorRes
         backgroundTintList = ContextCompat.getColorStateList(
             context,
-            if (buttonBackgroundColor != -1)
-                buttonBackgroundColor
-            else
-                ThemeManager.theme.ftlMixedButtonTheme.buttonBackgroundColor
+            if (buttonBackgroundColor != -1) buttonBackgroundColor
+            else ThemeManager.theme.ftlMixedButtonTheme.buttonBackgroundColor
         )
     }
 
@@ -189,10 +182,8 @@ class FTLMixedButton @JvmOverloads constructor(
         tvTextSlot.setTextColor(
             ContextCompat.getColor(
                 context,
-                if (buttonTextColor != -1)
-                    buttonTextColor
-                else
-                    ThemeManager.theme.ftlMixedButtonTheme.buttonTextColor
+                if (buttonTextColor != -1) buttonTextColor
+                else ThemeManager.theme.ftlMixedButtonTheme.buttonTextColor
             )
         )
     }
@@ -215,7 +206,6 @@ class FTLMixedButton @JvmOverloads constructor(
             param.removeRule(CENTER_HORIZONTAL)
             param.addRule(END_OF, flLeftSlotContainer.id)
         }
-
         tvTextSlot.layoutParams = param
     }
 
