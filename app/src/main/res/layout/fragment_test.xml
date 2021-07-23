@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cl_test"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLSectionTextView
+        android:id="@+id/tv_progress_section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:leftSlotType="PROGRESS"
+        app:textForTopSlot="Something progress" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLSectionTextView
+        android:id="@+id/tv_only_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_progress_section"
+        app:leftSlotType="NONE"
+        app:textForTopSlot="Hello world" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLSectionTextView
+        android:id="@+id/tv_with_icon"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_only_text"
+        app:leftSlotType="ICON"
+        app:textForTopSlot="Text with Icon" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLSectionTextView
+        android:id="@+id/tv_two_texts_slot"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:bottomSlotType="TEXT"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_with_icon"
+        app:textForBottomSlot="Second Text"
+        app:textForTopSlot="First Text" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLSectionTextView
+        android:id="@+id/tv_text_with_icons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:bottomSlotType="ICONS"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_two_texts_slot"
+        app:textForBottomSlot="Second Text"
+        app:textForTopSlot="First Text" />
+
+    <com.foodtechlab.ftlandroiduikit.button.mixed.FTLMixedButton
+        android:id="@+id/btn_mixed_full"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_text_with_icons"
+        app:mixedButton_leftSlotType="PROGRESS"
+        app:textForSlot="осталось: 10" />
+
+    <com.foodtechlab.ftlandroiduikit.button.mixed.FTLMixedButton
+        android:id="@+id/btn_mixed1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toStartOf="@id/btn_mixed2"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_mixed_full"
+        app:mixedButton_leftSlotType="PROGRESS" />
+
+    <com.foodtechlab.ftlandroiduikit.button.mixed.FTLMixedButton
+        android:id="@+id/btn_mixed2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@id/btn_mixed1"
+        app:layout_constraintTop_toBottomOf="@id/btn_mixed_full"
+        app:mixedButton_leftSlotType="PROGRESS"
+        app:textForSlot="осталось: 10" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTagView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="VLG0.1"
+        android:layout_margin="8dp"
+        app:shouldVisibleBorder="true"
+        app:shouldVisibleBackground="false"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_mixed2" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

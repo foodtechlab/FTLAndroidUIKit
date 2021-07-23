@@ -1,4 +1,4 @@
-package com.foodtechlab.ftlandroiduikit.bar.toolbar
+package com.foodtechlab.ftlandroiduikit.common
 
 import androidx.annotation.ColorRes
 import androidx.annotation.StringRes

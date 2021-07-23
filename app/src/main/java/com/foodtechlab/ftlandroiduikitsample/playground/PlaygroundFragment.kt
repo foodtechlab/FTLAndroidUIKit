@@ -1,18 +1,18 @@
 package com.foodtechlab.ftlandroiduikitsample.playground
 
 import android.os.Bundle
-import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import androidx.fragment.app.Fragment
-import com.foodtechlab.ftlandroiduikit.textfield.helper.TextWatcher
+import androidx.viewpager2.widget.ViewPager2
+import com.foodtechlab.ftlandroiduikit.bar.toolbar.FTLToolbar
+import com.foodtechlab.ftlandroiduikit.tab.FTLTabLayout
+import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
 import com.foodtechlab.ftlandroiduikitsample.R
-import kotlinx.android.synthetic.main.fragment_playground.*
+import com.google.android.material.tabs.TabLayoutMediator
 
 class PlaygroundFragment : Fragment() {
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -23,37 +23,22 @@ class PlaygroundFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val cats = arrayListOf("Мурзик", "Рыжик", "Барсик", "Борис Бритва", "Мурзилка", "Мурка")
+        val tblContainer = view.findViewById<FTLTabLayout>(R.id.tbl_playground)
+        val vpChecklists = view.findViewById<ViewPager2>(R.id.vp_playground)
+        val toolbar = view.findViewById<FTLToolbar>(R.id.toolbar)
 
-        val adapter = ArrayAdapter(
-            requireContext(),
-            R.layout.layout_ftl_autocomplete_drop_down_item,
-            cats
-        )
+        val vpAdapter = VPAdapter(childFragmentManager, lifecycle)
+        vpChecklists.adapter = vpAdapter
 
-        et_test_autocomplete.setHintsAdapter(adapter)
+        TabLayoutMediator(tblContainer.tabs, vpChecklists) { tab, position ->
+            tab.text = vpAdapter.getPageTitle(position)
+        }.attach()
 
-        with(et_test_autocomplete) {
-            setOnFocusChangeListener { _, hasFocus ->
-                if (hasFocus) {
-                    // Выводим выпадающий список
-                    et_test_autocomplete.showHints()
-                }
-            }
-            addTextChangedListener(object : TextWatcher() {
-                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                    if (s?.length ?: 0 >= 6) {
-                        et_test_autocomplete.hideHints()
-                    }
-                    super.onTextChanged(s, start, before, count)
-                }
+        tblContainer.changeCaseForItems(false)
 
-                override fun afterTextChanged(s: Editable?) {
-                    super.afterTextChanged(s)
-                    foldingDropDownDialog(cats, s, 2)
-                }
-            })
-        }
+        toolbar.showCircleProgressIndicator(ImageType.BONUSES)
+        toolbar.maxProgress = 15
+        toolbar.currentProgress = 10
     }
 
     companion object {
