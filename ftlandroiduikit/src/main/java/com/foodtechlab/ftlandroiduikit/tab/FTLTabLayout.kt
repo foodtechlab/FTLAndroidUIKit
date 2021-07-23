@@ -120,7 +120,6 @@ class FTLTabLayout @JvmOverloads constructor(
     }
 
     override fun onThemeChanged(theme: ThemeManager.Theme) {
-        setBackgroundColor(ContextCompat.getColor(context, theme.ftlTabLayoutTheme.backgroundColor))
         with(tabs) {
             setSelectedTabIndicatorColor(
                 ContextCompat.getColor(
@@ -132,6 +131,7 @@ class FTLTabLayout @JvmOverloads constructor(
                 ContextCompat.getColor(context, theme.ftlTabLayoutTheme.tabTextNormalColor),
                 ContextCompat.getColor(context, theme.ftlTabLayoutTheme.tabTextSelectedColor)
             )
+            setBackgroundColor(ContextCompat.getColor(context, theme.ftlTabLayoutTheme.backgroundColor))
         }
         tvConnectivity.setBackgroundColor(ContextCompat.getColor(context, networkState.color))
     }
