@@ -131,7 +131,12 @@ class FTLTabLayout @JvmOverloads constructor(
                 ContextCompat.getColor(context, theme.ftlTabLayoutTheme.tabTextNormalColor),
                 ContextCompat.getColor(context, theme.ftlTabLayoutTheme.tabTextSelectedColor)
             )
-            setBackgroundColor(ContextCompat.getColor(context, theme.ftlTabLayoutTheme.backgroundColor))
+            setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    theme.ftlTabLayoutTheme.backgroundColor
+                )
+            )
         }
         tvConnectivity.setBackgroundColor(ContextCompat.getColor(context, networkState.color))
     }
