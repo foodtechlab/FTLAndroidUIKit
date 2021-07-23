@@ -12,6 +12,7 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.annotation.ColorInt
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import kotlin.math.roundToInt
 
 /**
  * Created by Umalt on 07.05.2020
@@ -33,7 +34,7 @@ fun Context.dpToPxInt(dp: Float): Int {
         TypedValue.COMPLEX_UNIT_DIP,
         dp,
         this.resources.displayMetrics
-    ).toInt()
+    ).roundToInt()
 }
 
 fun Context.spToPx(sp: Float): Float {

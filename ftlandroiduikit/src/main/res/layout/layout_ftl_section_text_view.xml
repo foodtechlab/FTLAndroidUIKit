@@ -1,41 +1,111 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cl_section_text_view_container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <ImageView
-        android:id="@+id/iv_image_slot"
+        android:id="@+id/iv_section_text_view_image_slot"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:layout_marginEnd="8dp"
         android:background="@drawable/shape_oval_solid_white"
         android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@id/tv_section_text_view_top_slot"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_file"
         tools:ignore="ContentDescription"
         tools:visibility="visible" />
 
+    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleScaleView
+        android:id="@+id/cpi_section_text_view_progress_slot"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toStartOf="@id/tv_section_text_view_top_slot"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:sizeProgress="32dp" />
+
     <TextView
-        android:id="@+id/tv_text_slot"
+        android:id="@+id/tv_section_text_view_top_slot"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
-        android:layout_marginEnd="8dp"
-        android:layout_weight="1"
         android:fontFamily="@font/roboto_regular"
         android:includeFontPadding="false"
         android:lineSpacingExtra="8sp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
         android:textColor="@color/TextPrimaryLight"
         android:textSize="16sp"
+        app:layout_constraintBottom_toTopOf="@id/b_section_text_view_bottom_row"
+        app:layout_constraintEnd_toStartOf="@id/iv_section_text_view_right_arrow"
+        app:layout_constraintStart_toEndOf="@id/b_section_text_view_start_column"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="New Text New" />
+
+    <TextView
+        android:id="@+id/tv_section_text_view_bottom_slot"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/roboto_regular"
+        android:includeFontPadding="false"
+        android:lineSpacingExtra="8sp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:textColor="@color/TextOnColorAdditionalLight"
+        android:textSize="12sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@id/tv_section_text_view_top_slot"
+        app:layout_constraintStart_toStartOf="@id/tv_section_text_view_top_slot"
+        app:layout_constraintTop_toBottomOf="@id/tv_section_text_view_top_slot"
+        tools:text="New Text New" />
+
+    <LinearLayout
+        android:id="@+id/ll_section_text_view_bottom_slot"
+        android:layout_width="0dp"
+        android:layout_height="16dp"
+        android:layout_gravity="center_vertical"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        app:layout_constraintEnd_toEndOf="@id/tv_section_text_view_top_slot"
+        app:layout_constraintStart_toStartOf="@id/tv_section_text_view_top_slot"
+        app:layout_constraintTop_toBottomOf="@id/tv_section_text_view_top_slot"
         tools:text="New Text New" />
 
     <ImageView
-        android:id="@+id/iv_right_arrow"
+        android:id="@+id/iv_section_text_view_right_arrow"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical"
         android:rotation="270"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_arrow_down_24"
         tools:ignore="ContentDescription" />
-</merge>
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/b_section_text_view_start_column"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="end"
+        app:constraint_referenced_ids="iv_section_text_view_image_slot,cpi_section_text_view_progress_slot"
+        tools:layout_editor_absoluteX="411dp" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/b_section_text_view_bottom_row"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="tv_section_text_view_bottom_slot"
+        tools:layout_editor_absoluteY="37dp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -374,13 +374,27 @@
             <enum name="MAP_PIN" value="26" />
             <enum name="PIN_CODE" value="27" />
             <enum name="RESTAURANT" value="28" />
+            <enum name="CHECKLIST" value="29" />
+            <enum name="CROSS" value="30" />
+            <enum name="QUESTION" value="31" />
         </attr>
         <attr name="imageBackgroundColor" format="color" />
         <attr name="imageColor" format="color" />
     </declare-styleable>
 
     <declare-styleable name="FTLSectionTextView" parent="FTLDefaultTextView">
-        <attr name="textForSlot" />
+        <attr name="textForTopSlot" format="string" />
+        <attr name="textForBottomSlot" format="string" />
+        <attr name="leftSlotType" format="enum">
+            <enum name="NONE" value="0" />
+            <enum name="ICON" value="1" />
+            <enum name="PROGRESS" value="2" />
+        </attr>
+        <attr name="bottomSlotType" format="enum">
+            <enum name="NONE" value="0" />
+            <enum name="TEXT" value="1" />
+            <enum name="ICONS" value="2" />
+        </attr>
         <attr name="imageType" />
     </declare-styleable>
 
@@ -574,5 +588,53 @@
         <attr name="maxLength" />
         <attr name="maxLineCount" />
         <attr name="text" />
+    </declare-styleable>
+
+    <declare-styleable name="FTLTabLayout">
+        <attr name="displayMode">
+            <enum name="scrollable" value="0" />
+            <enum name="fixed" value="1" />
+            <enum name="auto" value="2" />
+        </attr>
+        <attr name="gravityMode">
+            <enum name="fill" value="0" />
+            <enum name="center" value="1" />
+            <enum name="start" value="2" />
+            <enum name="end" value="3" />
+        </attr>
+        <attr name="shouldShadowVisible" format="boolean" />
+        <attr name="shouldDrawIndicatorFullWidth" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="FTLRecordButton">
+        <attr name="isEnabledState" format="boolean" />
+        <attr name="recordState">
+            <enum name="STOP" value="0" />
+            <enum name="RECORDING" value="1" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="FTLTagView" parent="Chip">
+        <attr name="android:text" />
+        <attr name="shouldVisibleBackground" format="boolean"/>
+        <attr name="shouldVisibleBorder" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="FTLCircleScaleView" parent="FTLDefaultTextView">
+        <attr name="currentProgress" format="integer" />
+        <attr name="maxProgress" format="integer" />
+        <attr name="sizeProgress" format="dimension" />
+        <attr name="imageType" />
+    </declare-styleable>
+    <declare-styleable name="FTLMixedButton" parent="FTLDefaultTextView">
+        <attr name="mixedButton_currentProgress" format="integer" />
+        <attr name="mixedButton_maxProgress" format="integer" />
+        <attr name="textForSlot" />
+        <attr name="imageType" />
+        <attr name="mixedButton_leftSlotType" format="enum">
+            <enum name="NONE" value="0" />
+            <enum name="ICON" value="1" />
+            <enum name="PROGRESS" value="2" />
+        </attr>
     </declare-styleable>
 </resources>

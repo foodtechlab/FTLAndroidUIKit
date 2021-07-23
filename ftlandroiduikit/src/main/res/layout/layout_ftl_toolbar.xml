@@ -65,6 +65,13 @@
                 android:layout_height="32dp"
                 android:visibility="gone" />
 
+            <com.foodtechlab.ftlandroiduikit.progress.FTLCircleScaleView
+                android:id="@+id/cpi_ftl_toolbar_progress"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                app:sizeProgress="32dp"
+                android:visibility="gone" />
+
             <FrameLayout
                 android:id="@+id/fl_ftl_toolbar_indicator"
                 android:layout_width="32dp"
