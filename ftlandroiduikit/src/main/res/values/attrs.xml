@@ -646,4 +646,11 @@
             <enum name="PROGRESS" value="2" />
         </attr>
     </declare-styleable>
+    <declare-styleable name="FTLLinearProgressIndicator" parent="LinearProgressIndicator">
+        <attr name="android:progress" />
+        <attr name="android:max" />
+        <attr name="android:indeterminate" />
+        <attr name="trackCornerRadius" />
+        <attr name="trackThickness" />
+    </declare-styleable>
 </resources>

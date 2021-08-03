@@ -143,7 +143,8 @@ object ThemeManager {
         val ftlTagViewTheme: FTLTagViewTheme,
         val ftlCircleScaleViewTheme: FTLCircleScaleViewTheme,
         val ftlMixedButtonTheme: FTLMixedButtonTheme,
-        val ftlCircularCheckBoxTheme: FTLCircularCheckBoxTheme
+        val ftlCircularCheckBoxTheme: FTLCircularCheckBoxTheme,
+        val ftlLinearProgressIndicatorTheme: FTLLinearProgressIndicatorTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultLight),
@@ -369,6 +370,10 @@ object ThemeManager {
                 R.color.IconBlueLight,
                 R.color.IconGreyLight,
                 R.color.IconBlueLight
+            ),
+            FTLLinearProgressIndicatorTheme(
+                R.color.ProgressBarBackgroundLight,
+                R.color.ProgressBarIndicatorLight
             )
         ),
         DARK(
@@ -592,6 +597,10 @@ object ThemeManager {
                 R.color.IconBlueDark,
                 R.color.IconGreyDark,
                 R.color.IconBlueDark
+            ),
+            FTLLinearProgressIndicatorTheme(
+                R.color.ProgressBarBackgroundDark,
+                R.color.ProgressBarIndicatorDark
             )
         )
     }
@@ -880,6 +889,11 @@ object ThemeManager {
         @ColorRes val imageColor: Int,
         @ColorRes val imageBackgroundColor: Int,
         @ColorRes val buttonBackgroundColor: Int
+    )
+
+    data class FTLLinearProgressIndicatorTheme(
+        @ColorRes val trackColor: Int,
+        @ColorRes val indicatorColor: Int
     )
 
     interface ThemeChangedListener {

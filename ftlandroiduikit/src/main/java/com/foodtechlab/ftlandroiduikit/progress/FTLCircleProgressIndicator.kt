@@ -42,7 +42,7 @@ class FTLCircleProgressIndicator @JvmOverloads constructor(
     private var pbProgress: ProgressBar
 
     init {
-        inflate(context, R.layout.layout_ftl_progress, this)
+        inflate(context, R.layout.layout_ftl_circle_progress_indicator, this)
 
         vBackground = findViewById(R.id.v_background)
         pbProgress = findViewById(R.id.pb_progress)
