@@ -1,7 +1,6 @@
 package com.foodtechlab.ftlandroiduikit.util
 
 import android.animation.Animator
-import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.view.ViewAnimationUtils
@@ -143,7 +142,8 @@ object ThemeManager {
         val ftlRecordButtonTheme: FTLRecordButtonTheme,
         val ftlTagViewTheme: FTLTagViewTheme,
         val ftlCircleScaleViewTheme: FTLCircleScaleViewTheme,
-        val ftlMixedButtonTheme: FTLMixedButtonTheme
+        val ftlMixedButtonTheme: FTLMixedButtonTheme,
+        val ftlCircularCheckBoxTheme: FTLCircularCheckBoxTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultLight),
@@ -364,6 +364,11 @@ object ThemeManager {
                 R.color.IconPrimaryLight,
                 R.color.IconBackgroundGreenLight,
                 R.color.selector_ftl_mixed_button_light
+            ),
+            FTLCircularCheckBoxTheme(
+                R.color.IconBlueLight,
+                R.color.IconGreyLight,
+                R.color.IconBlueLight
             )
         ),
         DARK(
@@ -582,6 +587,11 @@ object ThemeManager {
                 R.color.IconPrimaryDark,
                 R.color.IconBackgroundGreenDark,
                 R.color.selector_ftl_mixed_button_dark
+            ),
+            FTLCircularCheckBoxTheme(
+                R.color.IconBlueDark,
+                R.color.IconGreyDark,
+                R.color.IconBlueDark
             )
         )
     }
@@ -632,6 +642,12 @@ object ThemeManager {
     data class FTLRadioButtonTheme(
         @ColorRes val textColor: Int,
         @ColorRes val uncheckedStateColor: Int
+    )
+
+    data class FTLCircularCheckBoxTheme(
+        @ColorRes var strokeColorChecked: Int,
+        @ColorRes var strokeColorUnchecked: Int,
+        @ColorRes var solidColorChecked: Int
     )
 
     data class FTLSwitchTheme(
