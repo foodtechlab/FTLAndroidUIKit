@@ -143,6 +143,7 @@ object ThemeManager {
         val ftlTagViewTheme: FTLTagViewTheme,
         val ftlCircleScaleViewTheme: FTLCircleScaleViewTheme,
         val ftlMixedButtonTheme: FTLMixedButtonTheme,
+        val ftlCircularCheckBoxTheme: FTLCircularCheckBoxTheme,
         val ftlLinearProgressIndicatorTheme: FTLLinearProgressIndicatorTheme
     ) {
         LIGHT(
@@ -364,6 +365,11 @@ object ThemeManager {
                 R.color.IconPrimaryLight,
                 R.color.IconBackgroundGreenLight,
                 R.color.selector_ftl_mixed_button_light
+            ),
+            FTLCircularCheckBoxTheme(
+                R.color.IconBlueLight,
+                R.color.IconGreyLight,
+                R.color.IconBlueLight
             ),
             FTLLinearProgressIndicatorTheme(
                 R.color.ProgressBarBackgroundLight,
@@ -587,6 +593,11 @@ object ThemeManager {
                 R.color.IconBackgroundGreenDark,
                 R.color.selector_ftl_mixed_button_dark
             ),
+            FTLCircularCheckBoxTheme(
+                R.color.IconBlueDark,
+                R.color.IconGreyDark,
+                R.color.IconBlueDark
+            ),
             FTLLinearProgressIndicatorTheme(
                 R.color.ProgressBarBackgroundDark,
                 R.color.ProgressBarIndicatorDark
@@ -640,6 +651,12 @@ object ThemeManager {
     data class FTLRadioButtonTheme(
         @ColorRes val textColor: Int,
         @ColorRes val uncheckedStateColor: Int
+    )
+
+    data class FTLCircularCheckBoxTheme(
+        @ColorRes var strokeColorChecked: Int,
+        @ColorRes var strokeColorUnchecked: Int,
+        @ColorRes var solidColorChecked: Int
     )
 
     data class FTLSwitchTheme(

@@ -517,6 +517,15 @@
         <attr name="animation_speed" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="FTLCircularCheckBox">
+        <attr name="color_stroke_checked_light" format="color" />
+        <attr name="color_stroke_checked_dark" format="color" />
+        <attr name="color_stroke_unchecked_light" format="color" />
+        <attr name="color_stroke_unchecked_dark" format="color" />
+        <attr name="color_solid_checked_light" format="color" />
+        <attr name="color_solid_checked_dark" format="color" />
+    </declare-styleable>
+
     <declare-styleable name="FTLButton">
         <attr name="ftlButton_type" format="enum">
             <enum name="primary" value="0" />
