@@ -313,4 +313,11 @@
 
     <color name="TagBorderLight">#A4A4A4</color>
     <color name="TagBorderDark">#B2B2B2</color>
+
+    <!--  FTLLinearProgressIndicator  -->
+    <color name="ProgressBarIndicatorLight">#4CB944</color>
+    <color name="ProgressBarIndicatorDark">#4CB944</color>
+
+    <color name="ProgressBarBackgroundLight">#F2F2F2</color>
+    <color name="ProgressBarBackgroundDark">#3A3A3A</color>
 </resources>

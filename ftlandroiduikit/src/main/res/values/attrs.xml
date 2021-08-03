@@ -616,8 +616,8 @@
 
     <declare-styleable name="FTLTagView" parent="Chip">
         <attr name="android:text" />
-        <attr name="shouldVisibleBackground" format="boolean"/>
-        <attr name="shouldVisibleBorder" format="boolean"/>
+        <attr name="shouldVisibleBackground" format="boolean" />
+        <attr name="shouldVisibleBorder" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="FTLCircleScaleView" parent="FTLDefaultTextView">
@@ -636,5 +636,12 @@
             <enum name="ICON" value="1" />
             <enum name="PROGRESS" value="2" />
         </attr>
+    </declare-styleable>
+    <declare-styleable name="FTLLinearProgressIndicator" parent="LinearProgressIndicator">
+        <attr name="android:progress" />
+        <attr name="android:max" />
+        <attr name="android:indeterminate" />
+        <attr name="trackCornerRadius" />
+        <attr name="trackThickness" />
     </declare-styleable>
 </resources>
