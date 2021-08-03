@@ -1,7 +1,6 @@
 package com.foodtechlab.ftlandroiduikit.util
 
 import android.animation.Animator
-import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.view.ViewAnimationUtils
@@ -143,7 +142,8 @@ object ThemeManager {
         val ftlRecordButtonTheme: FTLRecordButtonTheme,
         val ftlTagViewTheme: FTLTagViewTheme,
         val ftlCircleScaleViewTheme: FTLCircleScaleViewTheme,
-        val ftlMixedButtonTheme: FTLMixedButtonTheme
+        val ftlMixedButtonTheme: FTLMixedButtonTheme,
+        val ftlLinearProgressIndicatorTheme: FTLLinearProgressIndicatorTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultLight),
@@ -364,6 +364,10 @@ object ThemeManager {
                 R.color.IconPrimaryLight,
                 R.color.IconBackgroundGreenLight,
                 R.color.selector_ftl_mixed_button_light
+            ),
+            FTLLinearProgressIndicatorTheme(
+                R.color.ProgressBarBackgroundLight,
+                R.color.ProgressBarIndicatorLight
             )
         ),
         DARK(
@@ -582,6 +586,10 @@ object ThemeManager {
                 R.color.IconPrimaryDark,
                 R.color.IconBackgroundGreenDark,
                 R.color.selector_ftl_mixed_button_dark
+            ),
+            FTLLinearProgressIndicatorTheme(
+                R.color.ProgressBarBackgroundDark,
+                R.color.ProgressBarIndicatorDark
             )
         )
     }
@@ -864,6 +872,11 @@ object ThemeManager {
         @ColorRes val imageColor: Int,
         @ColorRes val imageBackgroundColor: Int,
         @ColorRes val buttonBackgroundColor: Int
+    )
+
+    data class FTLLinearProgressIndicatorTheme(
+        @ColorRes val trackColor: Int,
+        @ColorRes val indicatorColor: Int
     )
 
     interface ThemeChangedListener {
