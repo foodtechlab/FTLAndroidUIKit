@@ -654,9 +654,9 @@ object ThemeManager {
     )
 
     data class FTLCircularCheckBoxTheme(
-        @ColorRes var strokeColorChecked: Int,
-        @ColorRes var strokeColorUnchecked: Int,
-        @ColorRes var solidColorChecked: Int
+        @ColorRes var colorStrokeChecked: Int,
+        @ColorRes var colorStrokeUnchecked: Int,
+        @ColorRes var colorSolidChecked: Int
     )
 
     data class FTLSwitchTheme(
