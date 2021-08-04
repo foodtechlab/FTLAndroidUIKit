@@ -377,6 +377,7 @@
             <enum name="CHECKLIST" value="29" />
             <enum name="CROSS" value="30" />
             <enum name="QUESTION" value="31" />
+            <enum name="CHECK" value="32" />
         </attr>
         <attr name="imageBackgroundColor" format="color" />
         <attr name="imageColor" format="color" />

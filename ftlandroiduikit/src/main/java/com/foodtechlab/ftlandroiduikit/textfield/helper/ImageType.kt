@@ -35,5 +35,6 @@ enum class ImageType(@DrawableRes val imgRes: Int) {
     RESTAURANT(R.drawable.ic_restaurant),
     CHECKLIST(R.drawable.ic_checklist),
     CROSS(R.drawable.ic_cross),
-    QUESTION(R.drawable.ic_question)
+    QUESTION(R.drawable.ic_question),
+    CHECK(R.drawable.ic_check_32)
 }
