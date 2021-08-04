@@ -21,22 +21,32 @@ import com.foodtechlab.ftlandroiduikit.util.dpToPxInt
 class FTLCircularCheckBox @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
     AppCompatCheckBox(context, attrs), ThemeManager.ThemeChangedListener {
     @ColorInt
-    private var strokeColorChecked = ContextCompat.getColor(
-        context,
-        R.color.IconBlueLight
-    )
+    var colorStrokeChecked = ContextCompat.getColor(context, R.color.IconBlueLight)
+        set(value) {
+            field = value
+            val checkedGradientDrawable =
+                drawableChecked?.findDrawableByLayerId(R.id.qwerty) as? GradientDrawable
+            checkedGradientDrawable?.setStroke(context.dpToPxInt(2f), colorStrokeChecked)
+            updateButtonDrawable()
+        }
 
     @ColorInt
-    private var strokeColorUnchecked = ContextCompat.getColor(
-        context,
-        R.color.IconGreyLight
-    )
+    var colorStrokeUnchecked = ContextCompat.getColor(context, R.color.IconGreyLight)
+        set(value) {
+            field = value
+            drawableUnchecked?.setStroke(context.dpToPxInt(2f), colorStrokeUnchecked)
+            updateButtonDrawable()
+        }
 
     @ColorInt
-    private var solidColorChecked = ContextCompat.getColor(
-        context,
-        R.color.IconBlueLight
-    )
+    var colorSolidChecked = ContextCompat.getColor(context, R.color.IconBlueLight)
+        set(value) {
+            field = value
+            val checkedGradientDrawable =
+                drawableChecked?.findDrawableByLayerId(R.id.qwerty) as? GradientDrawable
+            checkedGradientDrawable?.setColor(colorSolidChecked)
+            updateButtonDrawable()
+        }
 
     private val drawableChecked = ResourcesCompat.getDrawable(
         resources,
@@ -57,9 +67,9 @@ class FTLCircularCheckBox @JvmOverloads constructor(context: Context, attrs: Att
 
     init {
         context.withStyledAttributes(attrs, R.styleable.FTLCircularCheckBox) {
-            updateStrokeColorChecked()
-            updateStrokeColorUnchecked()
-            updateSolidColorChecked()
+            updateThemeColorStrokeChecked()
+            updateThemeColorStrokeUnchecked()
+            updateThemeColorSolidChecked()
         }
         onThemeChanged(ThemeManager.theme)
     }
@@ -75,66 +85,57 @@ class FTLCircularCheckBox @JvmOverloads constructor(context: Context, attrs: Att
     }
 
     override fun onThemeChanged(theme: ThemeManager.Theme) {
-        strokeColorChecked = ContextCompat.getColor(
+        colorStrokeChecked = ContextCompat.getColor(
             context,
-            theme.ftlCircularCheckBoxTheme.strokeColorChecked
+            theme.ftlCircularCheckBoxTheme.colorStrokeChecked
         )
-        strokeColorUnchecked = ContextCompat.getColor(
+        colorStrokeUnchecked = ContextCompat.getColor(
             context,
-            theme.ftlCircularCheckBoxTheme.strokeColorUnchecked
+            theme.ftlCircularCheckBoxTheme.colorStrokeUnchecked
         )
-        solidColorChecked = ContextCompat.getColor(
+        colorSolidChecked = ContextCompat.getColor(
             context,
-            theme.ftlCircularCheckBoxTheme.solidColorChecked
+            theme.ftlCircularCheckBoxTheme.colorSolidChecked
         )
-        updateColors()
     }
 
-    private fun updateColors() {
-        val checkedGradientDrawable =
-            drawableChecked?.findDrawableByLayerId(R.id.qwerty) as? GradientDrawable
-        checkedGradientDrawable?.setColor(solidColorChecked)
-        checkedGradientDrawable?.setStroke(context.dpToPxInt(2f), strokeColorChecked)
-
-        drawableUnchecked?.setStroke(context.dpToPxInt(2f), strokeColorUnchecked)
-
+    private fun updateButtonDrawable() {
         val stateListDrawable = StateListDrawable()
         stateListDrawable.addState(states[0], drawableUnchecked)
         stateListDrawable.addState(states[1], drawableChecked)
-
         buttonDrawable = stateListDrawable
     }
 
-    private fun TypedArray.updateStrokeColorChecked() {
-        ThemeManager.Theme.LIGHT.ftlCircularCheckBoxTheme.strokeColorChecked = getResourceId(
-            R.styleable.FTLCircularCheckBox_color_stroke_checked_light,
-            ThemeManager.Theme.LIGHT.ftlCircularCheckBoxTheme.strokeColorChecked
+    private fun TypedArray.updateThemeColorStrokeChecked() {
+        ThemeManager.Theme.LIGHT.ftlCircularCheckBoxTheme.colorStrokeChecked = getResourceId(
+            R.styleable.FTLCircularCheckBox_theme_color_stroke_checked_light,
+            ThemeManager.Theme.LIGHT.ftlCircularCheckBoxTheme.colorStrokeChecked
         )
-        ThemeManager.Theme.DARK.ftlCircularCheckBoxTheme.strokeColorUnchecked = getResourceId(
-            R.styleable.FTLCircularCheckBox_color_stroke_checked_dark,
-            ThemeManager.Theme.DARK.ftlCircularCheckBoxTheme.strokeColorChecked
-        )
-    }
-
-    private fun TypedArray.updateStrokeColorUnchecked() {
-        ThemeManager.Theme.LIGHT.ftlCircularCheckBoxTheme.strokeColorUnchecked = getResourceId(
-            R.styleable.FTLCircularCheckBox_color_stroke_unchecked_light,
-            ThemeManager.Theme.LIGHT.ftlCircularCheckBoxTheme.strokeColorUnchecked
-        )
-        ThemeManager.Theme.DARK.ftlCircularCheckBoxTheme.strokeColorUnchecked = getResourceId(
-            R.styleable.FTLCircularCheckBox_color_stroke_unchecked_dark,
-            ThemeManager.Theme.DARK.ftlCircularCheckBoxTheme.strokeColorUnchecked
+        ThemeManager.Theme.DARK.ftlCircularCheckBoxTheme.colorStrokeChecked = getResourceId(
+            R.styleable.FTLCircularCheckBox_theme_color_stroke_checked_dark,
+            ThemeManager.Theme.DARK.ftlCircularCheckBoxTheme.colorStrokeChecked
         )
     }
 
-    private fun TypedArray.updateSolidColorChecked() {
-        ThemeManager.Theme.LIGHT.ftlCircularCheckBoxTheme.solidColorChecked = getResourceId(
-            R.styleable.FTLCircularCheckBox_color_solid_checked_light,
-            ThemeManager.Theme.LIGHT.ftlCircularCheckBoxTheme.solidColorChecked
+    private fun TypedArray.updateThemeColorStrokeUnchecked() {
+        ThemeManager.Theme.LIGHT.ftlCircularCheckBoxTheme.colorStrokeUnchecked = getResourceId(
+            R.styleable.FTLCircularCheckBox_theme_color_stroke_unchecked_light,
+            ThemeManager.Theme.LIGHT.ftlCircularCheckBoxTheme.colorStrokeUnchecked
         )
-        ThemeManager.Theme.DARK.ftlCircularCheckBoxTheme.solidColorChecked = getResourceId(
-            R.styleable.FTLCircularCheckBox_color_solid_checked_dark,
-            ThemeManager.Theme.DARK.ftlCircularCheckBoxTheme.solidColorChecked
+        ThemeManager.Theme.DARK.ftlCircularCheckBoxTheme.colorStrokeUnchecked = getResourceId(
+            R.styleable.FTLCircularCheckBox_theme_color_stroke_unchecked_dark,
+            ThemeManager.Theme.DARK.ftlCircularCheckBoxTheme.colorStrokeUnchecked
+        )
+    }
+
+    private fun TypedArray.updateThemeColorSolidChecked() {
+        ThemeManager.Theme.LIGHT.ftlCircularCheckBoxTheme.colorSolidChecked = getResourceId(
+            R.styleable.FTLCircularCheckBox_theme_color_solid_checked_light,
+            ThemeManager.Theme.LIGHT.ftlCircularCheckBoxTheme.colorSolidChecked
+        )
+        ThemeManager.Theme.DARK.ftlCircularCheckBoxTheme.colorSolidChecked = getResourceId(
+            R.styleable.FTLCircularCheckBox_theme_color_solid_checked_dark,
+            ThemeManager.Theme.DARK.ftlCircularCheckBoxTheme.colorSolidChecked
         )
     }
 }

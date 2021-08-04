@@ -225,6 +225,7 @@
         android:text="@string/buttons_name_ftl_radio_button" />
 
     <com.foodtechlab.ftlandroiduikit.button.FTLCircularCheckBox
+        android:id="@+id/ftlCircularCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
