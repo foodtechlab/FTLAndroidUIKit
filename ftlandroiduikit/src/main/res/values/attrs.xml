@@ -517,6 +517,15 @@
         <attr name="animation_speed" format="integer" />
     </declare-styleable>
 
+    <declare-styleable name="FTLCircularCheckBox">
+        <attr name="theme_color_stroke_checked_light" format="color" />
+        <attr name="theme_color_stroke_checked_dark" format="color" />
+        <attr name="theme_color_stroke_unchecked_light" format="color" />
+        <attr name="theme_color_stroke_unchecked_dark" format="color" />
+        <attr name="theme_color_solid_checked_light" format="color" />
+        <attr name="theme_color_solid_checked_dark" format="color" />
+    </declare-styleable>
+
     <declare-styleable name="FTLButton">
         <attr name="ftlButton_type" format="enum">
             <enum name="primary" value="0" />
@@ -616,8 +625,8 @@
 
     <declare-styleable name="FTLTagView" parent="Chip">
         <attr name="android:text" />
-        <attr name="shouldVisibleBackground" format="boolean"/>
-        <attr name="shouldVisibleBorder" format="boolean"/>
+        <attr name="shouldVisibleBackground" format="boolean" />
+        <attr name="shouldVisibleBorder" format="boolean" />
     </declare-styleable>
 
     <declare-styleable name="FTLCircleScaleView" parent="FTLDefaultTextView">
@@ -636,5 +645,12 @@
             <enum name="ICON" value="1" />
             <enum name="PROGRESS" value="2" />
         </attr>
+    </declare-styleable>
+    <declare-styleable name="FTLLinearProgressIndicator" parent="LinearProgressIndicator">
+        <attr name="android:progress" />
+        <attr name="android:max" />
+        <attr name="android:indeterminate" />
+        <attr name="trackCornerRadius" />
+        <attr name="trackThickness" />
     </declare-styleable>
 </resources>

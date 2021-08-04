@@ -207,17 +207,28 @@
     <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
         app:title_text="@string/buttons_description_ftl_switchers" />
 
     <com.foodtechlab.ftlandroiduikit.switch.FTLSwitch
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
         android:text="@string/buttons_name_ftl_switch" />
 
     <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp"
         android:text="@string/buttons_name_ftl_radio_button" />
+
+    <com.foodtechlab.ftlandroiduikit.button.FTLCircularCheckBox
+        android:id="@+id/ftlCircularCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginVertical="8dp" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

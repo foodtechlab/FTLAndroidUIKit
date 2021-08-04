@@ -14,23 +14,8 @@ import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 
-class FTLRadioButton : AppCompatRadioButton, ThemeManager.ThemeChangedListener {
-    constructor(context: Context?) : super(context) {
-        init(null)
-    }
-
-    constructor(context: Context?, attrs: AttributeSet?) : super(context, attrs) {
-        init(attrs)
-    }
-
-    constructor(context: Context?, attrs: AttributeSet?, defStyleAttr: Int) : super(
-        context,
-        attrs,
-        defStyleAttr
-    ) {
-        init(attrs)
-    }
-
+class FTLRadioButton @JvmOverloads constructor(context: Context, attrs: AttributeSet? = null) :
+    AppCompatRadioButton(context, attrs), ThemeManager.ThemeChangedListener {
     @ColorInt
     private var colorForStateChecked =
         ContextCompat.getColor(context, R.color.ButtonDangerEnableLight)
@@ -44,7 +29,7 @@ class FTLRadioButton : AppCompatRadioButton, ThemeManager.ThemeChangedListener {
         intArrayOf(android.R.attr.state_checked)
     )
 
-    private fun init(attrs: AttributeSet?) {
+    init {
         context.withStyledAttributes(attrs, R.styleable.FTLRadioButton) {
             colorForStateChecked = getColor(
                 R.styleable.FTLRadioButton_colorForStateChecked,
@@ -61,8 +46,11 @@ class FTLRadioButton : AppCompatRadioButton, ThemeManager.ThemeChangedListener {
         layoutDirection = View.LAYOUT_DIRECTION_RTL
 
         val typedValue = TypedValue()
-        context.theme
-            .resolveAttribute(android.R.attr.selectableItemBackgroundBorderless, typedValue, true)
+        context.theme.resolveAttribute(
+            android.R.attr.selectableItemBackgroundBorderless,
+            typedValue,
+            true
+        )
         setBackgroundResource(typedValue.resourceId)
     }
 

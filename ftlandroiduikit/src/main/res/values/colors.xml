@@ -229,6 +229,8 @@
     <color name="ProgressPrimaryLight">#039BE5</color>
     <color name="ProgressPrimaryDark">#28B5F6</color>
 
+    <color name="ProgressBackgroundLight">#F2F2F2</color>
+    <color name="ProgressBackgroundDark">#3A3A3A</color>
 
     <!--  Divider  -->
     <color name="DividerPrimaryLight">#F6F6F6</color>
@@ -313,4 +315,5 @@
 
     <color name="TagBorderLight">#A4A4A4</color>
     <color name="TagBorderDark">#B2B2B2</color>
+
 </resources>
