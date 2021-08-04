@@ -355,8 +355,8 @@ object ThemeManager {
                 R.color.TagBorderLight
             ),
             FTLCircleScaleViewTheme(
-                R.color.TimerBackgroundLight,
-                R.color.TimerPositiveLight,
+                R.color.ProgressBackgroundLight,
+                R.color.ProgressPrimaryLight,
                 R.color.IconSecondaryLight
             ),
             FTLMixedButtonTheme(
@@ -366,8 +366,8 @@ object ThemeManager {
                 R.color.selector_ftl_mixed_button_light
             ),
             FTLLinearProgressIndicatorTheme(
-                R.color.ProgressBarBackgroundLight,
-                R.color.ProgressBarIndicatorLight
+                R.color.ProgressBackgroundLight,
+                R.color.ProgressPrimaryLight
             )
         ),
         DARK(
@@ -577,8 +577,8 @@ object ThemeManager {
                 R.color.TagBorderDark
             ),
             FTLCircleScaleViewTheme(
-                R.color.TimerBackgroundDark,
-                R.color.TimerPositiveDark,
+                R.color.ProgressBackgroundDark,
+                R.color.ProgressPrimaryDark,
                 R.color.IconSecondaryDark
             ),
             FTLMixedButtonTheme(
@@ -588,8 +588,8 @@ object ThemeManager {
                 R.color.selector_ftl_mixed_button_dark
             ),
             FTLLinearProgressIndicatorTheme(
-                R.color.ProgressBarBackgroundDark,
-                R.color.ProgressBarIndicatorDark
+                R.color.ProgressBackgroundDark,
+                R.color.ProgressPrimaryDark
             )
         )
     }
