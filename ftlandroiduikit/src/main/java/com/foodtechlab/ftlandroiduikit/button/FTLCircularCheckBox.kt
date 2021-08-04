@@ -25,7 +25,7 @@ class FTLCircularCheckBox @JvmOverloads constructor(context: Context, attrs: Att
         set(value) {
             field = value
             val checkedGradientDrawable =
-                drawableChecked?.findDrawableByLayerId(R.id.qwerty) as? GradientDrawable
+                drawableChecked?.findDrawableByLayerId(R.id.bg_checked) as? GradientDrawable
             checkedGradientDrawable?.setStroke(context.dpToPxInt(2f), colorStrokeChecked)
             updateButtonDrawable()
         }
@@ -43,7 +43,7 @@ class FTLCircularCheckBox @JvmOverloads constructor(context: Context, attrs: Att
         set(value) {
             field = value
             val checkedGradientDrawable =
-                drawableChecked?.findDrawableByLayerId(R.id.qwerty) as? GradientDrawable
+                drawableChecked?.findDrawableByLayerId(R.id.bg_checked) as? GradientDrawable
             checkedGradientDrawable?.setColor(colorSolidChecked)
             updateButtonDrawable()
         }
