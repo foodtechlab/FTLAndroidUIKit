@@ -786,7 +786,7 @@ object ThemeManager {
 
     data class FTLSectionTextViewTheme(
         @ColorRes var textColor: Int,
-        @ColorRes var arrowColor: Int
+        @ColorRes var rightImageColor: Int
     )
 
     data class FTLDoubleTextViewTheme(
