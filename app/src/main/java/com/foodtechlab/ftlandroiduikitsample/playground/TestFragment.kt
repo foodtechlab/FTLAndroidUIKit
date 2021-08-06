@@ -1,9 +1,11 @@
 package com.foodtechlab.ftlandroiduikitsample.playground
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CompoundButton
 import androidx.fragment.app.Fragment
 import com.foodtechlab.ftlandroiduikitsample.R
 import com.foodtechlab.ftlandroiduikitsample.utils.argument
@@ -31,6 +33,12 @@ class TestFragment() : Fragment() {
         with(lpi1) {
             currentProgress = 5
             maxProgress = 20
+        }
+        with(tv1){
+            onFTLSectionTextViewCheckChangeListener =
+                CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
+                    Log.i(TAG, "btn = $buttonView, isChecked = $isChecked")
+                }
         }
     }
 

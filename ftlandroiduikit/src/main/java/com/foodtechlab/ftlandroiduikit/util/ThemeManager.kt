@@ -367,7 +367,6 @@ object ThemeManager {
                 R.color.selector_ftl_mixed_button_light
             ),
             FTLCircularCheckBoxTheme(
-                R.color.IconBlueLight,
                 R.color.IconGreyLight,
                 R.color.IconBlueLight
             ),
@@ -594,7 +593,6 @@ object ThemeManager {
                 R.color.selector_ftl_mixed_button_dark
             ),
             FTLCircularCheckBoxTheme(
-                R.color.IconBlueDark,
                 R.color.IconGreyDark,
                 R.color.IconBlueDark
             ),
@@ -654,7 +652,6 @@ object ThemeManager {
     )
 
     data class FTLCircularCheckBoxTheme(
-        @ColorRes var colorStrokeChecked: Int,
         @ColorRes var colorStrokeUnchecked: Int,
         @ColorRes var colorSolidChecked: Int
     )
@@ -786,7 +783,7 @@ object ThemeManager {
 
     data class FTLSectionTextViewTheme(
         @ColorRes var textColor: Int,
-        @ColorRes var arrowColor: Int
+        @ColorRes var rightImageColor: Int
     )
 
     data class FTLDoubleTextViewTheme(

@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         app:title_text="@string/text_fields_description_ftl_section_text_view" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLSectionTextView
+    <com.foodtechlab.ftlandroiduikit.textfield.ftlsectiontextview.FTLSectionTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"

@@ -396,6 +396,11 @@
             <enum name="TEXT" value="1" />
             <enum name="ICONS" value="2" />
         </attr>
+        <attr name="rightSlotType" format="enum">
+            <enum name="ICON" value="0" />
+            <enum name="CHECKBOX" value="1" />
+        </attr>
+        <attr name="rightSlotDrawable" format="reference" />
         <attr name="imageType" />
     </declare-styleable>
 
