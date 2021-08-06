@@ -654,4 +654,10 @@
         <attr name="trackCornerRadius" />
         <attr name="trackThickness" />
     </declare-styleable>
+    <declare-styleable name="FTLMediaPreviewView" >
+        <attr name="videoDuration" format="string"/>
+        <attr name="shouldVisibleTagViewBackground" format="boolean" />
+        <attr name="shouldVisibleTagViewBorder" format="boolean" />
+        <attr name="imageResource" format="reference"/>
+    </declare-styleable>
 </resources>
