@@ -21,6 +21,13 @@ class FTLCircleScaleView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : RelativeLayout(context, attrs, defStyle), ThemeManager.ThemeChangedListener {
+    var trackThickness: Int = 0
+        get() = pbIndicator.trackThickness
+        set(value) {
+            field = value
+            pbIndicator.trackThickness = field
+        }
+
     var currentProgress: Int = 0
         set(value) {
             field = value
@@ -31,6 +38,13 @@ class FTLCircleScaleView @JvmOverloads constructor(
         set(value) {
             field = value
             pbIndicator.max = field
+        }
+
+    var trackCornerRadius: Int = 0
+        get() = pbIndicator.trackCornerRadius
+        set(value) {
+            field = value
+            pbIndicator.trackCornerRadius = field
         }
 
     var imageType: ImageType = ImageType.CHECKLIST
@@ -73,6 +87,15 @@ class FTLCircleScaleView @JvmOverloads constructor(
             sizeProgress = getDimension(
                 R.styleable.FTLCircleScaleView_sizeProgress,
                 context.dpToPx(32f)
+            ).roundToInt()
+
+            trackThickness = getDimension(
+                R.styleable.FTLCircleScaleView_thickness,
+                context.dpToPx(DEFAULT_TRACK_THICKNESS)
+            ).toInt()
+            trackCornerRadius = getDimension(
+                R.styleable.FTLCircleScaleView_cornerRadius,
+                context.dpToPx(DEFAULT_CORNERS_RADIUS)
             ).roundToInt()
         }
         onThemeChanged(ThemeManager.theme)
@@ -131,5 +154,10 @@ class FTLCircleScaleView @JvmOverloads constructor(
                     ThemeManager.theme.ftlCircleScaleViewTheme.imageColor
             )
         )
+    }
+
+    companion object {
+        private const val DEFAULT_TRACK_THICKNESS = 2F
+        private const val DEFAULT_CORNERS_RADIUS = 2F
     }
 }
