@@ -48,5 +48,7 @@ dependencies {
 
     implementation 'com.squareup.picasso:picasso:2.71828'
 
+    implementation "io.coil-kt:coil:1.2.2"
+
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.7'
 }

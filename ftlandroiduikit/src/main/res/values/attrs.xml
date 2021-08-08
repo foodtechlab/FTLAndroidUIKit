@@ -660,9 +660,13 @@
         <attr name="trackThickness" />
     </declare-styleable>
     <declare-styleable name="FTLMediaPreviewView" >
-        <attr name="videoDuration" format="string"/>
+        <attr name="videoDuration" format="integer"/>
         <attr name="shouldVisibleTagViewBackground" format="boolean" />
         <attr name="shouldVisibleTagViewBorder" format="boolean" />
         <attr name="imageResource" format="reference"/>
+        <attr name="previewContentType" format="enum">
+            <enum name="IMAGE" value="0" />
+            <enum name="VIDEO" value="1" />
+        </attr>
     </declare-styleable>
 </resources>

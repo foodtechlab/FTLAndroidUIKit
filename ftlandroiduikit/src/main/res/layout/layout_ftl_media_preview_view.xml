@@ -2,24 +2,24 @@
 <merge xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:parentTag="android.widget.RelativeLayout"
     android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:background="@drawable/shape_ftl_media_preview_view_background"
-    android:layout_height="wrap_content">
+    tools:parentTag="android.widget.RelativeLayout">
 
     <ImageView
         android:id="@+id/iv_ftl_media_preview_content"
         android:layout_width="match_parent"
-        android:scaleType="centerCrop"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop" />
 
     <com.foodtechlab.ftlandroiduikit.textfield.FTLTagView
         android:id="@+id/tg_ftl_media_preview_video_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="true"
-        android:layout_margin="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_margin="8dp" />
 
     <com.foodtechlab.ftlandroiduikit.button.FTLCircularCheckBox
         android:id="@+id/cb_ftl_media_preview_select"
@@ -27,6 +27,23 @@
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_margin="8dp" />
+        android:layout_margin="8dp"
+        android:visibility="gone" />
+
+    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
+        android:id="@+id/cpi_ftl_media_preview_progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:visibility="gone"
+        app:hideBackground="true" />
+
+    <ImageView
+        android:id="@+id/iv_ftl_media_preview_repeat"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_centerInParent="true"
+        android:src="@drawable/ic_repeat_32"
+        android:visibility="gone" />
 
 </merge>
