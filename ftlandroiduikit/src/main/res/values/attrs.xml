@@ -640,6 +640,8 @@
         <attr name="maxProgress" format="integer" />
         <attr name="sizeProgress" format="dimension" />
         <attr name="imageType" />
+        <attr name="thickness" format="dimension"/>
+        <attr name="cornerRadius" format="dimension"/>
     </declare-styleable>
     <declare-styleable name="FTLMixedButton" parent="FTLDefaultTextView">
         <attr name="mixedButton_currentProgress" format="integer" />
