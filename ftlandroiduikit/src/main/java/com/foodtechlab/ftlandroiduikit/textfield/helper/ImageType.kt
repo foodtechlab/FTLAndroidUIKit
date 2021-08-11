@@ -36,5 +36,8 @@ enum class ImageType(@DrawableRes val imgRes: Int) {
     CHECKLIST(R.drawable.ic_checklist),
     CROSS(R.drawable.ic_cross),
     QUESTION(R.drawable.ic_question),
-    CHECK(R.drawable.ic_check_32)
+    CHECK(R.drawable.ic_check_32),
+    CAMERA(R.drawable.ic_camera_32),
+    VIDEO_CAMERA(R.drawable.ic_video_camera_32),
+    MIC(R.drawable.ic_mic_32)
 }

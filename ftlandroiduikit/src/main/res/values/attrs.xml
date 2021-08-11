@@ -378,6 +378,9 @@
             <enum name="CROSS" value="30" />
             <enum name="QUESTION" value="31" />
             <enum name="CHECK" value="32" />
+            <enum name="CAMERA" value="33" />
+            <enum name="VIDEO_CAMERA" value="34" />
+            <enum name="MIC" value="35" />
         </attr>
         <attr name="imageBackgroundColor" format="color" />
         <attr name="imageColor" format="color" />
