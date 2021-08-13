@@ -30,9 +30,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/dtvLargeUsual"
+        app:layout_constraintBottom_toBottomOf="@id/dtvLargeUsual"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dtvLargeUsual"
+        app:layout_constraintTop_toTopOf="@id/dtvLargeUsual"
         app:size="large"
         app:status="urgent" />
 
@@ -51,10 +51,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/dtvSmallDeliveredLate"
+        app:layout_constraintBottom_toBottomOf="@id/dtvSmallDeliveredLate"
         app:layout_constraintEnd_toStartOf="@id/dtvSmallDelivered"
         app:layout_constraintStart_toEndOf="@id/dtvSmallDeliveredLate"
-        app:layout_constraintTop_toTopOf="@+id/dtvSmallDeliveredLate"
+        app:layout_constraintTop_toTopOf="@id/dtvSmallDeliveredLate"
         app:size="small"
         app:status="canceled" />
 
@@ -63,9 +63,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/dtvSmallDeliveredLate"
+        app:layout_constraintBottom_toBottomOf="@id/dtvSmallDeliveredLate"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/dtvSmallDeliveredLate"
+        app:layout_constraintTop_toTopOf="@id/dtvSmallDeliveredLate"
         app:size="small"
         app:status="delivered" />
 
@@ -85,14 +85,14 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        app:layout_constraintBottom_toBottomOf="@+id/dtvSmallInProgress"
+        app:layout_constraintBottom_toBottomOf="@id/dtvSmallInProgress"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/dtvSmallInProgress"
-        app:layout_constraintTop_toTopOf="@+id/dtvSmallInProgress"
+        app:layout_constraintStart_toEndOf="@id/dtvSmallInProgress"
+        app:layout_constraintTop_toTopOf="@id/dtvSmallInProgress"
         app:size="small"
         app:status="in_progress_late" />
 
-    <View
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
         android:id="@+id/vTimesDivider"
         android:layout_width="match_parent"
         android:layout_height="8dp"
@@ -106,7 +106,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/vTimesDivider"
+        app:layout_constraintTop_toBottomOf="@id/vTimesDivider"
         app:title_text="@string/times_description_ftl_delivery_timer_view" />
 
     <com.foodtechlab.ftlandroiduikit.textfield.timer.FTLDeliveryTimerView
@@ -116,6 +116,6 @@
         app:deliveryTimerView_size="large"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tvTimerDescription" />
+        app:layout_constraintTop_toBottomOf="@id/tvTimerDescription" />
 
 </com.foodtechlab.ftlandroiduikit.container.FTLConstraintLayout>
