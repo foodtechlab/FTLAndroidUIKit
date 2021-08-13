@@ -39,8 +39,7 @@
         app:ftlButton_text="additional"
         app:ftlButton_type="additional" />
 
-    <View
-        android:id="@+id/vButtonsDivider1"
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
@@ -55,8 +54,7 @@
         android:layout_margin="8dp"
         app:rippleColor="@null" />
 
-    <View
-        android:id="@+id/vButtonsDivider2"
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
@@ -165,8 +163,7 @@
             app:type="navigator_large" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <View
-        android:id="@+id/vButtonsDivider3"
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
@@ -199,8 +196,26 @@
         app:accompanyingText="IN_DELIVERY"
         app:heightButton="48.0" />
 
-    <View
-        android:id="@+id/vButtonsDivider4"
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        app:title_text="@string/buttons_description_ftl_mixed_button" />
+
+    <com.foodtechlab.ftlandroiduikit.button.mixed.FTLMixedButton
+        android:id="@+id/btnTotalCount"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:mixedButton_currentProgress="15"
+        app:textForSlot="@string/buttons_ftl_mixed_button_text"
+        app:mixedButton_leftSlotType="PROGRESS" />
+
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 

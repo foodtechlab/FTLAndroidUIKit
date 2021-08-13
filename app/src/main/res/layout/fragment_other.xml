@@ -24,30 +24,7 @@
         android:layout_margin="8dp"
         app:textOrdersCount="1" />
 
-    <View
-        android:id="@+id/vOtherDivider1"
-        android:layout_width="match_parent"
-        android:layout_height="8dp" />
-
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:title_text="@string/other_description_ftl_circle_progress" />
-
-    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        app:hideBackground="true"
-        app:progressColor="@color/AdditionalViolet" />
-
-    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp" />
-
-    <View
-        android:id="@+id/vOtherDivider2"
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 

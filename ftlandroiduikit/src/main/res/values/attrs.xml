@@ -643,8 +643,8 @@
         <attr name="maxProgress" format="integer" />
         <attr name="sizeProgress" format="dimension" />
         <attr name="imageType" />
-        <attr name="thickness" format="dimension"/>
-        <attr name="cornerRadius" format="dimension"/>
+        <attr name="thickness" format="dimension" />
+        <attr name="cornerRadius" format="dimension" />
     </declare-styleable>
     <declare-styleable name="FTLMixedButton" parent="FTLDefaultTextView">
         <attr name="mixedButton_currentProgress" format="integer" />
@@ -663,5 +663,10 @@
         <attr name="android:indeterminate" />
         <attr name="trackCornerRadius" />
         <attr name="trackThickness" />
+    </declare-styleable>
+    <declare-styleable name="FTLBanneredTextView" parent="FTLDefaultTextView">
+        <attr name="textForSlot" />
+        <attr name="isBoldStyle" />
+        <attr name="isCheckedState" format="boolean"/>
     </declare-styleable>
 </resources>
