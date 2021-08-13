@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/llProgressContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/progress_description_ftl_circle_progress" />
+
+    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:hideBackground="true"
+        app:progressColor="@color/AdditionalViolet" />
+
+    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/progress_description_ftl_linear_progress" />
+
+    <com.foodtechlab.ftlandroiduikit.progress.FTLLinearProgressIndicator
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:progress="5"
+        android:max="20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:trackCornerRadius="5dp"
+        app:trackThickness="10dp" />
+
+    <com.foodtechlab.ftlandroiduikit.progress.FTLLinearProgressIndicator
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:indeterminate="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/progress_description_ftl_circle_scale_view" />
+
+    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleScaleView
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_margin="8dp"
+        app:currentProgress="10"
+        app:imageType="CHECKLIST"
+        app:maxProgress="90"
+        app:sizeProgress="32dp"
+        app:thickness="3dp" />
+
+</androidx.appcompat.widget.LinearLayoutCompat>

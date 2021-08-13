@@ -18,6 +18,7 @@ class ShowroomPagerAdapter(fragmentManager: FragmentManager) :
         getString(R.string.common_cards),
         getString(R.string.common_times),
         getString(R.string.common_bottomsheets),
+        getString(R.string.common_progress),
         getString(R.string.common_other),
         getString(R.string.common_banner)
     )

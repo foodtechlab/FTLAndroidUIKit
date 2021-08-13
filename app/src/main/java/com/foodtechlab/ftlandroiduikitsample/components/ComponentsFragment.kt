@@ -1,11 +1,13 @@
 package com.foodtechlab.ftlandroiduikitsample.components
 
-import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.annotation.IntDef
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.foodtechlab.ftlandroiduikit.button.FTLButton
 import com.foodtechlab.ftlandroiduikit.button.timer.State
@@ -15,7 +17,11 @@ import com.foodtechlab.ftlandroiduikit.common.SECONDARY_BUTTON
 import com.foodtechlab.ftlandroiduikit.common.Type
 import com.foodtechlab.ftlandroiduikit.sheet.*
 import com.foodtechlab.ftlandroiduikit.snackbar.top.FTLSnackbar
+import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
+import com.foodtechlab.ftlandroiduikit.textfield.helper.TextWatcher
 import com.foodtechlab.ftlandroiduikit.textfield.table.OnTableHeaderClickListener
+import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.changeColor
 import com.foodtechlab.ftlandroiduikitsample.R
 import com.foodtechlab.ftlandroiduikitsample.utils.Utils.getColorForTheme
 import com.foodtechlab.ftlandroiduikitsample.utils.argument
@@ -27,8 +33,8 @@ import kotlinx.android.synthetic.main.fragment_cards.*
 import kotlinx.android.synthetic.main.fragment_cards.tvRoute
 import kotlinx.android.synthetic.main.fragment_component.*
 import kotlinx.android.synthetic.main.fragment_edit_fields.*
-import kotlinx.android.synthetic.main.fragment_other.*
 import kotlinx.android.synthetic.main.fragment_other.llOtherContainer
+import kotlinx.android.synthetic.main.fragment_progress.*
 import kotlinx.android.synthetic.main.fragment_table_fields.*
 import kotlinx.android.synthetic.main.fragment_text_fields.*
 import kotlinx.android.synthetic.main.fragment_times.*
@@ -36,9 +42,9 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 class ComponentsFragment : Fragment() {
-
     private var type: Int by argument(TYPE_ID)
     private var bottomSheetDialog: FTLBottomSheet? = null
+    private var banneredTextViewState = -1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -57,6 +63,7 @@ class ComponentsFragment : Fragment() {
             TABLE_FIELDS -> initTableComponents()
             CARDS -> initCards()
             BOTTOMSHEETS -> initBottomSheets()
+            PROGRESS -> initProgress()
             OTHER -> initOther()
             BANNER -> initBanner()
             else -> initTimesComponents()
@@ -114,6 +121,18 @@ class ComponentsFragment : Fragment() {
         }
     }
 
+    private fun initProgress() {
+        with(vsComponentContainer) {
+            layoutResource = R.layout.fragment_progress
+            inflate()
+        }
+        llProgressContainer.setBackgroundColor(
+            getColorForTheme(
+                R.color.SurfaceThirdDark,
+                R.color.SurfaceThirdLight
+            )
+        )
+    }
 
     private fun initOther() {
         with(vsComponentContainer) {
@@ -124,18 +143,6 @@ class ComponentsFragment : Fragment() {
             getColorForTheme(
                 R.color.SurfaceThirdDark,
                 R.color.SurfaceThirdLight
-            )
-        )
-        vOtherDivider1.setBackgroundColor(
-            getColorForTheme(
-                R.color.BackgroundSecondaryDark,
-                R.color.BackgroundSecondaryLight
-            )
-        )
-        vOtherDivider2.setBackgroundColor(
-            getColorForTheme(
-                R.color.BackgroundSecondaryDark,
-                R.color.BackgroundSecondaryLight
             )
         )
     }
@@ -149,30 +156,6 @@ class ComponentsFragment : Fragment() {
             getColorForTheme(
                 R.color.SurfaceThirdDark,
                 R.color.SurfaceThirdLight
-            )
-        )
-        vButtonsDivider1.setBackgroundColor(
-            getColorForTheme(
-                R.color.BackgroundSecondaryDark,
-                R.color.BackgroundSecondaryLight
-            )
-        )
-        vButtonsDivider2.setBackgroundColor(
-            getColorForTheme(
-                R.color.BackgroundSecondaryDark,
-                R.color.BackgroundSecondaryLight
-            )
-        )
-        vButtonsDivider3.setBackgroundColor(
-            getColorForTheme(
-                R.color.BackgroundSecondaryDark,
-                R.color.BackgroundSecondaryLight
-            )
-        )
-        vButtonsDivider4.setBackgroundColor(
-            getColorForTheme(
-                R.color.BackgroundSecondaryDark,
-                R.color.BackgroundSecondaryLight
             )
         )
 
@@ -200,6 +183,11 @@ class ComponentsFragment : Fragment() {
             calendar.add(Calendar.MINUTE, 15)
             estimateSuccessAt = getDateString(calendar.time)
         }
+        with(btnTotalCount) {
+            updateProgressTrackColor(R.color.TimerNegativeLight)
+            imageTypeForProgress = ImageType.CASH
+            setOnClickListener { }
+        }
     }
 
     private fun initTextViews() {
@@ -211,36 +199,6 @@ class ComponentsFragment : Fragment() {
             getColorForTheme(
                 R.color.SurfaceThirdDark,
                 R.color.SurfaceThirdLight
-            )
-        )
-        vTextFieldsDivider1.setBackgroundColor(
-            getColorForTheme(
-                R.color.BackgroundSecondaryDark,
-                R.color.BackgroundSecondaryLight
-            )
-        )
-        vTextFieldsDivider2.setBackgroundColor(
-            getColorForTheme(
-                R.color.BackgroundSecondaryDark,
-                R.color.BackgroundSecondaryLight
-            )
-        )
-        vTextFieldsDivider3.setBackgroundColor(
-            getColorForTheme(
-                R.color.BackgroundSecondaryDark,
-                R.color.BackgroundSecondaryLight
-            )
-        )
-        vTextFieldsDivider4.setBackgroundColor(
-            getColorForTheme(
-                R.color.BackgroundSecondaryDark,
-                R.color.BackgroundSecondaryLight
-            )
-        )
-        vTextFieldsDivider5.setBackgroundColor(
-            getColorForTheme(
-                R.color.BackgroundSecondaryDark,
-                R.color.BackgroundSecondaryLight
             )
         )
         with(tvMultiple) {
@@ -261,6 +219,68 @@ class ComponentsFragment : Fragment() {
             R.color.IconBackgroundCyanDark,
             R.color.IconBackgroundCyanLight
         )
+
+        with(tvMediaContent) {
+            imageType = ImageType.CHECK
+            val color = ContextCompat.getColor(
+                context,
+                when (ThemeManager.theme) {
+                    ThemeManager.Theme.LIGHT -> R.color.IconBlueLight
+                    else -> R.color.IconBlueDark
+                }
+            )
+            val galleryDrawable = ContextCompat.getDrawable(
+                context,
+                R.drawable.ic_media_content_gallery
+            ).apply {
+                this?.mutate()?.changeColor(color)
+            }
+            val messageDrawable = ContextCompat.getDrawable(
+                context,
+                R.drawable.ic_media_content_message
+            ).apply {
+                this?.mutate()?.changeColor(color)
+            }
+            val cameraDrawable = ContextCompat.getDrawable(
+                context,
+                R.drawable.ic_media_content_camera
+            ).apply {
+                this?.mutate()?.changeColor(color)
+            }
+            val videoDrawable = ContextCompat.getDrawable(
+                context,
+                R.drawable.ic_media_content_video
+            ).apply {
+                this?.mutate()?.changeColor(color)
+            }
+            val voiceDrawable = ContextCompat.getDrawable(
+                context,
+                R.drawable.ic_media_content_voice
+            ).apply {
+                this?.mutate()?.changeColor(color)
+            }
+            addIconsForBottomSlot(
+                listOf(
+                    galleryDrawable,
+                    messageDrawable,
+                    cameraDrawable,
+                    videoDrawable,
+                    voiceDrawable
+                )
+            )
+            updateImageColors(
+                R.color.IconBackgroundGreenLight,
+                R.color.IconBackgroundGreenDark
+            )
+
+            tvBannered.setOnClickListener {
+                tvBannered.setVisibilityOfCheckbox(
+                    shouldVisible = banneredTextViewState < 0,
+                    showAnimation = true
+                )
+                banneredTextViewState *= -1
+            }
+        }
     }
 
     private fun initEditTexts() {
@@ -274,17 +294,35 @@ class ComponentsFragment : Fragment() {
                 R.color.SurfaceThirdLight
             )
         )
-        vEditFieldsDivider.setBackgroundColor(
-            getColorForTheme(
-                R.color.BackgroundSecondaryDark,
-                R.color.BackgroundSecondaryLight
-            )
-        )
+
         scErrorOnCode.setOnCheckedChangeListener { _, isChecked ->
             etCode.isErrorEnabled = isChecked
         }
         scErrorOnDefault.setOnCheckedChangeListener { _, isChecked ->
             etDefault.isErrorEnabled = isChecked
+        }
+        scErrorOnAutocomplete.setOnCheckedChangeListener { _, isChecked ->
+            etAutocomplete.isErrorEnabled = isChecked
+        }
+
+        val cats = resources.getStringArray(R.array.cat_names).toCollection(ArrayList())
+        val hintsAdapter = ArrayAdapter(
+            requireContext(),
+            R.layout.layout_ftl_autocomplete_drop_down_item,
+            cats
+        )
+        with(etAutocomplete) {
+            setHintsAdapter(hintsAdapter)
+            addTextChangedListener(object : TextWatcher() {
+                override fun afterTextChanged(s: Editable?) {
+                    foldingDropDownDialog(
+                        cats,
+                        charSequence = s,
+                        maxItemCountForFolding = 2
+                    )
+                    super.afterTextChanged(s)
+                }
+            })
         }
     }
 
@@ -299,12 +337,7 @@ class ComponentsFragment : Fragment() {
                 R.color.SurfaceThirdLight
             )
         )
-        vTableFieldsDivider.setBackgroundColor(
-            getColorForTheme(
-                R.color.BackgroundSecondaryDark,
-                R.color.BackgroundSecondaryLight
-            )
-        )
+
         val positionAdapter = PositionItemRVAdapter()
         rvPositions.adapter = positionAdapter
         positionAdapter.update(
@@ -405,12 +438,6 @@ class ComponentsFragment : Fragment() {
             layoutResource = R.layout.fragment_times
             inflate()
         }
-        vTimesDivider.setBackgroundColor(
-            getColorForTheme(
-                R.color.BackgroundSecondaryDark,
-                R.color.BackgroundSecondaryLight
-            )
-        )
 
         val time = Calendar.getInstance().time
         dtvLargeUsual.deliveryTime = getHoursAndMinutesString(time)
@@ -468,8 +495,9 @@ class ComponentsFragment : Fragment() {
         const val CARDS = 4
         const val TIMES = 5
         const val BOTTOMSHEETS = 6
-        const val OTHER = 7
-        const val BANNER = 8
+        const val PROGRESS = 7
+        const val OTHER = 8
+        const val BANNER = 9
         const val TYPE_ID = "TYPE_ID"
 
         @IntDef(BUTTONS, TEXT_FIELDS, EDIT_FIELDS, TABLE_FIELDS, CARDS, TIMES, BOTTOMSHEETS, OTHER)
