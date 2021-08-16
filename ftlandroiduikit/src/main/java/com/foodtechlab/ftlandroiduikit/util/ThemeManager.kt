@@ -139,13 +139,13 @@ object ThemeManager {
         val ftlCompleteEditTextTheme: FTLCompleteEditTextTheme,
         val ftlCellMenuTheme: FTLCellMenuTheme,
         val ftlTabLayoutTheme: FTLTabLayoutTheme,
-        val ftlRecordButtonTheme: FTLRecordButtonTheme,
         val ftlTagViewTheme: FTLTagViewTheme,
         val ftlCircleScaleViewTheme: FTLCircleScaleViewTheme,
         val ftlMixedButtonTheme: FTLMixedButtonTheme,
         val ftlCircularCheckBoxTheme: FTLCircularCheckBoxTheme,
         val ftlLinearProgressIndicatorTheme: FTLLinearProgressIndicatorTheme,
-        val ftlBanneredTextViewTheme: FTLBanneredTextViewTheme
+        val ftlBanneredTextViewTheme: FTLBanneredTextViewTheme,
+        val ftlAudioRecorderBottomSheetTheme: FTLAudioRecorderBottomSheetTheme,
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultLight),
@@ -239,7 +239,14 @@ object ThemeManager {
                 R.drawable.selector_additional_button_info_large_light,
                 R.drawable.selector_additional_button_replay_small_light,
                 R.drawable.selector_additional_button_replay_medium_light,
-                R.drawable.selector_additional_button_replay_large_light
+                R.drawable.selector_additional_button_replay_large_light,
+                R.drawable.selector_additional_button_trash_large_light,
+                R.drawable.selector_additional_button_record_large_light,
+                R.drawable.selector_additional_button_stop_large_light,
+                R.drawable.selector_additional_button_play_medium_light,
+                R.drawable.selector_additional_button_play_large_light,
+                R.drawable.selector_additional_button_pause_medium_light,
+                R.drawable.selector_additional_button_pause_large_light
             ),
             FTLBottomSheetTheme(R.color.TextPrimaryLight, R.color.SurfaceFourthLight),
             FTLRouteTextViewTheme(
@@ -350,7 +357,6 @@ object ThemeManager {
                 R.color.TextPrimaryLight,
                 R.color.ButtonInfoPressedLight
             ),
-            FTLRecordButtonTheme(R.color.selector_ftl_record_button_light),
             FTLTagViewTheme(
                 R.color.TextOnColorAdditionalLight,
                 R.color.TagBackgroundLight,
@@ -378,6 +384,10 @@ object ThemeManager {
             FTLBanneredTextViewTheme(
                 R.color.TextPrimaryLight,
                 R.color.selector_ftl_bannered_text_view_light
+            ),
+            FTLAudioRecorderBottomSheetTheme(
+                R.color.selector_ftl_audio_record_bottom_sheet_text_light,
+                R.color.SurfaceFourthLight
             )
         ),
         DARK(
@@ -472,7 +482,14 @@ object ThemeManager {
                 R.drawable.selector_additional_button_info_large_dark,
                 R.drawable.selector_additional_button_replay_small_dark,
                 R.drawable.selector_additional_button_replay_medium_dark,
-                R.drawable.selector_additional_button_replay_large_dark
+                R.drawable.selector_additional_button_replay_large_dark,
+                R.drawable.selector_additional_button_trash_large_dark,
+                R.drawable.selector_additional_button_record_large_dark,
+                R.drawable.selector_additional_button_stop_large_dark,
+                R.drawable.selector_additional_button_play_medium_dark,
+                R.drawable.selector_additional_button_play_large_dark,
+                R.drawable.selector_additional_button_pause_medium_dark,
+                R.drawable.selector_additional_button_pause_large_dark
             ),
             FTLBottomSheetTheme(R.color.TextPrimaryDark, R.color.SurfaceFourthDark),
             FTLRouteTextViewTheme(
@@ -580,7 +597,6 @@ object ThemeManager {
                 R.color.TextPrimaryDark,
                 R.color.ButtonInfoPressedDark
             ),
-            FTLRecordButtonTheme(R.color.selector_ftl_record_button_dark),
             FTLTagViewTheme(
                 R.color.TextOnColorAdditionalDark,
                 R.color.TagBackgroundDark,
@@ -608,6 +624,10 @@ object ThemeManager {
             FTLBanneredTextViewTheme(
                 R.color.TextPrimaryDark,
                 R.color.selector_ftl_bannered_text_view_dark
+            ),
+            FTLAudioRecorderBottomSheetTheme(
+                R.color.selector_ftl_audio_record_bottom_sheet_text_dark,
+                R.color.SurfaceFourthDark
             )
         )
     }
@@ -708,7 +728,19 @@ object ThemeManager {
 
         @DrawableRes val replaySmall: Int,
         @DrawableRes val replayMedium: Int,
-        @DrawableRes val replayLarge: Int
+        @DrawableRes val replayLarge: Int,
+
+        @DrawableRes val trashLarge: Int,
+
+        @DrawableRes val recordLarge: Int,
+
+        @DrawableRes val stopLarge: Int,
+
+        @DrawableRes val playMedium: Int,
+        @DrawableRes val playLarge: Int,
+
+        @DrawableRes val pauseMedium: Int,
+        @DrawableRes val pauseLarge: Int
     )
 
     data class FTLBottomSheetTheme(
@@ -874,10 +906,6 @@ object ThemeManager {
         @ColorRes val tabTextSelectedColor: Int
     )
 
-    data class FTLRecordButtonTheme(
-        @ColorRes val foregroundColor: Int
-    )
-
     data class FTLTagViewTheme(
         @ColorRes val textColor: Int,
         @ColorRes val backgroundColor: Int,
@@ -905,6 +933,11 @@ object ThemeManager {
     data class FTLBanneredTextViewTheme(
         @ColorRes val textColor: Int,
         @ColorRes val backgroundColor: Int
+    )
+
+    data class FTLAudioRecorderBottomSheetTheme(
+        @ColorRes val timerColor: Int,
+        @ColorRes val bgColor: Int
     )
 
     interface ThemeChangedListener {
