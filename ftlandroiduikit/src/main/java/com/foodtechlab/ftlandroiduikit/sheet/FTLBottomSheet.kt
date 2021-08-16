@@ -61,7 +61,7 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
         super.onCreate(savedInstanceState)
 
         // Work with styles here
-        setStyle(DialogFragment.STYLE_NORMAL, R.style.SadBottomSheetDialogStyle)
+        setStyle(DialogFragment.STYLE_NORMAL, R.style.FTLBottomSheetDialogStyle)
     }
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {

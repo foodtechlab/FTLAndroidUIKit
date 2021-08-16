@@ -19,6 +19,18 @@
             <enum name="replay_small" value="9" />
             <enum name="replay_medium" value="10" />
             <enum name="replay_large" value="11" />
+
+            <enum name="trash_large" value="12" />
+
+            <enum name="record_large" value="13" />
+            <enum name="stop_large" value="14" />
+
+            <enum name="play_medium" value="15" />
+            <enum name="play_large" value="16" />
+
+            <enum name="pause_medium" value="17" />
+            <enum name="pause_large" value="18" />
+
         </attr>
     </declare-styleable>
 
@@ -622,14 +634,6 @@
         </attr>
         <attr name="shouldShadowVisible" format="boolean" />
         <attr name="shouldDrawIndicatorFullWidth" format="boolean" />
-    </declare-styleable>
-
-    <declare-styleable name="FTLRecordButton">
-        <attr name="isEnabledState" format="boolean" />
-        <attr name="recordState">
-            <enum name="STOP" value="0" />
-            <enum name="RECORDING" value="1" />
-        </attr>
     </declare-styleable>
 
     <declare-styleable name="FTLTagView" parent="Chip">
