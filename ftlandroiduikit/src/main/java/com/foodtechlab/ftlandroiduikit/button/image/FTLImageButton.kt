@@ -20,10 +20,10 @@ class FTLImageButton @JvmOverloads constructor(
     private val displayDensity = resources.displayMetrics.density
 
     var type = ImageButtonType.NAVIGATOR_SMALL
-        private set(value) {
+        set(value) {
             field = value
 
-            background = ContextCompat.getDrawable(context, value.bgRes)
+            onThemeChanged(ThemeManager.theme)
 
             minimumWidth = (value.size * displayDensity).toInt()
             minimumHeight = (value.size * displayDensity).toInt()
@@ -34,7 +34,6 @@ class FTLImageButton @JvmOverloads constructor(
             val typeOrdinal = getInt(R.styleable.FTLImageButton_type, type.ordinal)
             type = ImageButtonType.values()[typeOrdinal]
         }
-        onThemeChanged(ThemeManager.theme)
     }
 
     override fun onAttachedToWindow() {
@@ -51,15 +50,29 @@ class FTLImageButton @JvmOverloads constructor(
         ImageButtonType.NAVIGATOR_SMALL.bgRes = theme.ftlImageButtonTheme.navigatorSmall
         ImageButtonType.NAVIGATOR_MEDIUM.bgRes = theme.ftlImageButtonTheme.navigatorMedium
         ImageButtonType.NAVIGATOR_LARGE.bgRes = theme.ftlImageButtonTheme.navigatorLarge
+
         ImageButtonType.LOCATION_SMALL.bgRes = theme.ftlImageButtonTheme.locationSmall
         ImageButtonType.LOCATION_MEDIUM.bgRes = theme.ftlImageButtonTheme.locationMedium
         ImageButtonType.LOCATION_LARGE.bgRes = theme.ftlImageButtonTheme.locationLarge
+
         ImageButtonType.INFO_SMALL.bgRes = theme.ftlImageButtonTheme.infoSmall
         ImageButtonType.INFO_MEDIUM.bgRes = theme.ftlImageButtonTheme.infoMedium
         ImageButtonType.INFO_LARGE.bgRes = theme.ftlImageButtonTheme.infoLarge
+
         ImageButtonType.REPLAY_SMALL.bgRes = theme.ftlImageButtonTheme.replaySmall
         ImageButtonType.REPLAY_MEDIUM.bgRes = theme.ftlImageButtonTheme.replayMedium
         ImageButtonType.REPLAY_LARGE.bgRes = theme.ftlImageButtonTheme.replayLarge
+
+        ImageButtonType.TRASH_LARGE.bgRes = theme.ftlImageButtonTheme.trashLarge
+
+        ImageButtonType.RECORD_LARGE.bgRes = theme.ftlImageButtonTheme.recordLarge
+        ImageButtonType.STOP_LARGE.bgRes = theme.ftlImageButtonTheme.stopLarge
+
+        ImageButtonType.PLAY_MEDIUM.bgRes = theme.ftlImageButtonTheme.playMedium
+        ImageButtonType.PLAY_LARGE.bgRes = theme.ftlImageButtonTheme.playLarge
+
+        ImageButtonType.PAUSE_MEDIUM.bgRes = theme.ftlImageButtonTheme.pauseMedium
+        ImageButtonType.PAUSE_LARGE.bgRes = theme.ftlImageButtonTheme.pauseLarge
 
         background = ContextCompat.getDrawable(context, type.bgRes)
     }

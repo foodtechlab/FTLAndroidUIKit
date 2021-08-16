@@ -1,6 +1,6 @@
 apply plugin: 'maven-publish'
 
-version = '0.30.0'
+version = '0.31.0'
 group="com.foodtechlab.ftlandroiduikit"
 
 Properties properties = new Properties()
