@@ -15,7 +15,7 @@ import androidx.core.view.isVisible
 import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.button.FTLCircularCheckBox
-import com.foodtechlab.ftlandroiduikit.textfield.helper.OnFTLTextFieldCheckedChangeListener
+import com.foodtechlab.ftlandroiduikit.common.OnFTLCheckedChangeListener
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import com.google.android.material.shape.CornerFamily
@@ -57,7 +57,7 @@ class FTLBanneredTextView @JvmOverloads constructor(
             tvTextSlot.text = field
         }
 
-    var onCheckedChangeListener: OnFTLTextFieldCheckedChangeListener? = null
+    var onCheckedChangeListener: OnFTLCheckedChangeListener? = null
 
     @ColorRes
     private var textBackgroundColor = -1
@@ -109,7 +109,6 @@ class FTLBanneredTextView @JvmOverloads constructor(
     override fun onThemeChanged(theme: ThemeManager.Theme) {
         updateTextColorTheme(textColor)
         updateBackgroundColorTheme(textBackgroundColor)
-        tvTextSlot.background = shapeDrawable
     }
 
     fun updateTextColorTheme(@ColorRes colorRes: Int) {
@@ -130,6 +129,7 @@ class FTLBanneredTextView @JvmOverloads constructor(
             if (textBackgroundColor != -1) textBackgroundColor
             else ThemeManager.theme.ftlBanneredTextViewTheme.backgroundColor
         )
+        tvTextSlot.background = shapeDrawable
     }
 
     fun updateSolidCheckedColorTheme(@ColorRes colorRes: Int) {
@@ -160,9 +160,7 @@ class FTLBanneredTextView @JvmOverloads constructor(
 
         set.applyTo(this)
 
-        if (shouldVisible) {
-            isVisibleCheckbox = true
-        }
+        isVisibleCheckbox = shouldVisible
     }
 
     companion object {

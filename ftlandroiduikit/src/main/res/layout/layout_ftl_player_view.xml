@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+    <com.foodtechlab.ftlandroiduikit.button.FTLCircularCheckBox
+        android:id="@+id/cb_ftl_player_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_ftl_player_view"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="32dp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_ftl_player_view_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:id="@+id/btn_ftl_player_view_media_control"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:type="play_medium" />
+
+        <TextView
+            android:id="@+id/tv_ftl_player_view_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="6dp"
+            android:layout_toEndOf="@id/btn_ftl_player_view_media_control"
+            android:fontFamily="@font/roboto_regular"
+            android:text="00:00 / 01:00"
+            android:textSize="12sp" />
+
+        <SeekBar
+            android:id="@+id/sb_ftl_player_view_progress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_ftl_player_view_time"
+            android:layout_toEndOf="@id/btn_ftl_player_view_media_control"
+            android:maxHeight="4dp"
+            android:minHeight="4dp"
+            android:paddingStart="10dp"
+            android:paddingEnd="12dp"
+            android:progress="20"
+            android:progressDrawable="@drawable/layer_list_ftl_seekbar_progress"
+            android:thumb="@drawable/shape_ftl_seekbar_thumb" />
+
+    </RelativeLayout>
+
+</merge>

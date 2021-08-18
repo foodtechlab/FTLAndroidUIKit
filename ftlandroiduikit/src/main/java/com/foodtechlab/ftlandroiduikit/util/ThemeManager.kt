@@ -146,6 +146,7 @@ object ThemeManager {
         val ftlLinearProgressIndicatorTheme: FTLLinearProgressIndicatorTheme,
         val ftlBanneredTextViewTheme: FTLBanneredTextViewTheme,
         val ftlAudioRecorderBottomSheetTheme: FTLAudioRecorderBottomSheetTheme,
+        val ftlPlayerViewTheme: FTLPlayerViewTheme
     ) {
         LIGHT(
             FTLLinearLayoutTheme(R.color.BackgroundDefaultLight),
@@ -374,8 +375,8 @@ object ThemeManager {
                 R.color.selector_ftl_mixed_button_light
             ),
             FTLCircularCheckBoxTheme(
-                R.color.IconGreyLight,
-                R.color.IconBlueLight
+                R.color.ButtonDisableLight,
+                R.color.ButtonInfoEnableLight
             ),
             FTLLinearProgressIndicatorTheme(
                 R.color.ProgressBackgroundLight,
@@ -388,6 +389,17 @@ object ThemeManager {
             FTLAudioRecorderBottomSheetTheme(
                 R.color.selector_ftl_audio_record_bottom_sheet_text_light,
                 R.color.SurfaceFourthLight
+            ),
+            FTLPlayerViewTheme(
+                R.color.SliderProgressBackgroundLight,
+                R.color.ProgressPrimaryLight,
+                R.color.ProgressPrimaryLight,
+                R.color.ButtonDisableLight,
+                R.color.ButtonDisableLight,
+                R.color.TextOnColorAdditionalLight,
+                R.color.ButtonInfoEnableLight,
+                R.color.ButtonDisableLight,
+                R.color.selector_ftl_player_view_light
             )
         ),
         DARK(
@@ -614,8 +626,8 @@ object ThemeManager {
                 R.color.selector_ftl_mixed_button_dark
             ),
             FTLCircularCheckBoxTheme(
-                R.color.IconGreyDark,
-                R.color.IconBlueDark
+                R.color.ButtonDisableDark,
+                R.color.ButtonInfoEnableDark
             ),
             FTLLinearProgressIndicatorTheme(
                 R.color.ProgressBackgroundDark,
@@ -628,6 +640,17 @@ object ThemeManager {
             FTLAudioRecorderBottomSheetTheme(
                 R.color.selector_ftl_audio_record_bottom_sheet_text_dark,
                 R.color.SurfaceFourthDark
+            ),
+            FTLPlayerViewTheme(
+                R.color.SliderProgressBackgroundDark,
+                R.color.ProgressPrimaryDark,
+                R.color.ProgressPrimaryDark,
+                R.color.ButtonDisableDark,
+                R.color.ButtonDisableDark,
+                R.color.TextOnColorAdditionalDark,
+                R.color.ButtonInfoEnableDark,
+                R.color.ButtonDisableDark,
+                R.color.selector_ftl_player_view_dark
             )
         )
     }
@@ -938,6 +961,18 @@ object ThemeManager {
     data class FTLAudioRecorderBottomSheetTheme(
         @ColorRes val timerColor: Int,
         @ColorRes val bgColor: Int
+    )
+
+    data class FTLPlayerViewTheme(
+        @ColorRes val bgSeekBarColor: Int,
+        @ColorRes val progressSeekBarColor: Int,
+        @ColorRes val secondaryProgressSeekBarColor: Int,
+        @ColorRes val progressSeekBarDisabledColor: Int,
+        @ColorRes val secondaryProgressSeekBarDisabledColor: Int,
+        @ColorRes val textColor: Int,
+        @ColorRes val thumbColor: Int,
+        @ColorRes val thumbDisabledColor: Int,
+        @ColorRes val bgControlColor: Int
     )
 
     interface ThemeChangedListener {

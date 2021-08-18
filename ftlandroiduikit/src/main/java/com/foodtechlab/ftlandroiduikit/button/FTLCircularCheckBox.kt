@@ -28,7 +28,7 @@ class FTLCircularCheckBox @JvmOverloads constructor(context: Context, attrs: Att
         }
 
     @ColorInt
-    var colorSolidChecked = ContextCompat.getColor(context, R.color.IconBlueLight)
+    var colorSolidChecked = ContextCompat.getColor(context, R.color.ButtonInfoEnableLight)
         set(value) {
             field = value
             val checkedGradientDrawable =

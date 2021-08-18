@@ -316,4 +316,8 @@
     <color name="TagBorderLight">#A4A4A4</color>
     <color name="TagBorderDark">#B2B2B2</color>
 
+    <!--  Slider  -->
+    <color name="SliderProgressBackgroundLight">#EAEAEA</color>
+    <color name="SliderProgressBackgroundDark">#555555</color>
+
 </resources>

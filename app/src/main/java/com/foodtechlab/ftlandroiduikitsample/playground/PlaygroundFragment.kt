@@ -17,7 +17,8 @@ import kotlinx.android.synthetic.main.fragment_playground.*
 import java.io.File
 
 class PlaygroundFragment : Fragment(), View.OnClickListener {
-    var bottomSheetDialog: FTLAudioRecorderBottomSheet? = null
+    private var filePath: String? = null
+    private var bottomSheetDialog: FTLAudioRecorderBottomSheet? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -38,15 +39,22 @@ class PlaygroundFragment : Fragment(), View.OnClickListener {
         btnStartRecord.setOnClickListener {
             getPermissionToRecordAudio()
         }
+        var state = false
+        pvMusicPlayer.setOnLongClickListener {
+            state = !state
+            pvMusicPlayer.setVisibilityOfCheckbox(
+                state,
+                true
+            )
+            true
+        }
     }
 
-    // Callback with the request from calling requestPermissions(...)
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<String>,
         grantResults: IntArray
     ) {
-        // Make sure it's our original READ_CONTACTS request
         if (requestCode == RECORD_AUDIO_REQUEST_CODE) {
             if (
                 grantResults.size == 3 && grantResults[0] == PackageManager.PERMISSION_GRANTED &&
@@ -68,6 +76,7 @@ class PlaygroundFragment : Fragment(), View.OnClickListener {
             R.id.btn_ftl_audio_recorder_bottom_sheet_action -> {
                 bottomSheetDialog?.dismiss()
                 bottomSheetDialog = null
+                pvMusicPlayer.dataSource = filePath
             }
         }
     }
@@ -79,14 +88,15 @@ class PlaygroundFragment : Fragment(), View.OnClickListener {
             file.mkdirs()
         }
 
-        val filePath =
-            root.absolutePath + "/FTLUIKit/voice/voice" + (System.currentTimeMillis()
-                .toString() + ".mp3")
-        bottomSheetDialog = FTLAudioRecorderBottomSheet(
-            "Прикрепить",
-            filePath
-        )
-        bottomSheetDialog?.show(childFragmentManager, FTLAudioRecorderBottomSheet.TAG)
+        filePath = root.absolutePath + "/FTLUIKit/voice/voice" + (System.currentTimeMillis()
+            .toString() + ".mp3")
+        filePath?.let {
+            bottomSheetDialog = FTLAudioRecorderBottomSheet(
+                "Прикрепить",
+                it
+            )
+            bottomSheetDialog?.show(childFragmentManager, FTLAudioRecorderBottomSheet.TAG)
+        }
     }
 
     private fun getPermissionToRecordAudio() {
