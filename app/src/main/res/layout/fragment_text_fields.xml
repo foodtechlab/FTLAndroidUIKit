@@ -18,8 +18,7 @@
         app:textAddressFrom="@string/common_first_address"
         app:textAddressTo="@string/common_second_address" />
 
-    <View
-        android:id="@+id/vTextFieldsDivider1"
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
@@ -35,8 +34,7 @@
         app:imageType="CUSTOMER"
         app:textForSlot="@string/text_fields_user_bio" />
 
-    <View
-        android:id="@+id/vTextFieldsDivider2"
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
@@ -50,10 +48,33 @@
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:imageType="INFO"
-        app:textForSlot="@string/text_fields_about_app" />
+        app:textForTopSlot="@string/text_fields_about_app" />
 
-    <View
-        android:id="@+id/vTextFieldsDivider3"
+    <com.foodtechlab.ftlandroiduikit.textfield.ftlsectiontextview.FTLSectionTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:imageType="FAST_FOOD"
+        app:rightSlotType="CHECKBOX"
+        app:textForTopSlot="@string/text_fields_add_item" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.ftlsectiontextview.FTLSectionTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:leftSlotType="PROGRESS"
+        app:textForTopSlot="@string/text_fields_first_section" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.ftlsectiontextview.FTLSectionTextView
+        android:id="@+id/tvMediaContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:bottomSlotType="ICONS"
+        app:leftSlotType="ICON"
+        app:textForTopSlot="@string/text_fields_media_content" />
+
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
@@ -73,8 +94,7 @@
         app:textTopEndSlot="@string/text_fields_test_amount"
         app:textTopStartSlot="@string/text_fields_cash" />
 
-    <View
-        android:id="@+id/vTextFieldsDivider4"
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
@@ -93,8 +113,23 @@
         app:fullText="@string/text_fields_description_ftl_extendable_full_text"
         app:imageType="COMMENT" />
 
-    <View
-        android:id="@+id/vTextFieldsDivider5"
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/text_fields_description_ftl_bannered_text_view" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLBanneredTextView
+        android:id="@+id/tvBannered"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:textForSlot="Очень грязные столы, а уборщица спит в подсобке" />
+
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
@@ -119,5 +154,22 @@
         android:layout_margin="8dp"
         app:textForEndSlot="@string/text_fields_test_amount"
         app:textForStartSlot="@string/text_fields_total" />
+
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/text_fields_description_ftl_tag_view" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTagView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/text_fields_code"
+        app:shouldVisibleBackground="true"
+        app:shouldVisibleBorder="false" />
 
 </androidx.appcompat.widget.LinearLayoutCompat>

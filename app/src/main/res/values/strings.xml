@@ -11,6 +11,7 @@
     <string name="common_cards">Cards</string>
     <string name="common_times">Times</string>
     <string name="common_bottomsheets">Bottomsheets</string>
+    <string name="common_progress">Progress</string>
     <string name="common_other">Other</string>
     <string name="common_banner">Banner</string>
     <string name="common_ok">Ок</string>
@@ -22,7 +23,10 @@
 
     <string name="menu_theme">Установить темную тему</string>
 
-    <string name="other_description_ftl_circle_progress">FTLCircleProgressIndicator различного типа</string>
+    <string name="progress_description_ftl_circle_progress">FTLCircleProgressIndicator</string>
+    <string name="progress_description_ftl_linear_progress">FTLLinearProgressIndicator</string>
+    <string name="progress_description_ftl_circle_scale_view">FTLCircleScaleView</string>
+
     <string name="other_description_ftl_placeholder">FTLPlaceholderImageView</string>
     <string name="other_description_ftl_marker">FTLRestaurantMarker различного типа</string>
 
@@ -31,8 +35,10 @@
     <string name="buttons_description_ftl_image_button">FTLImageButton различного типа</string>
     <string name="buttons_description_ftl_timer_button">FTLTimerButton различного типа</string>
     <string name="buttons_description_ftl_switchers">Переключатели различного типа</string>
+    <string name="buttons_description_ftl_mixed_button">FTLMixedButton</string>
     <string name="buttons_name_ftl_switch">FTLSwitch</string>
     <string name="buttons_name_ftl_radio_button">FTLRadioButton</string>
+    <string name="buttons_ftl_mixed_button_text">Всего: 15 бонусов</string>
 
     <string name="cardviews_description_ftl_cardview">FTLCardView со стилем FTLCardViewStyle</string>
     <string name="cardviews_name_test_order">№ 333</string>
@@ -40,7 +46,17 @@
     <string name="edit_fields_show_error">Отобразить состояние при ошибке</string>
     <string name="edit_fields_description_ftl_edit_text_default">FTLEditTextDefault</string>
     <string name="edit_fields_description_ftl_auth_code_edit_text">FTLAuthCodeEditText</string>
+    <string name="edit_fields_description_ftl_autocomplete_edit_text">FTLAutocompleteEditText</string>
     <string name="edit_fields_enter_text">Введите текст</string>
+    <string name="edit_fields_cat_name_hint">Имя котика</string>
+    <string-array name="cat_names">
+        <item>Мурзик</item>
+        <item>Рыжик</item>
+        <item>Рыжик</item>
+        <item>Борис Бритва</item>
+        <item>Мурзилка</item>
+        <item>Мурка</item>
+    </string-array>
 
     <string name="table_fields_description_ftl_table_header">FTLTableHeader без Subtitle</string>
     <string name="table_fields_description_ftl_table_header_with_subtitle">FTLTableHeader с Subtitle</string>
@@ -63,14 +79,20 @@
     <string name="text_fields_description_ftl_multiple_text_view">FTLMultipleTextView</string>
     <string name="text_fields_description_ftl_extendable_text_view">FTLExtendableTextView</string>
     <string name="text_fields_description_ftl_double_text_view">FTLDoubleTextView</string>
+    <string name="text_fields_description_ftl_tag_view">FTLTagView</string>
+    <string name="text_fields_description_ftl_bannered_text_view">FTLBanneredTextView</string>
     <string name="text_fields_description_ftl_extendable_ellipsized_text">…Ещё</string>
     <string name="text_fields_test_amount">1 000 ₽</string>
     <string name="text_fields_about_app">О приложении</string>
+    <string name="text_fields_first_section">Секция 1</string>
+    <string name="text_fields_add_item">Добавить ингредиент</string>
+    <string name="text_fields_media_content">Доступный медиа контент</string>
     <string name="text_fields_user_bio">Петров Иван Иванович</string>
     <string name="text_fields_not_changed">Без сдачи</string>
     <string name="text_fields_amount">Сумма: 1 000 ₽</string>
     <string name="text_fields_total">Итого</string>
     <string name="text_fields_cash">Наличными</string>
+    <string name="text_fields_code">VLG1.0.1</string>
     <string name="text_fields_description_ftl_extendable_full_text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</string>
 
     <string name="common_count_positions">%d шт.</string>
@@ -83,6 +105,4 @@
     <string name="text_banner_full_description">Для изменения звука оповещения либо при наличии проблем с уведомлениями перейдите в настройки устройства</string>
     <string name="text_banner_without_title_description">FTLBanner можно использовать без title</string>
     <string name="text_banner_without_title_and_buttons_description">Можно также не указывать кнопки, в таком случае FTLBanner будет состоять только из description</string>
-
-    <string name="fragment_cat_name_hint">Имя котика</string>
 </resources>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    tools:background="@android:color/black">
+
+    <View
+        android:id="@+id/v_ftl_audio_recorder_bottom_sheet_top"
+        android:layout_width="36dp"
+        android:layout_height="5.71dp"
+        android:layout_marginTop="9.81dp"
+        android:layout_marginBottom="9.81dp"
+        android:background="@drawable/shape_rect_solid_white_round_2dp" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_ftl_audio_recorder_bottom_sheet_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_rect_solid_white_round_top_16dp">
+
+        <Chronometer
+            android:id="@+id/cmr_ftl_audio_recorder_bottom_sheet_timer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="22dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:textSize="24sp"
+            android:fontFamily="@font/roboto_regular"
+            tools:text="00:00:00" />
+
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:id="@+id/btn_ftl_audio_recorder_bottom_sheet_rec"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="26dp"
+            android:layout_marginBottom="24dp"
+            app:layout_constraintBottom_toTopOf="@id/btn_ftl_audio_recorder_bottom_sheet_action"
+            app:layout_constraintEnd_toStartOf="@id/btn_ftl_audio_recorder_bottom_sheet_delete"
+            app:layout_constraintStart_toEndOf="@id/btn_ftl_audio_recorder_bottom_sheet_media_control"
+            app:layout_constraintTop_toBottomOf="@id/cmr_ftl_audio_recorder_bottom_sheet_timer"
+            app:type="record_large" />
+
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:id="@+id/btn_ftl_audio_recorder_bottom_sheet_media_control"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/cmr_ftl_audio_recorder_bottom_sheet_timer"
+            app:layout_constraintEnd_toStartOf="@id/btn_ftl_audio_recorder_bottom_sheet_rec"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/btn_ftl_audio_recorder_bottom_sheet_rec"
+            app:type="play_large" />
+
+        <com.foodtechlab.ftlandroiduikit.button.image.FTLImageButton
+            android:id="@+id/btn_ftl_audio_recorder_bottom_sheet_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/btn_ftl_audio_recorder_bottom_sheet_rec"
+            app:layout_constraintTop_toTopOf="@id/btn_ftl_audio_recorder_bottom_sheet_rec"
+            app:type="trash_large" />
+
+        <com.foodtechlab.ftlandroiduikit.button.FTLButton
+            android:id="@+id/btn_ftl_audio_recorder_bottom_sheet_action"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:ftlButton_type="secondary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

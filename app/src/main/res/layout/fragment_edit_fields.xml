@@ -9,27 +9,29 @@
     <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:title_text="@string/edit_fields_description_ftl_edit_text_default" />
+        app:title_text="@string/edit_fields_description_ftl_autocomplete_edit_text" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLEditTextDefault
-        android:id="@+id/etDefault"
-        android:layout_width="match_parent"
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLAutocompleteEditText
+        android:id="@+id/etAutocomplete"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:layout_margin="8dp"
-        app:hint="@string/edit_fields_enter_text" />
+        app:hint="@string/edit_fields_cat_name_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.foodtechlab.ftlandroiduikit.switch.FTLSwitch
-        android:id="@+id/scErrorOnDefault"
+        android:id="@+id/scErrorOnAutocomplete"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         android:text="@string/edit_fields_show_error" />
 
-    <View
-        android:id="@+id/vEditFieldsDivider"
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
         android:layout_width="match_parent"
-        android:layout_height="8dp"
-        android:background="@color/OnSurfacePrimaryEnabled" />
+        android:layout_height="8dp" />
 
     <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
         android:layout_width="match_parent"
@@ -47,6 +49,29 @@
 
     <com.foodtechlab.ftlandroiduikit.switch.FTLSwitch
         android:id="@+id/scErrorOnCode"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:text="@string/edit_fields_show_error" />
+
+    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+        android:layout_width="match_parent"
+        android:layout_height="8dp" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title_text="@string/edit_fields_description_ftl_edit_text_default" />
+
+    <com.foodtechlab.ftlandroiduikit.textfield.FTLEditTextDefault
+        android:id="@+id/etDefault"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:hint="@string/edit_fields_enter_text" />
+
+    <com.foodtechlab.ftlandroiduikit.switch.FTLSwitch
+        android:id="@+id/scErrorOnDefault"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
