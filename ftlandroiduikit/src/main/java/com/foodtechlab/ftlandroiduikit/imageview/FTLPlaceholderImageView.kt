@@ -20,7 +20,16 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
+import com.foodtechlab.ftlandroiduikit.container.FTLConstraintLayoutTheme
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.ViewTheme
+import com.foodtechlab.ftlandroiduikit.util.ViewThemeManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 import kotlin.math.min
 import kotlin.math.pow
 
@@ -28,7 +37,12 @@ class FTLPlaceholderImageView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : AppCompatImageView(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
+) : AppCompatImageView(context, attrs, defStyleAttr),
+    CoroutineScope {
+    private var viewThemeManager: ViewThemeManager<FTLPlaceholderImageViewTheme>? = null
+    private var job = SupervisorJob()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     private var borderRadius = 0f
     private var drawableRadius = 0f
@@ -159,41 +173,50 @@ class FTLPlaceholderImageView @JvmOverloads constructor(
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             outlineProvider = OutlineProvider()
         }
-
-        onThemeChanged(ThemeManager.theme)
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        ThemeManager.addListener(this)
+        viewThemeManager = FTLPlaceholderImageViewThemeManager()
+        launch {
+            viewThemeManager?.mapToViewData()?.collect { theme ->
+                theme?.let {
+                    bitmapPlaceholder = null
+                    placeholder = ContextCompat.getDrawable(
+                        context,
+                        it.placeholder
+                    )
+                }
+            }
+        }
     }
 
     override fun onDetachedFromWindow() {
+        job.cancel()
         super.onDetachedFromWindow()
-        ThemeManager.removeListener(this)
-    }
-
-    override fun onThemeChanged(theme: ThemeManager.Theme) {
-        bitmapPlaceholder = null
-        placeholder = ContextCompat.getDrawable(
-            context,
-            ThemeManager.theme.ftlPlaceholderImageViewTheme.placeholder
-        )
     }
 
     private fun TypedArray.setupPlaceholder() {
-        ThemeManager.Theme.LIGHT.ftlPlaceholderImageViewTheme.placeholder = getResourceId(
+        viewThemeManager?.lightTheme?.placeholder = getResourceId(
             R.styleable.FTLPlaceholderImageView_placeholder_light,
-            ThemeManager.Theme.LIGHT.ftlPlaceholderImageViewTheme.placeholder
+            R.drawable.ic_restaurant_placeholder_light
         )
-        ThemeManager.Theme.DARK.ftlPlaceholderImageViewTheme.placeholder = getResourceId(
+
+        viewThemeManager?.darkTheme?.placeholder = getResourceId(
             R.styleable.FTLPlaceholderImageView_placeholder_dark,
-            ThemeManager.Theme.DARK.ftlPlaceholderImageViewTheme.placeholder
+            R.drawable.ic_restaurant_placeholder_dark
         )
-        placeholder = ContextCompat.getDrawable(
-            context,
-            ThemeManager.theme.ftlPlaceholderImageViewTheme.placeholder
-        )
+        val job = launch {
+            viewThemeManager?.mapToViewData()?.collect { theme ->
+                theme?.let {
+                    placeholder = ContextCompat.getDrawable(
+                        context,
+                        it.placeholder
+                    )
+                }
+            }
+        }
+        job.cancel()
     }
 
     override fun setScaleType(scaleType: ScaleType) {
@@ -476,3 +499,7 @@ class FTLPlaceholderImageView @JvmOverloads constructor(
         private const val DEFAULT_BORDER_OVERLAY = false
     }
 }
+
+data class FTLPlaceholderImageViewTheme(
+    @DrawableRes var placeholder: Int
+) : ViewTheme()

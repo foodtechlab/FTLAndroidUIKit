@@ -12,15 +12,37 @@ import androidx.core.animation.doOnCancel
 import androidx.core.animation.doOnEnd
 import androidx.core.view.isVisible
 import com.foodtechlab.ftlandroiduikit.R
+import kotlinx.coroutines.*
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlin.coroutines.CoroutineContext
 import kotlin.math.hypot
 
 /**
  * Created by Umalt on 25.09.2020
  */
-object ThemeManager {
+object ThemeManager : CoroutineScope {
+    private val _stateTheme =
+        MutableSharedFlow<Theme>(
+            replay = 1,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST
+        )
+    val stateTheme = _stateTheme.asSharedFlow()
+
+    private val job = SupervisorJob()
+
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
     var theme = Theme.LIGHT
         set(value) {
             field = value
+            // new flow
+            launch {
+                _stateTheme.emit(value)
+            }
+            // order
             listeners.forEach { it.onThemeChanged(value) }
         }
 
@@ -90,12 +112,10 @@ object ThemeManager {
     }
 
     enum class Theme(
-        val ftlLinearLayoutTheme: FTLLinearLayoutTheme,
         val ftlToolbarTheme: FTLToolbarTheme,
         val ftlToolbarDotsProgressTheme: DotsProgressTheme,
         val ftlButtonDotsProgressTheme: DotsProgressTheme,
         val ftlTimerDotsProgressTheme: DotsProgressTheme,
-        val ftlPlaceholderImageViewTheme: FTLPlaceholderImageViewTheme,
         val ftlDeliveryTimeViewUsualTheme: FTLDeliveryTimeViewTheme,
         val ftlDeliveryTimeViewUrgentTheme: FTLDeliveryTimeViewTheme,
         val ftlDeliveryTimeViewDeliveredTheme: FTLDeliveryTimeViewTheme,
@@ -108,7 +128,6 @@ object ThemeManager {
         val ftlRadioButtonTheme: FTLRadioButtonTheme,
         val ftlSwitchTheme: FTLSwitchTheme,
         val ftlEmptyListImageViewTheme: FTLEmptyListImageViewTheme,
-        val ftlCardViewTheme: FTLCardViewTheme,
         val ftlShimmerViewTheme: FTLShimmerViewTheme,
         val ftlShimmerFrameLayoutTheme: FTLShimmerFrameLayoutTheme,
         val ftlFloatingActionButtonTheme: FTLFloatingActionButtonTheme,
@@ -125,8 +144,6 @@ object ThemeManager {
         val ftlTimerButtonTheme: FTLTimerButtonTheme,
         val ftlSectionTextViewTheme: FTLSectionTextViewTheme,
         val ftlDoubleTextViewTheme: FTLDoubleTextViewTheme,
-        val ftlCoordinatorLayoutTheme: FTLCoordinatorLayoutTheme,
-        val ftlConstraintLayoutTheme: FTLConstraintLayoutTheme,
         val ftlTitleTheme: FTLTitleTheme,
         val ftlBottomNavigationViewTheme: FTLBottomNavigationViewTheme,
         val ftlDividerTheme: FTLDividerTheme,
@@ -149,7 +166,6 @@ object ThemeManager {
         val ftlMediaPreviewViewTheme: FTLMediaPreviewViewTheme
     ) {
         LIGHT(
-            FTLLinearLayoutTheme(R.color.BackgroundDefaultLight),
             FTLToolbarTheme(
                 R.color.SurfaceSecondLight,
                 R.color.TextPrimaryLight,
@@ -174,7 +190,6 @@ object ThemeManager {
                 R.color.IconGreyLightOpacity60,
                 R.color.IconGreyLightOpacity80
             ),
-            FTLPlaceholderImageViewTheme(R.drawable.ic_restaurant_placeholder_light),
             FTLDeliveryTimeViewTheme(
                 R.color.TimeUsualLight,
                 R.color.TimeDefaultLight,
@@ -224,7 +239,6 @@ object ThemeManager {
                 R.color.ButtonSecondaryEnableLight
             ),
             FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_light),
-            FTLCardViewTheme(R.color.SurfaceFirstLight),
             FTLShimmerViewTheme(R.color.ShimmerBackgroundLight),
             FTLShimmerFrameLayoutTheme(R.color.ShimmerBaseLight, R.color.ShimmerHighlightingLight),
             FTLFloatingActionButtonTheme(R.color.selector_ftl_fab_light),
@@ -313,8 +327,6 @@ object ThemeManager {
             ),
             FTLSectionTextViewTheme(R.color.TextPrimaryLight, R.color.IconSecondaryLight),
             FTLDoubleTextViewTheme(R.color.TextPrimaryLight),
-            FTLCoordinatorLayoutTheme(R.color.BackgroundSecondaryLight),
-            FTLConstraintLayoutTheme(R.color.BackgroundDefaultLight),
             FTLTitleTheme(R.color.TextPrimaryLight, R.color.TextSuccessEnabledLight),
             FTLBottomNavigationViewTheme(
                 R.color.SurfaceSecondLight,
@@ -397,7 +409,6 @@ object ThemeManager {
             )
         ),
         DARK(
-            FTLLinearLayoutTheme(R.color.BackgroundDefaultDark),
             FTLToolbarTheme(
                 R.color.SurfaceSecondDark,
                 R.color.TextPrimaryDark,
@@ -422,7 +433,6 @@ object ThemeManager {
                 R.color.IconGreyLightOpacity60,
                 R.color.IconGreyLightOpacity80
             ),
-            FTLPlaceholderImageViewTheme(R.drawable.ic_restaurant_placeholder_dark),
             FTLDeliveryTimeViewTheme(
                 R.color.TimeUsualDark,
                 R.color.TimeDefaultDark,
@@ -472,7 +482,6 @@ object ThemeManager {
                 R.color.ButtonSecondaryEnableDark
             ),
             FTLEmptyListImageViewTheme(R.drawable.ic_placeholder_empty_order_list_dark),
-            FTLCardViewTheme(R.color.SurfaceFirstDark),
             FTLShimmerViewTheme(R.color.ShimmerBackgroundDark),
             FTLShimmerFrameLayoutTheme(R.color.ShimmerBaseDark, R.color.ShimmerHighlightingDark),
             FTLFloatingActionButtonTheme(R.color.selector_ftl_fab_dark),
@@ -561,8 +570,6 @@ object ThemeManager {
             ),
             FTLSectionTextViewTheme(R.color.TextPrimaryDark, R.color.IconSecondaryDark),
             FTLDoubleTextViewTheme(R.color.TextPrimaryDark),
-            FTLCoordinatorLayoutTheme(R.color.BackgroundSecondaryDark),
-            FTLConstraintLayoutTheme(R.color.BackgroundDefaultDark),
             FTLTitleTheme(R.color.TextPrimaryDark, R.color.TextSuccessEnabledDark),
             FTLBottomNavigationViewTheme(
                 R.color.SurfaceSecondDark,
@@ -662,14 +669,6 @@ object ThemeManager {
         @ColorRes var bounceDotColor: Int
     )
 
-    data class FTLPlaceholderImageViewTheme(
-        @DrawableRes var placeholder: Int
-    )
-
-    data class FTLLinearLayoutTheme(
-        @ColorRes val bgColor: Int
-    )
-
     data class FTLDeliveryTimeViewTheme(
         @ColorRes val textColor: Int,
         @ColorRes val bgColor: Int,
@@ -705,10 +704,6 @@ object ThemeManager {
 
     data class FTLEmptyListImageViewTheme(
         @DrawableRes val imgSrc: Int
-    )
-
-    data class FTLCardViewTheme(
-        @ColorRes val bgColor: Int
     )
 
     data class FTLShimmerViewTheme(
@@ -843,14 +838,6 @@ object ThemeManager {
     )
 
     data class FTLDividerTheme(
-        @ColorRes var bgColor: Int
-    )
-
-    data class FTLCoordinatorLayoutTheme(
-        @ColorRes var bgColor: Int
-    )
-
-    data class FTLConstraintLayoutTheme(
         @ColorRes var bgColor: Int
     )
 

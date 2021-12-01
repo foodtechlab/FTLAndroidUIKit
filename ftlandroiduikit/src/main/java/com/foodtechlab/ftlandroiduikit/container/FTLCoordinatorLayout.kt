@@ -5,46 +5,68 @@ import android.util.AttributeSet
 import androidx.annotation.ColorRes
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
-import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.ViewTheme
+import com.foodtechlab.ftlandroiduikit.util.ViewThemeManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 
 class FTLCoordinatorLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defAttrStyle: Int = 0
-) : CoordinatorLayout(context, attrs, defAttrStyle), ThemeManager.ThemeChangedListener {
+) : CoordinatorLayout(context, attrs, defAttrStyle), CoroutineScope {
+    private var viewThemeManager: ViewThemeManager<FTLCoordinatorLayoutTheme>? = null
 
-    init {
-        onThemeChanged(ThemeManager.theme)
-    }
+    private var job = SupervisorJob()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     override fun onAttachedToWindow() {
+        viewThemeManager = FTLCoordinatorLayoutThemeManager()
+        launch {
+            viewThemeManager?.mapToViewData()?.collect { theme ->
+                theme?.let {
+                    setBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            it.bgColor
+                        )
+                    )
+                }
+            }
+        }
         super.onAttachedToWindow()
-        ThemeManager.addListener(this)
     }
 
     override fun onDetachedFromWindow() {
+        job.cancel()
         super.onDetachedFromWindow()
-        ThemeManager.removeListener(this)
-    }
-
-    override fun onThemeChanged(theme: ThemeManager.Theme) {
-        setBackgroundColor(
-            ContextCompat.getColor(
-                context,
-                theme.ftlCoordinatorLayoutTheme.bgColor
-            )
-        )
     }
 
     fun updateBackgroundColor(@ColorRes lightColor: Int, @ColorRes darkColor: Int) {
-        ThemeManager.Theme.LIGHT.ftlCoordinatorLayoutTheme.bgColor = lightColor
-        ThemeManager.Theme.DARK.ftlCoordinatorLayoutTheme.bgColor = darkColor
-        setBackgroundColor(
-            ContextCompat.getColor(
-                context,
-                ThemeManager.theme.ftlCoordinatorLayoutTheme.bgColor
-            )
-        )
+        viewThemeManager?.darkTheme = viewThemeManager?.darkTheme?.copy(bgColor = darkColor)
+        viewThemeManager?.lightTheme = viewThemeManager?.lightTheme?.copy(bgColor = lightColor)
+        val job = launch {
+            viewThemeManager?.mapToViewData()?.collect { theme ->
+                theme?.let {
+                    setBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            it.bgColor
+                        )
+                    )
+                }
+            }
+        }
+        job.cancel()
     }
 }
+
+data class FTLCoordinatorLayoutTheme(
+    @ColorRes var bgColor: Int
+) : ViewTheme()
