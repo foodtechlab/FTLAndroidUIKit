@@ -17,7 +17,7 @@ publishing {
     repositories {
         maven {
             name 'nexus'
-            url "https://nexus.foodtech-lab.ru/repository/ftlandroiduikit-releases/"
+            url "http://nexus.foodtech-lab.ru/repository/ftlandroiduikit-snapshot/"
             credentials {
                 username properties.getProperty("nexus.user")
                 password properties.getProperty("nexus.password")

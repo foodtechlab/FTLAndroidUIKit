@@ -1,9 +1,17 @@
 package com.foodtechlab.ftlandroiduikit.util
 
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 
 abstract class ViewThemeManager<VD : ViewTheme> {
-    var darkTheme: VD? = null
-    var lightTheme: VD? = null
-    abstract fun mapToViewData(): Flow<VD?>
+    abstract var darkTheme: VD?
+    abstract var lightTheme: VD
+    fun mapToViewData(): Flow<VD> {
+        return ThemeManager.stateTheme.map {
+            when (it) {
+                ThemeManager.Theme.DARK -> darkTheme ?: lightTheme
+                else -> lightTheme
+            }
+        }
+    }
 }

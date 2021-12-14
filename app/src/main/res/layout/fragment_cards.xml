@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/cardviews_description_ftl_cardview" />
@@ -39,14 +39,14 @@
                 android:layout_toStartOf="@id/btnDetails"
                 app:size="small" />
 
-            <com.foodtechlab.ftlandroiduikit.imageview.FTLPlaceholderImageView
+            <com.foodtechlab.ftlandroiduikit.imageview.placeholder.FTLPlaceholderImageView
                 android:id="@+id/ivBrand"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_alignParentStart="true"
                 tools:srcCompat="@tools:sample/avatars" />
 
-            <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+            <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
                 android:id="@+id/tvNum"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

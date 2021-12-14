@@ -13,7 +13,7 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTagView
+    <com.foodtechlab.ftlandroiduikit.textfield.tag.FTLTagView
         android:id="@+id/tg_ftl_media_preview_video_duration"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -21,7 +21,7 @@
         android:layout_alignParentBottom="true"
         android:layout_margin="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.button.FTLCircularCheckBox
+    <com.foodtechlab.ftlandroiduikit.button.circular.FTLCircularCheckBox
         android:id="@+id/cb_ftl_media_preview_select"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         android:layout_margin="8dp"
         android:visibility="gone" />
 
-    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
+    <com.foodtechlab.ftlandroiduikit.progress.circle.indicator.FTLCircleProgressIndicator
         android:id="@+id/cpi_ftl_media_preview_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

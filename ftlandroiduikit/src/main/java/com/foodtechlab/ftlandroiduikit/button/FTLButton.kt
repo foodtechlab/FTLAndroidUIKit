@@ -11,6 +11,7 @@ import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
@@ -19,8 +20,12 @@ import androidx.core.view.updateLayoutParams
 import androidx.transition.Fade
 import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLButtonDotsProgress
+import com.foodtechlab.ftlandroiduikit.common.dotsprogress.button.FTLButtonDotsProgress
 import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.ViewTheme
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by Umalt on 23.06.2020
@@ -29,7 +34,7 @@ class FTLButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : RelativeLayout(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
+) : RelativeLayout(context, attrs, defStyleAttr), CoroutineScope {
 
     var inProgress = false
     var isWrapContentOnHeight = false
@@ -43,6 +48,11 @@ class FTLButton @JvmOverloads constructor(
         set(value) {
             tvText.text = value?.toString()
         }
+
+    private val job = SupervisorJob()
+    private var jobTheme: Job? = null
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     @ColorRes
     private var textColorRes = -1
@@ -74,7 +84,6 @@ class FTLButton @JvmOverloads constructor(
 
             val ordinal = getInt(R.styleable.FTLButton_ftlButton_type, buttonType.ordinal)
             buttonType = ButtonType.values()[ordinal]
-            onThemeChanged(ThemeManager.theme)
             updateViewState(
                 getColor(R.styleable.FTLButton_ftlButton_textColor, -1),
                 getColor(R.styleable.FTLButton_ftlButton_dotColor, -1),
@@ -89,7 +98,7 @@ class FTLButton @JvmOverloads constructor(
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        ThemeManager.addListener(this)
+        onThemeChanged()
         setProgressVisibility(inProgress)
         onPreDrawListener?.let {
             tvText.viewTreeObserver.removeOnPreDrawListener(it)
@@ -108,56 +117,89 @@ class FTLButton @JvmOverloads constructor(
     }
 
     override fun onDetachedFromWindow() {
+        job.cancel()
         super.onDetachedFromWindow()
-        ThemeManager.removeListener(this)
         tvText.viewTreeObserver.removeOnPreDrawListener(onPreDrawListener)
         onPreDrawListener = null
     }
 
-    override fun onThemeChanged(theme: ThemeManager.Theme) {
-        val dotThemeColor: Int
-        val bounceDotThemeColor: Int
-        when (buttonType) {
-            ButtonType.ADDITIONAL -> {
-                ButtonType.ADDITIONAL.dotColor = theme.ftlButtonAdditionalTheme.dotColor
-                ButtonType.ADDITIONAL.bounceDotColor = theme.ftlButtonAdditionalTheme.bounceDotColor
-                ButtonType.ADDITIONAL.textColor = theme.ftlButtonAdditionalTheme.textColor
-                dotThemeColor = ButtonType.ADDITIONAL.dotColor
-                bounceDotThemeColor = ButtonType.ADDITIONAL.bounceDotColor
-            }
-            ButtonType.CANCEL -> {
-                ButtonType.CANCEL.dotColor = theme.ftlButtonCancelTheme.dotColor
-                ButtonType.CANCEL.bounceDotColor = theme.ftlButtonCancelTheme.bounceDotColor
-                ButtonType.CANCEL.background = theme.ftlButtonCancelTheme.bgDrawable
-                ButtonType.CANCEL.textColor = theme.ftlButtonCancelTheme.textColor
-                dotThemeColor = ButtonType.CANCEL.dotColor
-                bounceDotThemeColor = ButtonType.CANCEL.bounceDotColor
-            }
-            ButtonType.SECONDARY -> {
-                ButtonType.SECONDARY.dotColor = theme.ftlButtonSecondaryTheme.dotColor
-                ButtonType.SECONDARY.bounceDotColor = theme.ftlButtonSecondaryTheme.bounceDotColor
-                ButtonType.SECONDARY.background = theme.ftlButtonSecondaryTheme.bgDrawable
-                ButtonType.SECONDARY.textColor = theme.ftlButtonSecondaryTheme.textColor
-                dotThemeColor = ButtonType.SECONDARY.dotColor
-                bounceDotThemeColor = ButtonType.SECONDARY.bounceDotColor
-            }
-            else -> {
-                ButtonType.PRIMARY.dotColor = theme.ftlButtonPrimaryTheme.dotColor
-                ButtonType.PRIMARY.bounceDotColor = theme.ftlButtonPrimaryTheme.bounceDotColor
-                ButtonType.PRIMARY.background = theme.ftlButtonPrimaryTheme.bgDrawable
-                ButtonType.PRIMARY.textColor = theme.ftlButtonPrimaryTheme.textColor
-                dotThemeColor = ButtonType.PRIMARY.dotColor
-                bounceDotThemeColor = ButtonType.PRIMARY.bounceDotColor
+    private fun onThemeChanged() {
+        jobTheme = launch {
+            when (buttonType) {
+                ButtonType.ADDITIONAL -> {
+                    FTLButtonAdditionalThemeManager().mapToViewData().collect { theme ->
+                        ButtonType.ADDITIONAL.dotColor = theme.dotColor
+                        ButtonType.ADDITIONAL.bounceDotColor = theme.bounceDotColor
+                        ButtonType.ADDITIONAL.textColor = theme.textColor
+                        updateTextColor(textColorRes)
+                        updateBackgroundDrawable(
+                            backgroundDrawableLightRes,
+                            backgroundDrawableDarkRes
+                        )
+                        theme.dotColor =
+                            if (dotColorRes != -1) dotColorRes else theme.dotColor
+                        theme.bounceDotColor =
+                            if (bounceDotColorRes != -1) bounceDotColorRes else theme.bounceDotColor
+                    }
+                }
+                ButtonType.CANCEL -> {
+                    FTLButtonCancelThemeManager().mapToViewData().collect { theme ->
+                        ButtonType.CANCEL.dotColor = theme.dotColor
+                        ButtonType.CANCEL.bounceDotColor =
+                            theme.bounceDotColor
+                        ButtonType.CANCEL.background = theme.bgDrawable
+                        ButtonType.CANCEL.textColor = theme.textColor
+                        updateTextColor(textColorRes)
+                        updateBackgroundDrawable(
+                            backgroundDrawableLightRes,
+                            backgroundDrawableDarkRes
+                        )
+
+                        theme.dotColor =
+                            if (dotColorRes != -1) dotColorRes else theme.dotColor
+                        theme.bounceDotColor =
+                            if (bounceDotColorRes != -1) bounceDotColorRes else theme.bounceDotColor
+                    }
+                }
+                ButtonType.SECONDARY -> {
+                    FTLButtonSecondaryThemeManager().mapToViewData().collect { theme ->
+                        ButtonType.SECONDARY.dotColor = theme.dotColor
+                        ButtonType.SECONDARY.bounceDotColor =
+                            theme.bounceDotColor
+                        ButtonType.SECONDARY.background = theme.bgDrawable
+                        ButtonType.SECONDARY.textColor = theme.textColor
+                        updateTextColor(textColorRes)
+                        updateBackgroundDrawable(
+                            backgroundDrawableLightRes,
+                            backgroundDrawableDarkRes
+                        )
+                        theme.dotColor =
+                            if (dotColorRes != -1) dotColorRes else theme.dotColor
+                        theme.bounceDotColor =
+                            if (bounceDotColorRes != -1) bounceDotColorRes else theme.bounceDotColor
+                    }
+
+                }
+                else -> {
+                    FTLButtonPrimaryThemeManager().mapToViewData().collect { theme ->
+                        ButtonType.PRIMARY.dotColor = theme.dotColor
+                        ButtonType.PRIMARY.bounceDotColor =
+                            theme.bounceDotColor
+                        ButtonType.PRIMARY.background = theme.bgDrawable
+                        ButtonType.PRIMARY.textColor = theme.textColor
+                        updateTextColor(textColorRes)
+                        updateBackgroundDrawable(
+                            backgroundDrawableLightRes,
+                            backgroundDrawableDarkRes
+                        )
+                        theme.dotColor =
+                            if (dotColorRes != -1) dotColorRes else theme.dotColor
+                        theme.bounceDotColor =
+                            if (bounceDotColorRes != -1) bounceDotColorRes else theme.bounceDotColor
+                    }
+                }
             }
         }
-
-        updateTextColor(textColorRes)
-        updateBackgroundDrawable(backgroundDrawableLightRes, backgroundDrawableDarkRes)
-
-        theme.ftlButtonDotsProgressTheme.dotColor =
-            if (dotColorRes != -1) dotColorRes else dotThemeColor
-        theme.ftlButtonDotsProgressTheme.bounceDotColor =
-            if (bounceDotColorRes != -1) bounceDotColorRes else bounceDotThemeColor
     }
 
     override fun onSaveInstanceState(): Parcelable =
@@ -199,7 +241,8 @@ class FTLButton @JvmOverloads constructor(
     fun setButtonType(type: ButtonType) {
         clearCustomColors()
         buttonType = type
-        onThemeChanged(ThemeManager.theme)
+
+        onThemeChanged()
         updateViewState()
     }
 
@@ -219,18 +262,22 @@ class FTLButton @JvmOverloads constructor(
 
     fun updateDotColor(@ColorRes colorRes: Int) {
         dotColorRes = colorRes
-        dotProgress.dotColor = ContextCompat.getColor(
-            context,
-            if (dotColorRes != -1) dotColorRes else buttonType.dotColor
-        )
+        buttonType.dotColor?.let { dotColor ->
+            dotProgress.dotColor = ContextCompat.getColor(
+                context,
+                if (dotColorRes != -1) dotColorRes else dotColor
+            )
+        }
     }
 
     fun updateBounceDotColor(@ColorRes colorRes: Int) {
         bounceDotColorRes = colorRes
-        dotProgress.bounceDotColor = ContextCompat.getColor(
-            context,
-            if (bounceDotColorRes != -1) bounceDotColorRes else buttonType.bounceDotColor
-        )
+        buttonType.bounceDotColor?.let { bounceDotColor ->
+            dotProgress.bounceDotColor = ContextCompat.getColor(
+                context,
+                if (bounceDotColorRes != -1) bounceDotColorRes else bounceDotColor
+            )
+        }
     }
 
     fun updateBackgroundDrawable(drawableForLight: Drawable?, drawableForDark: Drawable?) {
@@ -263,16 +310,20 @@ class FTLButton @JvmOverloads constructor(
         }
 
         with(dotProgress) {
-            this.dotColor = if (dotColor != -1) {
-                dotColor
-            } else {
-                ContextCompat.getColor(context, buttonType.dotColor)
+            buttonType.dotColor?.let {
+                this.dotColor = if (dotColor != -1) {
+                    dotColor
+                } else {
+                    ContextCompat.getColor(context, it)
+                }
             }
 
-            this.bounceDotColor = if (bounceDotColor != -1) {
-                bounceDotColor
-            } else {
-                ContextCompat.getColor(context, buttonType.bounceDotColor)
+            buttonType.bounceDotColor?.let {
+                this.bounceDotColor = if (bounceDotColor != -1) {
+                    bounceDotColor
+                } else {
+                    ContextCompat.getColor(context, it)
+                }
             }
         }
 
@@ -300,11 +351,13 @@ class FTLButton @JvmOverloads constructor(
     }
 
     private fun setTextColorFromType() {
-        val color = ContextCompat.getColor(context, buttonType.textColor)
-        if (color < 0) {
-            tvText.setTextColor(ContextCompat.getColorStateList(context, buttonType.textColor))
-        } else {
-            tvText.setTextColor(color)
+        buttonType.textColor?.let { textColor ->
+            val color = ContextCompat.getColor(context, textColor)
+            if (color < 0) {
+                tvText.setTextColor(ContextCompat.getColorStateList(context, textColor))
+            } else {
+                tvText.setTextColor(color)
+            }
         }
     }
 
@@ -357,3 +410,30 @@ class FTLButton @JvmOverloads constructor(
         private const val MIN_HEIGHT_WRAP_CONTENT = 24
     }
 }
+
+data class FTLButtonAdditionalTheme(
+    @ColorRes val textColor: Int,
+    @ColorRes var dotColor: Int,
+    @ColorRes var bounceDotColor: Int
+) : ViewTheme()
+
+data class FTLButtonPrimaryTheme(
+    @ColorRes val textColor: Int,
+    @ColorRes var dotColor: Int,
+    @ColorRes var bounceDotColor: Int,
+    @DrawableRes val bgDrawable: Int
+) : ViewTheme()
+
+data class FTLButtonSecondaryTheme(
+    @ColorRes val textColor: Int,
+    @ColorRes var dotColor: Int,
+    @ColorRes var bounceDotColor: Int,
+    @DrawableRes val bgDrawable: Int
+) : ViewTheme()
+
+data class FTLButtonCancelTheme(
+    @ColorRes val textColor: Int,
+    @ColorRes var dotColor: Int,
+    @ColorRes var bounceDotColor: Int,
+    @DrawableRes val bgDrawable: Int
+) : ViewTheme()

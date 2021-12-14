@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/text_fields_description_ftl_route_text_view" />
@@ -18,39 +18,39 @@
         app:textAddressFrom="@string/common_first_address"
         app:textAddressTo="@string/common_second_address" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/text_fields_description_ftl_default_text_view" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLDefaultTextView
+    <com.foodtechlab.ftlandroiduikit.textfield.default.FTLDefaultTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:imageType="CUSTOMER"
         app:textForSlot="@string/text_fields_user_bio" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/text_fields_description_ftl_section_text_view" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.ftlsectiontextview.FTLSectionTextView
+    <com.foodtechlab.ftlandroiduikit.textfield.section.FTLSectionTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:imageType="INFO"
         app:textForTopSlot="@string/text_fields_about_app" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.ftlsectiontextview.FTLSectionTextView
+    <com.foodtechlab.ftlandroiduikit.textfield.section.FTLSectionTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -58,14 +58,14 @@
         app:rightSlotType="CHECKBOX"
         app:textForTopSlot="@string/text_fields_add_item" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.ftlsectiontextview.FTLSectionTextView
+    <com.foodtechlab.ftlandroiduikit.textfield.section.FTLSectionTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:leftSlotType="PROGRESS"
         app:textForTopSlot="@string/text_fields_first_section" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.ftlsectiontextview.FTLSectionTextView
+    <com.foodtechlab.ftlandroiduikit.textfield.section.FTLSectionTextView
         android:id="@+id/tvMediaContent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,16 +74,16 @@
         app:leftSlotType="ICON"
         app:textForTopSlot="@string/text_fields_media_content" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/text_fields_description_ftl_multiple_text_view" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLMultipleTextView
+    <com.foodtechlab.ftlandroiduikit.textfield.multiple.FTLMultipleTextView
         android:id="@+id/tvMultiple"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -94,11 +94,11 @@
         app:textTopEndSlot="@string/text_fields_test_amount"
         app:textTopStartSlot="@string/text_fields_cash" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/text_fields_description_ftl_extendable_text_view" />
@@ -113,11 +113,11 @@
         app:fullText="@string/text_fields_description_ftl_extendable_full_text"
         app:imageType="COMMENT" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/text_fields_description_ftl_bannered_text_view" />
@@ -129,16 +129,16 @@
         android:layout_margin="8dp"
         app:textForSlot="Очень грязные столы, а уборщица спит в подсобке" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/text_fields_description_ftl_double_text_view" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLDoubleTextView
+    <com.foodtechlab.ftlandroiduikit.textfield.double.FTLDoubleTextView
         android:id="@+id/tvDoubleText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -148,23 +148,23 @@
         app:textForEndSlot="@string/text_fields_test_amount"
         app:textForStartSlot="@string/text_fields_total" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLDoubleTextView
+    <com.foodtechlab.ftlandroiduikit.textfield.double.FTLDoubleTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:textForEndSlot="@string/text_fields_test_amount"
         app:textForStartSlot="@string/text_fields_total" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/text_fields_description_ftl_tag_view" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTagView
+    <com.foodtechlab.ftlandroiduikit.textfield.tag.FTLTagView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"

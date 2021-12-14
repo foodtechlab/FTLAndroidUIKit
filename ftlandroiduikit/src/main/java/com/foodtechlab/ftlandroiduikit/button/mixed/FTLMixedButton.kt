@@ -12,16 +12,23 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.isVisible
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.progress.FTLCircleScaleView
+import com.foodtechlab.ftlandroiduikit.progress.circle.scale.FTLCircleScaleView
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
-import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.ViewTheme
+import com.foodtechlab.ftlandroiduikit.util.ViewThemeManager
 import com.foodtechlab.ftlandroiduikit.util.dpToPxInt
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 class FTLMixedButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : RelativeLayout(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
+) : RelativeLayout(context, attrs, defStyleAttr), CoroutineScope {
     var currentProgress: Int = 0
         set(value) {
             field = value
@@ -86,6 +93,13 @@ class FTLMixedButton @JvmOverloads constructor(
     @ColorRes
     private var buttonTextColor = -1
 
+    private val viewThemeManager: ViewThemeManager<FTLMixedButtonTheme> =
+        FTLMixedButtonThemeManager()
+    private var ftlMixedButtonTheme: FTLMixedButtonTheme? = viewThemeManager.lightTheme
+    private val job = SupervisorJob()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
     private var tvTextSlot: TextView
     private var ivImageSlot: ImageView
     private var cpiProgressSlot: FTLCircleScaleView
@@ -113,25 +127,20 @@ class FTLMixedButton @JvmOverloads constructor(
                 leftSlotType.ordinal
             )]
         }
-
-        onThemeChanged(ThemeManager.theme)
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        ThemeManager.addListener(this)
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                onThemeChanged(theme)
+            }
+        }
     }
 
     override fun onDetachedFromWindow() {
-        ThemeManager.removeListener(this)
+        job.cancel()
         super.onDetachedFromWindow()
-    }
-
-    override fun onThemeChanged(theme: ThemeManager.Theme) {
-        updateImageColorTheme(imageColor)
-        updateImageBackgroundColorTheme(imageColor)
-        updateBackgroundColorTheme(buttonBackgroundColor)
-        updateTextColorTheme(buttonTextColor)
     }
 
     fun updateProgressTrackColor(@ColorRes colorRes: Int) {
@@ -152,7 +161,7 @@ class FTLMixedButton @JvmOverloads constructor(
             ContextCompat.getColor(
                 context,
                 if (imageColor != -1) imageColor
-                else ThemeManager.theme.ftlMixedButtonTheme.imageColor
+                else ftlMixedButtonTheme!!.imageColor
             )
         )
     }
@@ -163,7 +172,7 @@ class FTLMixedButton @JvmOverloads constructor(
             ContextCompat.getColor(
                 context,
                 if (imageBackgroundColor != -1) imageBackgroundColor
-                else ThemeManager.theme.ftlMixedButtonTheme.imageBackgroundColor
+                else ftlMixedButtonTheme!!.imageBackgroundColor
             )
         )
     }
@@ -173,7 +182,7 @@ class FTLMixedButton @JvmOverloads constructor(
         backgroundTintList = ContextCompat.getColorStateList(
             context,
             if (buttonBackgroundColor != -1) buttonBackgroundColor
-            else ThemeManager.theme.ftlMixedButtonTheme.buttonBackgroundColor
+            else ftlMixedButtonTheme!!.buttonBackgroundColor
         )
     }
 
@@ -183,9 +192,17 @@ class FTLMixedButton @JvmOverloads constructor(
             ContextCompat.getColor(
                 context,
                 if (buttonTextColor != -1) buttonTextColor
-                else ThemeManager.theme.ftlMixedButtonTheme.buttonTextColor
+                else ftlMixedButtonTheme!!.buttonTextColor
             )
         )
+    }
+
+    private fun onThemeChanged(theme: FTLMixedButtonTheme) {
+        ftlMixedButtonTheme = theme
+        updateImageColorTheme(imageColor)
+        updateImageBackgroundColorTheme(imageColor)
+        updateBackgroundColorTheme(buttonBackgroundColor)
+        updateTextColorTheme(buttonTextColor)
     }
 
     private fun placeTextToCenter(isCenterText: Boolean) {
@@ -214,3 +231,10 @@ class FTLMixedButton @JvmOverloads constructor(
         private const val HORIZONTAL_MARGIN = 8F
     }
 }
+
+data class FTLMixedButtonTheme(
+    @ColorRes val buttonTextColor: Int,
+    @ColorRes val imageColor: Int,
+    @ColorRes val imageBackgroundColor: Int,
+    @ColorRes val buttonBackgroundColor: Int
+) : ViewTheme()

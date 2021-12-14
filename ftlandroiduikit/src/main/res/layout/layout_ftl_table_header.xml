@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:id="@+id/vTopDivider"
         android:layout_width="match_parent"
         android:layout_height="1dp" />
@@ -70,7 +70,7 @@
 
     </RelativeLayout>
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:id="@+id/vBottomDivider"
         android:layout_width="match_parent"
         android:layout_height="1dp"

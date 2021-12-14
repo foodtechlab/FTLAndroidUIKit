@@ -6,33 +6,33 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/progress_description_ftl_circle_progress" />
 
-    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
+    <com.foodtechlab.ftlandroiduikit.progress.circle.indicator.FTLCircleProgressIndicator
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:hideBackground="true"
         app:progressColor="@color/AdditionalViolet" />
 
-    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleProgressIndicator
+    <com.foodtechlab.ftlandroiduikit.progress.circle.indicator.FTLCircleProgressIndicator
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/progress_description_ftl_linear_progress" />
 
-    <com.foodtechlab.ftlandroiduikit.progress.FTLLinearProgressIndicator
+    <com.foodtechlab.ftlandroiduikit.progress.linear.indicator.FTLLinearProgressIndicator
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -44,7 +44,7 @@
         app:trackCornerRadius="5dp"
         app:trackThickness="10dp" />
 
-    <com.foodtechlab.ftlandroiduikit.progress.FTLLinearProgressIndicator
+    <com.foodtechlab.ftlandroiduikit.progress.linear.indicator.FTLLinearProgressIndicator
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
@@ -53,16 +53,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/progress_description_ftl_circle_scale_view" />
 
-    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleScaleView
+    <com.foodtechlab.ftlandroiduikit.progress.circle.scale.FTLCircleScaleView
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_margin="8dp"

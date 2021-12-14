@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.foodtechlab.ftlandroiduikit.container.linear.FTLLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/llShowRoomRoot"
     android:layout_width="match_parent"
@@ -27,4 +27,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-</com.foodtechlab.ftlandroiduikit.container.FTLLinearLayout>
+</com.foodtechlab.ftlandroiduikit.container.linear.FTLLinearLayout>

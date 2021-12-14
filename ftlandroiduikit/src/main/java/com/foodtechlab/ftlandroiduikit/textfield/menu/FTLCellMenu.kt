@@ -4,20 +4,34 @@ import android.content.Context
 import android.text.TextUtils
 import android.util.AttributeSet
 import android.util.TypedValue
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.updatePadding
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.ViewTheme
+import com.foodtechlab.ftlandroiduikit.util.ViewThemeManager
 import com.foodtechlab.ftlandroiduikit.util.dpToPxInt
 import com.google.android.material.textview.MaterialTextView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 class FTLCellMenu @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : MaterialTextView(context, attrs, defStyle),
-    ThemeManager.ThemeChangedListener {
+    CoroutineScope {
+    private val viewThemeManager: ViewThemeManager<FTLCellMenuTheme> =
+        FTLCellMenuThemeManager()
+    private val job = SupervisorJob()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
     init {
         updatePadding(
             context.dpToPxInt(HORIZONTAL_PADDING),
@@ -32,25 +46,27 @@ class FTLCellMenu @JvmOverloads constructor(
         setTextSize(TypedValue.COMPLEX_UNIT_SP, TEXT_SIZE)
 
         typeface = ResourcesCompat.getFont(context, R.font.roboto_regular)
-
-        onThemeChanged(ThemeManager.theme)
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        ThemeManager.addListener(this)
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                onThemeChanged(theme)
+            }
+        }
     }
 
     override fun onDetachedFromWindow() {
+        job.cancel()
         super.onDetachedFromWindow()
-        ThemeManager.removeListener(this)
     }
 
-    override fun onThemeChanged(theme: ThemeManager.Theme) {
+    private fun onThemeChanged(theme: FTLCellMenuTheme) {
         setTextColor(
-            ContextCompat.getColor(context, theme.ftlCellMenuTheme.textColor)
+            ContextCompat.getColor(context, theme.textColor)
         )
-        highlightColor = ContextCompat.getColor(context, theme.ftlCellMenuTheme.highlightColor)
+        highlightColor = ContextCompat.getColor(context, theme.highlightColor)
     }
 
     companion object {
@@ -59,3 +75,8 @@ class FTLCellMenu @JvmOverloads constructor(
         private const val TEXT_SIZE = 16f
     }
 }
+
+data class FTLCellMenuTheme(
+    @ColorRes val textColor: Int,
+    @ColorRes val highlightColor: Int
+) : ViewTheme()

@@ -7,18 +7,24 @@ import android.os.Bundle
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.ViewTheme
+import com.foodtechlab.ftlandroiduikit.util.ViewThemeManager
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 /**
  * Created by Umalt on 16.07.2020
  */
-class FTLProgressDialog private constructor() : DialogFragment(),
-    ThemeManager.ThemeChangedListener {
-
+class FTLProgressDialog private constructor() : DialogFragment() {
+    private val viewThemeManager: ViewThemeManager<FTLProgressDialogTheme> =
+        FTLProgressDialogThemeManager()
     private var message: String? = null
 
     private var tvMessage: TextView? = null
@@ -31,7 +37,7 @@ class FTLProgressDialog private constructor() : DialogFragment(),
         llContainer = view?.findViewById(R.id.ll_ftl_progress_dialog_container)
         tvMessage = view?.findViewById(R.id.tv_ftl_progress_dialog_message)
         pbProgress = view?.findViewById(R.id.pb_ftl_progress_dialog_progress)
-        onThemeChanged(ThemeManager.theme)
+        onThemeChanged()
 
         tvMessage?.text = message
 
@@ -41,30 +47,34 @@ class FTLProgressDialog private constructor() : DialogFragment(),
             .create().apply { setCanceledOnTouchOutside(false) }
     }
 
-    override fun onThemeChanged(theme: ThemeManager.Theme) {
-        llContainer?.setBackgroundColor(
-            ContextCompat.getColor(
-                requireContext(),
-                theme.ftlProgressDialogTheme.bgColor
-            )
-        )
-        tvMessage?.setTextColor(
-            ContextCompat.getColor(
-                requireContext(),
-                theme.ftlProgressDialogTheme.textColor
-            )
-        )
+    private fun onThemeChanged() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewThemeManager.mapToViewData().flowWithLifecycle(lifecycle).collect { theme ->
+                llContainer?.setBackgroundColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        theme.bgColor
+                    )
+                )
+                tvMessage?.setTextColor(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        theme.textColor
+                    )
+                )
 
-        pbProgress?.progressTintList = ColorStateList.valueOf(
-            ContextCompat.getColor(
-                requireContext(),
-                theme.ftlProgressDialogTheme.accentColor
-            )
-        )
+                pbProgress?.progressTintList = ColorStateList.valueOf(
+                    ContextCompat.getColor(
+                        requireContext(),
+                        theme.accentColor
+                    )
+                )
+            }
+        }
     }
 
     companion object {
-        const val TAG = "FTLProgressDialog"
+        private const val TAG = "FTLProgressDialog"
 
         fun newInstance(msg: String? = null): FTLProgressDialog {
             return FTLProgressDialog().apply {
@@ -73,3 +83,9 @@ class FTLProgressDialog private constructor() : DialogFragment(),
         }
     }
 }
+
+data class FTLProgressDialogTheme(
+    @ColorRes val textColor: Int,
+    @ColorRes val bgColor: Int,
+    @ColorRes val accentColor: Int
+) : ViewTheme()

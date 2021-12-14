@@ -19,7 +19,7 @@
         tools:ignore="ContentDescription"
         tools:visibility="visible" />
 
-    <com.foodtechlab.ftlandroiduikit.progress.FTLCircleScaleView
+    <com.foodtechlab.ftlandroiduikit.progress.circle.scale.FTLCircleScaleView
         android:id="@+id/cpi_section_text_view_progress_slot"
         android:layout_width="32dp"
         android:layout_height="32dp"
@@ -91,7 +91,7 @@
         app:srcCompat="@drawable/ic_arrow_right_24"
         tools:ignore="ContentDescription" />
 
-    <com.foodtechlab.ftlandroiduikit.button.FTLCircularCheckBox
+    <com.foodtechlab.ftlandroiduikit.button.circular.FTLCircularCheckBox
         android:id="@+id/cb_section_text_view_right_slot"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

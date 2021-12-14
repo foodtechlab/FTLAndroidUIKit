@@ -6,6 +6,7 @@ import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.*
@@ -13,17 +14,23 @@ import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.button.ButtonType
 import com.foodtechlab.ftlandroiduikit.button.FTLButton
 import com.foodtechlab.ftlandroiduikit.common.DialogButton
-import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.ViewTheme
+import com.foodtechlab.ftlandroiduikit.util.ViewThemeManager
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
 import com.google.android.material.card.MaterialCardView
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 class FTLBanner @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : MaterialCardView(context, attrs, defStyle), ThemeManager.ThemeChangedListener,
+) : MaterialCardView(context, attrs, defStyle), CoroutineScope,
     View.OnClickListener {
-
     /**
      * Данный параметр позволяет установить заголовок в компоненте.
      * В случае если заголовок = null, то на верстке заголовок будет скрыт.
@@ -47,6 +54,11 @@ class FTLBanner @JvmOverloads constructor(
             tvDescription.text = field
         }
 
+    private val viewThemeManager: ViewThemeManager<FTLBannerTheme> = FTLBannerThemeManager()
+    private val job = SupervisorJob()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
     private val tvTitle: TextView
     private val tvDescription: TextView
     private val llContainer: LinearLayout
@@ -63,29 +75,42 @@ class FTLBanner @JvmOverloads constructor(
             title = getString(R.styleable.FTLBanner_title)
             description = getString(R.styleable.FTLBanner_description) ?: ""
         }
-        onThemeChanged(ThemeManager.theme)
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        ThemeManager.addListener(this)
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                onThemeChanged(theme)
+            }
+        }
     }
 
     override fun onDetachedFromWindow() {
+        job.cancel()
         super.onDetachedFromWindow()
-        ThemeManager.removeListener(this)
-    }
-
-    override fun onThemeChanged(theme: ThemeManager.Theme) {
-        tvTitle.setTextColor(ContextCompat.getColor(context, theme.ftlBannerTheme.titleColor))
-        tvDescription.setTextColor(
-            ContextCompat.getColor(context, theme.ftlBannerTheme.descriptionColor)
-        )
-        setCardBackgroundColor(ContextCompat.getColor(context, theme.ftlBannerTheme.bgColor))
     }
 
     override fun onClick(v: View) {
         onClickBannerListener?.onClick(v)
+    }
+
+    private fun onThemeChanged(theme: FTLBannerTheme) {
+        tvTitle.setTextColor(
+            ContextCompat.getColor(
+                context,
+                theme.titleColor
+            )
+        )
+        tvDescription.setTextColor(
+            ContextCompat.getColor(context, theme.descriptionColor)
+        )
+        setCardBackgroundColor(
+            ContextCompat.getColor(
+                context,
+                theme.bgColor
+            )
+        )
     }
 
     /**
@@ -138,3 +163,9 @@ class FTLBanner @JvmOverloads constructor(
         private const val BUTTON_MARGIN_TOP = 4f
     }
 }
+
+data class FTLBannerTheme(
+    @ColorRes val titleColor: Int,
+    @ColorRes val descriptionColor: Int,
+    @ColorRes val bgColor: Int
+) : ViewTheme()

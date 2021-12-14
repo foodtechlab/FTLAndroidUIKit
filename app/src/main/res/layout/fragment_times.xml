@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.foodtechlab.ftlandroiduikit.container.FTLConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.foodtechlab.ftlandroiduikit.container.constraint.FTLConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:paddingBottom="8dp">
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:id="@+id/tvTimeDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -92,7 +92,7 @@
         app:size="small"
         app:status="in_progress_late" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:id="@+id/vTimesDivider"
         android:layout_width="match_parent"
         android:layout_height="8dp"
@@ -100,7 +100,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/dtvSmallInProgress" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:id="@+id/tvTimerDescription"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -118,4 +118,4 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tvTimerDescription" />
 
-</com.foodtechlab.ftlandroiduikit.container.FTLConstraintLayout>
+</com.foodtechlab.ftlandroiduikit.container.constraint.FTLConstraintLayout>

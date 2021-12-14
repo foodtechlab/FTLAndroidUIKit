@@ -7,15 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
+import androidx.annotation.DrawableRes
 import androidx.annotation.NonNull
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.util.ThemeManager
-import com.foodtechlab.ftlandroiduikit.util.dpToPx
+import com.foodtechlab.ftlandroiduikit.util.*
 import com.foodtechlab.ftlandroiduikit.util.findSuitableParent
 import com.google.android.material.snackbar.BaseTransientBottomBar
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
 
 /**
  * Created by Umalt on 08.05.2020
@@ -23,7 +25,8 @@ import com.google.android.material.snackbar.BaseTransientBottomBar
 class FTLSnackbar(
     @NonNull parent: ViewGroup,
     @NonNull customView: SnackbarView
-) : BaseTransientBottomBar<FTLSnackbar>(parent, customView, customView), ThemeManager.ThemeChangedListener {
+) : BaseTransientBottomBar<FTLSnackbar>(parent, customView, customView) {
+    private val viewThemeManager: ViewThemeManager<FTLSnackbarTheme> = FTLSnackbarThemeManager()
 
     init {
         animationMode = ANIMATION_MODE_FADE
@@ -33,12 +36,13 @@ class FTLSnackbar(
             is CoordinatorLayout.LayoutParams -> lParams.gravity = Gravity.TOP
         }
 
-        onThemeChanged(ThemeManager.theme)
+        onThemeChanged()
 
         ViewCompat.setElevation(view, context.dpToPx(ELEVATION))
     }
 
     companion object {
+        private const val TAG = "FTLSnackbar"
         private const val ELEVATION = 6f
 
         fun make(
@@ -67,8 +71,22 @@ class FTLSnackbar(
         }
     }
 
+
     @SuppressLint("RestrictedApi")
-    override fun onThemeChanged(theme: ThemeManager.Theme) {
-        view.background = ContextCompat.getDrawable(context, theme.ftlSnackbarTheme.background)
+    fun onThemeChanged() {
+        CoroutineScope(Dispatchers.Main).launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                    view.background = ContextCompat.getDrawable(context, theme.background)
+                try {
+                    this.cancel()
+                } catch (e: Exception) {
+                    Log.e(TAG, e.message.toString())
+                }
+            }
+        }
     }
 }
+
+data class FTLSnackbarTheme(
+    @DrawableRes val background: Int
+) : ViewTheme()

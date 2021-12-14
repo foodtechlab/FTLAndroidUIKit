@@ -42,7 +42,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.foodtechlab.ftlandroiduikit.imageview.FTLPlaceholderImageView
+            <com.foodtechlab.ftlandroiduikit.imageview.placeholder.FTLPlaceholderImageView
                 android:id="@+id/iv_ftl_restaurant_brand_logo"
                 android:layout_width="24dp"
                 android:layout_height="24dp"

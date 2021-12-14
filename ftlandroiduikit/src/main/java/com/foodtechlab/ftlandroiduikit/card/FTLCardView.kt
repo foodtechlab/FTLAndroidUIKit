@@ -33,24 +33,16 @@ class FTLCardView @JvmOverloads constructor(
         }
     }
 
-    private var viewThemeManager: ViewThemeManager<FTLCardViewTheme>? = null
-    private var job = SupervisorJob()
+    private val viewThemeManager: ViewThemeManager<FTLCardViewTheme> = FTLCardViewThemeManager()
+    private val job = SupervisorJob()
     override val coroutineContext: CoroutineContext
         get() = Dispatchers.Main + job
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        viewThemeManager = FTLCardViewThemeManager()
         launch {
-            viewThemeManager?.mapToViewData()?.collect { theme ->
-                theme?.let {
-                    setCardBackgroundColor(
-                        ContextCompat.getColor(
-                            context,
-                            it.bgColor
-                        )
-                    )
-                }
+            viewThemeManager.mapToViewData().collect { theme ->
+                    onThemeChanged(theme)
             }
         }
     }
@@ -58,6 +50,15 @@ class FTLCardView @JvmOverloads constructor(
     override fun onDetachedFromWindow() {
         job.cancel()
         super.onDetachedFromWindow()
+    }
+
+    private fun onThemeChanged(theme: FTLCardViewTheme) {
+        setCardBackgroundColor(
+            ContextCompat.getColor(
+                context,
+                theme.bgColor
+            )
+        )
     }
 
     companion object {

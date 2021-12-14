@@ -12,9 +12,15 @@ import android.view.animation.Animation
 import android.view.animation.LinearInterpolator
 import android.view.animation.Transformation
 import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.ViewTheme
+import com.foodtechlab.ftlandroiduikit.util.ViewThemeManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlin.coroutines.CoroutineContext
 import kotlin.math.min
 
 /**
@@ -24,7 +30,7 @@ abstract class BaseDotsProgress @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : View(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
+) : View(context, attrs, defStyleAttr), CoroutineScope {
 
     private val displayDensity = resources.displayMetrics.density
 
@@ -45,6 +51,11 @@ abstract class BaseDotsProgress @JvmOverloads constructor(
     private var animationSpeed = 250L
 
     private var dotPosition = 0
+
+    abstract val viewThemeManager: ViewThemeManager<FTLDotsProgressTheme>
+    private val job = SupervisorJob()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     @ColorInt
     var dotColor = Color.WHITE
@@ -120,14 +131,9 @@ abstract class BaseDotsProgress @JvmOverloads constructor(
         )
     }
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        ThemeManager.addListener(this)
-    }
-
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
-        ThemeManager.removeListener(this)
+        job.cancel()
     }
 
     private fun Canvas.drawDots() {
@@ -196,3 +202,8 @@ abstract class BaseDotsProgress @JvmOverloads constructor(
         private const val HALF = .5f
     }
 }
+
+data class FTLDotsProgressTheme(
+    @ColorRes var dotColor: Int,
+    @ColorRes var bounceDotColor: Int
+) : ViewTheme()

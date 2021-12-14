@@ -488,6 +488,7 @@ class ComponentsFragment : Fragment() {
     }
 
     companion object {
+        const val TAG = "ComponentsFragment"
         const val BUTTONS = 0
         const val TEXT_FIELDS = 1
         const val EDIT_FIELDS = 2

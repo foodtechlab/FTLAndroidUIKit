@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/table_fields_description_ftl_table_header" />
@@ -23,11 +23,11 @@
         android:layout_height="wrap_content"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/table_fields_description_ftl_table_header_with_subtitle" />

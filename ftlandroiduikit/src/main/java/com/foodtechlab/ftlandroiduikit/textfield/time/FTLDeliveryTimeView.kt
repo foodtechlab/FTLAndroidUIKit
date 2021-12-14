@@ -1,5 +1,6 @@
 package com.foodtechlab.ftlandroiduikit.textfield.time
 
+import DeliveryStatus
 import android.content.Context
 import android.graphics.*
 import android.os.Parcel
@@ -8,16 +9,19 @@ import android.text.TextPaint
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.textfield.time.helper.DeliveryStatus
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.Icon
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.Size
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.formatTime
-import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.ViewTheme
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.*
 import java.util.concurrent.TimeUnit
+import kotlin.coroutines.CoroutineContext
 import kotlin.math.abs
 import kotlin.math.min
 
@@ -25,7 +29,10 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : View(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
+) : View(context, attrs, defStyleAttr), CoroutineScope {
+    private val job = SupervisorJob()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     private val displayDensity = resources.displayMetrics.density
 
@@ -203,13 +210,11 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
             val tSize = size.textSize * displayDensity
             textScale = textSize / tSize
 
-            updateViewState()
+            onThemeChanged()
         }
-
-//        onThemeChanged(ThemeManager.theme)
     }
 
-    override fun onSaveInstanceState(): Parcelable? =
+    override fun onSaveInstanceState(): Parcelable =
         SavedState(super.onSaveInstanceState()).apply {
             estimateDuration = this@FTLDeliveryTimeView.estimateDuration
             remainedDuration = this@FTLDeliveryTimeView.remainedDuration
@@ -225,14 +230,9 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
         }
     }
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        ThemeManager.addListener(this)
-    }
-
     override fun onDetachedFromWindow() {
+        job.cancel()
         super.onDetachedFromWindow()
-        ThemeManager.removeListener(this)
     }
 
     override fun onDraw(canvas: Canvas) {
@@ -257,43 +257,66 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
         )
     }
 
-    override fun onThemeChanged(theme: ThemeManager.Theme) {
-        DeliveryStatus.USUAL.textColor = theme.ftlDeliveryTimeViewUsualTheme.textColor
-        DeliveryStatus.USUAL.bgColor = theme.ftlDeliveryTimeViewUsualTheme.bgColor
-        DeliveryStatus.USUAL.iconColor = theme.ftlDeliveryTimeViewUsualTheme.iconColor
+    private fun onThemeChanged() {
+        DeliveryStatus.USUAL.textColor = FTLDeliveryTimeViewUsualThemeManager().lightTheme.textColor
+        DeliveryStatus.USUAL.bgColor = FTLDeliveryTimeViewUsualThemeManager().lightTheme.bgColor
+        DeliveryStatus.USUAL.iconColor = FTLDeliveryTimeViewUsualThemeManager().lightTheme.iconColor
+        launch {
+            val usualTheme = FTLDeliveryTimeViewUsualThemeManager().mapToViewData()
+            val urgentTheme = FTLDeliveryTimeViewUrgentThemeManager().mapToViewData()
+            val deliveredTheme = FTLDeliveryTimeViewDeliveredThemeManager().mapToViewData()
+            val deliveredLateTheme = FTLDeliveryTimeViewDeliveredLateThemeManager().mapToViewData()
+            val canceledTheme = FTLDeliveryTimeViewCanceledThemeManager().mapToViewData()
+            val progressTheme = FTLDeliveryTimeViewInProgressThemeManager().mapToViewData()
+            val progressLateTheme = FTLDeliveryTimeViewInProgressLateThemeManager().mapToViewData()
 
-        DeliveryStatus.URGENT.textColor = theme.ftlDeliveryTimeViewUrgentTheme.textColor
-        DeliveryStatus.URGENT.bgColor = theme.ftlDeliveryTimeViewUrgentTheme.bgColor
-        DeliveryStatus.URGENT.iconColor = theme.ftlDeliveryTimeViewUrgentTheme.iconColor
-
-        DeliveryStatus.DELIVERED.textColor = theme.ftlDeliveryTimeViewDeliveredTheme.textColor
-        DeliveryStatus.DELIVERED.bgColor = theme.ftlDeliveryTimeViewDeliveredTheme.bgColor
-        DeliveryStatus.DELIVERED.iconColor = theme.ftlDeliveryTimeViewDeliveredTheme.iconColor
-
-        DeliveryStatus.DELIVERED_LATE.textColor =
-            theme.ftlDeliveryTimeViewDeliveredLateTheme.textColor
-        DeliveryStatus.DELIVERED_LATE.bgColor = theme.ftlDeliveryTimeViewDeliveredLateTheme.bgColor
-        DeliveryStatus.DELIVERED_LATE.iconColor =
-            theme.ftlDeliveryTimeViewDeliveredLateTheme.iconColor
-
-        DeliveryStatus.CANCELED.textColor = theme.ftlDeliveryTimeViewCanceledTheme.textColor
-        DeliveryStatus.CANCELED.bgColor = theme.ftlDeliveryTimeViewCanceledTheme.bgColor
-        DeliveryStatus.CANCELED.iconColor = theme.ftlDeliveryTimeViewCanceledTheme.iconColor
-
-        DeliveryStatus.IN_PROGRESS.textColor = theme.ftlDeliveryTimeViewInProgressTheme.textColor
-        DeliveryStatus.IN_PROGRESS.bgColor = theme.ftlDeliveryTimeViewInProgressTheme.bgColor
-        DeliveryStatus.IN_PROGRESS.iconColor = theme.ftlDeliveryTimeViewInProgressTheme.iconColor
-
-        DeliveryStatus.IN_PROGRESS_LATE.textColor =
-            theme.ftlDeliveryTimeViewInProgressLateTheme.textColor
-        DeliveryStatus.IN_PROGRESS_LATE.bgColor =
-            theme.ftlDeliveryTimeViewInProgressLateTheme.bgColor
-        DeliveryStatus.IN_PROGRESS_LATE.iconColor =
-            theme.ftlDeliveryTimeViewInProgressLateTheme.iconColor
-
-        updateViewState()
-
-        requestLayout()
+            usualTheme.zip(urgentTheme) { usual, urgent ->
+                DeliveryStatus.USUAL.textColor = usual.textColor
+                DeliveryStatus.USUAL.bgColor = usual.bgColor
+                DeliveryStatus.USUAL.iconColor = usual.iconColor
+                urgent
+            }.zip(deliveredTheme) { urgent, delivered ->
+                DeliveryStatus.URGENT.textColor = urgent.textColor
+                DeliveryStatus.URGENT.bgColor = urgent.bgColor
+                DeliveryStatus.URGENT.iconColor = urgent.iconColor
+                delivered
+            }.zip(deliveredLateTheme) { delivered, deliveredLate ->
+                DeliveryStatus.DELIVERED.textColor =
+                    delivered.textColor
+                DeliveryStatus.DELIVERED.bgColor = delivered.bgColor
+                DeliveryStatus.DELIVERED.iconColor = delivered.iconColor
+                deliveredLate
+            }.zip(canceledTheme) { deliveredLate, canceled ->
+                DeliveryStatus.DELIVERED_LATE.textColor =
+                    deliveredLate.textColor
+                DeliveryStatus.DELIVERED_LATE.bgColor =
+                    deliveredLate.bgColor
+                DeliveryStatus.DELIVERED_LATE.iconColor =
+                    deliveredLate.iconColor
+                canceled
+            }.zip(progressTheme) { canceled, progress ->
+                DeliveryStatus.CANCELED.textColor = canceled.textColor
+                DeliveryStatus.CANCELED.bgColor = canceled.bgColor
+                DeliveryStatus.CANCELED.iconColor = canceled.iconColor
+                progress
+            }.zip(progressLateTheme) { progress, progressLate ->
+                DeliveryStatus.IN_PROGRESS.textColor =
+                    progress.textColor
+                DeliveryStatus.IN_PROGRESS.bgColor =
+                    progress.bgColor
+                DeliveryStatus.IN_PROGRESS.iconColor =
+                    progress.iconColor
+                progressLate
+            }.collect { progressLate ->
+                DeliveryStatus.IN_PROGRESS_LATE.textColor =
+                    progressLate.textColor
+                DeliveryStatus.IN_PROGRESS_LATE.bgColor =
+                    progressLate.bgColor
+                DeliveryStatus.IN_PROGRESS_LATE.iconColor =
+                    progressLate.iconColor
+                updateViewState()
+            }
+        }
     }
 
     private fun measureDimension(desiredSize: Int, measureSpec: Int): Int {
@@ -335,8 +358,13 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
         paddingHorizontal = size.paddingHorizontal * displayDensity
         paddingVertical = size.paddingVertical * displayDensity
         textPaint.textSize = textSize * textScale
-        textPaint.color = ContextCompat.getColor(context, deliveryStatus.textColor)
-        bgPaint.color = ContextCompat.getColor(context, deliveryStatus.bgColor)
+
+        deliveryStatus.textColor?.let {
+            textPaint.color = ContextCompat.getColor(context, it)
+        }
+        deliveryStatus.bgColor?.let {
+            bgPaint.color = ContextCompat.getColor(context, it)
+        }
 
         if (!isInEditMode) textPaint.typeface = ResourcesCompat.getFont(context, size.font)
     }
@@ -414,3 +442,9 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
         private const val TIME_TEMPLATE = "-00:00"
     }
 }
+
+data class FTLDeliveryTimeViewTheme(
+    @ColorRes val textColor: Int,
+    @ColorRes val bgColor: Int,
+    @ColorRes val iconColor: Int? = null
+) : ViewTheme()

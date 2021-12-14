@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/buttons_description_ftl_button" />
@@ -39,26 +39,26 @@
         app:ftlButton_text="additional"
         app:ftlButton_type="additional" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/buttons_description_ftl_fab" />
 
-    <com.foodtechlab.ftlandroiduikit.button.FTLFloatingActionButton
+    <com.foodtechlab.ftlandroiduikit.button.floating.FTLFloatingActionButton
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:rippleColor="@null" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/buttons_description_ftl_image_button" />
@@ -163,11 +163,11 @@
             app:type="navigator_large" />
     </androidx.appcompat.widget.LinearLayoutCompat>
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/buttons_description_ftl_timer_button" />
@@ -196,11 +196,11 @@
         app:accompanyingText="IN_DELIVERY"
         app:heightButton="48.0" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -215,11 +215,11 @@
         app:textForSlot="@string/buttons_ftl_mixed_button_text"
         app:mixedButton_leftSlotType="PROGRESS" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
@@ -232,14 +232,14 @@
         android:layout_marginVertical="8dp"
         android:text="@string/buttons_name_ftl_switch" />
 
-    <com.foodtechlab.ftlandroiduikit.button.FTLRadioButton
+    <com.foodtechlab.ftlandroiduikit.button.radio.FTLRadioButton
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
         android:layout_marginVertical="8dp"
         android:text="@string/buttons_name_ftl_radio_button" />
 
-    <com.foodtechlab.ftlandroiduikit.button.FTLCircularCheckBox
+    <com.foodtechlab.ftlandroiduikit.button.circular.FTLCircularCheckBox
         android:id="@+id/ftlCircularCheckBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

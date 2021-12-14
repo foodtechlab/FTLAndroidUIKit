@@ -1,13 +1,16 @@
 package com.foodtechlab.ftlandroiduikit.bar.toolbar
 
+import DeliveryStatus
 import android.content.Context
 import android.content.res.TypedArray
 import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.annotation.ColorRes
+import androidx.annotation.DrawableRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import androidx.core.view.isGone
@@ -16,15 +19,16 @@ import androidx.transition.Fade
 import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.common.NetworkConnectivityState
-import com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLToolbarDotsProgress
-import com.foodtechlab.ftlandroiduikit.progress.FTLCircleScaleView
-import com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+import com.foodtechlab.ftlandroiduikit.common.dotsprogress.toolbar.FTLToolbarDotsProgress
+import com.foodtechlab.ftlandroiduikit.progress.circle.scale.FTLCircleScaleView
+import com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
 import com.foodtechlab.ftlandroiduikit.textfield.time.FTLDeliveryTimeView
-import com.foodtechlab.ftlandroiduikit.textfield.time.helper.DeliveryStatus
-import com.foodtechlab.ftlandroiduikit.util.ThemeManager
-import com.foodtechlab.ftlandroiduikit.util.changeColor
-import com.foodtechlab.ftlandroiduikit.util.dpToPx
+import com.foodtechlab.ftlandroiduikit.util.*
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
+import java.lang.Runnable
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by Umalt on 28.05.2020
@@ -33,8 +37,7 @@ class FTLToolbar @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
-
+) : LinearLayout(context, attrs, defStyleAttr), CoroutineScope {
     var isShadowVisible: Boolean
         get() = vShadow.isVisible
         set(value) {
@@ -95,9 +98,21 @@ class FTLToolbar @JvmOverloads constructor(
     var startDrawable: Drawable?
         get() = ibStart.drawable
         set(value) {
-            value?.mutate()?.changeColor(
-                ContextCompat.getColor(context, ThemeManager.theme.ftlToolbarTheme.startIconColor)
-            )
+            launch {
+                viewThemeManager.mapToViewData().collect { theme ->
+                    value?.mutate()?.changeColor(
+                        ContextCompat.getColor(
+                            context,
+                            theme.startIconColor
+                        )
+                    )
+                }
+                try {
+                    this.cancel()
+                } catch (e: Exception) {
+                    Log.e(TAG, e.message.toString())
+                }
+            }
             ibStart.setImageDrawable(value)
             ibStart.isVisible = value != null
         }
@@ -105,9 +120,18 @@ class FTLToolbar @JvmOverloads constructor(
     var endDrawable: Drawable?
         get() = ibEnd.drawable
         set(value) {
-            value?.mutate()?.changeColor(
-                ContextCompat.getColor(context, ThemeManager.theme.ftlToolbarTheme.endIconColor)
-            )
+            launch {
+                viewThemeManager.mapToViewData().collect { theme ->
+                    value?.mutate()?.changeColor(
+                        ContextCompat.getColor(context, theme.endIconColor)
+                    )
+                    try {
+                        this.cancel()
+                    } catch (e: Exception) {
+                        Log.e(TAG, e.message.toString())
+                    }
+                }
+            }
             ibEnd.setImageDrawable(value)
         }
 
@@ -126,14 +150,46 @@ class FTLToolbar @JvmOverloads constructor(
     var socketConnectivityState = SocketConnectivityState.CONNECTED
         set(value) {
             field = value
-            vIndicator.background.changeColor(ContextCompat.getColor(context, value.color))
+            launch {
+                viewThemeManager.mapToViewData().collect { theme ->
+                    if (value == SocketConnectivityState.CONNECTED) {
+                        vIndicator.background.changeColor(
+                            ContextCompat.getColor(
+                                context,
+                                theme.socketConnected
+                            )
+                        )
+                    } else {
+                        vIndicator.background.changeColor(
+                            ContextCompat.getColor(
+                                context,
+                                theme.socketDisconnected
+                            )
+                        )
+                    }
+                    try {
+                        this.cancel()
+                    } catch (e: Exception) {
+                        Log.e(TAG, e.message.toString())
+                    }
+                }
+            }
         }
 
     var networkState = NetworkConnectivityState.CONNECTED
         set(value) {
             field = value
             tvConnectivity.apply {
-                setBackgroundColor(ContextCompat.getColor(context, value.color))
+                launch {
+                    viewThemeManager.mapToViewData().collect { theme ->
+                        setBackgroundColor(ContextCompat.getColor(context, theme.networkConnected))
+                        try {
+                            this.cancel()
+                        } catch (e: Exception) {
+                            Log.e(TAG, e.message.toString())
+                        }
+                    }
+                }
                 setText(value.message)
                 isVisible = true
             }
@@ -153,6 +209,11 @@ class FTLToolbar @JvmOverloads constructor(
     var onIndicatorClickListener: OnClickListener? = null
 
     var onActionClickListener: OnClickListener? = null
+
+    private val viewThemeManager: ViewThemeManager<FTLToolbarTheme> = FTLToolbarThemeManager()
+    private val job = SupervisorJob()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     private val progress: FTLToolbarDotsProgress
     private val ibStart: ImageButton
@@ -229,53 +290,65 @@ class FTLToolbar @JvmOverloads constructor(
             actionText = getString(R.styleable.FTLToolbar_ftlToolbar_action_text)
             subTitle = getString(R.styleable.FTLToolbar_ftlToolbar_subtitle)
         }
-
-        onThemeChanged(ThemeManager.theme)
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        ThemeManager.addListener(this)
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                onThemeChanged(theme)
+            }
+        }
     }
 
     override fun onDetachedFromWindow() {
+        job.cancel()
         super.onDetachedFromWindow()
-        ThemeManager.removeListener(this)
     }
 
-    override fun onThemeChanged(theme: ThemeManager.Theme) {
+    private fun onThemeChanged(theme: FTLToolbarTheme) {
         rlContainer.setBackgroundColor(
             ContextCompat.getColor(
                 context,
-                theme.ftlToolbarTheme.bgColor
+                theme.bgColor
             )
         )
         endDrawable?.mutate()?.changeColor(
             ContextCompat.getColor(
                 context,
-                theme.ftlToolbarTheme.endIconColor
+                theme.endIconColor
             )
         )
         startDrawable?.mutate()?.changeColor(
             ContextCompat.getColor(
                 context,
-                theme.ftlToolbarTheme.startIconColor
+                theme.startIconColor
             )
         )
-        if (theme.ftlToolbarTheme.logoIcon != -1) {
-            logoIcon = ContextCompat.getDrawable(context, theme.ftlToolbarTheme.logoIcon)
+        if (theme.logoIcon != -1) {
+            logoIcon = ContextCompat.getDrawable(context, theme.logoIcon)
         }
-        titleColor = ContextCompat.getColor(context, theme.ftlToolbarTheme.titleColor)
-        subtitleColor = ContextCompat.getColor(context, theme.ftlToolbarTheme.subtitleColor)
-        actionTextColor = ContextCompat.getColor(context, theme.ftlToolbarTheme.actionColor)
+        titleColor = ContextCompat.getColor(context, theme.titleColor)
+        subtitleColor = ContextCompat.getColor(context, theme.subtitleColor)
+        actionTextColor = ContextCompat.getColor(context, theme.actionColor)
 
-        SocketConnectivityState.CONNECTED.color = theme.ftlToolbarTheme.socketConnected
-        SocketConnectivityState.DISCONNECTED.color = theme.ftlToolbarTheme.socketDisconnected
         socketConnectivityState = socketConnectivityState
 
-        NetworkConnectivityState.CONNECTED.color = theme.ftlToolbarTheme.networkConnected
-        NetworkConnectivityState.DISCONNECTED.color = theme.ftlToolbarTheme.networkDisconnected
-        tvConnectivity.setBackgroundColor(ContextCompat.getColor(context, networkState.color))
+        if (networkState == NetworkConnectivityState.CONNECTED) {
+            tvConnectivity.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    theme.networkConnected
+                )
+            )
+        } else {
+            tvConnectivity.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    theme.networkDisconnected
+                )
+            )
+        }
     }
 
     fun showProgress() {
@@ -363,68 +436,145 @@ class FTLToolbar @JvmOverloads constructor(
     }
 
     fun updateBackgroundColor(@ColorRes lightColor: Int, @ColorRes darkColor: Int) {
-        ThemeManager.Theme.LIGHT.ftlToolbarTheme.bgColor = lightColor
-        ThemeManager.Theme.DARK.ftlToolbarTheme.bgColor = darkColor
-        rlContainer.setBackgroundColor(
-            ContextCompat.getColor(
-                context,
-                ThemeManager.theme.ftlToolbarTheme.bgColor
-            )
-        )
+        viewThemeManager.lightTheme.bgColor = lightColor
+        viewThemeManager.darkTheme?.bgColor = darkColor
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                rlContainer.setBackgroundColor(
+                    ContextCompat.getColor(
+                        context,
+                        theme.bgColor
+                    )
+                )
+                try {
+                    this.cancel()
+                } catch (e: Exception) {
+                    Log.e(TAG, e.message.toString())
+                }
+            }
+        }
     }
 
     private fun TypedArray.setupLogoIcon() {
-        ThemeManager.Theme.LIGHT.ftlToolbarTheme.logoIcon = getResourceId(
+        viewThemeManager.lightTheme.logoIcon = getResourceId(
             R.styleable.FTLToolbar_ftlToolbar_logo_icon_light,
-            ThemeManager.Theme.LIGHT.ftlToolbarTheme.logoIcon
+            viewThemeManager.lightTheme.logoIcon
         )
-        ThemeManager.Theme.DARK.ftlToolbarTheme.logoIcon = getResourceId(
-            R.styleable.FTLToolbar_ftlToolbar_logo_icon_dark,
-            ThemeManager.Theme.DARK.ftlToolbarTheme.logoIcon
-        )
-        if (ThemeManager.theme.ftlToolbarTheme.logoIcon != -1) {
-            logoIcon = ContextCompat.getDrawable(
-                context,
-                ThemeManager.theme.ftlToolbarTheme.logoIcon
+        viewThemeManager.darkTheme?.let {
+            it.logoIcon = getResourceId(
+                R.styleable.FTLToolbar_ftlToolbar_logo_icon_dark,
+                it.logoIcon
             )
+        }
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                if (theme.logoIcon != -1) {
+                    logoIcon = ContextCompat.getDrawable(
+                        context,
+                        theme.logoIcon
+                    )
+                }
+                try {
+                    this.cancel()
+                } catch (e: Exception) {
+                    Log.e(TAG, e.message.toString())
+                }
+            }
         }
     }
 
     private fun TypedArray.setupTitleColor() {
-        ThemeManager.Theme.LIGHT.ftlToolbarTheme.titleColor = getResourceId(
+        viewThemeManager.lightTheme.titleColor = getResourceId(
             R.styleable.FTLToolbar_ftlToolbar_title_color_light,
-            ThemeManager.Theme.LIGHT.ftlToolbarTheme.titleColor
+            viewThemeManager.lightTheme.titleColor
         )
-        ThemeManager.Theme.DARK.ftlToolbarTheme.titleColor = getResourceId(
-            R.styleable.FTLToolbar_ftlToolbar_title_color_dark,
-            ThemeManager.Theme.DARK.ftlToolbarTheme.titleColor
-        )
-        titleColor = ContextCompat.getColor(context, ThemeManager.theme.ftlToolbarTheme.titleColor)
+        viewThemeManager.darkTheme?.let {
+            it.titleColor = getResourceId(
+                R.styleable.FTLToolbar_ftlToolbar_title_color_dark,
+                it.titleColor
+            )
+        }
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                titleColor = ContextCompat.getColor(
+                    context,
+                    theme.titleColor
+                )
+                try {
+                    this.cancel()
+                } catch (e: Exception){
+                    Log.e(TAG, e.message.toString())
+                }
+            }
+        }
     }
 
     private fun TypedArray.setupSubtitleColor() {
-        ThemeManager.Theme.LIGHT.ftlToolbarTheme.subtitleColor = getResourceId(
+        viewThemeManager.lightTheme.subtitleColor = getResourceId(
             R.styleable.FTLToolbar_ftlToolbar_subtitle_color_light,
-            ThemeManager.Theme.LIGHT.ftlToolbarTheme.subtitleColor
+            viewThemeManager.lightTheme.subtitleColor
         )
-        ThemeManager.Theme.DARK.ftlToolbarTheme.subtitleColor = getResourceId(
-            R.styleable.FTLToolbar_ftlToolbar_subtitle_color_dark,
-            ThemeManager.Theme.DARK.ftlToolbarTheme.subtitleColor
-        )
-        subtitleColor =
-            ContextCompat.getColor(context, ThemeManager.theme.ftlToolbarTheme.subtitleColor)
+
+        viewThemeManager.darkTheme?.let {
+            it.subtitleColor = getResourceId(
+                R.styleable.FTLToolbar_ftlToolbar_subtitle_color_dark,
+                it.subtitleColor
+            )
+        }
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                ContextCompat.getColor(context, theme.subtitleColor)
+                try {
+                    this.cancel()
+                } catch (e: Exception){
+                    Log.e(TAG, e.message.toString())
+                }
+            }
+        }
     }
 
     private fun TypedArray.setupActionColor() {
-        ThemeManager.Theme.LIGHT.ftlToolbarTheme.actionColor = getResourceId(
+        viewThemeManager.lightTheme.actionColor = getResourceId(
             R.styleable.FTLToolbar_ftlToolbar_action_color_light,
-            ThemeManager.Theme.LIGHT.ftlToolbarTheme.actionColor
+            viewThemeManager.lightTheme.actionColor
         )
-        ThemeManager.Theme.DARK.ftlToolbarTheme.actionColor = getResourceId(
-            R.styleable.FTLToolbar_ftlToolbar_action_color_dark,
-            ThemeManager.Theme.DARK.ftlToolbarTheme.actionColor
-        )
-        actionTextColor =
-            ContextCompat.getColor(context, ThemeManager.theme.ftlToolbarTheme.actionColor)
+        viewThemeManager.darkTheme?.let {
+            it.actionColor = getResourceId(
+                R.styleable.FTLToolbar_ftlToolbar_action_color_dark,
+                it.actionColor
+            )
+        }
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                actionTextColor =
+                    ContextCompat.getColor(
+                        context,
+                        theme.actionColor
+                    )
+                try {
+                    this.cancel()
+                } catch (e : Exception){
+                    Log.e(TAG, e.message.toString())
+                }
+            }
+        }
+    }
+
+    companion object {
+        private const val TAG = "FTLToolbar"
     }
 }
+
+data class FTLToolbarTheme(
+    @ColorRes var bgColor: Int,
+    @ColorRes var titleColor: Int,
+    @ColorRes var subtitleColor: Int,
+    @ColorRes var actionColor: Int,
+    @ColorRes var startIconColor: Int,
+    @ColorRes var endIconColor: Int,
+    @ColorRes var socketConnected: Int,
+    @ColorRes var socketDisconnected: Int,
+    @ColorRes var networkConnected: Int,
+    @ColorRes var networkDisconnected: Int,
+    @DrawableRes var logoIcon: Int = -1
+) : ViewTheme()

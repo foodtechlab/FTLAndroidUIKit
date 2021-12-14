@@ -6,17 +6,25 @@ import android.view.View
 import android.widget.LinearLayout
 import android.widget.TableRow
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.common.FTLDivider
-import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
+import com.foodtechlab.ftlandroiduikit.util.ViewTheme
+import com.foodtechlab.ftlandroiduikit.util.ViewThemeManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 class FTLTableRow @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : LinearLayout(context, attrs, defStyle), ThemeManager.ThemeChangedListener {
+) : LinearLayout(context, attrs, defStyle), CoroutineScope {
 
     var isLastRow = false
         set(value) {
@@ -42,6 +50,11 @@ class FTLTableRow @JvmOverloads constructor(
             tvEndColumn.text = field
         }
 
+    private val viewThemeManager: ViewThemeManager<FTLTableRowTheme> = FTLTableRowThemeManager()
+    val job = SupervisorJob()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
     private var vDivider: FTLDivider
     private var tvEndColumn: TextView
     private var tvStartColumn: TextView
@@ -61,35 +74,36 @@ class FTLTableRow @JvmOverloads constructor(
             textForEndColumn = getString(R.styleable.FTLTableRow_textForEndColumn) ?: ""
             isLastRow = getBoolean(R.styleable.FTLTableRow_isLastRow, false)
         }
-
-        onThemeChanged(ThemeManager.theme)
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        ThemeManager.addListener(this)
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                onThemeChanged(theme)
+            }
+        }
     }
 
     override fun onDetachedFromWindow() {
+        job.cancel()
         super.onDetachedFromWindow()
-        ThemeManager.removeListener(this)
     }
 
     /**
      * Метод для обновления цветовой гаммы в соответствии с темой
      * @param theme Тип темы приложения
      */
-    override fun onThemeChanged(theme: ThemeManager.Theme) {
+    private fun onThemeChanged(theme: FTLTableRowTheme) {
         tvStartColumn.setTextColor(
-            ContextCompat.getColor(context, theme.ftlTableRowTheme.startTextColor)
+            ContextCompat.getColor(context, theme.startTextColor)
         )
         tvCenterColumn.setTextColor(
-            ContextCompat.getColor(context, theme.ftlTableRowTheme.centerTextColor)
+            ContextCompat.getColor(context, theme.centerTextColor)
         )
         tvEndColumn.setTextColor(
-            ContextCompat.getColor(context, theme.ftlTableRowTheme.endTextColor)
+            ContextCompat.getColor(context, theme.endTextColor)
         )
-        vDivider.onThemeChanged(theme)
     }
 
     /**
@@ -110,3 +124,9 @@ class FTLTableRow @JvmOverloads constructor(
         }
     }
 }
+
+data class FTLTableRowTheme(
+    @ColorRes val startTextColor: Int,
+    @ColorRes val centerTextColor: Int,
+    @ColorRes val endTextColor: Int
+) : ViewTheme()

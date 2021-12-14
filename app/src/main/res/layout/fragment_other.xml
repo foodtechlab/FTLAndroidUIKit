@@ -6,34 +6,34 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/other_description_ftl_marker" />
 
-    <com.foodtechlab.ftlandroiduikit.map.FTLRestaurantMarker
+    <com.foodtechlab.ftlandroiduikit.map.restaurant.marker.FTLRestaurantMarker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:isMultiBrandMarker="true"
         app:textOrdersCount="999" />
 
-    <com.foodtechlab.ftlandroiduikit.map.FTLRestaurantMarker
+    <com.foodtechlab.ftlandroiduikit.map.restaurant.marker.FTLRestaurantMarker
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="8dp"
         app:textOrdersCount="1" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/other_description_ftl_placeholder" />
 
-    <com.foodtechlab.ftlandroiduikit.imageview.FTLPlaceholderImageView
+    <com.foodtechlab.ftlandroiduikit.imageview.placeholder.FTLPlaceholderImageView
         android:layout_width="32dp"
         android:layout_height="32dp"
         android:layout_margin="8dp"

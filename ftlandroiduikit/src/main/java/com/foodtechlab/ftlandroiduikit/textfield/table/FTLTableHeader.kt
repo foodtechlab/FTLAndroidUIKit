@@ -9,21 +9,31 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import android.widget.TextView
 import androidx.annotation.ColorInt
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.content.withStyledAttributes
 import com.foodtechlab.ftlandroiduikit.R
-import com.foodtechlab.ftlandroiduikit.common.FTLDivider
+import com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
 import com.foodtechlab.ftlandroiduikit.textfield.helper.ImageType
-import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.ViewTheme
 import com.foodtechlab.ftlandroiduikit.util.changeColor
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
-
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 class FTLTableHeader @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyle: Int = 0
-) : LinearLayout(context, attrs, defStyle), ThemeManager.ThemeChangedListener {
+) : LinearLayout(context, attrs, defStyle), CoroutineScope {
+    private val viewThemeManager = FTLTableHeaderViewTheme()
+    private val job = SupervisorJob()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
 
     private var tvTitle: TextView
     private var tvSubtitle: TextView
@@ -126,44 +136,46 @@ class FTLTableHeader @JvmOverloads constructor(
             )
             initStateHeader()
         }
-
-        onThemeChanged(ThemeManager.theme)
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        ThemeManager.addListener(this)
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                onThemeChanged(theme)
+            }
+        }
     }
 
     override fun onDetachedFromWindow() {
+        job.cancel()
         super.onDetachedFromWindow()
-        ThemeManager.removeListener(this)
     }
 
-    override fun onThemeChanged(theme: ThemeManager.Theme) {
+    private fun onThemeChanged(theme: FTLTableHeaderTheme) {
         ivSwitch.drawable?.mutate()?.changeColor(
             ContextCompat.getColor(
                 context,
-                theme.ftlTableHeaderTheme.switchIconColor
+                theme.switchIconColor
             )
         )
         vTopDivider.setBackgroundColor(
             ContextCompat.getColor(
                 context,
-                theme.ftlTableHeaderTheme.dividerColor
+                theme.dividerColor
             )
         )
         vBottomDivider.setBackgroundColor(
             ContextCompat.getColor(
                 context,
-                theme.ftlTableHeaderTheme.dividerColor
+                theme.dividerColor
             )
         )
-        tvTitle.setTextColor(ContextCompat.getColor(context, theme.ftlTableHeaderTheme.titleColor))
+        tvTitle.setTextColor(ContextCompat.getColor(context, theme.titleColor))
         tvSubtitle.setTextColor(
             ContextCompat.getColor(
                 context,
-                theme.ftlTableHeaderTheme.subtitleColor
+                theme.subtitleColor
             )
         )
     }
@@ -227,3 +239,10 @@ class FTLTableHeader @JvmOverloads constructor(
         }
     }
 }
+
+data class FTLTableHeaderTheme(
+    @ColorRes val dividerColor: Int,
+    @ColorRes val switchIconColor: Int,
+    @ColorRes val titleColor: Int,
+    @ColorRes val subtitleColor: Int
+) : ViewTheme()

@@ -52,4 +52,8 @@ class MainActivity : AppCompatActivity(), OnNavigateListener {
     override fun onNavigateExclusive(fragmentInstance: Fragment, tag: String?) {
         supportFragmentManager.replaceFragment(R.id.flMainContainer, fragmentInstance, tag)
     }
+
+    companion object {
+        const val TAG = "MainActivity"
+    }
 }

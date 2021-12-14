@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
 
-    <com.foodtechlab.ftlandroiduikit.button.FTLCircularCheckBox
+    <com.foodtechlab.ftlandroiduikit.button.circular.FTLCircularCheckBox
         android:id="@+id/cb_ftl_bannered_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

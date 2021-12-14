@@ -10,28 +10,31 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.core.content.ContextCompat
 import androidx.core.view.*
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.flowWithLifecycle
+import androidx.lifecycle.lifecycleScope
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.button.ButtonType
 import com.foodtechlab.ftlandroiduikit.button.FTLButton
 import com.foodtechlab.ftlandroiduikit.common.*
-import com.foodtechlab.ftlandroiduikit.util.ThemeManager
-import com.foodtechlab.ftlandroiduikit.util.changeColor
-import com.foodtechlab.ftlandroiduikit.util.dpToPx
+import com.foodtechlab.ftlandroiduikit.util.*
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 /**
  * Created by Umalt on 20.05.2020
  */
-class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
-    ThemeManager.ThemeChangedListener {
-
+class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
     var behavior: BottomSheetBehavior<*>? = null
 
+    private val viewThemeManager: ViewThemeManager<FTLBottomSheetTheme> =
+        FTLBottomSheetThemeManager()
     private val dialogState by lazy {
         arguments?.getParcelable(KEY_DIALOG_STATE) ?: DialogState(
             title = "undefined",
@@ -50,7 +53,6 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-
         // Initialize listeners here
 
         onClickListener =
@@ -94,7 +96,7 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
         llContainer = view.findViewById(R.id.ll_container)
         vTop = view.findViewById(R.id.v_top)
 
-        onThemeChanged(ThemeManager.theme)
+        onThemeChanged()
 
         return view
     }
@@ -109,28 +111,31 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
         onClickListener?.onClick(v)
     }
 
-    override fun onThemeChanged(theme: ThemeManager.Theme) {
-        context?.let { ctx ->
-            llContainer.background.changeColor(
-                ContextCompat.getColor(
-                    ctx,
-                    theme.ftlBottomSheetTheme.bgColor
-                )
-            )
-            vTop.background.changeColor(
-                ContextCompat.getColor(
-                    ctx,
-                    theme.ftlBottomSheetTheme.bgColor
-                )
-            )
-            tvMessage.setTextColor(
-                ContextCompat.getColor(
-                    ctx,
-                    theme.ftlBottomSheetTheme.messageColor
-                )
-            )
+    private fun onThemeChanged() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewThemeManager.mapToViewData().flowWithLifecycle(lifecycle).collect { theme ->
+                    context?.let { ctx ->
+                        llContainer.background.changeColor(
+                            ContextCompat.getColor(
+                                ctx,
+                                theme.bgColor
+                            )
+                        )
+                        vTop.background.changeColor(
+                            ContextCompat.getColor(
+                                ctx,
+                                theme.bgColor
+                            )
+                        )
+                        tvMessage.setTextColor(
+                            ContextCompat.getColor(
+                                ctx,
+                                theme.messageColor
+                            )
+                        )
+                    }
+                }
         }
-
         removeListenersAndButtonsIfNeed()
         setupUI()
     }
@@ -192,3 +197,8 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener,
         }
     }
 }
+
+data class FTLBottomSheetTheme(
+    @ColorRes val messageColor: Int,
+    @ColorRes val bgColor: Int
+) : ViewTheme()

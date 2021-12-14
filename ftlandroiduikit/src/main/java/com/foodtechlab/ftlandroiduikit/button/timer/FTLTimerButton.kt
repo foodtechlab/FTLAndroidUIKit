@@ -26,13 +26,20 @@ import androidx.transition.Fade
 import androidx.transition.TransitionManager
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.common.ProgressView
-import com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLTimerDotsProgress
+import com.foodtechlab.ftlandroiduikit.common.dotsprogress.timer.FTLTimerDotsProgress
 import com.foodtechlab.ftlandroiduikit.textfield.time.helper.getMillis
-import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.util.ViewTheme
+import com.foodtechlab.ftlandroiduikit.util.ViewThemeManager
 import com.foodtechlab.ftlandroiduikit.util.dpToPx
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 import java.lang.ref.WeakReference
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.coroutines.CoroutineContext
 import kotlin.math.abs
 
 /**
@@ -42,13 +49,20 @@ class FTLTimerButton @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : RelativeLayout(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
+) : RelativeLayout(context, attrs, defStyleAttr), CoroutineScope {
 
     private val radius = 8 * resources.displayMetrics.density
 
     private var isTimerRenewableInside = true
 
     private var onGlobalLayoutListener: ViewTreeObserver.OnGlobalLayoutListener? = null
+
+    private val viewThemeManager: ViewThemeManager<FTLTimerButtonTheme> =
+        FTLTimerButtonThemeManager()
+    private val job = SupervisorJob()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
 
     var inProgress = false
         private set
@@ -186,8 +200,6 @@ class FTLTimerButton @JvmOverloads constructor(
         }
 
         super.setOnClickListener { if (!inProgress) clickListener?.onClick(it) }
-
-        onThemeChanged(ThemeManager.theme)
     }
 
     override fun onAttachedToWindow() {
@@ -208,10 +220,14 @@ class FTLTimerButton @JvmOverloads constructor(
             viewTreeObserver.addOnGlobalLayoutListener(onGlobalLayoutListener)
         }
         updateDotProgressVisibility(inProgress)
-        ThemeManager.addListener(this)
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                    onThemeChanged(theme)
+            }
+        }
     }
 
-    override fun onSaveInstanceState(): Parcelable? =
+    override fun onSaveInstanceState(): Parcelable =
         SavedState(super.onSaveInstanceState()).apply {
             inProgress = this@FTLTimerButton.inProgress
             estimateDuration = this@FTLTimerButton.estimateDuration
@@ -240,33 +256,33 @@ class FTLTimerButton @JvmOverloads constructor(
     }
 
     override fun onDetachedFromWindow() {
+        job.cancel()
         super.onDetachedFromWindow()
-        ThemeManager.removeListener(this)
         rlRoot.viewTreeObserver.removeOnGlobalLayoutListener(onGlobalLayoutListener)
         onGlobalLayoutListener = null
     }
 
-    override fun onThemeChanged(theme: ThemeManager.Theme) {
-        State.NEW.textColor = theme.ftlTimerButtonTheme.textColorNew
-        State.NEW.progressColor = theme.ftlTimerButtonTheme.progressColorNew
-        State.NEW.progressBgColor = theme.ftlTimerButtonTheme.progressBgColorNew
-        State.NEW.dotColor = theme.ftlTimerButtonTheme.dotColorNew
-        State.NEW.bounceDotColor = theme.ftlTimerButtonTheme.bounceDotColorNew
+    private fun onThemeChanged(theme: FTLTimerButtonTheme) {
+        State.NEW.textColor = theme.textColorNew
+        State.NEW.progressColor = theme.progressColorNew
+        State.NEW.progressBgColor = theme.progressBgColorNew
+        State.NEW.dotColor = theme.dotColorNew
+        State.NEW.bounceDotColor = theme.bounceDotColorNew
 
-        State.READY_FOR_DELIVERY.textColor = theme.ftlTimerButtonTheme.textColorReadyForDelivery
+        State.READY_FOR_DELIVERY.textColor = theme.textColorReadyForDelivery
         State.READY_FOR_DELIVERY.progressColor =
-            theme.ftlTimerButtonTheme.progressColorReadyForDelivery
+            theme.progressColorReadyForDelivery
         State.READY_FOR_DELIVERY.progressBgColor =
-            theme.ftlTimerButtonTheme.progressBgColorReadyForDelivery
-        State.READY_FOR_DELIVERY.dotColor = theme.ftlTimerButtonTheme.dotColorReadyForDelivery
+            theme.progressBgColorReadyForDelivery
+        State.READY_FOR_DELIVERY.dotColor = theme.dotColorReadyForDelivery
         State.READY_FOR_DELIVERY.bounceDotColor =
-            theme.ftlTimerButtonTheme.bounceDotColorReadyForDelivery
+            theme.bounceDotColorReadyForDelivery
 
-        State.IN_DELIVERY.textColor = theme.ftlTimerButtonTheme.textColorInDelivery
-        State.IN_DELIVERY.progressColor = theme.ftlTimerButtonTheme.progressColorInDelivery
-        State.IN_DELIVERY.progressBgColor = theme.ftlTimerButtonTheme.progressBgColorInDelivery
-        State.IN_DELIVERY.dotColor = theme.ftlTimerButtonTheme.dotColorInDelivery
-        State.IN_DELIVERY.bounceDotColor = theme.ftlTimerButtonTheme.bounceDotColorInDelivery
+        State.IN_DELIVERY.textColor = theme.textColorInDelivery
+        State.IN_DELIVERY.progressColor = theme.progressColorInDelivery
+        State.IN_DELIVERY.progressBgColor = theme.progressBgColorInDelivery
+        State.IN_DELIVERY.dotColor = theme.dotColorInDelivery
+        State.IN_DELIVERY.bounceDotColor = theme.bounceDotColorInDelivery
 
         updateViewState()
     }
@@ -307,18 +323,22 @@ class FTLTimerButton @JvmOverloads constructor(
 
     fun updateDotColor(@ColorRes colorRes: Int) {
         dotColorRes = colorRes
-        dotProgress.dotColor = ContextCompat.getColor(
-            context,
-            if (dotColorRes != -1) dotColorRes else state.dotColor
-        )
+        state.dotColor?.let { dotColor ->
+            dotProgress.dotColor = ContextCompat.getColor(
+                context,
+                if (dotColorRes != -1) dotColorRes else dotColor
+            )
+        }
     }
 
     fun updateBounceDotColor(@ColorRes colorRes: Int) {
         bounceDotColorRes = colorRes
-        dotProgress.bounceDotColor = ContextCompat.getColor(
-            context,
-            if (bounceDotColorRes != -1) bounceDotColorRes else state.bounceDotColor
-        )
+        state.bounceDotColor?.let { bounceDotColor ->
+            dotProgress.bounceDotColor = ContextCompat.getColor(
+                context,
+                if (bounceDotColorRes != -1) bounceDotColorRes else bounceDotColor
+            )
+        }
     }
 
     private fun updateViewState(
@@ -332,22 +352,30 @@ class FTLTimerButton @JvmOverloads constructor(
         with(dotProgress) {
             isVisible = inProgress
 
-            this.dotColor = if (dotColor != -1) {
-                dotColor
-            } else {
-                ContextCompat.getColor(context, state.dotColor)
+            state.dotColor?.let {
+                this.dotColor = if (dotColor != -1) {
+                    dotColor
+                } else {
+                    ContextCompat.getColor(context, it)
+                }
             }
 
-            this.bounceDotColor = if (bounceDotColor != -1) {
-                bounceDotColor
-            } else {
-                ContextCompat.getColor(context, state.bounceDotColor)
+            state.bounceDotColor?.let {
+                this.bounceDotColor = if (bounceDotColor != -1) {
+                    bounceDotColor
+                } else {
+                    ContextCompat.getColor(context, it)
+                }
             }
         }
 
         with(progressView) {
-            colorBackground = ContextCompat.getColor(context, state.progressBgColor)
-            colorProgress = ContextCompat.getColor(context, state.progressColor)
+            state.progressBgColor?.let { progressBgColor ->
+                colorBackground = ContextCompat.getColor(context, progressBgColor)
+            }
+            state.progressColor?.let { progressColor ->
+                colorProgress = ContextCompat.getColor(context, progressColor)
+            }
         }
 
         when {
@@ -362,16 +390,17 @@ class FTLTimerButton @JvmOverloads constructor(
             else -> setTextColorFromState()
         }
 
+        state.progressColor?.let { progressColor ->
+            background = configureSelector(
+                ContextCompat.getColor(context, progressColor),
+                floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
+            )
 
-        background = configureSelector(
-            ContextCompat.getColor(context, state.progressColor),
-            floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
-        )
-
-        llContainer.background = configureSelector(
-            ContextCompat.getColor(context, state.progressColor),
-            floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
-        )
+            llContainer.background = configureSelector(
+                ContextCompat.getColor(context, progressColor),
+                floatArrayOf(radius, radius, radius, radius, radius, radius, radius, radius)
+            )
+        }
     }
 
     private fun configureSelector(@ColorInt color: Int, radii: FloatArray) =
@@ -416,64 +445,72 @@ class FTLTimerButton @JvmOverloads constructor(
     }
 
     private fun setTextColorFromState() {
-        val color = ContextCompat.getColor(context, state.textColor)
+        state.textColor?.let { textColor ->
+            val color = ContextCompat.getColor(context, textColor)
 
-        if (color < 0) {
-            tvTime.setTextColor(ContextCompat.getColorStateList(context, state.textColor))
-            tvLabel.setTextColor(ContextCompat.getColorStateList(context, state.textColor))
-        } else {
-            tvTime.setTextColor(color)
-            tvLabel.setTextColor(color)
+            if (color < 0) {
+                tvTime.setTextColor(ContextCompat.getColorStateList(context, textColor))
+                tvLabel.setTextColor(ContextCompat.getColorStateList(context, textColor))
+            } else {
+                tvTime.setTextColor(color)
+                tvLabel.setTextColor(color)
+            }
         }
     }
 
     private fun TypedArray.setupColors() {
         when (state) {
             State.NEW -> {
-                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.textColorNew = getResourceId(
-                    R.styleable.FTLTimerButton_ftlTimerButton_textColor,
-                    ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.textColorNew
-                )
-                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.dotColorNew = getResourceId(
-                    R.styleable.FTLTimerButton_ftlTimerButton_dotColor,
-                    ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.dotColorNew
-                )
-                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.bounceDotColorNew = getResourceId(
-                    R.styleable.FTLTimerButton_ftlTimerButton_bounceDotColor,
-                    ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.bounceDotColorNew
-                )
+                viewThemeManager.lightTheme.let {
+                    it.textColorNew = getResourceId(
+                        R.styleable.FTLTimerButton_ftlTimerButton_textColor,
+                        it.textColorNew
+                    )
+                    it.dotColorNew = getResourceId(
+                        R.styleable.FTLTimerButton_ftlTimerButton_dotColor,
+                        it.dotColorNew
+                    )
+                    it.bounceDotColorNew = getResourceId(
+                        R.styleable.FTLTimerButton_ftlTimerButton_bounceDotColor,
+                        it.bounceDotColorNew
+                    )
+                }
             }
             State.IN_DELIVERY -> {
-                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.textColorInDelivery = getResourceId(
-                    R.styleable.FTLTimerButton_ftlTimerButton_textColor,
-                    ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.textColorInDelivery
-                )
-                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.dotColorInDelivery = getResourceId(
-                    R.styleable.FTLTimerButton_ftlTimerButton_dotColor,
-                    ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.dotColorInDelivery
-                )
-                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.bounceDotColorInDelivery =
-                    getResourceId(
-                        R.styleable.FTLTimerButton_ftlTimerButton_bounceDotColor,
-                        ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.bounceDotColorInDelivery
+                viewThemeManager.lightTheme.let {
+                    it.textColorInDelivery = getResourceId(
+                        R.styleable.FTLTimerButton_ftlTimerButton_textColor,
+                        it.textColorInDelivery
                     )
+                    it.dotColorInDelivery = getResourceId(
+                        R.styleable.FTLTimerButton_ftlTimerButton_dotColor,
+                        it.dotColorInDelivery
+                    )
+                    it.bounceDotColorInDelivery =
+                        getResourceId(
+                            R.styleable.FTLTimerButton_ftlTimerButton_bounceDotColor,
+                            it.bounceDotColorInDelivery
+                        )
+                }
             }
             else -> {
-                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.textColorReadyForDelivery =
-                    getResourceId(
-                        R.styleable.FTLTimerButton_ftlTimerButton_textColor,
-                        ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.textColorReadyForDelivery
-                    )
-                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.dotColorReadyForDelivery =
-                    getResourceId(
-                        R.styleable.FTLTimerButton_ftlTimerButton_dotColor,
-                        ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.dotColorReadyForDelivery
-                    )
-                ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.bounceDotColorReadyForDelivery =
-                    getResourceId(
-                        R.styleable.FTLTimerButton_ftlTimerButton_bounceDotColor,
-                        ThemeManager.Theme.LIGHT.ftlTimerButtonTheme.bounceDotColorReadyForDelivery
-                    )
+                viewThemeManager.lightTheme.let {
+                    it.textColorReadyForDelivery =
+                        getResourceId(
+                            R.styleable.FTLTimerButton_ftlTimerButton_textColor,
+                            it.textColorReadyForDelivery
+                        )
+                    it.dotColorReadyForDelivery =
+                        getResourceId(
+                            R.styleable.FTLTimerButton_ftlTimerButton_dotColor,
+                            it.dotColorReadyForDelivery
+                        )
+                    it.bounceDotColorReadyForDelivery =
+                        getResourceId(
+                            R.styleable.FTLTimerButton_ftlTimerButton_bounceDotColor,
+                            it.bounceDotColorReadyForDelivery
+                        )
+                }
             }
         }
     }
@@ -534,3 +571,23 @@ class FTLTimerButton @JvmOverloads constructor(
         }
     }
 }
+
+data class FTLTimerButtonTheme(
+    @ColorRes var textColorNew: Int,
+    @ColorRes val progressColorNew: Int,
+    @ColorRes val progressBgColorNew: Int,
+    @ColorRes var dotColorNew: Int,
+    @ColorRes var bounceDotColorNew: Int,
+
+    @ColorRes var textColorReadyForDelivery: Int,
+    @ColorRes val progressColorReadyForDelivery: Int,
+    @ColorRes val progressBgColorReadyForDelivery: Int,
+    @ColorRes var dotColorReadyForDelivery: Int,
+    @ColorRes var bounceDotColorReadyForDelivery: Int,
+
+    @ColorRes var textColorInDelivery: Int,
+    @ColorRes val progressColorInDelivery: Int,
+    @ColorRes val progressBgColorInDelivery: Int,
+    @ColorRes var dotColorInDelivery: Int,
+    @ColorRes var bounceDotColorInDelivery: Int
+) : ViewTheme()

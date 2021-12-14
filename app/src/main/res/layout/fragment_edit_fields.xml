@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical">
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/edit_fields_description_ftl_autocomplete_edit_text" />
@@ -29,16 +29,16 @@
         android:layout_margin="8dp"
         android:text="@string/edit_fields_show_error" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/edit_fields_description_ftl_auth_code_edit_text" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLAuthCodeEditText
+    <com.foodtechlab.ftlandroiduikit.textfield.auth.FTLAuthCodeEditText
         android:id="@+id/etCode"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -54,11 +54,11 @@
         android:layout_margin="8dp"
         android:text="@string/edit_fields_show_error" />
 
-    <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+    <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
         android:layout_width="match_parent"
         android:layout_height="8dp" />
 
-    <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+    <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:title_text="@string/edit_fields_description_ftl_edit_text_default" />

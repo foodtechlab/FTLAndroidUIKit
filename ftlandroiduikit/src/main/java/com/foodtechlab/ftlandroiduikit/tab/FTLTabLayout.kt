@@ -2,10 +2,12 @@ package com.foodtechlab.ftlandroiduikit.tab
 
 import android.content.Context
 import android.util.AttributeSet
+import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
+import androidx.annotation.ColorRes
 import androidx.annotation.IntDef
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat
@@ -15,15 +17,27 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.common.NetworkConnectivityState
-import com.foodtechlab.ftlandroiduikit.util.ThemeManager
+import com.foodtechlab.ftlandroiduikit.switch.FTLSwitchTheme
+import com.foodtechlab.ftlandroiduikit.util.ViewTheme
+import com.foodtechlab.ftlandroiduikit.util.ViewThemeManager
 import com.google.android.material.tabs.TabLayout
-
+import kotlinx.coroutines.*
+import kotlinx.coroutines.flow.collect
+import java.lang.Exception
+import java.lang.Runnable
+import kotlin.coroutines.CoroutineContext
 
 class FTLTabLayout @JvmOverloads constructor(
     context: Context,
     attrs: AttributeSet? = null,
     defStyleAttr: Int = 0
-) : LinearLayout(context, attrs, defStyleAttr), ThemeManager.ThemeChangedListener {
+) : LinearLayout(context, attrs, defStyleAttr), CoroutineScope {
+    private val viewThemeManager: ViewThemeManager<FTLTabLayoutTheme> = FTLTabLayoutThemeManager()
+    private val job = SupervisorJob()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
+
     var isShadowVisible: Boolean
         get() = vShadow.isVisible
         set(value) {
@@ -40,7 +54,30 @@ class FTLTabLayout @JvmOverloads constructor(
         set(value) {
             field = value
             tvConnectivity.apply {
-                setBackgroundColor(ContextCompat.getColor(context, value.color))
+                launch {
+                    viewThemeManager.mapToViewData().collect { theme ->
+                        if (value == NetworkConnectivityState.CONNECTED) {
+                            setBackgroundColor(
+                                ContextCompat.getColor(
+                                    context,
+                                    theme.networkConnected
+                                )
+                            )
+                        } else {
+                            setBackgroundColor(
+                                ContextCompat.getColor(
+                                    context,
+                                    theme.networkDisconnected
+                                )
+                            )
+                        }
+                        try {
+                            this.cancel()
+                        } catch (e: Exception) {
+                            Log.e(TAG, e.message.toString())
+                        }
+                    }
+                }
                 setText(value.message)
                 isVisible = true
             }
@@ -105,40 +142,20 @@ class FTLTabLayout @JvmOverloads constructor(
             displayMode = getInt(R.styleable.FTLTabLayout_displayMode, TabLayout.MODE_FIXED)
             gravityMode = getInt(R.styleable.FTLTabLayout_gravityMode, TabLayout.GRAVITY_FILL)
         }
-
-        onThemeChanged(ThemeManager.theme)
     }
 
     override fun onAttachedToWindow() {
         super.onAttachedToWindow()
-        ThemeManager.addListener(this)
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                onThemeChanged(theme)
+            }
+        }
     }
 
     override fun onDetachedFromWindow() {
+        job.cancel()
         super.onDetachedFromWindow()
-        ThemeManager.removeListener(this)
-    }
-
-    override fun onThemeChanged(theme: ThemeManager.Theme) {
-        with(tabs) {
-            setSelectedTabIndicatorColor(
-                ContextCompat.getColor(
-                    context,
-                    theme.ftlTabLayoutTheme.selectedTabIndicatorColor
-                )
-            )
-            setTabTextColors(
-                ContextCompat.getColor(context, theme.ftlTabLayoutTheme.tabTextNormalColor),
-                ContextCompat.getColor(context, theme.ftlTabLayoutTheme.tabTextSelectedColor)
-            )
-            setBackgroundColor(
-                ContextCompat.getColor(
-                    context,
-                    theme.ftlTabLayoutTheme.backgroundColor
-                )
-            )
-        }
-        tvConnectivity.setBackgroundColor(ContextCompat.getColor(context, networkState.color))
     }
 
     fun changeCaseForItems(isAllCaps: Boolean) {
@@ -153,7 +170,44 @@ class FTLTabLayout @JvmOverloads constructor(
         }
     }
 
+    private fun onThemeChanged(theme: FTLTabLayoutTheme) {
+        with(tabs) {
+            setSelectedTabIndicatorColor(
+                ContextCompat.getColor(
+                    context,
+                    theme.selectedTabIndicatorColor
+                )
+            )
+            setTabTextColors(
+                ContextCompat.getColor(context, theme.tabTextNormalColor),
+                ContextCompat.getColor(context, theme.tabTextSelectedColor)
+            )
+            setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    theme.backgroundColor
+                )
+            )
+        }
+        if (networkState == NetworkConnectivityState.CONNECTED) {
+            tvConnectivity.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    theme.networkConnected
+                )
+            )
+        } else {
+            tvConnectivity.setBackgroundColor(
+                ContextCompat.getColor(
+                    context,
+                    theme.networkDisconnected
+                )
+            )
+        }
+    }
+
     companion object {
+        private const val TAG = "FTLTabLayout"
         const val GRAVITY_FILL = 0
         const val GRAVITY_CENTER = 1
         const val GRAVITY_START = 2
@@ -167,3 +221,12 @@ class FTLTabLayout @JvmOverloads constructor(
         annotation class TabGravity
     }
 }
+
+data class FTLTabLayoutTheme(
+    @ColorRes val backgroundColor: Int,
+    @ColorRes val selectedTabIndicatorColor: Int,
+    @ColorRes val tabTextNormalColor: Int,
+    @ColorRes val tabTextSelectedColor: Int,
+    @ColorRes var networkConnected: Int,
+    @ColorRes var networkDisconnected: Int
+) : ViewTheme()

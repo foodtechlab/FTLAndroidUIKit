@@ -59,13 +59,13 @@
                 android:visibility="gone"
                 tools:src="@drawable/ic_close_24" />
 
-            <com.foodtechlab.ftlandroiduikit.imageview.FTLPlaceholderImageView
+            <com.foodtechlab.ftlandroiduikit.imageview.placeholder.FTLPlaceholderImageView
                 android:id="@+id/iv_ftl_toolbar_logo"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:visibility="gone" />
 
-            <com.foodtechlab.ftlandroiduikit.progress.FTLCircleScaleView
+            <com.foodtechlab.ftlandroiduikit.progress.circle.scale.FTLCircleScaleView
                 android:id="@+id/cpi_ftl_toolbar_progress"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
@@ -89,7 +89,7 @@
             </FrameLayout>
         </FrameLayout>
 
-        <com.foodtechlab.ftlandroiduikit.textfield.FTLTitle
+        <com.foodtechlab.ftlandroiduikit.textfield.title.FTLTitle
             android:id="@+id/ftl_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -107,7 +107,7 @@
             android:visibility="gone"
             app:size="small" />
 
-        <com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLToolbarDotsProgress
+        <com.foodtechlab.ftlandroiduikit.common.dotsprogress.toolbar.FTLToolbarDotsProgress
             android:id="@+id/dot_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

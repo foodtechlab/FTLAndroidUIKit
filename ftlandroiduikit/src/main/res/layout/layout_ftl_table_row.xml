@@ -55,7 +55,7 @@
 
         </LinearLayout>
 
-        <com.foodtechlab.ftlandroiduikit.common.FTLDivider
+        <com.foodtechlab.ftlandroiduikit.common.divider.FTLDivider
             android:id="@+id/v_bottom_divider"
             android:layout_width="match_parent"
             android:layout_height="1dp"

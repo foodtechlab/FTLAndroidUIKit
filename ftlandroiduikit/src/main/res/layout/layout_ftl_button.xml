@@ -13,7 +13,7 @@
         android:gravity="center"
         android:maxLines="1" />
 
-    <com.foodtechlab.ftlandroiduikit.common.dotsprogress.FTLButtonDotsProgress
+    <com.foodtechlab.ftlandroiduikit.common.dotsprogress.button.FTLButtonDotsProgress
         android:id="@+id/dot_progress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
