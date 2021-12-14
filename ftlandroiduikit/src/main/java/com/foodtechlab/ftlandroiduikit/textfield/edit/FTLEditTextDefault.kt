@@ -240,7 +240,7 @@ class FTLEditTextDefault @JvmOverloads constructor(
         focusChangeListener = l
     }
 
-    private fun onThemeChanged(theme: FTLEditTextDefaultTheme) {
+    fun onThemeChanged(theme: FTLEditTextDefaultTheme) {
         ftlEditTextDefaultTheme = theme
         with(etInput) {
             setTextColor(ContextCompat.getColor(context, theme.textColor))

@@ -229,7 +229,7 @@ class FTLAuthCodeEditText @JvmOverloads constructor(
         throw RuntimeException("setCustomSelectionActionModeCallback() not supported.")
     }
 
-    private fun onThemeChanged(theme: FTLAuthCodeEditTextTheme) {
+    fun onThemeChanged(theme: FTLAuthCodeEditTextTheme) {
         ftlAuthCodeEditTextTheme = theme
         bgPaint.color =
             ContextCompat.getColor(context, theme.bgColor)

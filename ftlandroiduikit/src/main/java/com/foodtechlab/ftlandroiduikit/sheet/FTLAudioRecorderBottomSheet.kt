@@ -165,7 +165,7 @@ class FTLAudioRecorderBottomSheet() : BottomSheetDialogFragment(), View.OnClickL
         onClickListener?.onClick(v)
     }
 
-    private fun onThemeChanged() {
+    fun onThemeChanged() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewThemeManager.mapToViewData().flowWithLifecycle(lifecycle).collect { theme ->
                 context?.let { ctx ->

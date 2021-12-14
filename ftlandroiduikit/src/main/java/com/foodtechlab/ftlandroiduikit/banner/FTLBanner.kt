@@ -95,7 +95,7 @@ class FTLBanner @JvmOverloads constructor(
         onClickBannerListener?.onClick(v)
     }
 
-    private fun onThemeChanged(theme: FTLBannerTheme) {
+    fun onThemeChanged(theme: FTLBannerTheme) {
         tvTitle.setTextColor(
             ContextCompat.getColor(
                 context,

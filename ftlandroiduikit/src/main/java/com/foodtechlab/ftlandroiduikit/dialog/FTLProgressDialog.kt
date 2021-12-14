@@ -47,7 +47,7 @@ class FTLProgressDialog private constructor() : DialogFragment() {
             .create().apply { setCanceledOnTouchOutside(false) }
     }
 
-    private fun onThemeChanged() {
+    fun onThemeChanged() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewThemeManager.mapToViewData().flowWithLifecycle(lifecycle).collect { theme ->
                 llContainer?.setBackgroundColor(

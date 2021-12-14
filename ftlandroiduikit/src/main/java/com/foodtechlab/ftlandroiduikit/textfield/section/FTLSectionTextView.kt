@@ -226,7 +226,7 @@ class FTLSectionTextView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLSectionTextViewTheme) {
+    fun onThemeChanged(theme: FTLSectionTextViewTheme) {
         tvTopTextSlot.setTextColor(
             ContextCompat.getColor(
                 context,

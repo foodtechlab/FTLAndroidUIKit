@@ -121,7 +121,7 @@ class FTLBanneredTextView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged() {
+    fun onThemeChanged() {
         updateTextColorTheme(textColor)
         updateBackgroundColorTheme(textBackgroundColor)
         tvTextSlot.background = shapeDrawable

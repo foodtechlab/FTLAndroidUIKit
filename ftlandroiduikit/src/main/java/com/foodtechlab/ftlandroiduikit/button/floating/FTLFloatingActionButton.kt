@@ -53,7 +53,7 @@ class FTLFloatingActionButton @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLFloatingActionButtonTheme) {
+    fun onThemeChanged(theme: FTLFloatingActionButtonTheme) {
         backgroundTintList =
             ContextCompat.getColorStateList(context, theme.bgColor)
     }

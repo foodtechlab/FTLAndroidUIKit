@@ -86,7 +86,7 @@ class FTLCircleProgressIndicator @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLCircleProgressIndicatorTheme) {
+    fun onThemeChanged(theme: FTLCircleProgressIndicatorTheme) {
         progressBackgroundColor =
             ContextCompat.getColor(context, theme.bgColor)
     }

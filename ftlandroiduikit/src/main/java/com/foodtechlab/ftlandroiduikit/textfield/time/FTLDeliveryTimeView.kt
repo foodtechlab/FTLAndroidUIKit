@@ -257,7 +257,7 @@ class FTLDeliveryTimeView @JvmOverloads constructor(
         )
     }
 
-    private fun onThemeChanged() {
+    fun onThemeChanged() {
         DeliveryStatus.USUAL.textColor = FTLDeliveryTimeViewUsualThemeManager().lightTheme.textColor
         DeliveryStatus.USUAL.bgColor = FTLDeliveryTimeViewUsualThemeManager().lightTheme.bgColor
         DeliveryStatus.USUAL.iconColor = FTLDeliveryTimeViewUsualThemeManager().lightTheme.iconColor

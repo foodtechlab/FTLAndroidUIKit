@@ -262,7 +262,7 @@ class FTLTimerButton @JvmOverloads constructor(
         onGlobalLayoutListener = null
     }
 
-    private fun onThemeChanged(theme: FTLTimerButtonTheme) {
+    fun onThemeChanged(theme: FTLTimerButtonTheme) {
         State.NEW.textColor = theme.textColorNew
         State.NEW.progressColor = theme.progressColorNew
         State.NEW.progressBgColor = theme.progressBgColorNew

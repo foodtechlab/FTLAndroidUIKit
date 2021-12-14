@@ -78,7 +78,7 @@ class FTLRadioButton @JvmOverloads constructor(context: Context, attrs: Attribut
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLRadioButtonTheme) {
+    fun onThemeChanged(theme: FTLRadioButtonTheme) {
         setTextColor(ContextCompat.getColor(context, theme.textColor))
         colorForStateUnchecked =
             ContextCompat.getColor(context, theme.uncheckedStateColor)

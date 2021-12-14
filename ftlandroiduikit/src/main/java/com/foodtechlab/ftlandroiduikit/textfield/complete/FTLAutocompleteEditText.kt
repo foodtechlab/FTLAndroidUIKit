@@ -249,7 +249,7 @@ class FTLAutocompleteEditText @JvmOverloads constructor(
         focusChangeListener = l
     }
 
-    private fun onThemeChanged(theme: FTLCompleteEditTextTheme) {
+    fun onThemeChanged(theme: FTLCompleteEditTextTheme) {
         ftlAutocompleteEditTextTheme = theme
         with(etInput) {
             setTextColor(ContextCompat.getColor(context, theme.textColor))

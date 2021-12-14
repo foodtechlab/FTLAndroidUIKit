@@ -114,7 +114,7 @@ class FTLRestaurantMarker @JvmOverloads constructor(
     }
 
 
-    private fun onThemeChanged(theme: FTLRestaurantMarkerTheme) {
+    fun onThemeChanged(theme: FTLRestaurantMarkerTheme) {
         llRoot.background = ContextCompat.getDrawable(
             context,
             theme.background

@@ -139,7 +139,7 @@ class FTLRouteTextView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLRouteTextViewTheme) {
+    fun onThemeChanged(theme: FTLRouteTextViewTheme) {
         tvAddressTo.setTextColor(
             ContextCompat.getColor(
                 context,

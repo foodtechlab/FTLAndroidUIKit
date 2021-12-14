@@ -52,7 +52,7 @@ class FTLConstraintLayout @JvmOverloads constructor(
         }
     }
 
-    private fun onThemeChanged(theme: FTLConstraintLayoutTheme) {
+    fun onThemeChanged(theme: FTLConstraintLayoutTheme) {
         setBackgroundColor(
             ContextCompat.getColor(
                 context,

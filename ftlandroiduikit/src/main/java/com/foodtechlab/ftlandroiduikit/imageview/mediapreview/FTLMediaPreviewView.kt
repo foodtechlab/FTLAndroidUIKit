@@ -113,7 +113,7 @@ class FTLMediaPreviewView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLMediaPreviewViewTheme) {
+    fun onThemeChanged(theme: FTLMediaPreviewViewTheme) {
         ivRepeat.drawable?.mutate()?.changeColor(
             ContextCompat.getColor(context, theme.accentColor)
         )

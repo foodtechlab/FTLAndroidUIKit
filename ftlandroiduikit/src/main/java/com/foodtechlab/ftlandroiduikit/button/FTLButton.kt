@@ -123,7 +123,7 @@ class FTLButton @JvmOverloads constructor(
         onPreDrawListener = null
     }
 
-    private fun onThemeChanged() {
+    fun onThemeChanged() {
         jobTheme = launch {
             when (buttonType) {
                 ButtonType.ADDITIONAL -> {

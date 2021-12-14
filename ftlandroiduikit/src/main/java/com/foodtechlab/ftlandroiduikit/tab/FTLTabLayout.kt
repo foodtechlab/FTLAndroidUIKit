@@ -170,7 +170,7 @@ class FTLTabLayout @JvmOverloads constructor(
         }
     }
 
-    private fun onThemeChanged(theme: FTLTabLayoutTheme) {
+    fun onThemeChanged(theme: FTLTabLayoutTheme) {
         with(tabs) {
             setSelectedTabIndicatorColor(
                 ContextCompat.getColor(

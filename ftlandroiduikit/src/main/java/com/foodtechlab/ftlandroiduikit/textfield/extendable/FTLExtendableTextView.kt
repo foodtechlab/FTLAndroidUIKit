@@ -115,7 +115,7 @@ class FTLExtendableTextView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLExtendableTextViewTheme) {
+    fun onThemeChanged(theme: FTLExtendableTextViewTheme) {
         tvTextSlot.setTextColor(
             ContextCompat.getColor(context, theme.fullTextColor)
         )

@@ -152,7 +152,7 @@ class FTLTableHeader @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLTableHeaderTheme) {
+    fun onThemeChanged(theme: FTLTableHeaderTheme) {
         ivSwitch.drawable?.mutate()?.changeColor(
             ContextCompat.getColor(
                 context,

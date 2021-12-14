@@ -60,7 +60,7 @@ class FTLImageButton @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLImageButtonTheme) {
+    fun onThemeChanged(theme: FTLImageButtonTheme) {
         ImageButtonType.NAVIGATOR_SMALL.bgRes = theme.navigatorSmall
         ImageButtonType.NAVIGATOR_MEDIUM.bgRes = theme.navigatorMedium
         ImageButtonType.NAVIGATOR_LARGE.bgRes = theme.navigatorLarge

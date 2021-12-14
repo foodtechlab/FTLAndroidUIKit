@@ -197,7 +197,7 @@ class FTLMixedButton @JvmOverloads constructor(
         )
     }
 
-    private fun onThemeChanged(theme: FTLMixedButtonTheme) {
+    fun onThemeChanged(theme: FTLMixedButtonTheme) {
         ftlMixedButtonTheme = theme
         updateImageColorTheme(imageColor)
         updateImageBackgroundColorTheme(imageColor)

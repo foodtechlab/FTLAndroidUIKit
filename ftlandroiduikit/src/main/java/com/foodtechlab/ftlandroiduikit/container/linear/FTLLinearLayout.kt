@@ -37,7 +37,7 @@ class FTLLinearLayout @JvmOverloads constructor(
         }
     }
 
-    private fun onThemeChanged(theme: FTLLinearLayoutTheme) {
+    fun onThemeChanged(theme: FTLLinearLayoutTheme) {
         setBackgroundColor(ContextCompat.getColor(context, theme.bgColor))
     }
 

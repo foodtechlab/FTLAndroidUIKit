@@ -88,7 +88,7 @@ class FTLCircularCheckBox @JvmOverloads constructor(context: Context, attrs: Att
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLCircularCheckBoxTheme) {
+    fun onThemeChanged(theme: FTLCircularCheckBoxTheme) {
         colorStrokeUnchecked = ContextCompat.getColor(
             context,
             theme.colorStrokeUnchecked

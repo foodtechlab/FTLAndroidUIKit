@@ -62,7 +62,7 @@ class FTLCellMenu @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLCellMenuTheme) {
+    fun onThemeChanged(theme: FTLCellMenuTheme) {
         setTextColor(
             ContextCompat.getColor(context, theme.textColor)
         )

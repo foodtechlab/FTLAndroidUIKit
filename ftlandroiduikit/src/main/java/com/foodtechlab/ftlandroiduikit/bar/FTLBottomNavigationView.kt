@@ -60,7 +60,7 @@ class FTLBottomNavigationView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLBottomNavigationViewTheme) {
+    fun onThemeChanged(theme: FTLBottomNavigationViewTheme) {
         setBackgroundColor(
             ContextCompat.getColor(context, theme.bgColor)
         )

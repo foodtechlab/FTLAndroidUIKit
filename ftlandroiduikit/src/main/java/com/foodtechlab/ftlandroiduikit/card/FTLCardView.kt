@@ -52,7 +52,7 @@ class FTLCardView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLCardViewTheme) {
+    fun onThemeChanged(theme: FTLCardViewTheme) {
         setCardBackgroundColor(
             ContextCompat.getColor(
                 context,

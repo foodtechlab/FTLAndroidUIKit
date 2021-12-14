@@ -190,7 +190,7 @@ class FTLCircleScaleView @JvmOverloads constructor(
         }
     }
 
-    private fun onThemeChanged() {
+    fun onThemeChanged() {
         updateTrackColorTheme(trackColor)
         updateBackgroundTrackColorTheme(backgroundTrackColor)
         updateImageColorTheme(imageColor)

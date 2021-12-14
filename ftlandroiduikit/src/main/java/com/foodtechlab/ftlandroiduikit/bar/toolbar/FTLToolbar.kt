@@ -306,7 +306,7 @@ class FTLToolbar @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLToolbarTheme) {
+    fun onThemeChanged(theme: FTLToolbarTheme) {
         rlContainer.setBackgroundColor(
             ContextCompat.getColor(
                 context,

@@ -111,7 +111,7 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
         onClickListener?.onClick(v)
     }
 
-    private fun onThemeChanged() {
+    fun onThemeChanged() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewThemeManager.mapToViewData().flowWithLifecycle(lifecycle).collect { theme ->
                     context?.let { ctx ->

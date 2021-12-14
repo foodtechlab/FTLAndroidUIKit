@@ -186,7 +186,7 @@ class FTLPlaceholderImageView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLPlaceholderImageViewTheme) {
+    fun onThemeChanged(theme: FTLPlaceholderImageViewTheme) {
         bitmapPlaceholder = null
         placeholder = ContextCompat.getDrawable(
             context,

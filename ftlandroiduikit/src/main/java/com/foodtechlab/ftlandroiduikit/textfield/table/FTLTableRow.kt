@@ -94,7 +94,7 @@ class FTLTableRow @JvmOverloads constructor(
      * Метод для обновления цветовой гаммы в соответствии с темой
      * @param theme Тип темы приложения
      */
-    private fun onThemeChanged(theme: FTLTableRowTheme) {
+    fun onThemeChanged(theme: FTLTableRowTheme) {
         tvStartColumn.setTextColor(
             ContextCompat.getColor(context, theme.startTextColor)
         )

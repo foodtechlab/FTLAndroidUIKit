@@ -34,7 +34,7 @@ class FTLButtonDotsProgress @JvmOverloads constructor(
         }
     }
 
-    private fun onThemeChanged(theme: FTLDotsProgressTheme) {
+    fun onThemeChanged(theme: FTLDotsProgressTheme) {
         dotColor = ContextCompat.getColor(context, theme.dotColor)
         bounceDotColor =
             ContextCompat.getColor(context, theme.bounceDotColor)

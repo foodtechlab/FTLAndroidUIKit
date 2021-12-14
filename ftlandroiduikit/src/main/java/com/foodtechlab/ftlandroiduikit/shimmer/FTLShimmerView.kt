@@ -46,7 +46,7 @@ class FTLShimmerView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLShimmerViewTheme) {
+    fun onThemeChanged(theme: FTLShimmerViewTheme) {
         background?.changeColor(ContextCompat.getColor(context, theme.bgColor))
     }
 }

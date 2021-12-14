@@ -41,7 +41,7 @@ class FTLEmptyListImageView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLEmptyListImageViewTheme) {
+    fun onThemeChanged(theme: FTLEmptyListImageViewTheme) {
         setImageResource(theme.imgSrc)
     }
 }

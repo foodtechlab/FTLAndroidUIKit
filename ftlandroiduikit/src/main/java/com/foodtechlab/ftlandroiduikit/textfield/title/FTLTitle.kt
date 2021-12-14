@@ -158,7 +158,7 @@ class FTLTitle @JvmOverloads constructor(
         }
     }
 
-    private fun onThemeChanged(theme: FTLTitleTheme) {
+    fun onThemeChanged(theme: FTLTitleTheme) {
         if (autoHandleColors) {
             titleColor = ContextCompat.getColor(context, theme.titleColor)
             subtitleColor = ContextCompat.getColor(context, theme.subtitleColor)

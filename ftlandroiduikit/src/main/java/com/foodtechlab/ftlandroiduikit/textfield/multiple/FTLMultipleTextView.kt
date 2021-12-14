@@ -154,7 +154,7 @@ class FTLMultipleTextView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLMultipleTextViewTheme) {
+    fun onThemeChanged(theme: FTLMultipleTextViewTheme) {
         tvTopEndSlot.setTextColor(
             ContextCompat.getColor(
                 context,

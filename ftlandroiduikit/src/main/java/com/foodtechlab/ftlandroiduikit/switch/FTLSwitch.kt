@@ -136,7 +136,7 @@ class FTLSwitch : SwitchCompat, CoroutineScope {
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLSwitchTheme) {
+    fun onThemeChanged(theme: FTLSwitchTheme) {
         setTextColor(ContextCompat.getColor(context, theme.textColor))
         thumbOffColor = ContextCompat.getColor(context, theme.thumbColor)
         trackOffColor = ContextCompat.getColor(context, theme.trackColor)

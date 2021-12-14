@@ -44,7 +44,7 @@ class FTLShimmerFrameLayout @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged(theme: FTLShimmerFrameLayoutTheme) {
+    fun onThemeChanged(theme: FTLShimmerFrameLayoutTheme) {
         setShimmer(
             Shimmer.ColorHighlightBuilder()
                 .setBaseColor(

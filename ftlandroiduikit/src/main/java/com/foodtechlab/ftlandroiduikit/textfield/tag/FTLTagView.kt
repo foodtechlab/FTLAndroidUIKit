@@ -106,7 +106,7 @@ class FTLTagView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    private fun onThemeChanged() {
+    fun onThemeChanged() {
         updateTextColorTheme(tagTextColor)
         updateBackgroundColorTheme(tagBackgroundColor)
         updateBorderColorTheme(tagBorderColor)
