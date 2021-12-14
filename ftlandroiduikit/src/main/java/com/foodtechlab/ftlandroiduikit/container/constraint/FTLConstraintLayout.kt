@@ -62,7 +62,7 @@ class FTLConstraintLayout @JvmOverloads constructor(
     }
 
     companion object {
-        private const val TAG = "FTLConstraintLayout"
+        const val TAG = "FTLConstraintLayout"
     }
 }
 

@@ -74,7 +74,7 @@ class FTLProgressDialog private constructor() : DialogFragment() {
     }
 
     companion object {
-        private const val TAG = "FTLProgressDialog"
+        const val TAG = "FTLProgressDialog"
 
         fun newInstance(msg: String? = null): FTLProgressDialog {
             return FTLProgressDialog().apply {

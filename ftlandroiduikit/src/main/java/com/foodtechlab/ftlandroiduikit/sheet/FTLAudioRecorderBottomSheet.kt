@@ -302,7 +302,7 @@ class FTLAudioRecorderBottomSheet() : BottomSheetDialogFragment(), View.OnClickL
     }
 
     companion object {
-        val TAG = "FTLAudioRecorderBottomSheet"
+        const val TAG = "FTLAudioRecorderBottomSheet"
 
         private const val KEY_TEXT_ACTION_BUTTON = "KEY_TEXT_ACTION_BUTTON"
         private const val KEY_VOICE_FILE_PATH = "KEY_VOICE_FILE_PATH"

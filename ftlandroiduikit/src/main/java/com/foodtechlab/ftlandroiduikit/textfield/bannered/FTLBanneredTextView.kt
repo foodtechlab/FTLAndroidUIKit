@@ -200,7 +200,7 @@ class FTLBanneredTextView @JvmOverloads constructor(
 
     companion object {
         private const val CORNERS = 8F
-        private const val TAG = "FTLBanneredTextView"
+        const val TAG = "FTLBanneredTextView"
     }
 }
 

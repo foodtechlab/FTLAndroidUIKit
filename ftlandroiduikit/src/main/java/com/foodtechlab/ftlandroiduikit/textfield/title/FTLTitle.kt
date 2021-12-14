@@ -166,7 +166,7 @@ class FTLTitle @JvmOverloads constructor(
     }
 
     companion object {
-        private const val TAG = "FTLTitle"
+        const val TAG = "FTLTitle"
     }
 }
 

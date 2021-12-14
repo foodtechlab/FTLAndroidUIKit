@@ -216,7 +216,7 @@ class FTLRouteTextView @JvmOverloads constructor(
     }
 
     companion object {
-        private const val TAG = "FTLRouteTextViewTheme"
+        const val TAG = "FTLRouteTextViewTheme"
     }
 }
 

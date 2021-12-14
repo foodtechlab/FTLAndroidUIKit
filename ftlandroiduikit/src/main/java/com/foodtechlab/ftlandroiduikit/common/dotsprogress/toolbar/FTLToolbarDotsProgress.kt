@@ -91,6 +91,6 @@ class FTLToolbarDotsProgress @JvmOverloads constructor(
     }
 
     companion object {
-        private const val TAG = "FTLToolbarDotsProgress"
+        const val TAG = "FTLToolbarDotsProgress"
     }
 }

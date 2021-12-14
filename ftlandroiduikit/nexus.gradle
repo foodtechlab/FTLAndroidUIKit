@@ -1,6 +1,6 @@
 apply plugin: 'maven-publish'
 
-version = '0.31.0'
+version = '0.32.0-SNAPSHOT'
 group="com.foodtechlab.ftlandroiduikit"
 
 Properties properties = new Properties()
@@ -17,7 +17,7 @@ publishing {
     repositories {
         maven {
             name 'nexus'
-            url "http://nexus.foodtech-lab.ru/repository/ftlandroiduikit-snapshot/"
+            url "https://nexus.foodtech-lab.ru/repository/ftlandroiduikit-snapshot/"
             credentials {
                 username properties.getProperty("nexus.user")
                 password properties.getProperty("nexus.password")

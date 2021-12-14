@@ -199,7 +199,7 @@ class FTLCircleScaleView @JvmOverloads constructor(
     companion object {
         private const val DEFAULT_TRACK_THICKNESS = 2F
         private const val DEFAULT_CORNERS_RADIUS = 2F
-        private const val TAG = "FTLCircleScaleView"
+        const val TAG = "FTLCircleScaleView"
     }
 }
 
