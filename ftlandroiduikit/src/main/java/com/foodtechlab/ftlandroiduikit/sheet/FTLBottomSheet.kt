@@ -96,9 +96,12 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
         llContainer = view.findViewById(R.id.ll_container)
         vTop = view.findViewById(R.id.v_top)
 
-        onThemeChanged()
-
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        onThemeChanged()
     }
 
     override fun onDestroyView() {
@@ -114,27 +117,27 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
     fun onThemeChanged() {
         viewLifecycleOwner.lifecycleScope.launch {
             viewThemeManager.mapToViewData().flowWithLifecycle(lifecycle).collect { theme ->
-                    context?.let { ctx ->
-                        llContainer.background.changeColor(
-                            ContextCompat.getColor(
-                                ctx,
-                                theme.bgColor
-                            )
+                context?.let { ctx ->
+                    llContainer.background.changeColor(
+                        ContextCompat.getColor(
+                            ctx,
+                            theme.bgColor
                         )
-                        vTop.background.changeColor(
-                            ContextCompat.getColor(
-                                ctx,
-                                theme.bgColor
-                            )
+                    )
+                    vTop.background.changeColor(
+                        ContextCompat.getColor(
+                            ctx,
+                            theme.bgColor
                         )
-                        tvMessage.setTextColor(
-                            ContextCompat.getColor(
-                                ctx,
-                                theme.messageColor
-                            )
+                    )
+                    tvMessage.setTextColor(
+                        ContextCompat.getColor(
+                            ctx,
+                            theme.messageColor
                         )
-                    }
+                    )
                 }
+            }
         }
         removeListenersAndButtonsIfNeed()
         setupUI()

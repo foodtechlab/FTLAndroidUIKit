@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -37,7 +38,6 @@ class FTLProgressDialog private constructor() : DialogFragment() {
         llContainer = view?.findViewById(R.id.ll_ftl_progress_dialog_container)
         tvMessage = view?.findViewById(R.id.tv_ftl_progress_dialog_message)
         pbProgress = view?.findViewById(R.id.pb_ftl_progress_dialog_progress)
-        onThemeChanged()
 
         tvMessage?.text = message
 
@@ -45,6 +45,11 @@ class FTLProgressDialog private constructor() : DialogFragment() {
             .setView(view)
             .setCancelable(false)
             .create().apply { setCanceledOnTouchOutside(false) }
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        onThemeChanged()
     }
 
     fun onThemeChanged() {

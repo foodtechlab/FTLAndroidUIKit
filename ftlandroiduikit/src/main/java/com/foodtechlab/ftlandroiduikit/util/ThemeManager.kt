@@ -42,25 +42,9 @@ object ThemeManager : CoroutineScope {
             launch {
                 _stateTheme.emit(value)
             }
-            // order
-            listeners.forEach { it.onThemeChanged(value) }
         }
 
-    private val listeners = mutableListOf<ThemeChangedListener>()
-
     private var animator: Animator? = null
-
-    fun addListener(listener: ThemeChangedListener) {
-        listeners.add(listener)
-    }
-
-    fun removeListener(listener: ThemeChangedListener) {
-        listeners.remove(listener)
-    }
-
-    fun removeListeners() {
-        listeners.clear()
-    }
 
     fun setTheme(
         theme: Theme,
