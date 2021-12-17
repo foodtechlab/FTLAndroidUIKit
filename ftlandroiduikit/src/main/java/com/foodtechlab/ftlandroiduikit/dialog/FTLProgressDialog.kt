@@ -4,7 +4,9 @@ import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.res.ColorStateList
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -13,19 +15,26 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.DialogFragment
 import androidx.lifecycle.flowWithLifecycle
-import androidx.lifecycle.lifecycleScope
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.util.ViewTheme
 import com.foodtechlab.ftlandroiduikit.util.ViewThemeManager
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 /**
  * Created by Umalt on 16.07.2020
  */
-class FTLProgressDialog private constructor() : DialogFragment() {
+class FTLProgressDialog private constructor() : DialogFragment(), CoroutineScope {
     private val viewThemeManager: ViewThemeManager<FTLProgressDialogTheme> =
         FTLProgressDialogThemeManager()
+    private val job = SupervisorJob()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
     private var message: String? = null
 
     private var tvMessage: TextView? = null
@@ -47,13 +56,22 @@ class FTLProgressDialog private constructor() : DialogFragment() {
             .create().apply { setCanceledOnTouchOutside(false) }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         onThemeChanged()
+        return super.onCreateView(inflater, container, savedInstanceState)
+    }
+
+    override fun onDestroyView() {
+        job.cancel()
+        super.onDestroyView()
     }
 
     fun onThemeChanged() {
-        viewLifecycleOwner.lifecycleScope.launch {
+        launch {
             viewThemeManager.mapToViewData().flowWithLifecycle(lifecycle).collect { theme ->
                 llContainer?.setBackgroundColor(
                     ContextCompat.getColor(
@@ -67,7 +85,6 @@ class FTLProgressDialog private constructor() : DialogFragment() {
                         theme.textColor
                     )
                 )
-
                 pbProgress?.progressTintList = ColorStateList.valueOf(
                     ContextCompat.getColor(
                         requireContext(),

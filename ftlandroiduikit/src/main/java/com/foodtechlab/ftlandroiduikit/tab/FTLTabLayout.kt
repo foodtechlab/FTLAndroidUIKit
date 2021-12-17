@@ -142,15 +142,8 @@ class FTLTabLayout @JvmOverloads constructor(
             displayMode = getInt(R.styleable.FTLTabLayout_displayMode, TabLayout.MODE_FIXED)
             gravityMode = getInt(R.styleable.FTLTabLayout_gravityMode, TabLayout.GRAVITY_FILL)
         }
-    }
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        launch {
-            viewThemeManager.mapToViewData().collect { theme ->
-                onThemeChanged(theme)
-            }
-        }
+        onThemeChanged()
     }
 
     override fun onDetachedFromWindow() {
@@ -170,39 +163,43 @@ class FTLTabLayout @JvmOverloads constructor(
         }
     }
 
-    fun onThemeChanged(theme: FTLTabLayoutTheme) {
-        with(tabs) {
-            setSelectedTabIndicatorColor(
-                ContextCompat.getColor(
-                    context,
-                    theme.selectedTabIndicatorColor
-                )
-            )
-            setTabTextColors(
-                ContextCompat.getColor(context, theme.tabTextNormalColor),
-                ContextCompat.getColor(context, theme.tabTextSelectedColor)
-            )
-            setBackgroundColor(
-                ContextCompat.getColor(
-                    context,
-                    theme.backgroundColor
-                )
-            )
-        }
-        if (networkState == NetworkConnectivityState.CONNECTED) {
-            tvConnectivity.setBackgroundColor(
-                ContextCompat.getColor(
-                    context,
-                    theme.networkConnected
-                )
-            )
-        } else {
-            tvConnectivity.setBackgroundColor(
-                ContextCompat.getColor(
-                    context,
-                    theme.networkDisconnected
-                )
-            )
+    fun onThemeChanged() {
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                with(tabs) {
+                    setSelectedTabIndicatorColor(
+                        ContextCompat.getColor(
+                            context,
+                            theme.selectedTabIndicatorColor
+                        )
+                    )
+                    setTabTextColors(
+                        ContextCompat.getColor(context, theme.tabTextNormalColor),
+                        ContextCompat.getColor(context, theme.tabTextSelectedColor)
+                    )
+                    setBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            theme.backgroundColor
+                        )
+                    )
+                }
+                if (networkState == NetworkConnectivityState.CONNECTED) {
+                    tvConnectivity.setBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            theme.networkConnected
+                        )
+                    )
+                } else {
+                    tvConnectivity.setBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            theme.networkDisconnected
+                        )
+                    )
+                }
+            }
         }
     }
 

@@ -252,6 +252,8 @@ class FTLToolbar @JvmOverloads constructor(
         tvConnectivity = findViewById(R.id.tv_ftl_toolbar_connectivity)
         tvTime = findViewById(R.id.tv_ftl_toolbar_time)
 
+        onThemeChanged()
+
         ftlTitle.autoHandleColors = false
 
         ibStart.setOnClickListener { onToolbarClickListener?.onToolbarClick(it) }
@@ -292,62 +294,57 @@ class FTLToolbar @JvmOverloads constructor(
         }
     }
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        launch {
-            viewThemeManager.mapToViewData().collect { theme ->
-                onThemeChanged(theme)
-            }
-        }
-    }
-
     override fun onDetachedFromWindow() {
         job.cancel()
         super.onDetachedFromWindow()
     }
 
-    fun onThemeChanged(theme: FTLToolbarTheme) {
-        rlContainer.setBackgroundColor(
-            ContextCompat.getColor(
-                context,
-                theme.bgColor
-            )
-        )
-        endDrawable?.mutate()?.changeColor(
-            ContextCompat.getColor(
-                context,
-                theme.endIconColor
-            )
-        )
-        startDrawable?.mutate()?.changeColor(
-            ContextCompat.getColor(
-                context,
-                theme.startIconColor
-            )
-        )
-        if (theme.logoIcon != -1) {
-            logoIcon = ContextCompat.getDrawable(context, theme.logoIcon)
-        }
-        titleColor = ContextCompat.getColor(context, theme.titleColor)
-        subtitleColor = ContextCompat.getColor(context, theme.subtitleColor)
-        actionTextColor = ContextCompat.getColor(context, theme.actionColor)
-
-        socketConnectivityState = socketConnectivityState
-
-        if (networkState == NetworkConnectivityState.CONNECTED) {
-            tvConnectivity.setBackgroundColor(
-                ContextCompat.getColor(
-                    context,
-                    theme.networkConnected
+    fun onThemeChanged() {
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                rlContainer.setBackgroundColor(
+                    ContextCompat.getColor(
+                        context,
+                        theme.bgColor
+                    )
                 )
-            )
-        } else {
-            tvConnectivity.setBackgroundColor(
-                ContextCompat.getColor(
-                    context,
-                    theme.networkDisconnected
+                endDrawable?.mutate()?.changeColor(
+                    ContextCompat.getColor(
+                        context,
+                        theme.endIconColor
+                    )
                 )
-            )
+                startDrawable?.mutate()?.changeColor(
+                    ContextCompat.getColor(
+                        context,
+                        theme.startIconColor
+                    )
+                )
+                if (theme.logoIcon != -1) {
+                    logoIcon = ContextCompat.getDrawable(context, theme.logoIcon)
+                }
+                titleColor = ContextCompat.getColor(context, theme.titleColor)
+                subtitleColor = ContextCompat.getColor(context, theme.subtitleColor)
+                actionTextColor = ContextCompat.getColor(context, theme.actionColor)
+
+                socketConnectivityState = socketConnectivityState
+
+                if (networkState == NetworkConnectivityState.CONNECTED) {
+                    tvConnectivity.setBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            theme.networkConnected
+                        )
+                    )
+                } else {
+                    tvConnectivity.setBackgroundColor(
+                        ContextCompat.getColor(
+                            context,
+                            theme.networkDisconnected
+                        )
+                    )
+                }
+            }
         }
     }
 
@@ -502,7 +499,7 @@ class FTLToolbar @JvmOverloads constructor(
                 )
                 try {
                     this.cancel()
-                } catch (e: Exception){
+                } catch (e: Exception) {
                     Log.e(TAG, e.message.toString())
                 }
             }
@@ -526,7 +523,7 @@ class FTLToolbar @JvmOverloads constructor(
                 ContextCompat.getColor(context, theme.subtitleColor)
                 try {
                     this.cancel()
-                } catch (e: Exception){
+                } catch (e: Exception) {
                     Log.e(TAG, e.message.toString())
                 }
             }
@@ -553,7 +550,7 @@ class FTLToolbar @JvmOverloads constructor(
                     )
                 try {
                     this.cancel()
-                } catch (e : Exception){
+                } catch (e: Exception) {
                     Log.e(TAG, e.message.toString())
                 }
             }

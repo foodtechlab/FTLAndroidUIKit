@@ -104,6 +104,7 @@ class FTLAudioRecorderBottomSheet() : BottomSheetDialogFragment(), View.OnClickL
         vTop = view.findViewById(R.id.v_ftl_audio_recorder_bottom_sheet_top)
         clContainer = view.findViewById(R.id.cl_ftl_audio_recorder_bottom_sheet_container)
         cmrTimer = view.findViewById(R.id.cmr_ftl_audio_recorder_bottom_sheet_timer)
+
         onThemeChanged()
 
         btnRecControl.setOnClickListener(this)

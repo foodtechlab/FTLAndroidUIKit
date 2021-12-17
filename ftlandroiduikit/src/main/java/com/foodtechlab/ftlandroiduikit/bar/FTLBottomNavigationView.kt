@@ -34,8 +34,8 @@ class FTLBottomNavigationView @JvmOverloads constructor(
 
 
     init {
-        itemIconTintList = null
         labelVisibilityMode = NavigationBarView.LABEL_VISIBILITY_LABELED
+        onThemeChanged()
     }
 
     fun addMenuItems(menuItems: List<FTLMenuItem>) {
@@ -46,32 +46,31 @@ class FTLBottomNavigationView @JvmOverloads constructor(
         }
     }
 
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        launch {
-            viewThemeManager.mapToViewData().collect { theme ->
-                onThemeChanged(theme)
-            }
-        }
-    }
-
     override fun onDetachedFromWindow() {
         job.cancel()
         super.onDetachedFromWindow()
     }
 
-    fun onThemeChanged(theme: FTLBottomNavigationViewTheme) {
-        setBackgroundColor(
-            ContextCompat.getColor(context, theme.bgColor)
-        )
-        itemIconTintList = ContextCompat.getColorStateList(
-            context,
-            theme.itemColor
-        )
-        itemTextColor = ContextCompat.getColorStateList(
-            context,
-            theme.itemColor
-        )
+    fun onThemeChanged() {
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                setBackgroundColor(
+                    ContextCompat.getColor(context, theme.bgColor)
+                )
+                itemTextColor = ContextCompat.getColorStateList(
+                    context,
+                    theme.itemColor
+                )
+                itemIconTintList = ContextCompat.getColorStateList(
+                    context,
+                    theme.itemColor
+                )
+            }
+        }
+    }
+
+    companion object {
+        const val TAG = "FTLBottomNavigation"
     }
 }
 

@@ -96,12 +96,9 @@ class FTLBottomSheet : BottomSheetDialogFragment(), View.OnClickListener {
         llContainer = view.findViewById(R.id.ll_container)
         vTop = view.findViewById(R.id.v_top)
 
-        return view
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
         onThemeChanged()
+
+        return view
     }
 
     override fun onDestroyView() {
