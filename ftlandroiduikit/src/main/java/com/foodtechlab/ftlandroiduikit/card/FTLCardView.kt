@@ -22,6 +22,11 @@ class FTLCardView @JvmOverloads constructor(
     attrs: AttributeSet? = null,
     defStyle: Int = 0
 ) : CardView(context, attrs, defStyle), CoroutineScope {
+    private val viewThemeManager: ViewThemeManager<FTLCardViewTheme> = FTLCardViewThemeManager()
+    private val job = SupervisorJob()
+    override val coroutineContext: CoroutineContext
+        get() = Dispatchers.Main + job
+
     init {
         context.withStyledAttributes(
             attrs,
@@ -31,20 +36,8 @@ class FTLCardView @JvmOverloads constructor(
             radius = context.dpToPx(CARD_RADIUS_DEFAULT)
             cardElevation = context.dpToPx(CARD_ELEVATION_DEFAULT)
         }
-    }
 
-    private val viewThemeManager: ViewThemeManager<FTLCardViewTheme> = FTLCardViewThemeManager()
-    private val job = SupervisorJob()
-    override val coroutineContext: CoroutineContext
-        get() = Dispatchers.Main + job
-
-    override fun onAttachedToWindow() {
-        super.onAttachedToWindow()
-        launch {
-            viewThemeManager.mapToViewData().collect { theme ->
-                    onThemeChanged(theme)
-            }
-        }
+        onThemeChanged()
     }
 
     override fun onDetachedFromWindow() {
@@ -52,13 +45,17 @@ class FTLCardView @JvmOverloads constructor(
         super.onDetachedFromWindow()
     }
 
-    fun onThemeChanged(theme: FTLCardViewTheme) {
-        setCardBackgroundColor(
-            ContextCompat.getColor(
-                context,
-                theme.bgColor
-            )
-        )
+    fun onThemeChanged() {
+        launch {
+            viewThemeManager.mapToViewData().collect { theme ->
+                setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        context,
+                        theme.bgColor
+                    )
+                )
+            }
+        }
     }
 
     companion object {

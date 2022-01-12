@@ -647,6 +647,7 @@
         <attr name="thickness" format="dimension" />
         <attr name="cornerRadius" format="dimension" />
     </declare-styleable>
+
     <declare-styleable name="FTLMixedButton" parent="FTLDefaultTextView">
         <attr name="mixedButton_currentProgress" format="integer" />
         <attr name="mixedButton_maxProgress" format="integer" />
@@ -658,6 +659,7 @@
             <enum name="PROGRESS" value="2" />
         </attr>
     </declare-styleable>
+
     <declare-styleable name="FTLLinearProgressIndicator" parent="LinearProgressIndicator">
         <attr name="android:progress" />
         <attr name="android:max" />
@@ -665,19 +667,64 @@
         <attr name="trackCornerRadius" />
         <attr name="trackThickness" />
     </declare-styleable>
+
     <declare-styleable name="FTLBanneredTextView" parent="FTLDefaultTextView">
         <attr name="textForSlot" />
         <attr name="isBoldStyle" />
-        <attr name="isCheckedState" format="boolean"/>
+        <attr name="isCheckedState" format="boolean" />
     </declare-styleable>
-    <declare-styleable name="FTLMediaPreviewView" >
-        <attr name="videoDuration" format="integer"/>
+
+    <declare-styleable name="FTLMediaPreviewView">
+        <attr name="videoDuration" format="integer" />
         <attr name="shouldVisibleTagViewBackground" format="boolean" />
         <attr name="shouldVisibleTagViewBorder" format="boolean" />
-        <attr name="imageResource" format="reference"/>
+        <attr name="imageResource" format="reference" />
         <attr name="previewContentType" format="enum">
             <enum name="IMAGE" value="0" />
             <enum name="VIDEO" value="1" />
         </attr>
     </declare-styleable>
+
+    <declare-styleable name="FTLIndicator">
+        <attr name="text_indicator" format="string" />
+        <attr name="icon_indicator" format="reference" />
+        <attr name="visible_indicator" format="boolean" />
+        <attr name="indicator_text_color_light" format="color" />
+        <attr name="indicator_text_color_dark" format="color" />
+        <attr name="indicator_icon_color_light" format="color" />
+        <attr name="indicator_icon_color_dark" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="FTLCircleImageView">
+        <attr name="elevation" format="dimension" />
+        <attr name="iconImage" format="reference" />
+        <attr name="iconPadding" format="dimension" />
+        <attr name="colorBackground" format="color" />
+        <attr name="circleType" format="enum">
+            <enum name="DOUBLE_CHECK" value="0" />
+            <enum name="MAINTENANCE" value="1" />
+            <enum name="STAR" value="2" />
+            <enum name="MEDICAL" value="3" />
+            <enum name="QUESTION" value="4" />
+        </attr>
+    </declare-styleable>
+
+    <declare-styleable name="FTLSegmentedTabLayout">
+        <attr name="tabIndicatorFullHeight" format="boolean" />
+        <attr name="tabIndicatorMargin" format="dimension" />
+        <attr name="tabBackgroundColorLight" format="color" />
+        <attr name="tabBackgroundColorDark" format="color" />
+        <attr name="tabIndicatorColorLight" format="color" />
+        <attr name="tabIndicatorColorDark" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="FTLComponentTabSegmented">
+        <attr name="componentTab_IndicatorColorLight" format="color" />
+        <attr name="componentTab_IndicatorColorDark" format="color" />
+        <attr name="tabTextColorLight" format="color" />
+        <attr name="tabTextColorDark" format="color" />
+        <attr name="tabTextSelectedColorLight" format="color" />
+        <attr name="tabTextSelectedColorDark" format="color" />
+    </declare-styleable>
+
 </resources>

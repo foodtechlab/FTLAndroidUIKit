@@ -17,7 +17,6 @@ import androidx.core.view.isGone
 import androidx.core.view.isVisible
 import com.foodtechlab.ftlandroiduikit.R
 import com.foodtechlab.ftlandroiduikit.common.NetworkConnectivityState
-import com.foodtechlab.ftlandroiduikit.switch.FTLSwitchTheme
 import com.foodtechlab.ftlandroiduikit.util.ViewTheme
 import com.foodtechlab.ftlandroiduikit.util.ViewThemeManager
 import com.google.android.material.tabs.TabLayout

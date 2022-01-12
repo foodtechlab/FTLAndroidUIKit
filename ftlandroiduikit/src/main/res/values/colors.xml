@@ -316,4 +316,9 @@
     <color name="TagBorderLight">#A4A4A4</color>
     <color name="TagBorderDark">#B2B2B2</color>
 
+    <!-- FTLTabSegmented -->
+    <color name="TabBackgroundLight">#EBEBEB</color>
+    <color name="TabTextLight">#80000000</color>
+    <color name="TabSelectedTextLight">#000000</color>
+
 </resources>
